@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Lia's D3 Template!</title>
+
+    <!-- D3 v6 -->
+    <script type="text/javascript" src="https://d3js.org/d3.v6.min.js"></script>
+
+    <!-- CSS *********************************************************************** -->
+    <style>
+      body {
+        font-family: 'Work Sans';
+      }
+      #hex-vis {
+        width: 1000px;
+        margin: 0px auto;
+        background-color: #eeeeee;
+      }
+      .hex {
+        mix-blend-mode: multiply;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HTML ********************************************************************** -->
+
+    <div id="hex-vis"></div>
+
+    <!-- JAVASCRIPT **************************************************************** -->
+    <script type="text/javascript">
+
+      var w = 1000;
+      var h = 650;
+
+      var hexSvg = d3.select('#hex-vis')
+        .append('svg')
+          .attr('width', w)
+          .attr('height', h);
+      var hexContainer = hexSvg.append('g') // group to hold centroid symbols
+        .attr('id', 'hex-container')
+        .attr('transform', 'translate(25, 25)');
+
+      // load CSV of county etymology data
+      d3.csv('data_counties-etymologies-11.csv')
+        .then(function(data) {
+
+          // establish county centroids
+          hexContainer.selectAll('.hex')
+            .data(data.filter(function(d) {
+              return d.x != ''; // leave out any without hex coordinates 
+            }))
+            .enter()
+            .append('circle')
+              .attr('id', function(d) {
+                return d.fullname;
+              })
+              .attr('class', function(d) {
+                return 'hex hex-' + d.granularlanguage;
+              })
+              .attr('cx', function(d) {
+                return (d.x) * 11;
+              })
+              .attr('cy', function(d) {
+                return (d.y) * 9.5;
+              })
+              .attr('r', 5) // make width smaller to have white padding between counties
+              .on('mouseover', function(d) {
+                var currentHoverLang = d3.select(this).attr('class');
+                hexContainer.selectAll('.hex')
+                  .each(function(d) {
+                    if (d3.select(this).attr('class') == currentHoverLang) {
+                      /* do nothing */
+                    } else {
+                      d3.select(this)
+                        .style('opacity', 0.2);
+                    }
+                  })
+              })
+              .on('mouseout', function(d) {
+                hexContainer.selectAll('.hex')
+                  .each(function(d) {
+                    d3.select(this)
+                      .style('opacity', 1);
+                    })
+              })
+              .append('title')
+              .text(function(d) {
+                return d.fullname + ' // ' + d.granularlanguage;
+              });
+
+      }); // close CSV function
+
+
+    </script>
+
+
+
+  </body>
+</html>

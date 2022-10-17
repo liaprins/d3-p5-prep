@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Lia's D3 Template!</title>
+    <!--
+    <script type="text/javascript" src="../../d3-library/d3.js"></script>
+    -->
+    <script type="text/javascript" src="../../d3-book-master/d3.js"></script>
+    <style>
+    </style>
+  </head>
+  <body>
+    <script>
+
+      var w = 500;
+      var h = 300;
+
+      // define selected projection (Albers USA here)
+      var myProjection = d3.geoAlbersUsa()
+                         .translate([w / 2, h / 2])
+                         .scale([500]);
+
+      // define path generator, using a projection from above
+      var myPath = d3.geoPath()
+                    .projection(myProjection);
+
+      // create SVG container
+      var mySvg = d3.select("body")
+                    .append("svg")
+                    .attr("width", w)
+                    .attr("height", h);
+
+      // load in GeoJSON data
+      d3.json("us-states.json", function(json) {
+        // bind data and create one path per GeoJSON feature
+        mySvg.selectAll("path")
+          .data(json.features)
+          .enter()
+          .append("path")
+          .attr("d", myPath)
+          .style("fill", "red");
+      });
+
+    </script>
+  </body>
+</html>

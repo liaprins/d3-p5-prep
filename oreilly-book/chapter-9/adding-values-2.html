@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Lia's D3 Template!</title>
+    <script type="text/javascript" src="../../d3-library/d3.js"></script>
+    <style>
+      div.bar {
+        display: inline-block;
+        width: 20px;
+        height: 75px;    /* Will be overridden by D3 */
+        background-color: teal;
+        margin-right: 2px;
+      }
+    </style>
+  </head>
+  <body>
+
+    <p>Click on this text to add a new bar (infinite times).</p>
+
+    <script type="text/javascript">
+
+      var w = 600;
+      var h = 250;
+
+      var myDataset = [5, 10, 13, 19, 21, 25, 22, 18, 15, 13, 11, 12, 15, 20, 18, 17, 16, 18, 23, 25];
+
+      var xScale = d3.scaleBand()
+                     .domain(d3.range(myDataset.length))
+                     // .range([0, w])
+                     // .round(true)    // to prevent fuzzy antialiasing of pixels
+                     .rangeRound([0, w])
+                     .paddingInner(0.05);    // set spacing between each bar to 5% of the bar + spacing's total width
+
+      var yScale = d3.scaleLinear()
+                     .domain([0, d3.max(myDataset)])
+                     .range([0, h]);
+
+      var mySvg = d3.select("body")
+                    .append("svg")
+                    .attr("width", w)
+                    .attr("height", h);
+
+      // create bars
+      mySvg.selectAll("rect")
+           .data(myDataset)
+           .enter()
+           .append("rect")
+           .attr("x", function(d, i) {
+             return xScale(i);
+           })
+           .attr("y", function(d) {
+             return h - yScale(d);
+           })
+           .attr("width", xScale.bandwidth())    // D3's "bandwidth()" knows the width of each bar already (based on the ordinal scale, I think)
+           .attr("height", function(d) {
+  			   		return yScale(d);
+  			   })
+           .attr("fill", function(d) {
+             return "rgb(0, 0, " + Math.round(d * 10) + ")"
+           });
+
+      mySvg.selectAll("text")
+            .data(myDataset)
+            .enter()
+            .append("text")
+            .text(function(d){
+              return d;
+            })
+            .attr("x", function(d, i) {
+              return xScale(i) + (xScale.bandwidth() / 2);
+            })
+            .attr("y", function (d) {
+              return h - yScale(d) + 14;
+            })
+            .attr("font-family", "sans-serif")
+            .attr("font-size", "11px")
+            .attr("text-anchor", "middle")
+            .attr("fill", "white");
+
+      // click as event listener
+      d3.select("p")
+
+        .on("click", function() {
+          // new value for dataset
+          var maxValue = 25;
+          var newNumber = Math.floor(Math.random() * maxValue);
+          myDataset.push(newNumber);
+
+          // update yScale
+          xScale.domain(d3.range(myDataset.length));
+          yScale.domain([0, d3.max(myDataset)]);
+
+          // store existing bars as "update selection"
+          var bars = mySvg.selectAll("rect")
+                          .data(myDataset);
+
+          // add new bar + update existing bars
+          bars.enter()
+              .append("rect")
+              .attr("x", w)
+              .attr("y", function(d) {
+                return h - yScale(d);
+              })
+              .attr("width", xScale.bandwidth())
+              .attr("height", function(d) {
+                return yScale(d);
+              })
+              .attr("fill", function(d) {
+                return "rgb(0, 0, " + Math.round(d * 10) + ")";
+              })
+              .merge(bars)
+              .transition()
+              .duration(500)
+              .attr("x", function(d, i) {
+                return xScale(i);
+              })
+              .attr("y", function(d) {
+                return h - yScale(d);
+              })
+              .attr("width", xScale.bandwidth())
+              .attr("height", function(d) {
+                return yScale(d);
+              });
+
+          // store existing labels as "update selection"
+          var labels = mySvg.selectAll("text")
+                            .data(myDataset);
+
+          // add new label + update existing labels
+          labels.enter()
+                .append("text")
+                .attr("x", w + 5)
+                .attr("y", function(d) {
+                  if (d > (maxValue / 10)) {
+                    return h - yScale(d) + 14;
+                  } else {
+                    return h - yScale(d) - 10;
+                  }
+                })
+                .attr("fill", function(d) {
+                  if (d > (maxValue / 10)) {
+                    return "white";
+                  } else {
+                    return "black";
+                  }
+                })
+                .attr("font-family", "sans-serif")
+                .attr("font-size", "11px")
+                .attr("text-anchor", "middle")
+                .attr("fill", "white")
+                .merge(labels)
+                .transition()
+                .delay(function(d, i) {
+                  return (i / myDataset.length) * 1000;
+                })
+                .duration(500)
+                .ease(d3.easeElasticOut)
+                .attr("x", function(d, i) {
+                  return xScale(i) + (xScale.bandwidth() / 2);
+                })
+                .attr("y", function(d) {
+                  if (d > (maxValue / 10)) {
+                    return h - yScale(d) + 14;
+                  } else {
+                    return h - yScale(d) - 10;
+                  }
+                })
+                .attr("fill", function(d) {
+                  if (d > (maxValue / 10)) {
+                    return "white";
+                  } else {
+                    return "black";
+                  }
+                })
+                .text(function(d) {
+                  return d;
+                });
+        });
+
+    </script>
+  </body>
+</html>

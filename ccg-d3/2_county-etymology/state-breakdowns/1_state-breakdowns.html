@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>State breakdowns | County etymologies | CCG</title>
+
+    <!-- D3 v6 -->
+    <script type="text/javascript" src="https://d3js.org/d3.v6.min.js"></script>
+
+    <!-- CSS *********************************************************************** -->
+    <style>
+    body {
+      font-family: 'Work Sans';
+    }
+    #state-breakdowns-vis {
+      width: 1000px;
+      margin: 10px auto;
+    }
+    #states-svg {
+      background: #eeeeee;
+      padding-top: 25px;
+    }
+    .state-chart {
+      background-color: teal;
+    }
+    </style>
+  </head>
+  <body>
+    <!-- HTML ********************************************************************** -->
+
+    <div id="state-breakdowns-vis"></div>
+
+    <!-- JAVASCRIPT **************************************************************** -->
+    <script type="text/javascript">
+
+    // load in the data
+    d3.csv("../data_county-etymologies.csv")
+      .then(function(data) {
+
+        /* // COMMENTING OUT BECAUSE DON'T NEED THE ROW INFO, JUST NEED THE LENGTHS (SO USING d3.rollups INSTEAD TO GET THE LENGTHS!)
+        var stateGroups = d3.groups(data
+            .sort(function(a, b) { return d3.ascending(a.state, b.state) })
+            .filter(function(d) { return d.state != 'District of Columbia'}),
+          v => v.length,
+          d => d.state, d => d.category, d => d.language);
+          */
+
+        var stateRollups = d3.rollups(data
+            .sort(function(a, b) { return d3.ascending(a.state, b.state) })
+            .filter(function(d) { return d.state != 'District of Columbia'}),
+          v => v.length,
+          d => d.state, d => d.category, d => d.language);
+
+        var stateRollupsHierarchy = d3.hierarchy(stateRollups);
+
+        // WORKS WITH d3.groups, BUT NOT WITH d3.rollups ("Error: duplicate key", meaning the key value appears more than once (but to me it seems it doesn't ... oh well))
+        // var stateIndex = d3.index(stateGroups);
+
+        // console.log('stateGroups: ');
+        // console.log(stateGroups);
+        console.log('stateRollups: ');
+        console.log(stateRollups);
+        console.log('stateRollupsHierarchy: ');
+        console.log(stateRollupsHierarchy);
+        // console.log('stateIndex: ');
+        // console.log(stateIndex);
+
+        var w = 1000;
+        var stateH = 50;
+        var h = stateH * 50;
+
+        var statesSvg = d3.select('#state-breakdowns-vis')
+          .append('svg')
+            .attr('id', 'states-svg')
+            .attr('width', w)
+            .attr('height', h);
+
+        var stateCharts = statesSvg.selectAll('.state-chart')
+          .data(stateRollupsHierarchy.data)
+          .enter()
+          .append('g')
+            .attr('id', d => d[0] + '-chart')
+            .attr('class', 'state-chart')
+            .attr('transform', function(d, i) {
+              return 'translate(0,' + (stateH * i) + ')'
+            });
+
+        var color = d3.scaleOrdinal(d3.schemePaired)
+            .domain(['battle', 'combination', 'concept', 'creation', 'flora', 'geology', 'group', 'man', 'object', 'place', 'resource', 'woman', 'unknown']);
+
+        stateCharts.selectAll('.state-category')
+          .data(function(d) {
+            return d[1];
+          })
+          .enter()
+          .append('rect')
+            .attr('class', 'state-category')
+            .attr('x', 200)
+            .attr('y', function(d, i) {
+              return i * (stateH / 13);
+            })
+            .attr('width', function(d) {
+              // return d[1][0][1] * 3.5; // for now getting the length of the first language listed per category, since many have only one language within a category (this does not use all data! just a POC!)
+              if (d[1][1]) { // if there are two languages used in this state x category group
+                return (d[1][1][1] + d[1][0][1]) * 3.5; // sum them
+              } else {
+                return d[1][0][1] * 3.5; // else just return the single language used
+              }
+            })
+            .attr('height', (stateH / 13))
+            .attr('fill', function(d) {
+              return color(d[0]);
+            });
+
+        stateCharts.append('text')
+            .attr('class', 'state-label')
+            .text(d => d[0])
+            .attr('x', 50)
+            .attr('y', stateH / 2);
+
+      }); // close CSV function
+
+    </script>
+
+  </body>
+</html>

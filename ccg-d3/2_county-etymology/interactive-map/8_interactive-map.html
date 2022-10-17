@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Lia's D3 Template!</title>
+
+    <!-- D3 v6 -->
+    <!-- <script type="text/javascript" src="https://d3js.org/d3.v6.min.js"></script> -->
+
+    <!-- v6(.7) // USING TEMPORARILY WHILE ON AIRPLANE -->
+    <script type="text/javascript" src="../../../d3-library/d3.js"></script>
+
+    <!-- CSS *********************************************************************** -->
+    <style>
+      body {
+        font-family: 'Work Sans';
+        margin-top: 0;
+      }
+      .state-outline {
+        fill: #ffffff00;
+        stroke: #f5f5f5;
+        stroke-width: 0.5;
+        pointer-events: none;
+      }
+      #ix-map {
+        width: 1000px;
+        margin: 0px auto;
+        background-color: #f5f5f5;
+        font-family: 'Work Sans';
+        font-weight: 600;
+      }
+      #toggle-container {
+        border: black solid 2px;
+        border-radius: 20px;
+        display: inline-block;
+        padding: 2px;
+        cursor: pointer;
+      }
+      #toggle-pill-cat,
+      #toggle-pill-lang {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 20px;
+      }
+      #toggle-pill-cat {
+        background-color: black;
+      }
+      #toggle-text-cat,
+      #toggle-text-lang {
+        font-size: 16px;
+        font-weight: 600;
+      }
+      #toggle-text-cat {
+        color: white;
+      }
+      #tooltip {
+        position: absolute;
+        width: 400px;
+        height: auto;
+        padding: 15px;
+        background-color: #ffffffbb;
+        border-color: black;
+        border-width: 2px;
+        border-style: solid;
+        pointer-events: none;
+        /* cursor: pointer; */
+      }
+      #tooltip p {
+        margin: 0;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      #county-topline span {
+        font-size: 19px;
+        padding-bottom: 5px;
+        font-weight: 600;
+      }
+      #tooltip-cat-label,
+      #tooltip-lang-label {
+        font-weight: 600;
+      }
+      #tooltip-cat,
+      #tooltip-lang {
+        text-transform: capitalize;
+      }
+      .hidden {
+        display: none;
+      }
+      #dot-cat,
+      #dot-lang {
+        width: 12px;
+        height: 12px;
+        background-color: red;
+        display: inline-block;
+        border-radius: 6px;
+        margin-right: 6px;
+      }
+      #cat,
+      #lang {
+        display: inline-block;
+      }
+      /* ZOOMING BUTTONS */
+      .zoom-button rect {
+        fill: black;
+        opacity: 0.2;
+      }
+      .zoom-button rect {
+        rx: 5;    /* rounded corners */
+        ry: 5;
+      }
+      .zoom-button text {
+        fill: black;
+        font-size: 18px;
+        text-anchor: middle;
+      }
+      .zoom-button:hover rect,
+      .zoom-button:hover text {
+        fill: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HTML ********************************************************************** -->
+
+    <!-- Toggle -->
+    <p>Color counties by:</p>
+    <div id="toggle-container">
+      <div id="toggle-pill-cat">
+        <span id="toggle-text-cat">Category</span>
+      </div>
+      <div id="toggle-pill-lang">
+        <span id="toggle-text-lang">Language</span>
+      </div>
+    </div>
+
+    <!-- Map container -->
+    <div id="ix-map">
+    </div>
+
+    <!-- Tooltip -->
+    <div id="tooltip" class="hidden">
+      <p id="county-topline">
+          <span id="tooltip-name">[County Name]</span>
+          <span id="tooltip-type">[Type]</span><span>, </span>
+          <span id="tooltip-state">[State]</span>
+      </p>
+      <p id="tooltip-ety">[Etymology]</p>
+
+      <div>
+        <div id="dot-cat">
+        </div>
+        <p id="cat">
+          <span id="tooltip-cat-label">Category: </span>
+          <span id="tooltip-cat">[Category]</span>
+          <span id="tooltip-subcat"></span>
+        </p>
+      </div>
+
+      <div id="dot-lang">
+      </div>
+      <p id="lang">
+        <span id="tooltip-lang-label">Language: </span>
+        <span id="tooltip-lang">[Language]</span>
+        <span id="tooltip-granlang"></span>
+      </p>
+    </div>
+
+    <!-- JAVASCRIPT **************************************************************** -->
+
+    <!-- CHOROPLETH: CATEGORY ======================================================= -->
+    <script type="text/javascript">
+
+      var w = 1000;
+      var h = 700;
+
+      var projection = d3.geoAlbersUsa()
+        .translate([w/2, h/2])
+        .scale([1250]);
+
+      var ixMapSvg = d3.select('#ix-map')
+        .append('svg')
+          .attr('width', w)
+          .attr('height', h);
+
+      // set up zooming
+      // define what to do when zooming
+      var zooming = function(event, d) {
+
+        console.log(event);
+
+        // get the current (pre-zooming) translation offset
+        var offset = [event.transform.x, event.transform.y];
+
+        // calculate new scale
+        var newScale = event.transform.k * 1250; // 1200 matches the projection scale set above, ~line 175
+
+        // update projection with new offset
+        projection.translate(offset)
+          .scale(newScale);
+
+        // update all paths and circles
+        ixMapSvg.selectAll("path")
+          .attr("d", path);
+      }
+
+      // define drag behavior
+      var zoom = d3.zoom()
+        .scaleExtent([ 1, 7.0 ]) // constrain zoom
+        // .translateExtent([[ -1200, -700 ], [ 1200, 700 ]]) // constrain pan
+        .translateExtent([[ -(w/2), -(h/2) ], [ w/2, h/2 ]]) // constrain pan
+        .on("zoom", zooming);
+
+      var center = projection([-130.0, 48.0]); // manually setting approximate center of the map using arbitrarily set lat + lon values
+
+      // create group to hold all draggable elements (county + state paths)
+      var draggableGroup = ixMapSvg.append('g')
+        .attr('id', 'group-draggable')
+        .call(zoom) // bind the zooming behavior
+        .call(zoom.transform, d3.zoomIdentity // then apply the initial transform
+          .translate(w/2, h/2)
+          .scale(1)); // can change this if needed
+          /* .scale(1) // can change this if needed
+          .translate(-center[0], -center[1])); */
+
+      // create invisible BG rect to catch zooming events
+      draggableGroup.append("rect")
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("width", w)
+        .attr("height", h)
+        .attr("opacity", 0);
+
+      // interactive color-coding toggle
+      var toggle = d3.select('#toggle-container');
+
+      var statePath = d3.geoPath()
+        .projection(projection);
+
+      var path = d3.geoPath()
+        .projection(projection);
+
+      // load CSV of county etymology data
+      d3.csv('../data_counties.csv')
+        .then(function(data) {
+
+        // load JSON of county outlines
+        d3.json('../data_counties-20m.json')
+        .then(function(json) {
+
+          for (var i = 0; i < data.length; i++) {
+
+            var csvCountyId = data[i].id; // get county id from etymology CSV
+            var csvCountyName = data[i].name; // get name per county from etymology CSV
+            var csvCountyType = data[i].type; // get type per county from etymology CSV
+            var csvCountyState = data[i].state; // get state per county from etymology CSV
+            var csvCountyTooltipState = data[i].tooltipstate; // get state abbreviation per county from etymology CSV
+            var csvCountyLanguage = data[i].language; // get high-level language per county from etymology CSV
+            var csvCountyTooltipLanguage = data[i].tooltiplanguage; // get high-level language per county (in everyday phrasing) from etymology CSV
+            var csvCountyGranularlanguage = data[i].granularlanguage; // get granular language per county from etymology CSV
+            var csvCountyTooltipGranularlanguage = data[i].tooltipgranularlanguage; // get granular language per county from etymology CSV
+            var csvCountyCategory = data[i].category; // get high-level category per county from etymology CSV
+            var csvCountySubcategory = data[i].subcategory; // get subcategory per county from etymology CSV
+            var csvCountyTooltipSubcategory = data[i].tooltipsubcategory; // get subcategory (in everyday phrasing) per county from etymology CSV
+            var csvCountyEtymology = data[i].etymology; // get etymology per county from etymology CSV
+
+            for (var j = 0; j < json.features.length; j++) { // find the corresponding county id within the GeoJSON
+
+              var pathCountyId = json.features[j].properties.STATE + json.features[j].properties.COUNTY;
+
+              if (csvCountyId == pathCountyId) {
+                json.features[j].properties.name = csvCountyName; // copy the county name into the JSON per county
+                json.features[j].properties.type = csvCountyType; // copy the county type into the JSON per county
+                json.features[j].properties.state = csvCountyState; // copy the county type into the JSON per county
+                json.features[j].properties.tooltipstate = csvCountyTooltipState; // copy the county type into the JSON per county
+                json.features[j].properties.language = csvCountyLanguage; // copy the high-level language into the JSON per county
+                json.features[j].properties.tooltiplanguage = csvCountyTooltipLanguage; // copy the high-level language into the JSON per county
+                json.features[j].properties.granularlanguage = csvCountyGranularlanguage; // copy the granular language into the JSON per county
+                json.features[j].properties.tooltipgranularlanguage = csvCountyTooltipGranularlanguage; // copy the granular language into the JSON per county
+                json.features[j].properties.category = csvCountyCategory; // copy the high-level category into the JSON per county
+                json.features[j].properties.subcategory = csvCountySubcategory; // copy the subcategory into the JSON per county
+                json.features[j].properties.tooltipsubcategory = csvCountyTooltipSubcategory; // copy the subcategory into the JSON per county
+                json.features[j].properties.etymology = csvCountyEtymology; // copy the etymology into the JSON per county
+                break; // stop looking through the JSON
+              } // close if
+            } // close j for-loop
+          } // close i for-loop
+
+          // drawing county paths
+          // var countyGroup = ixMapSvg.append("g")
+          var countyGroup = draggableGroup.append("g")
+                        .attr("id", "group-county");
+
+          // ixMapSvg.selectAll('.ix-map')
+          countyGroup.selectAll('.ix-map')
+            .data(json.features)
+            .enter()
+            .append('path')
+              .attr('d', path)
+              .attr('class', function(d) {
+                return 'ix-map ix-map-' + d.properties.category;
+              })
+              .style('stroke', '#f5f5f5')
+              .style('stroke-width', 0.3)
+              .style('fill', function(d, i) {
+                // if (colorCodeFlag == 'color-cat') {
+                  if (d.properties.category == 'people') {
+                    return '#caa569';
+                  } else if (d.properties.category == 'place') {
+                    return '#77b2e0';
+                  } else if (d.properties.category == 'nature') {
+                    return '#68bc8f';
+                  } else if (d.properties.category == 'concept') {
+                    return '#db93c7';
+                  } else if (d.properties.category == 'unknown') {
+                    return '#aeaeae';
+                  }
+                /* } else {
+                  if (d.properties.language == 'euro') {
+                    return '#A0B363';
+                  } else if (d.properties.language == 'natam') {
+                    return '#BB9EE4';
+                  }
+                } */
+              })
+              .on('mouseover', function(q, d, r) { // NOT SURE WHY, BUT WITH NEWER VERSIONS OF D3, d (TO ACCESS THE DATASET) IS THE SECOND VAR IN THE .on() FUNCTIONS...
+                var currentCounty = d3.select(this);
+                var centroid = path.centroid(currentCounty.datum());
+                var centroidH = centroid[0];
+                var centroidV = centroid[1];
+                var windowW = window.innerWidth;
+                var bodyTop = document.body.getBoundingClientRect().top;
+                var map = document.getElementById('ix-map');
+                var mapTop = map.getBoundingClientRect().top;
+                var yDiff = mapTop - bodyTop;
+                var tooltipW = 400;
+                var tooltipPadding = 15;
+                var tooltipH = document.getElementById('tooltip').getBoundingClientRect().height;
+                var mapH = map.getBoundingClientRect().height;
+                console.log(tooltipH);
+                d3.select(this)
+                  .style('fill', 'black');
+                d3.select("#tooltip")
+                  .classed("hidden", false)
+                  .style('left', function() {
+                    if ((centroidH + ((windowW - w) / 2)) < (windowW - ((windowW - w) / 2) - (tooltipW + (tooltipPadding * 2)))) {
+                      return (centroidH + ((windowW - w) / 2)) + 'px';
+                    } else {
+                      return ((centroidH + ((windowW - w) / 2)) - tooltipW - (tooltipPadding * 2)) + 'px';
+                    }
+                  })
+                  .style('top', (centroidV + yDiff) + 'px')
+                  /* .style('top', function() {
+                    if ((mapTop + mapH) > (centroidV + yDiff + tooltipH)) {
+                      return (centroidV + yDiff) + 'px';
+                    } else {
+                      return (centroidV + yDiff - tooltipH) + 'px';
+                    }
+                  }) */
+                  .style('width', tooltipW + 'px')
+                  .style('padding', tooltipPadding + 'px');
+                d3.select("#tooltip-name")
+                  .text(d.properties.name);
+                d3.select("#tooltip-type")
+                  .text(d.properties.type);
+                d3.select("#tooltip-state")
+                  .text(d.properties.tooltipstate);
+                d3.select("#tooltip-ety")
+                  .text(d.properties.etymology);
+                d3.select("#dot-cat")
+                  .style('background-color', function() {
+                    if (d.properties.category == 'people') {
+                      return '#caa569';
+                    } else if (d.properties.category == 'place') {
+                      return '#77b2e0';
+                    } else if (d.properties.category == 'nature') {
+                      return '#68bc8f';
+                    } else if (d.properties.category == 'concept') {
+                      return '#db93c7';
+                    } else if (d.properties.category == 'unknown') {
+                      return '#aeaeae';
+                    }
+                  })
+                d3.select("#tooltip-cat")
+                  .text(d.properties.category);
+                d3.select("#tooltip-subcat")
+                  .text('(' + d.properties.tooltipsubcategory + ')');
+                d3.select("#dot-lang")
+                  .style('background-color', function() {
+                    if (d.properties.language == 'euro') {
+                      return '#A0B363';
+                    } else if (d.properties.language == 'natam') {
+                      return '#BB9EE4';
+                    }
+                  })
+                d3.select("#tooltip-lang")
+                  .text(d.properties.tooltiplanguage);
+                d3.select("#tooltip-granlang")
+                  .text(d.properties.tooltipgranularlanguage);
+              })
+              .on('mouseout', function() {
+                d3.select("#tooltip")
+                  .classed("hidden", true);
+                d3.select(this)
+                  .style('fill', function(d, i) {
+                    if (toggle.attr('class') != 'color-lang') {
+                      if (d.properties.category == 'people') {
+                        return '#caa569';
+                      } else if (d.properties.category == 'place') {
+                        return '#77b2e0';
+                      } else if (d.properties.category == 'nature') {
+                        return '#68bc8f';
+                      } else if (d.properties.category == 'concept') {
+                        return '#db93c7';
+                      } else if (d.properties.category == 'unknown') {
+                        return '#aeaeae';
+                      }
+                    } else {
+                      if (d.properties.language == 'euro') {
+                        return '#A0B363';
+                      } else if (d.properties.language == 'natam') {
+                        return '#BB9EE4';
+                      }
+                    }
+                })
+              }); // close .on for tooltip
+
+          // load JSON of state outlines
+          d3.json('../data_states-20m.json')
+            .then(function(json) {
+
+            // var stateGroup = ixMapSvg.append("g")
+            var stateGroup = draggableGroup.append("g")
+                        .attr("id", "group-state");
+            // ixMapSvg.selectAll('.state-outline')
+            stateGroup.selectAll('.state-outline')
+              .data(json.features.filter(function(d) {
+                return (d.properties.STATE != '02') && (d.properties.STATE != '15'); // leave out any without hex coordinates
+              }))
+              .enter()
+              .append('path')
+                .attr('d', statePath)
+                .attr('class', 'state-outline');
+          }); // close JSON function for state outlines
+
+        }); // close JSON function for county outlines
+
+      }); // close CSV function
+
+      toggle
+        .on('click', function() {
+
+          // if being set to LANG; therefore colored by CAT prior to click
+          if (!toggle.classed('color-lang')) { // if not set to lang currently
+
+            ixMapSvg.selectAll('.ix-map')
+              .style('fill', function(d) {
+                if (d.properties.language == 'euro') {
+                  return '#A0B363';
+                } else if (d.properties.language == 'natam') {
+                  return '#BB9EE4';
+                }
+              });
+
+            toggle.classed('color-lang', true);
+
+            toggle.select('#toggle-pill-lang')
+              .style('background-color', 'black');
+
+            toggle.select('#toggle-text-lang')
+              .style('color', 'white');
+
+            toggle.select('#toggle-pill-cat')
+              .style('background-color', 'white');
+
+            toggle.select('#toggle-text-cat')
+              .style('color', 'black');
+
+          } else {
+
+            ixMapSvg.selectAll('.ix-map')
+              .style('fill', function(d, i) {
+                if (d.properties.category == 'people') {
+                  return '#caa569';
+                } else if (d.properties.category == 'place') {
+                  return '#77b2e0';
+                } else if (d.properties.category == 'nature') {
+                  return '#68bc8f';
+                } else if (d.properties.category == 'concept') {
+                  return '#db93c7';
+                } else if (d.properties.category == 'unknown') {
+                  return '#aeaeae';
+                }
+              });
+
+            toggle.classed('color-lang', false);
+
+            toggle.select('#toggle-pill-cat')
+              .style('background-color', 'black');
+
+            toggle.select('#toggle-text-cat')
+              .style('color', 'white');
+
+            toggle.select('#toggle-pill-lang')
+              .style('background-color', 'white');
+
+            toggle.select('#toggle-text-lang')
+              .style('color', 'black');
+
+          } // close if
+
+        }); // close .on for toggle
+
+      // create zoom buttons
+      // var createZoomButtons = function() {
+
+        // create the clickable groups
+
+        // zoom in button
+        var zoomIn = ixMapSvg.append("g")
+                       .attr("class", "zoom-button")
+                       .attr("id", "in")    // use this to identify which direction to zoom
+                       .attr("transform", "translate(" + (w - 110) + "," + (h - 70) + ")");
+
+        zoomIn.append("rect")
+          .attr("x", 0)
+          .attr("y", 0)
+          .attr("width", 30)
+          .attr("height", 30);
+
+        zoomIn.append("text")
+          .attr("x", 15)
+          .attr("y", 20)
+          .text("+");
+
+        // zoom out button
+        var zoomOut = ixMapSvg.append("g")
+                       .attr("class", "zoom-button")
+                       .attr("id", "out")    // use this to identify which direction to zoom
+                       .attr("transform", "translate(" + (w - 70) + "," + (h - 70) + ")");
+
+        zoomOut.append("rect")
+          .attr("x", 0)
+          .attr("y", 0)
+          .attr("width", 30)
+          .attr("height", 30);
+
+        zoomOut.append("text")
+          .attr("x", 15)
+          .attr("y", 20)
+          .html("&ndash;");
+
+        // zooming interaction
+        d3.selectAll(".zoom-button")
+          .on("click", function() {
+
+            // set how much to scale on each click
+            var scaleFactor;
+
+            // which way are we headed?
+            var direction = d3.select(this).attr("id");
+
+            // modify the k scale value, depending on the direction
+            switch (direction) {
+              case "in":
+                scaleFactor = 1.5;
+                break;
+              case "out":
+                scaleFactor = 0.75;
+                break;
+              default:
+                break;
+            }
+
+            // this triggers a zoom event, scaling by scaleFactor
+            draggableGroup.transition()
+              // .duration(500)
+              .call(zoom.scaleBy, scaleFactor);
+
+          });
+
+      // }; // close zoom button creation function
+
+    </script>
+
+  </body>
+</html>

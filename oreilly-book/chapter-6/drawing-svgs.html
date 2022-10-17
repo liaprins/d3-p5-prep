@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Lia's D3 Template!</title>
+    <script type="text/javascript" src="../../d3-library/d3.js"></script>
+    <style>
+      div.bar {
+        display: inline-block;
+        width: 20px;
+        height: 75px;    /* Will be overridden by D3 */
+        background-color: teal;
+        margin-right: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <script type="text/javascript">
+
+      var w = 500;
+      var h = 50;
+      var mySvg = d3.select("body")
+                    .append("svg")
+                    .attr("width", w)
+                    .attr("height", h);
+
+      var myDataset = [5, 10, 15, 20, 25];
+
+      var circles = mySvg.selectAll("circle")
+                          .data(myDataset)
+                          .enter()
+                          .append("circle");
+
+      circles.attr("cx", function(d, i) {
+                return (i * 50) + 25;
+              })
+              .attr("cy", h/2)
+              .attr("r", function(d) {
+                return d;
+              })
+              .attr("fill", "yellow")
+              .attr("stroke", "orange")
+              .attr("stroke-width", function(d) {
+                return d/2;
+              })
+
+
+    </script>
+  </body>
+</html>

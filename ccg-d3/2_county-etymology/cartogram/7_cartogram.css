@@ -1,0 +1,16 @@
+body {
+  font-family: 'Work Sans';
+  background: black;
+}
+h1 {
+  color: magenta;
+  text-align: center;
+  margin: 60px 0 20px 0;
+}
+#hex-vis {
+  width: 1000px;
+  margin: 10px auto;
+}
+.hex {
+  /* mix-blend-mode: multiply; */
+}

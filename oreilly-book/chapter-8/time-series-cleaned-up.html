@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Lia's D3 Template!</title>
+    <script type="text/javascript" src="../../d3-library/d3.js"></script>
+  </head>
+  <body>
+    <script type="text/javascript">
+
+      var w = 500;
+      var h = 300;
+      var padding = 40;
+
+      var datasetOriginal = [
+        { Date: "01/01/17", Amount: "35" },
+        { Date: "01/02/17", Amount: "30" },
+        { Date: "01/03/17", Amount: "24" },
+        { Date: "01/04/17", Amount: "37" },
+        { Date: "01/05/17", Amount: "54" },
+        { Date: "01/06/17", Amount: "55" },
+        { Date: "01/07/17", Amount: "62" },
+        { Date: "01/08/17", Amount: "62" },
+        { Date: "01/09/17", Amount: "70" },
+        { Date: "01/10/17", Amount: "66" },
+        { Date: "01/11/17", Amount: "51" },
+        { Date: "01/12/17", Amount: "63" },
+        { Date: "01/13/17", Amount: "74" },
+        { Date: "01/14/17", Amount: "58" },
+        { Date: "01/15/17", Amount: "69" },
+        { Date: "01/16/17", Amount: "56" },
+        { Date: "01/17/17", Amount: "56" },
+        { Date: "01/18/17", Amount: "50" },
+        { Date: "01/19/17", Amount: "52" },
+        { Date: "01/20/17", Amount: "48" },
+        { Date: "01/21/17", Amount: "55" },
+        { Date: "01/22/17", Amount: "44" },
+        { Date: "01/23/17", Amount: "35" },
+        { Date: "01/24/17", Amount: "32" },
+        { Date: "01/25/17", Amount: "35" },
+        { Date: "01/26/17", Amount: "21" },
+        { Date: "01/27/17", Amount: "15" },
+        { Date: "01/28/17", Amount: "32" },
+        { Date: "01/29/17", Amount: "21" },
+        { Date: "01/30/17", Amount: "12" },
+        { Date: "01/31/17", Amount: "23" }
+      ]
+
+      /*
+      var datasetOriginal = [
+        { Date: 01/01/17, Amount: 35},
+        { Date: 01/02/17, Amount: 30},
+        { Date: 01/03/17, Amount: 24},
+        { Date: 01/04/17, Amount: 37},
+        { Date: 01/05/17, Amount: 54},
+        { Date: 01/06/17, Amount: 55},
+        { Date: 01/07/17, Amount: 62},
+        { Date: 01/08/17, Amount: 62},
+        { Date: 01/09/17, Amount: 70},
+        { Date: 01/10/17, Amount: 66},
+        { Date: 01/11/17, Amount: 51},
+        { Date: 01/12/17, Amount: 63},
+        { Date: 01/13/17, Amount: 74},
+        { Date: 01/14/17, Amount: 58},
+        { Date: 01/15/17, Amount: 69},
+        { Date: 01/16/17, Amount: 56},
+        { Date: 01/17/17, Amount: 56},
+        { Date: 01/18/17, Amount: 50},
+        { Date: 01/19/17, Amount: 52},
+        { Date: 01/20/17, Amount: 48},
+        { Date: 01/21/17, Amount: 55},
+        { Date: 01/22/17, Amount: 44},
+        { Date: 01/23/17, Amount: 35},
+        { Date: 01/24/17, Amount: 32},
+        { Date: 01/25/17, Amount: 35},
+        { Date: 01/26/17, Amount: 21},
+        { Date: 01/27/17, Amount: 15},
+        { Date: 01/28/17, Amount: 32},
+        { Date: 01/29/17, Amount: 21},
+        { Date: 01/30/17, Amount: 12},
+        { Date: 01/31/17, Amount: 23}
+      ]
+      */
+      // to convert strings to dates
+      var parseTime = d3.timeParse("%m/%d/%y");    // note the quotes!
+
+      // to convert dates to strings
+      var formatTime = d3.timeFormat("%b %e");
+
+      /*
+      var rowConverter = function(d) {
+				return {
+					Date: parseTime(d.Date),
+					Amount: parseInt(d.Amount)
+				};
+			}
+      */
+
+      var datasetNew = [];
+
+      for (var i = 0; i < datasetOriginal.length; i++) {
+        var datifiedDate = parseTime(datasetOriginal[i].Date);
+        var intifiedAmount = parseInt(datasetOriginal[i].Amount)
+        // datasetNew.push("{ Date: " + datifiedDate + ", Amount: " + intifiedAmount + "}");
+        datasetNew.push({ Date: datifiedDate , Amount: intifiedAmount });
+        console.log(datasetNew[i]);
+      }
+
+      var startDate = d3.min(datasetNew, function(d) { return d.Date; });
+      var endDate = d3.max(datasetNew, function(d) { return d.Date; });
+
+      var xScale = d3.scaleTime()
+                     .domain([
+                       // d3.min(datasetNew, function(d) { return d.Date; }),
+                       d3.timeDay.offset(startDate, -1),
+                       // d3.max(datasetNew, function(d) { return d.Date; })
+                       d3.timeDay.offset(endDate, 1),
+                     ])
+                     .range([padding, w - padding]);
+
+      var yScale = d3.scaleLinear()
+                     .domain([
+                       // d3.min(datasetNew, function(d) { return d.Amount; }),
+                       0,
+                       d3.max(datasetNew, function(d) { return d.Amount; })
+                     ])
+                     .range([h - padding, padding]);
+
+    var xAxis = d3.axisBottom()
+                  .scale(xScale)
+                  .tickFormat(formatTime)
+                  .ticks(5);    // set rough # of ticks
+
+    var yAxis = d3.axisLeft()
+                  .scale(yScale)
+                  .ticks(5);
+
+      // create SVG container
+      var mySvg = d3.select("body")
+                    .append("svg")
+                    .attr("width", w)
+                    .attr("height", h);
+
+      // make guide lines
+      mySvg.selectAll("line")
+           .data(datasetNew)
+           .enter()
+           .append("line")
+           .attr("x1", function(d) {
+             return xScale(d.Date);
+           })
+           .attr("y1", function(d){
+             return yScale(d.Amount);
+           })
+           .attr("x2", function(d) {
+             return xScale(d.Date);
+           })
+           .attr("y2", h - padding)
+           .attr("stroke-width", 1)
+           .attr("stroke", "gray");
+
+      /*
+      // create labels
+      mySvg.selectAll("text")
+           .data(datasetNew)
+           .enter()
+           .append("text")
+           .text(function(d) {
+             return formatTime(d.Date);
+           })
+           .attr("x", function(d) {
+             return xScale(d.Date);
+           })
+           .attr("y", function(d) {
+             return yScale(d.Amount);
+           })
+           .attr("font-family", "sans-serif")
+           .attr("font-size", "9px")
+           .attr("fill", "gray");
+      */
+
+      // create dots
+      mySvg.selectAll("circle")
+           .data(datasetNew)
+           .enter()
+           .append("circle")
+           .attr("cx", function(d) {
+             return xScale(d.Date);
+           })
+           .attr("cy", function(d) {
+             return yScale(d.Amount);
+           })
+           .attr("r", 2);
+
+      mySvg.append("g")
+           .call(xAxis)
+           .attr("class", "axis")
+           .attr("transform", "translate(0," + (h - padding) + ")");
+
+      mySvg.append("g")
+           .call(yAxis)
+           .attr("class", "axis")
+           .attr("transform", "translate(" + padding + ",0)")
+
+    </script>
+  </body>
+</html>

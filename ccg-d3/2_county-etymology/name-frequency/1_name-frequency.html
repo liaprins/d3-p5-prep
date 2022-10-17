@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Name frequency | County etymologies | CCG</title>
+
+    <!-- D3 v6 -->
+    <script type="text/javascript" src="https://d3js.org/d3.v6.min.js"></script>
+
+    <!-- CSS *********************************************************************** -->
+    <style>
+    </style>
+  </head>
+  <body>
+    <!-- HTML ********************************************************************** -->
+
+    <div id="name-frequency-vis"></div>
+
+    <!-- JAVASCRIPT **************************************************************** -->
+    <script type="text/javascript">
+
+      // load in the data
+      d3.csv("../data_county-etymologies.csv")
+        .then(function(data) {
+
+        var uniqueArray = [];
+        uniqueArray = data.filter((d, i, array)=>{
+          return data.indexOf(d) === i;
+        })
+        var uniqueCountyNames = [];
+        for (var i = 0; i < uniqueArray.length; i++) {
+          uniqueCountyNames[i] = uniqueArray[i].county;
+        }
+        var ActuallyUniqueCountyNames = [];
+        ActuallyUniqueCountyNames = uniqueCountyNames.filter((d, i, array)=>{
+          return uniqueCountyNames.indexOf(d) === i;
+        })
+        .sort(function(a, b) { return d3.ascending(a, b) });
+
+        // group the CSV rows together by unique name
+        // var countiesByName = d3.group(data, d => d.county, d => d.etymology);
+        var countiesByName = d3.group(data, d => d.county);
+
+        var countyNameCounts = [];
+        for (var i = 0; i < ActuallyUniqueCountyNames.length; i++) {
+          countyNameCounts[i] = {
+            name: ActuallyUniqueCountyNames[i],
+            amount: countiesByName.get(ActuallyUniqueCountyNames[i]).length,
+            countyinfo: countiesByName.get(ActuallyUniqueCountyNames[i])
+          } // close object
+        } // i
+
+        var sortedCountyNameCounts = countyNameCounts.sort(function(a, b) { return d3.descending(a.amount, b.amount) });
+
+        console.log('uniqueArray');
+        console.log(uniqueArray);
+
+        console.log('uniqueCountyNames');
+        console.log(uniqueCountyNames);
+
+        console.log('ActuallyUniqueCountyNames');
+        console.log(ActuallyUniqueCountyNames);
+
+        console.log('countyNameCounts');
+        console.log(countyNameCounts);
+
+        console.log('sortedCountyNameCounts');
+        console.log(sortedCountyNameCounts);
+
+        var w = 1000;
+        var h = 25000;
+
+        var freqSvg = d3.select('#name-frequency-vis')
+          /*.append('svg')
+            .attr('width', w)
+            .attr('height', h)
+            .style('background', '#eeeeee'); */
+
+        freqSvg.selectAll('text')
+          .data(sortedCountyNameCounts)
+          .enter()
+          .append('p')
+          .html(function(d, i) {
+            return (i + 1) + ": " + d.name + ": " + d.amount;
+          })
+            .attr('x', 50)
+            .attr('y', function(d, i) {
+              return (i * 25) + 50;
+            });
+
+
+
+      }); // close CSV function
+
+    </script>
+
+  </body>
+</html>

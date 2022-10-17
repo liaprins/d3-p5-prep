@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Lia's D3 Template!</title>
+
+    <!-- D3 v6 -->
+    <!-- <script type="text/javascript" src="https://d3js.org/d3.v6.min.js"></script> -->
+
+    <!-- v6(.7) // USING TEMPORARILY WHILE ON AIRPLANE -->
+    <script type="text/javascript" src="../../../d3-library/d3.js"></script>
+
+    <!-- CSS *********************************************************************** -->
+    <style>
+      body {
+        font-family: 'Work Sans';
+      }
+      h1 {
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 20px;
+      }
+      #hex-vis-carto-lang,
+      #hex-vis-carto-cat,
+      #hex-vis-choro-lang,
+      #hex-vis-choro-cat {
+        width: 1000px;
+        margin: 0px auto;
+        background-color: #f5f5f5;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HTML ********************************************************************** -->
+
+    <div id="hex-vis-carto-lang">
+      <h1>Cartogram: Languages</h1>
+    </div>
+
+    <div id="hex-vis-carto-cat">
+      <h1>Cartogram: Categories</h1>
+    </div>
+
+    <div id="hex-vis-choro-lang">
+      <h1>Choropleth: Languages</h1>
+    </div>
+
+    <div id="hex-vis-choro-cat">
+      <h1>Choropleth: Categories</h1>
+    </div>
+
+    <!-- JAVASCRIPT **************************************************************** -->
+
+    <!-- CHOROPLETH: LANGUAGE ======================================================= -->
+    <script type="text/javascript">
+
+      var w = 1000;
+      var h = 700;
+
+      var choroLangSvg = d3.select('#hex-vis-choro-lang')
+        .append('svg')
+          .attr('width', w)
+          .attr('height', h);
+
+      var projection = d3.geoAlbersUsa()
+        .translate([w/2, h/2])
+        .scale([1200]);
+
+      var path = d3.geoPath()
+        .projection(projection);
+
+      // load CSV of county etymology data
+      d3.csv('../data_counties.csv')
+        .then(function(data) {
+
+        // load JSON of county outlines
+        d3.json('../data_counties-20m.json')
+        .then(function(json) {
+
+          for (var i = 0; i < data.length; i++) {
+
+            var csvCountyId = data[i].id; // get county id from etymology CSV
+            var csvCountyName = data[i].name; // get language per county
+            var csvCountyLanguage = data[i].language; // get language per county
+            var csvCountyGranularlanguage = data[i].granularlanguage;
+            var csvCountyCategory = data[i].category;
+            var csvCountySubcategory = data[i].subcategory;
+            var csvCountyEtymology = data[i].etymology;
+            var csvCountyYear = data[i].year;
+
+            for (var j = 0; j < json.features.length; j++) { // find the corresponding county id within the GeoJSON
+
+              var pathCountyId = json.features[j].properties.STATE + json.features[j].properties.COUNTY;
+
+              if (csvCountyId == pathCountyId) {
+                json.features[j].properties.name = csvCountyName; // copy the language into the JSON per county
+                json.features[j].properties.language = csvCountyLanguage; // copy the language into the JSON per county
+                json.features[j].properties.granularlanguage = csvCountyGranularlanguage;
+                json.features[j].properties.category = csvCountyCategory;
+                json.features[j].properties.subcategory = csvCountySubcategory;
+                json.features[j].properties.etymology = csvCountyEtymology;
+                json.features[j].properties.year = csvCountyYear;
+                break; // stop looking through the JSON
+              } // close if
+            } // close j for-loop
+          } // close i for-loop
+
+          // console.log(json.features.properties.etymology);
+
+          // opacity scale
+          opacityScale = d3.scaleLinear()
+            // .domain([1634, 2013])
+            .domain([1634, 1990])
+            .range([0.05, 1]);
+
+          // drawing county paths
+          choroLangSvg.selectAll('.choro-lang')
+            .data(json.features)
+            .enter()
+            .append('path')
+              .attr('d', path)
+              .attr('class', function(d) {
+                return 'choro-lang choro-lang-' + d.properties.language + '-' + d.properties.granularlanguage;
+              })
+              .style('stroke', '#f5f5f5')
+              .style('stroke-width', 0.25)
+              .style('opacity', function(d) {
+                console.log(parseInt(d.properties.year) / 10000);
+                return opacityScale(parseInt(d.properties.year));
+              })
+              .style('fill', function(d) {
+                var range = 1 - 0.6;
+                if ((d.properties.language == 'euro') && (d.properties.granularlanguage != '')) {
+                  var j = d3.interpolateRgb("rgb(140, 159, 62)", "rgb(255, 255, 255)");
+                  var numLang = 14;
+                  var interval = range / numLang;
+                  if (d.properties.granularlanguage == 'English') {
+                    return '#bb9ee4';
+                  } else if (d.properties.granularlanguage == 'Spanish') {
+                    return '#bb9ee4';
+                  } else if (d.properties.granularlanguage == 'French') {
+                    return '#bb9ee4';
+                  } else if (d.properties.granularlanguage == 'Dutch') {
+                    return '#bb9ee4';
+                  } else if (d.properties.granularlanguage == 'German') {
+                    return '#bb9ee4';
+                  } else if (d.properties.granularlanguage == 'Greek') {
+                    return '#bb9ee4';
+                  } else if (d.properties.granularlanguage == 'Irish') {
+                    return '#bb9ee4';
+                  } else if (d.properties.granularlanguage == 'Polish') {
+                    return '#bb9ee4';
+                  } else if (d.properties.granularlanguage == 'Latin') {
+                    return '#bb9ee4';
+                  } else if (d.properties.granularlanguage == 'Welsh') {
+                    return '#bb9ee4';
+                  } else if (d.properties.granularlanguage == 'Italian') {
+                    return '#bb9ee4';
+                  } else if (d.properties.granularlanguage == 'Scottish') {
+                    return '#bb9ee4';
+                  } else if (d.properties.granularlanguage == 'Arab') {
+                    return '#bb9ee4';
+                  } else if (d.properties.granularlanguage == 'Hebrew') {
+                    return '#bb9ee4';
+                  } else if (d.properties.granularlanguage == 'Norwegian') {
+                    return '#bb9ee4';
+                  }
+                } else if ((d.properties.language == 'natam') && (d.properties.granularlanguage != '')) { // parent language is Nat Am
+                  var k = d3.interpolateRgb("rgb(182, 92, 191)", "rgb(255, 255, 255)");
+                  var numLang = 52;
+                  var interval = range / numLang;
+                  if (d.properties.granularlanguage == 'Ojibwe') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Lenape') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Muscogee') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Dakota') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Miami-Illinois') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Chickasaw') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Choctaw') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Muskogean') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Hawaiian') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Iroquoian') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Mohawk') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Seneca') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Potawatomi') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Tlingit') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Ute') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Algonquian') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Tsalagi') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Wyandot') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Caddo') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Erie') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Meskwaki-Sauk') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Miwok') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Onondaga') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Otoe') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Powhatan') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Shoshone') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Abenaki') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Alutiiq') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Anishinaabemowin') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Atakapa') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Athabascan') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Aztec') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Chinook') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Chinook Jargon') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Eastern Algonquian') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Hitchiti') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Hochunk') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Klallam') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Menominee') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Mono') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Montana Salish') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Niimiipuu') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Nisenan') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Nooksack') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Omaha-Ponca') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Osage') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Papago-Pima') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Quechan') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Siouan') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Taensa') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Tiwa') {
+                    return '#a0b363';
+                  } else if (d.properties.granularlanguage == 'Yakama') {
+                    return '#a0b363';
+                  }
+                } else if ((d.properties.language == 'euro') && (d.properties.granularlanguage == '')) {
+                  return '#bb9ee4';
+                } else if ((d.properties.language == 'natam') && (d.properties.granularlanguage == '')) {
+                  return '#a0b363';
+                }
+              })
+              .on('mouseover', function(d) {
+                var currentHoverLang = d3.select(this).attr('class');
+                choroLangSvg.selectAll('.choro-lang')
+                  .each(function(d) {
+                    if (d3.select(this).attr('class') == currentHoverLang) {
+                    } else {
+                      d3.select(this)
+                        .style('opacity', 0.4);
+                    }
+                  })
+              })
+              .on('mouseout', function(d) {
+                choroLangSvg.selectAll('.choro-lang')
+                  .each(function(d) {
+                    d3.select(this)
+                      .style('opacity', 1);
+                    })
+              })
+              .append('title')
+              .text(function(d) {
+                return d.properties.name + ' // ' + d.properties.language + ': ' + d.properties.granularlanguage;
+              });
+
+        }); // close JSON function
+
+      }); // close CSV function
+
+    </script>
+
+    <!-- CHOROPLETH: CATEGORY ======================================================= -->
+    <script type="text/javascript">
+
+      var w = 1000;
+      var h = 700;
+
+      var choroCatSvg = d3.select('#hex-vis-choro-cat')
+        .append('svg')
+          .attr('width', w)
+          .attr('height', h);
+
+      var projection = d3.geoAlbersUsa()
+        .translate([w/2, h/2])
+        .scale([1200]);
+
+      var path = d3.geoPath()
+        .projection(projection);
+
+      // load CSV of county etymology data
+      d3.csv('../data_counties.csv')
+        .then(function(data) {
+
+        // load JSON of county outlines
+        d3.json('../data_counties-20m.json')
+        .then(function(json) {
+
+          for (var i = 0; i < data.length; i++) {
+
+            var csvCountyId = data[i].id; // get county id from etymology CSV
+            var csvCountyName = data[i].name; // get language per county
+            var csvCountyLanguage = data[i].language; // get language per county
+            var csvCountyGranularlanguage = data[i].granularlanguage;
+            var csvCountyCategory = data[i].category;
+            var csvCountySubcategory = data[i].subcategory;
+            var csvCountyEtymology = data[i].etymology;
+            var csvCountyYear = data[i].year;
+
+            for (var j = 0; j < json.features.length; j++) { // find the corresponding county id within the GeoJSON
+
+              var pathCountyId = json.features[j].properties.STATE + json.features[j].properties.COUNTY;
+
+              if (csvCountyId == pathCountyId) {
+                json.features[j].properties.name = csvCountyName; // copy the language into the JSON per county
+                json.features[j].properties.language = csvCountyLanguage; // copy the language into the JSON per county
+                json.features[j].properties.granularlanguage = csvCountyGranularlanguage;
+                json.features[j].properties.category = csvCountyCategory;
+                json.features[j].properties.subcategory = csvCountySubcategory;
+                json.features[j].properties.etymology = csvCountyEtymology;
+                json.features[j].properties.year = csvCountyYear;
+                break; // stop looking through the JSON
+              } // close if
+            } // close j for-loop
+          } // close i for-loop
+
+          // opacity scale
+          opacityScale = d3.scaleLinear()
+            // .domain([1634, 2013])
+            .domain([1634, 1990])
+            .range([0.05, 1]);
+
+          // drawing county paths
+          choroCatSvg.selectAll('.choro-cat')
+            .data(json.features)
+            .enter()
+            .append('path')
+              .attr('d', path)
+              .attr('class', function(d) {
+                return 'choro-cat choro-cat-' + d.properties.category + '-' + d.properties.subcategory;
+              })
+              .style('stroke', '#f5f5f5')
+              .style('stroke-width', 0.25)
+              .style('opacity', function(d) {
+                console.log(parseInt(d.properties.year) / 10000);
+                return opacityScale(parseInt(d.properties.year));
+              })
+              .style('fill', function(d, i) {
+                var range = 1 - 0.6;
+                if (d.properties.category == 'people') {
+                  var j = d3.interpolateRgb("rgb(201, 85, 116)", "rgb(255, 255, 255)");
+                  var numCat = 3;
+                  var interval = range / numCat;
+                  if (d.properties.subcategory == 'man') {
+                    return '#caa569';
+                  } else if (d.properties.subcategory == 'woman') {
+                    return '#caa569';
+                  } else if (d.properties.subcategory == 'group') {
+                    return '#caa569';
+                  }
+                } else if (d.properties.category == 'place') {
+                  var j = d3.interpolateRgb("rgb(116, 127, 202)", "rgb(255, 255, 255)");
+                  var numCat = 2;
+                  var interval = range / numCat;
+                  if (d.properties.subcategory == 'america') {
+                    return '#77b2e0';
+                  } else if (d.properties.subcategory == 'abroad') {
+                    return '#77b2e0';
+                  }
+                } else if (d.properties.category == 'nature') {
+                  var j = d3.interpolateRgb("rgb(78, 172, 124)", "rgb(255, 255, 255)");
+                  var numCat = 4;
+                  var interval = range / numCat;
+                  if (d.properties.subcategory == 'flora') {
+                    return '#68bc8f';
+                  } else if (d.properties.subcategory == 'geology') {
+                    return '#68bc8f';
+                  } else if (d.properties.subcategory == 'water') {
+                   return '#68bc8f';
+                  } else if (d.properties.subcategory == 'resource') {
+                    return '#68bc8f';
+                  }
+                } else if (d.properties.category == 'concept') {
+                  var j = d3.interpolateRgb("rgb(179, 148, 63)", "rgb(255, 255, 255)");
+                  var numCat = 3;
+                  var interval = range / numCat;
+                  if (d.properties.subcategory == 'event') {
+                    return '#db93c7';
+                  } else if (d.properties.subcategory == 'object') {
+                    return '#db93c7';
+                  } else if (d.properties.subcategory == 'idea') {
+                    return '#db93c7';
+                  }
+                } else if (d.properties.category == 'unknown') {
+                  var j = d3.interpolateRgb("rgb(150, 150, 150)", "rgb(255, 255, 255)");
+                  var numCat = 2;
+                  var interval = range / numCat;
+                  if (d.properties.subcategory == 'uncertain') {
+                    return '#aeaeae';
+                  } else if (d.properties.subcategory == 'combination') {
+                    return '#aeaeae';
+                  }
+                }
+              })
+              .on('mouseover', function(d) {
+                var currentHoverCat = d3.select(this).attr('class');
+                choroCatSvg.selectAll('.choro-cat')
+                  .each(function(d) {
+                    console.log(currentHoverCat);
+                    if (d3.select(this).attr('class') == currentHoverCat) {
+                    } else {
+                      d3.select(this)
+                        .style('opacity', 0.4);
+                    }
+                  })
+              })
+              .on('mouseout', function(d) {
+                choroCatSvg.selectAll('.choro-cat')
+                  .each(function(d) {
+                    d3.select(this)
+                      .style('opacity', 1);
+                    })
+              })
+              .append('title')
+              .text(function(d) {
+                return d.properties.name + ' // ' + d.properties.category + ': ' + d.properties.subcategory;
+              });
+
+        }); // close JSON function
+
+      }); // close CSV function
+
+    </script>
+
+  </body>
+</html>

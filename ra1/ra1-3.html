@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+        <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <title>Lia's D3 Template!</title>
+            <script type="text/javascript" src="../d3-library/d3.js"></script>
+            <style>
+
+              #container {
+                background-color: yellow;
+                width: 90vw;
+                height: 1000px;
+              }
+              .bucket {
+                background-color: green;
+                height: 130px;
+                width: 75vw;
+              }
+              .category {
+                background-color: blue;
+                height: 10px;
+                margin-top: 5px;
+                width: 50vw;
+              }
+
+            </style>
+          </head>
+          <body>
+
+            <div id="container"></div>
+
+            <script type="text/javascript">
+
+              var myDataset = [
+                ['1a', '1b'],
+                ['2a', '2b', '2c', '2d', '2e'],
+                ['3a', '3b', '3c', '3d', '3e', '3f'],
+                ['4a', '4b', '4c', '4d']
+              ]
+
+              var container = document.getElementById('container');
+
+              for (i = 0; i < myDataset.length; i++) {
+                var bucket = document.createElement('div');
+                bucket.setAttribute('id', 'bucket' + myDataset[i][0]);
+                bucket.setAttribute('class', 'bucket');
+                container.appendChild(bucket);
+
+                for (j = 0; j < myDataset[i].length; j++) {
+                  var category = document.createElement('div');
+                  category.setAttribute('class', 'category');
+                  container.lastElementChild.appendChild(category);
+                }
+              }
+
+            </script>
+          </body>
+        </html>

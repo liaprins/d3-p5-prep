@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Name frequency | County etymologies | CCG</title>
+
+    <!-- v4(.5) -->
+    <!-- <script type="text/javascript" src="../../../d3-book-master/d3.js"></script> -->
+    <!-- v6(.7) USING TEMPORARILY WHILE INTERNET IS DOWN :( -->
+    <script type="text/javascript" src="../../../d3-library/d3.js"></script>
+    <!-- D3 v6 -->
+    <!-- <script type="text/javascript" src="https://d3js.org/d3.v6.min.js"></script> -->
+
+    <!-- CSS ********************************************************************************************************* -->
+    <style>
+    body {
+      font-family: 'Work Sans';
+    }
+    #vis-6 {
+      background-color: #f5f5f5;
+    }
+    #tooltip-6 {
+        position: relative;
+        padding: 10px;
+        background-color: rgba(255, 255, 255, 0.9);
+        border: solid 2px black;
+        pointer-events: none;
+    }
+    .hidden {
+      display: none;
+    }
+    </style>
+  </head>
+  <body>
+    <!-- HTML ******************************************************************************************************** -->
+
+    <div id="vis-6"></div>
+
+    <div id="tooltip-6" class="hidden">
+      <p id="tooltip-county-6"></p>
+      <p id="tooltip-etycount-6"></p>
+      <p id="tooltip-namecount-6"></p>
+      <p id="tooltip-ety-6"></p>
+      <p id="tooltip-states-6"></p>
+    </div>
+
+    <!-- JAVASCRIPT ************************************************************************************************** -->
+    <script type="text/javascript">
+
+    // DATA ---------------------------------------------------------------------------------------------------------
+
+    // load in the data
+    d3.csv("../data_name-frequency.csv")
+      .then(function(data) {
+
+      // Step 1: isolate names of counties into their own set
+      var countyNames = [];
+      for (var i = 0; i < data.length; i++) {
+        countyNames[i] = data[i].name;
+      }
+
+      // Step 2: throw out any repeated names, so each county name is only listed once (will be used to access d3.group's map in step 4)
+      var uniqueCountyNames = [];
+      uniqueCountyNames = countyNames.filter((d, i, array)=>{
+        return countyNames.indexOf(d) === i;
+      });
+
+      // Step 3: group the CSV rows together by unique name
+      var countiesByName = d3.group(data, d => d.name);
+
+      // step 4: create JSONified dataset
+      var json = [];
+      for (var i = 0; i < uniqueCountyNames.length; i++) {
+        json[i] = countiesByName.get(uniqueCountyNames[i]);
+      } // i
+
+      // VARS ---------------------------------------------------------------------------------------------------------
+
+      var margin = ({ top: 58, right: 58, bottom: 58, left: 58 });
+      var w = 642 - margin.left - margin.right;
+      var maxCounties = 31; // number of counties in name with most counties (Washington)
+      var nameCount = 13; // number of names featured in the vis
+      var groupHeight = 58; // height of each county name's label + bars + vertical spacing
+      var height = groupHeight * nameCount + margin.top;
+      var unitWidth = w / maxCounties;
+
+      var x = d3.scaleLinear() // x scale
+        .domain([0, maxCounties])
+        .range([0, w]);
+
+      // convert categories to colors
+      var color = function(r) {
+        if (r == 'people') {
+          return '#caa569';
+        } else if (r == 'place') {
+          return '#77b2e0';
+        } else if (r == 'nature') {
+          return '#68bc8f';
+        } else if (r == 'concept') {
+          return '#db93c7';
+        } else if (r == 'unknown') {
+          return '#aeaeae' ;
+        }
+      };
+
+      // BUILD --------------------------------------------------------------------------------------------------------
+
+      var div = d3.selectAll('#vis-6')
+        .style('width', (w + margin.left + margin.right) + 'px')
+        .style('margin', '0 auto');
+
+      var svg = div.append('svg')
+          .attr('id', 'svg-6')
+          .attr('width', (w + margin.left + margin.right) + 'px')
+          .attr('height', height);
+
+      var nameGroup = svg.selectAll('.namegroup-6')
+        .data(json)
+        .enter()
+        .append('g')
+          .attr('class', 'namegroup-6')
+          .attr('transform', function(d, i) {
+            return 'translate(' + margin.left + ',' + (i * groupHeight + margin.top) + ')';
+          });
+
+      var etyGroup = nameGroup.selectAll('.etygroup-6')
+        .data(function(d) {
+          return d;
+        })
+        .enter()
+        .append('rect')
+          .attr('class', 'etygroup-6')
+          .attr('id', function(d) {
+            return d.frequency;
+          })
+          .attr('width', function(d) {
+            return x(d.frequency) + 'px';
+          })
+          .attr('height', unitWidth + 'px')
+          .attr('x', function(d) {
+            return x(d.shift) + 'px';
+          })
+          .attr('y', unitWidth / 2)
+          .attr('rx', (unitWidth / 2) + 'px')
+          .attr('ry', (unitWidth / 2) + 'px')
+          .attr('fill', function(d) {
+            return color(d.category);
+          })
+          .on('click', function(q, d, r) { // NOT SURE WHY, BUT WITH NEWER VERSIONS OF D3, d (TO ACCESS THE DATASET) IS THE SECOND VAR IN THE .on() FUNCTIONS...
+
+            var clickedEty = d3.select(this);
+            var selectedEty = clickedEty.classed('selectedety-6'); // is the bead selected right now?
+
+            etyGroup.classed('selectedety-6', function() { // this turns off previously selected beads
+            if (!clickedEty) { // apply to all but currently clicked bead
+                return true;
+              }
+            })
+              .style('stroke', 'none')
+
+            if (selectedEty) { // if selected prior to click
+
+              d3.select('#tooltip-6') // affect the tooltip
+                .classed('hidden', true);
+
+              clickedEty.classed('selectedety-6', false) // affect the bead
+                .style('stroke', 'none')
+
+            } else { // if NOT selected prior to click
+
+              var tooltip6 = d3.select('#tooltip-6'); // affect the tooltip
+              tooltip6.style('left', function() {
+                  return 'calc(50vw - ' + ((w / 2) + 'px + ' + (d.shift * unitWidth)) + 'px';
+                })
+                .style('top', function() {
+                  return -height + (d.group * groupHeight) + margin.top + (unitWidth / 2) + 4 + 'px'; // "4" needed to account for the stroke width 2 x 2px of the bead and the tooltip (I think)
+                })
+                .style('width', '408px')
+                .select("#tooltip-county-6")
+                .text(d.name);
+
+                tooltip6
+                  .select("#tooltip-etycount-6")
+                  .text(d.frequency);
+
+                tooltip6
+                  .select("#tooltip-namecount-6")
+                  .text(d.total);
+
+                tooltip6
+                  .select("#tooltip-ety-6")
+                  .text(d.etymology);
+
+                tooltip6
+                  .select("#tooltip-states-6")
+                  .text(d.states);
+
+              d3.select("#tooltip-6")
+                .classed("hidden", false);
+
+              clickedEty.classed('selectedety-6', true) // affect the bead
+              .style('stroke', 'black')
+              .style('stroke-width', 2);
+
+            } // if
+          }); // on
+
+          nameGroup.append('text')
+            .attr('class', 'label-6')
+            .text(function(d) {
+              return d[0].name;
+            });
+
+    }); // close CSV function
+
+    </script>
+
+  </body>
+</html>

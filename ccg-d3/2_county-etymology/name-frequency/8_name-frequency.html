@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Name frequency | County etymologies | CCG</title>
+
+    <!-- D3 v6 -->
+    <script type="text/javascript" src="https://d3js.org/d3.v6.min.js"></script>
+
+    <!-- CSS *********************************************************************** -->
+    <style>
+    body {
+      font-family: 'Work Sans';
+    }
+    .name-bars {
+      margin: 5px;
+    }
+    </style>
+  </head>
+  <body>
+    <!-- HTML ********************************************************************** -->
+
+    <div id="name-frequency-vis"></div>
+
+    <!-- JAVASCRIPT **************************************************************** -->
+    <script type="text/javascript">
+
+    // load in the data
+    d3.csv("../data_name-frequency.csv")
+      .then(function(data) {
+
+      // Step 1: isolate names of counties into their own set
+      var countyNames = [];
+      for (var i = 0; i < data.length; i++) {
+        countyNames[i] = data[i].name;
+      }
+
+      // Step 2: throw out any repeated names, so each county name is only listed once (will be used to access d3.group's map, below)
+      var uniqueCountyNames = [];
+      uniqueCountyNames = countyNames.filter((d, i, array)=>{
+        return countyNames.indexOf(d) === i;
+      });
+
+      // Step 3: group the CSV rows together by unique name
+      var countiesByName = d3.group(data, d => d.name);
+      // var countiesByNameZh = d3.hierarchy(countiesByName);
+
+      // step 4: create JSONified dataset
+      var nameFreqJson = [];
+      for (var i = 0; i < uniqueCountyNames.length; i++) {
+        nameFreqJson[i] = countiesByName.get(uniqueCountyNames[i]);
+      } // i
+
+      console.log('data');
+      console.log(data);
+
+      console.log('countyNames');
+      console.log(countyNames);
+
+      console.log('uniqueCountyNames');
+      console.log(uniqueCountyNames);
+
+      console.log('countiesByName');
+      console.log(countiesByName);
+
+      console.log('nameFreqJson');
+      console.log(nameFreqJson);
+
+      var nameFreqDiv = d3.selectAll('#name-frequency-vis');
+      var nameFreqSvg = nameFreqDiv.append('svg')
+        .attr('width', 1500)
+        .attr('height', 1000);
+
+      var nameFreqBoxWidth = 30;
+
+      var nameFreqBar = nameFreqSvg.selectAll('.name-freq-bar')
+        .data(nameFreqJson)
+        .enter()
+        .append('g')
+          .attr('class', 'name-freq-bar')
+          .attr('transform', function(d, i) {
+            return 'translate(50, ' + ((i * nameFreqBoxWidth) + nameFreqBoxWidth) + ')';
+          });
+
+      var nameFreqSubBar = nameFreqBar.selectAll('.name-freq-subbar')
+        .data(function(d) {
+          return d;
+        })
+        .enter()
+        .append('rect')
+          .attr('x', function(d, i) {
+            return d.shift * nameFreqBoxWidth;
+          })
+          .attr('y', 0)
+          .attr('width', function(d) {
+            return d.frequency * nameFreqBoxWidth;
+          })
+          .attr('height', nameFreqBoxWidth)
+          .attr('stroke', 'red');
+
+    }); // close CSV function
+
+    </script>
+
+  </body>
+</html>

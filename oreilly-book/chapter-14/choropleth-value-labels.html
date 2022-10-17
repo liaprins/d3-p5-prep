@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Lia's D3 Template!</title>
+    <!--
+    <script type="text/javascript" src="../../d3-library/d3.js"></script>
+    -->
+    <script type="text/javascript" src="../../d3-book-master/d3.js"></script>
+    <style>
+
+      .pan rect,
+      .zoom rect {
+        fill: black;
+        opacity: 0.2;
+      }
+
+      .zoom rect {
+        rx: 5;    /* rounded corners */
+        ry: 5;
+      }
+
+      .pan text,
+      .zoom text {
+        fill: black;
+        font-size: 18px;
+        text-anchor: middle;
+      }
+
+      .pan:hover rect,
+      .pan:hover text,
+      .zoom:hover rect,
+      .zoom:hover text {
+        fill: blue;
+      }
+
+      .label {
+        font-family: Helvetica, sans-sans-serif;
+        font-size: 11px;
+        fill: black;
+        text-anchor: middle;
+      }
+
+    </style>
+  </head>
+  <body>
+
+    <div>
+      <button id="pnw">Pacific Northwest</button>
+      <button id="reset">Reset</button>
+    </div>
+
+    <script>
+
+      var w = 500;
+      var h = 300;
+
+      // define selected projection (Albers USA here)
+      var myProjection = d3.geoAlbersUsa()
+                         .translate([w / 2, h / 2])
+                         .scale([2000]);
+
+      // define path generator, using a projection from above
+      var myPath = d3.geoPath()
+                    .projection(myProjection);
+
+      // set up color scale
+      var myColor = d3.scaleQuantize()
+                      .range(["rgb(237,248,233)", "rgb(186,228,179)", "rgb(116,196,118)", "rgb(49,163,84)", "rgb(0,109,44)"]);
+
+      // add commas every third digit
+      var formatAsThousands = d3.format(",");
+
+      // number formating for ag values
+      var formatDecimals = d3.format(".3");
+
+      // create SVG container
+      var mySvg = d3.select("body")
+                    .append("svg")
+                    .attr("width", w)
+                    .attr("height", h);
+
+      // define what to do when dragging
+      var zooming = function(d) {
+
+        console.log(d3.event.transform);
+
+        // new offset array
+				var offset = [d3.event.transform.x, d3.event.transform.y];
+
+        // calculate new scale
+				var newScale = d3.event.transform.k * 2000;
+
+        // update projection with new offset and scale
+				myProjection.translate(offset)
+				  .scale(newScale);
+
+        // update all paths and circles
+        mySvg.selectAll("path")
+          .attr("d", myPath);
+
+        mySvg.selectAll("circle")
+          .attr("cx", function(d) {
+            return myProjection([d.lon, d.lat])[0];
+          })
+          .attr("cy", function(d) {
+            return myProjection([d.lon, d.lat])[1];
+          });
+
+        // initiate + position labels
+        mySvg.selectAll(".label")
+          .attr("x", function(d) {
+            return myPath.centroid(d)[0];
+          })
+          .attr("y", function(d) {
+            return myPath.centroid(d)[1];
+          });
+
+      }
+
+      // define zoom behavior
+      var myZoom = d3.zoom()
+        .scaleExtent([ 0.2, 2.0 ])
+        .translateExtent([[ -1200, -700 ], [ 1200, 700 ]])
+        .on("zoom", zooming);
+
+      // where to center the map
+      var center = myProjection([-107.0, 42.5]);
+      /* var center = ([
+        d3.max(json, function(d) { return d.lat; }),
+        d3.max(json, function(d) { return d.lon; })
+      ]); */
+
+      // create container to hold all zoomable elements
+      var map = mySvg.append("g")
+                  .attr("id", "map")
+                  .call(myZoom)    // bind the dragging behavior
+                  .call(myZoom.transform, d3.zoomIdentity
+                    .translate(w/2, h/2)
+                    .scale(0.25)
+                    .translate(-center[0], -center[1]));
+
+      // create invisible BG rect to catch zoom events
+      map.append("rect")
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("width", w)
+        .attr("height", h)
+        .attr("opacity", 0);
+
+      // load in GeoJSON data
+      d3.csv("us-ag-productivity.csv", function(data) {
+
+        // set color scale's domain
+        myColor.domain([
+          d3.min(data, function(d) { return d.value; }),
+          d3.max(data, function(d) { return d.value; })
+        ]);
+
+        d3.json("us-states.json", function(json) {
+
+          // merge the ag data (CSV) and GeoJSON state outline data (JSON)
+          // loop through each ag data value
+          for (var i = 0; i < data.length; i++) {
+
+            // grab state name
+            var dataState = data[i].state;
+
+            // grab data value, and convert from string to float
+            var dataValue = parseFloat(data[i].value);
+
+            // match up the corresponding state inside the GeoJSON file
+            for (var j = 0; j < json.features.length; j++) {
+
+              var jsonState = json.features[j].properties.name;
+
+              if (dataState == jsonState) {
+
+                // copy the data value into the JSON
+                json.features[j].properties.value = dataValue;
+
+                // stop looking through the JSON
+                break;
+
+              }
+
+            }
+
+          }
+
+          // bind data and create one path per GeoJSON feature
+          map.selectAll("path")
+            .data(json.features)
+            .enter()
+            .append("path")
+            .attr("d", myPath)
+            .style("fill", function(d) {
+              var value = d.properties.value;
+              if (value) {
+                return myColor(value);
+              } else {
+                return "#CCCCCC";
+              }
+            });
+
+          // create one label per state
+          map.selectAll("text")
+            .data(json.features)
+            .enter()
+            .append("text")
+            .attr("class", "label")
+            .attr("x", function(d) {
+              return myPath.centroid(d)[0];
+            })
+            .attr("y", function(d) {
+              return myPath.centroid(d)[1];
+            })
+            .text(function(d) {
+              if (d.properties.value) {
+                return formatDecimals(d.properties.value);
+              };
+            });
+
+          // load in cities data
+          d3.csv("us-cities.csv", function(data) {
+
+            map.selectAll("circle")
+              .data(data)
+              .enter()
+              .append("circle")
+              .attr("cx", function(d) {
+                return myProjection([d.lon, d.lat])[0];
+              })
+              .attr("cy", function(d) {
+                return myProjection([d.lon, d.lat])[1];
+              })
+              .attr("r", function(d) {
+                return Math.sqrt(parseInt(d.population) * 0.00004);
+              })
+              .style("fill", "yellow")
+              .style("stroke", "gray")
+              .style("stroke-width", "0.25")
+              .style("opacity", "0.75")
+              .append("title")
+              .text(function(d) {
+                return d.place + ": " + formatAsThousands(d.population) + "people";
+              });
+
+              createPanButtons();
+              createZoomButtons();
+
+          });
+
+        });
+
+      });
+
+      var createPanButtons = function() {
+
+        // create the clickable groups
+
+        // north
+        var north = mySvg.append("g")
+                      .attr("class", "pan")
+                      .attr("id", "north");
+        north.append("rect")
+          .attr("x", 0)
+          .attr("y", 0)
+          .attr("width", w)
+          .attr("height", 30);
+        north.append("text")
+          .attr("x", w/2)
+          .attr("y", 20)
+          .html("&uarr;");    // arrow symbol
+
+        // south
+        var south = mySvg.append("g")
+                      .attr("class", "pan")
+                      .attr("id", "south");
+        south.append("rect")
+          .attr("x", 0)
+          .attr("y", h - 30)
+          .attr("width", w)
+          .attr("height", 30);
+        south.append("text")
+          .attr("x", w/2)
+          .attr("y", h - 10)
+          .html("&darr;");    // arrow symbol
+
+        // west
+        var west = mySvg.append("g")
+                      .attr("class", "pan")
+                      .attr("id", "west");
+        west.append("rect")
+          .attr("x", 0)
+          .attr("y", 30)
+          .attr("width", 30)
+          .attr("height", h - 60);
+        west.append("text")
+          .attr("x", 15)
+          .attr("y", h/2)
+          .html("&larr;");    // arrow symbol
+
+        // east
+        var east = mySvg.append("g")
+                      .attr("class", "pan")
+                      .attr("id", "east");
+        east.append("rect")
+          .attr("x", w - 30)
+          .attr("y", 30)
+          .attr("width", 30)
+          .attr("height", h - 60);
+        east.append("text")
+          .attr("x", w - 15)
+          .attr("y", h/2)
+          .html("&rarr;");    // arrow symbol
+
+        // panning interaction
+        d3.selectAll(".pan")
+					.on("click", function() {
+
+						//Get current translation offset
+						// var offset = myProjection.translate();
+
+						//Set how much to move on each click
+						var moveAmount = 50;
+
+            // set x and y to 0 for now
+            var x = 0;
+            var y = 0;
+
+						//Which way are we headed?
+						var direction = d3.select(this).attr("id");
+
+						//Modify the offset, depending on the direction
+						switch (direction) {
+							case "north":
+								y += moveAmount;  //Increase y offset
+								break;
+							case "south":
+								y -= moveAmount;  //Decrease y offset
+								break;
+							case "west":
+								x += moveAmount;  //Increase x offset
+								break;
+							case "east":
+								x -= moveAmount;  //Decrease x offset
+								break;
+							default:
+								break;
+						}
+
+						// this triggers a zoom event, translating by x, y
+            map.transition()
+              .duration(500)
+              .call(myZoom.translateBy, x, y);
+
+					});
+
+      };
+
+      // create zoom buttons
+      var createZoomButtons = function() {
+
+        // create the clickable groups
+
+        // zoom in button
+        var zoomIn = mySvg.append("g")
+                       .attr("class", "zoom")
+                       .attr("id", "in")    // use this to identify which direction to zoom
+                       .attr("transform", "translate(" + (w - 110) + "," + (h - 70) + ")");
+
+        zoomIn.append("rect")
+          .attr("x", 0)
+          .attr("y", 0)
+          .attr("width", 30)
+          .attr("height", 30);
+
+        zoomIn.append("text")
+          .attr("x", 15)
+          .attr("y", 20)
+          .text("+");
+
+        // zoom out button
+        var zoomOut = mySvg.append("g")
+                       .attr("class", "zoom")
+                       .attr("id", "out")    // use this to identify which direction to zoom
+                       .attr("transform", "translate(" + (w - 70) + "," + (h - 70) + ")");
+
+        zoomOut.append("rect")
+          .attr("x", 0)
+          .attr("y", 0)
+          .attr("width", 30)
+          .attr("height", 30);
+
+        zoomOut.append("text")
+          .attr("x", 15)
+          .attr("y", 20)
+          .html("&ndash;");
+
+        // zooming interaction
+        d3.selectAll(".zoom")
+          .on("click", function() {
+
+            // set how much to scale on each click
+            var scaleFactor;
+
+            // which way are we headed?
+            var direction = d3.select(this).attr("id");
+
+            // modify the k scale value, depending on the direction
+            switch (direction) {
+              case "in":
+                scaleFactor = 1.5;
+                break;
+              case "out":
+                scaleFactor = 0.75;
+                break;
+              default:
+                break;
+            }
+
+            // this triggers a zoom event, scaling by scaleFactor
+            map.transition()
+              .duration(500)
+              .call(myZoom.scaleBy, scaleFactor);
+
+          });
+
+      };
+
+      // bind PNW preset view button behavior
+      d3.select("#pnw")
+        .on("click", function() {
+          map.transition()
+            .duration(1000)
+            .call(myZoom.transform, d3.zoomIdentity
+              .translate(w/2, h/2)
+              .scale(0.9)
+              .translate(600, 300));
+        });
+
+      // bind Reset view button behavior
+      d3.select("#reset")
+        .on("click", function() {
+          map.transition()
+            .duration(1000)
+            .call(myZoom.transform, d3.zoomIdentity
+              .translate(w/2, h/2)
+              .scale(0.25)
+              .translate(-center[0], -center[1]));
+        });
+
+    </script>
+  </body>
+</html>

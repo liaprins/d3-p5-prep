@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Lia's D3 Template!</title>
+    <script type="text/javascript" src="../../d3-library/d3.js"></script>
+    <!--
+    <script type="text/javascript" src="../../d3-book-master/d3.js"></script>
+    -->
+    <style>
+      div.bar {
+        display: inline-block;
+        width: 20px;
+        height: 75px;    /* Will be overridden by D3 */
+        background-color: teal;
+        margin-right: 2px;
+      }
+      /*
+      rect:hover {
+        fill: orange;
+      }
+      */
+      p {
+        font-family: sans-serif;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+
+    <p>SORT BY VALUE</p>
+
+    <script type="text/javascript">
+
+      var w = 600;
+      var h = 250;
+
+      var myDataset = [5, 10, 13, 19, 21, 25, 22, 18, 15, 13, 11, 12, 15, 20, 18, 17, 16, 18, 23, 25];
+
+      var xScale = d3.scaleBand()
+                     .domain(d3.range(myDataset.length))
+                     .rangeRound([0, w])
+                     .paddingInner(0.05);    // set spacing between each bar to 5% of the bar + spacing's total width
+
+      var yScale = d3.scaleLinear()
+                     .domain([0, d3.max(myDataset)])
+                     .range([0, h]);
+
+      var mySvg = d3.select("body")
+                    .append("svg")
+                    .attr("width", w)
+                    .attr("height", h);
+
+      // create bars
+      mySvg.selectAll("rect")
+           .data(myDataset)
+           .enter()
+           .append("rect")
+           .attr("x", function(d, i) {
+             return xScale(i);
+           })
+           .attr("y", function (d) {
+             return h - yScale(d);
+           })
+           .attr("width", xScale.bandwidth())    // D3's "bandwidth()" knows the width of each bar already (based on the ordinal scale, I think)
+           .attr("height", function(d) {
+             return yScale(d);
+           })
+           .attr("fill", function(d) {
+             return "rgb(0, 0, " + Math.round(d * 10) + ")"
+           })
+           // .on("mouseover", function(d) {    // THIS ONLY WORKS WITH AN OLDER VERSION OF D3 THAT SCOTT USES IN HIS EXAMPLES: https://github.com/scotthmurray/d3-book/blob/master/d3.js
+           .on("mouseover", function(q, d) {    // trying to print the data value of the clicked-upon bar, but it won't work unless d is the second item passed to the function!!! But works on Scott's sample code normally (not like this!) http://localhost:8888/d3/d3-book-master/chapter_10/02_click.html
+             d3.select(this)
+               .attr("fill", "orange");
+
+             var xPosition = parseFloat(d3.select(this).attr("x")) + (xScale.bandwidth() / 2);
+             var yPosition = parseFloat(d3.select(this).attr("y")) + 14;
+             mySvg.append("text")
+                  .attr("id", "tooltip")
+                  .attr("x", xPosition)
+                  .attr("y", yPosition)
+                  .attr("text-anchor", "middle")
+                  .attr("font-family", "sans-serif")
+                  .attr("font-size", "11px")
+                  .attr("font-weight", "bold")
+                  .attr("fill", "black")
+                  .text(d);
+           })
+           // .on("mouseout", function(d) {    // THIS ONLY WORKS WITH AN OLDER VERSION OF D3 THAT SCOTT USES IN HIS EXAMPLES: https://github.com/scotthmurray/d3-book/blob/master/d3.js
+           .on("mouseout", function(q, d) {    // trying to print the data value of the clicked-upon bar, but it won't work unless d is the second item passed to the function!!! But works on Scott's sample code normally (not like this!) http://localhost:8888/d3/d3-book-master/chapter_10/02_click.html
+             d3.select(this)
+               .transition("restoreBarColor")
+               .duration(250)
+               .attr("fill", "rgb(0, 0, " + Math.round(d * 10) + ")");
+
+             d3.select("#tooltip")
+               .remove();
+           })
+           .on("click", function() {
+             sortBars();
+           });
+      /*
+      mySvg.selectAll("text")
+            .data(myDataset)
+            .enter()
+            .append("text")
+            .style("pointer-events", "none")
+            .text(function(d){
+              return d;
+            })
+            .attr("x", function(d, i) {
+              return xScale(i) + (xScale.bandwidth() / 2);
+            })
+            .attr("y", function (d) {
+              return h - yScale(d) + 14;
+            })
+            .attr("font-family", "sans-serif")
+            .attr("font-size", "11px")
+            .attr("text-anchor", "middle")
+            .attr("fill", "white");
+            */
+      // apply sort function
+      d3.select("p")
+           .on("click", function() {
+             sortBars();
+           });
+
+      // set flag to define sorting order
+      var sortOrder = false;
+
+      // build sort function
+      var sortBars = function() {
+
+        // flip value of sortOrder
+        sortOrder = !sortOrder;
+
+        mySvg.selectAll("rect")
+             .sort(function(a, b) {
+               if (sortOrder) {
+                 return d3.ascending(a, b);
+               } else {
+                 return d3.descending(a, b);
+               }
+             })
+             .transition()
+             .delay(function(d, i) {
+               return i * 50;
+             })
+             .duration(1000)
+             .attr("x", function(d, i) {
+               return xScale(i);
+             });
+        /*
+        mySvg.selectAll("text")
+             .sort(function(a, b) {
+               if (sortOrder) {
+                 return d3.ascending(a, b);
+               } else {
+                 return d3.descending(a, b);
+               }
+             })
+             .transition("sortBars")
+             .delay(function(d, i) {
+               return i * 50;
+             })
+             .duration(1000)
+             .attr("x", function(d, i) {
+               return xScale(i) + (xScale.bandwidth() / 2);
+             });
+             */
+      }
+
+    </script>
+  </body>
+</html>

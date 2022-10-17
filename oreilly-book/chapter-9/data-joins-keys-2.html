@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Lia's D3 Template!</title>
+    <script type="text/javascript" src="../../d3-library/d3.js"></script>
+    <style>
+      div.bar {
+        display: inline-block;
+        width: 20px;
+        height: 75px;    /* Will be overridden by D3 */
+        background-color: teal;
+        margin-right: 2px;
+      }
+    </style>
+  </head>
+  <body>
+
+    <p>Click on this text to remove bar.</p>
+
+    <script type="text/javascript">
+
+      var w = 600;
+      var h = 250;
+
+			var myDataset = [
+              { key: 0,  value: 5 },
+							{ key: 1,  value: 10 },
+							{ key: 2,  value: 13 },
+							{ key: 3,  value: 19 },
+							{ key: 4,  value: 21 },
+							{ key: 5,  value: 25 },
+							{ key: 6,  value: 22 },
+							{ key: 7,  value: 18 },
+							{ key: 8,  value: 15 },
+							{ key: 9,  value: 13 },
+							{ key: 10, value: 11 },
+							{ key: 11, value: 12 },
+							{ key: 12, value: 15 },
+							{ key: 13, value: 20 },
+							{ key: 14, value: 18 },
+							{ key: 15, value: 17 },
+							{ key: 16, value: 16 },
+							{ key: 17, value: 18 },
+							{ key: 18, value: 23 },
+							{ key: 19, value: 25 }
+            ];
+
+      var xScale = d3.scaleBand()
+                     .domain(d3.range(myDataset.length))
+                     .rangeRound([0, w])
+                     .paddingInner(0.05);    // set spacing between each bar to 5% of the bar + spacing's total width
+
+      var yScale = d3.scaleLinear()
+                     .domain([0, d3.max(myDataset, function(d) { return d.value; })])
+                     .range([0, h]);
+
+      // define key function, to bind data based on artificial index (".key" within objects)
+      var myKey = function(d) {
+        return d.key;
+      }
+
+      var mySvg = d3.select("body")
+                    .append("svg")
+                    .attr("width", w)
+                    .attr("height", h);
+
+      // create bars
+      mySvg.selectAll("rect")
+           .data(myDataset, myKey)
+           .enter()
+           .append("rect")
+           .attr("x", function(d, i) {
+             return xScale(i);
+           })
+           .attr("y", function(d) {
+             return h - yScale(d.value);
+           })
+           .attr("width", xScale.bandwidth())    // D3's "bandwidth()" knows the width of each bar already (based on the ordinal scale, I think)
+           .attr("height", function(d) {
+  			   		return yScale(d.value);
+  			   })
+           .attr("fill", function(d) {
+             return "rgb(0, 0, " + Math.round(d.value * 10) + ")"
+           });
+
+      mySvg.selectAll("text")
+            .data(myDataset, myKey)
+            .enter()
+            .append("text")
+            .text(function(d){
+              return d.value;
+            })
+            .attr("x", function(d, i) {
+              return xScale(i) + (xScale.bandwidth() / 2);
+            })
+            .attr("y", function (d) {
+              return h - yScale(d.value) + 14;
+            })
+            .attr("font-family", "sans-serif")
+            .attr("font-size", "11px")
+            .attr("text-anchor", "middle")
+            .attr("fill", "white");
+
+      // click as event listener
+      d3.select("p")
+
+        .on("click", function() {
+
+          // Remove FIRST value from dataset
+          myDataset.shift();
+
+          // update yScale
+          xScale.domain(d3.range(myDataset.length));
+          yScale.domain([0, d3.max(myDataset, function(d) { return d.value; })]);
+
+          // store existing bars as "update selection"
+          var bars = mySvg.selectAll("rect")
+                          .data(myDataset, myKey);
+
+          // add new bar + update existing bars
+          // COMMENT OUT THIS CHUNK TO MAKE THE LAST BAR SLIDE OUT AND ALL BARS MAINTAIN WIDTH INSTEAD OF SCALING WIDER
+          bars.enter()
+              .append("rect")
+              .attr("x", w)
+              .attr("y", function(d) {
+                return h - yScale(d.value);
+              })
+              .attr("width", xScale.bandwidth())
+              .attr("height", function(d) {
+                return yScale(d.value);
+              })
+              .attr("fill", function(d) {
+                return "rgb(0, 0, " + Math.round(d * 10) + ")";
+              })
+              .merge(bars)
+              .transition()
+              .duration(500)
+              .attr("x", function(d, i) {
+                return xScale(i);
+              })
+              .attr("y", function(d) {
+                return h - yScale(d.value);
+              })
+              .attr("width", xScale.bandwidth())
+              .attr("height", function(d) {
+                return yScale(d.value);
+              });
+
+          // remove a bar
+          bars.exit()
+              .transition()
+              .duration(500)
+              .attr("x", -xScale.bandwidth())    // move bar off the to the left
+              .remove();
+
+          // store existing labels as "update selection"
+          var labels = mySvg.selectAll("text")
+                            .data(myDataset, myKey);
+
+          // add new label + update existing labels
+          // COMMENT OUT THIS CHUNK THEN UN-COMMENT THE NEXT CHUNK, TO MAKE THE LAST LABEL SLIDE OUT WITH ITS BAR
+          labels.enter()
+                .append("text")
+                .attr("x", w + 5)
+                .attr("y", function(d) {
+                  return h - yScale(d.value) + 14;
+                })
+                .attr("fill", "white")
+                .attr("font-family", "sans-serif")
+                .attr("font-size", "11px")
+                .attr("text-anchor", "middle")
+                .attr("fill", "white")
+                .merge(labels)
+                .transition()
+                .delay(function(d, i) {
+                  return (i / myDataset.length) * 1000;
+                })
+                .duration(500)
+                .ease(d3.easeElasticOut)
+                .attr("x", function(d, i) {
+                  return xScale(i) + (xScale.bandwidth() / 2);
+                })
+                .attr("y", function(d) {
+                  return h - yScale(d.value) + 14;
+                })
+                .attr("fill", "white")
+                .text(function(d) {
+                  return d.value;
+                });
+
+          // remove a label
+          labels.exit()
+              .transition()
+              .duration(500)
+              .attr("x", -xScale.bandwidth())
+              .remove();
+
+        });
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>State breakdowns | County etymologies | CCG</title>
+
+    <!-- D3 v6 -->
+    <!-- <script type="text/javascript" src="https://d3js.org/d3.v6.min.js"></script> -->
+
+    <!-- v6(.7) // USING TEMPORARILY WHILE ON AIRPLANE -->
+    <script type="text/javascript" src="../../../d3-library/d3.js"></script>
+
+    <!-- CSS *********************************************************************** -->
+    <style>
+    body {
+      font-family: 'Work Sans';
+    }
+    #state-raw-cat {
+      width: 5000px;
+      margin: 10px auto;
+    }
+    #states-svg {
+      background: #eeeeee;
+      padding-top: 25px;
+    }
+    .state-chart {
+      background-color: teal;
+    }
+    .state-category {
+      mix-blend-mode: multiply;
+    }
+    </style>
+  </head>
+  <body>
+    <!-- HTML ********************************************************************** -->
+
+    <div id="state-raw-cat">
+      <h1>Raw counts: Categories</h1>
+    </div>
+
+    <!-- JAVASCRIPT **************************************************************** -->
+    <script type="text/javascript">
+
+      let dimensions = {
+        w: 5000,
+        h: 195,
+        margins: 50
+      };
+      dimensions.containerW = dimensions.w - (dimensions.margins * 2);
+      dimensions.containerH = dimensions.h - (dimensions.margins * 2);
+
+      // create containers
+      var svg = d3.select('#state-raw-cat')
+        .append('svg')
+          .attr('id', 'state-raw-cat')
+          .attr('width', dimensions.w)
+          .attr('height', dimensions.h)
+          .style('background', '#eeeeee');
+
+      var container = svg.append("g")
+        .attr(
+          'transform',
+          'translate(' + dimensions.margins + ', ' + dimensions.margins + ')'
+        );
+
+    // load in the data
+    d3.csv("../data_counties.csv")
+      .then(function(data) {
+
+        var stateRollups = d3.rollups(data
+            .sort((a, b) => d3.ascending(a.state, b.state) || d3.ascending(a.category, b.category))
+            .filter(function(d) { return d.state != 'District of Columbia'}),
+          v => v.length, // don't think I need this actually
+          d => d.state, d => d.category);
+
+        var stateGroups = d3.group(data
+            .sort((a, b) => d3.ascending(a.state, b.state) || d3.ascending(a.category, b.category))
+            .filter(function(d) { return d.state != 'District of Columbia'}),
+          d => d.state, d => d.category);
+
+        var stateGroupsHierarchy = d3.hierarchy(stateGroups);
+
+        var catArray = ['people', 'nature', 'place', 'concept', 'unknown'];
+
+        // TO MAKE DYNAMIC, USE data-* HTML ATTRIBUTE TO PASS PARENT <g>'S STATE INDEX (LIKE I DID IN 27_timeline.html WITH data-histosymbolvalue)
+        // length scale
+        var lengthScale = function(u, v) {
+          var domainMax = d3.max(catRollupsHierarchy.data[u][1], function(f) { return f[1] } );
+          var rangeMax = w - chartSlideOver - padding;
+
+          return (v * rangeMax) / domainMax;
+
+          // SOMEHOW D3'S SCALE DOESN'T WORK WITHIN MY FUNCTION, BUT BUILDING MY OWN PROPORTION-SCALE DOES; SEE ABOVE!
+          /* return d3.scaleLinear(v)
+            .domain([0, domainMax])
+            .range([0, rangeMax]); */
+        };
+
+        var stateData = [];
+
+        for (i = 0; i < stateRollups.length; i++) {
+
+          stateData[i] = {};
+
+          for (j = 0; j < stateRollups[i][1].length; j++) {
+
+            var peopleCount,
+                natureCount,
+                placeCount,
+                conceptCount,
+                unknownCount;
+
+            if (stateGroups.get(stateRollups[i][0]).get('people')) { // navigate into the state for this i-loop, then into the category
+              peopleCount = stateGroups.get(stateRollups[i][0]).get('people').length;
+            } else {
+              peopleCount = 0;
+            }
+
+            if (stateGroups.get(stateRollups[i][0]).get('nature')) {
+              natureCount = stateGroups.get(stateRollups[i][0]).get('nature').length;
+            } else {
+              natureCount = 0;
+            }
+
+            if (stateGroups.get(stateRollups[i][0]).get('place')) {
+              placeCount = stateGroups.get(stateRollups[i][0]).get('place').length;
+            } else {
+              placeCount = 0;
+            }
+
+            if (stateGroups.get(stateRollups[i][0]).get('concept')) {
+              conceptCount = stateGroups.get(stateRollups[i][0]).get('concept').length;
+            } else {
+              conceptCount = 0;
+            }
+
+            if (stateGroups.get(stateRollups[i][0]).get('unknown')) {
+              unknownCount = stateGroups.get(stateRollups[i][0]).get('unknown').length;
+            } else {
+              unknownCount = 0;
+            }
+
+          } // j
+
+          stateData[i] = {
+            'people':   parseFloat(peopleCount),
+            'nature':   parseFloat(natureCount),
+            'place':    parseFloat(placeCount),
+            'concept':  parseFloat(conceptCount),
+            'unknown':  parseFloat(unknownCount)
+          }; // close object creation
+
+        } // i
+
+        var stack = d3.stack()
+          .keys([ 'people', 'nature', 'place', 'concept', 'unknown' ]) // try replacing with teh var catArray
+          .order(d3.stackOrderAscending);
+
+        // stack-ify the dataset
+        var series = stack(stateData);
+
+        console.log('stateRollups: ');
+        console.log(stateRollups);
+        console.log('stateGroups: ');
+        console.log(stateGroups);
+        console.log('stateGroupsHierarchy: ');
+        console.log(stateGroupsHierarchy);
+        console.log('stateData: ');
+        console.log(stateData);
+        console.log('series: ');
+        console.log(series);
+
+        // create scale functions
+        var xScale = d3.scaleBand()
+          .domain(d3.range(stateData.length))
+          .range([0, dimensions.containerW])
+          .paddingInner(0.05);
+
+        var yScale = d3.scaleLinear()
+          .domain([0, d3.max(stateData, function(d) {
+            return d.people + d.nature + d.place + d.concept + d.unknown;
+          })])
+         .range([dimensions.containerH, 0]);
+
+        // var color = ['rgb(201, 85, 116)', 'rgb(78, 172, 124)', 'rgb(116, 127, 202)', 'rgb(179, 148, 63)', 'rgb(150, 150, 150)']; // people, nature, place, concept, unknown
+        var color = ['#caa569', '#68bc8f', '#77b2e0', '#db93c7', '#aeaeae']; // people, nature, place, concept, unknown
+
+        // add a group for each category
+        var groups = container.selectAll('.state-group-cat')
+          .data(series)
+          .enter()
+          .append('g')
+            .attr('class', 'state-group-cat')
+            .style("fill", function(d, i) {
+              return color[i];
+            });
+
+        // add a rect per data value
+  			var rects = groups.selectAll('.state-rect-cat')
+          .data(function(d) { return d; })
+          .enter()
+          .append('rect')
+            .attr('class', 'state-rect-cat')
+            .attr("x", function(d, i) {
+              return xScale(i);
+            })
+            .attr("y", function(d) {
+              return yScale(d[1]);
+    				})
+    				.attr("height", function(d) {
+              return yScale(d[0]) - yScale(d[1]);
+    				})
+    				.attr("width", xScale.bandwidth());
+
+          // conver state labels to 2 letters
+          var stateConverter = function(s) {
+
+            if (s == 'Alabama') {
+              return 'AL';
+            } else if (s == 'Alaska') {
+              return 'AK';
+            } else if (s == 'Arizona') {
+              return 'AZ';
+            } else if (s == 'Arkansas') {
+              return 'AR';
+            } else if (s == 'California') {
+              return 'CA';
+            } else if (s == 'Colorado') {
+              return 'CO';
+            } else if (s == 'Connecticut') {
+              return 'CT';
+            } else if (s == 'Delaware') {
+              return 'DE';
+            } else if (s == 'Florida') {
+              return 'FL';
+            } else if (s == 'Georgia') {
+              return 'GA';
+            } else if (s == 'Hawaii') {
+              return 'HI';
+            } else if (s == 'Idaho') {
+              return 'ID';
+            } else if (s == 'Illinois') {
+              return 'IL';
+            } else if (s == 'Indiana') {
+              return 'IN';
+            } else if (s == 'Iowa') {
+              return 'IA';
+            } else if (s == 'Kansas') {
+              return 'KS';
+            } else if (s == 'Kentucky') {
+              return 'KY';
+            } else if (s == 'Louisiana') {
+              return 'LA';
+            } else if (s == 'Maine') {
+              return 'ME';
+            } else if (s == 'Maryland') {
+              return 'ML';
+            } else if (s == 'Massachusetts') {
+              return 'MA';
+            } else if (s == 'Michigan') {
+              return 'MI';
+            } else if (s == 'Minnesota') {
+              return 'MN';
+            } else if (s == 'Mississippi') {
+              return 'MS';
+            } else if (s == 'Missouri') {
+              return 'MO';
+            } else if (s == 'Montana') {
+              return 'MT';
+            } else if (s == 'Nebraska') {
+              return 'NE';
+            } else if (s == 'Nevada') {
+              return 'NV';
+            } else if (s == 'New Hampshire') {
+              return 'NH';
+            } else if (s == 'New Jersey') {
+              return 'NJ';
+            } else if (s == 'New Mexico') {
+              return 'NM';
+            } else if (s == 'New York') {
+              return 'NY';
+            } else if (s == 'North Carolina') {
+              return 'NC';
+            } else if (s == 'North Dakota') {
+              return 'ND';
+            } else if (s == 'Ohio') {
+              return 'OH';
+            } else if (s == 'Oklahoma') {
+              return 'OK';
+            } else if (s == 'Oregon') {
+              return 'OR';
+            } else if (s == 'Pennsylvania') {
+              return 'PA';
+            } else if (s == 'Rhode Island') {
+              return 'RI';
+            } else if (s == 'South Carolina') {
+              return 'SC';
+            } else if (s == 'South Dakota') {
+              return 'SD';
+            } else if (s == 'Tennessee') {
+              return 'TN';
+            } else if (s == 'Texas') {
+              return 'TX';
+            } else if (s == 'Utah') {
+              return 'UT';
+            } else if (s == 'Vermont') {
+              return 'VT';
+            } else if (s == 'Virginia') {
+              return 'VA';
+            } else if (s == 'Washington') {
+              return 'WA';
+            } else if (s == 'West Virginia') {
+              return 'WV';
+            } else if (s == 'Wisconsin') {
+              return 'WI';
+            } else if (s == 'Wyoming') {
+              return 'WY';
+            } // close if
+
+          }; // close function
+
+          var labels = container.selectAll('.state-label-cat')
+            .data(stateRollups)
+            .enter()
+            .append('text')
+              .attr('class', 'state-label-cat')
+              .attr('x', function(d, i) {
+                return xScale(i) + 2;
+              })
+              .attr('y', dimensions.containerH + 15)
+              .attr('font-size', 9)
+              .text(function(d) {
+                return stateConverter(d[0]);
+              })
+
+      }); // close CSV function
+
+    </script>
+
+  </body>
+</html>

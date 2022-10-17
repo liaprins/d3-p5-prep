@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Timeline | County etymologies | CCG</title>
+
+    <!-- D3 v6 FINAL -->
+    <script type="text/javascript" src="https://d3js.org/d3.v6.min.js"></script>
+    <!-- v6(.7) -->
+    <!-- <script type="text/javascript" src="../../../d3-library/d3.js"></script> -->
+    <!-- v4(.5) -->
+    <!-- <script type="text/javascript" src="../../../d3-book-master/d3.js"></script> -->
+
+    <!-- CSS *********************************************************************** -->
+    <style>
+    #timeline-vis {
+      width: 1000px;
+      margin: 10px auto;
+    }
+    .line {
+      fill: none;
+      stroke-width: 2;
+      mix-blend-mode: multiply;
+    }
+    </style>
+  </head>
+  <body>
+    <!-- HTML ********************************************************************** -->
+
+    <div id="timeline-vis"></div>
+
+    <!-- JAVASCRIPT **************************************************************** -->
+    <script type="text/javascript">
+
+      var boxheight = 5; // width + height each symbol is alotted, including padding
+      var symbolheight = boxheight - 2.5; // actual width + height each symbol is (sans padding)
+
+      // load in the data
+      d3.csv("../data_county-etymologies.csv")
+        .then(function(data) {
+
+        // bin the data by decade
+        var bin = d3.bin()
+          .domain([
+						  d3.min(data, function(d) { return parseFloat(d.year); }),
+						  d3.max(data, function(d) { return parseFloat(d.year); })
+						])
+          .value(function(d) {
+            return parseFloat(d.year);
+          })
+          .thresholds(76); // approximately one bin per half-decade
+
+        var binnedCounties = bin(data);
+
+        // group by category within each bin
+        var binnedCats = [];
+
+        for (var j = 0; j < binnedCounties.length; j++) { // loop through ~152 times
+          binnedCats[j] = [];
+          for (var k = 0; k < binnedCounties[j].length; k++) { // within each j-loop, loop through as many times as it is long
+            if (binnedCats[j] == []) {
+              binnedCats[j] = [];
+            } else {
+              binnedCats[j] = [d3.group(binnedCounties[j], function(d) {
+                return d.category; })];
+            } // close if
+          } // k
+        } // j
+
+        // prepare the data to be able to be stack-ified (like the dataset in O'Reilly Ch 13 stack-layout.html)
+        var stackedBarData = [];
+
+        for (var l = 0; l < binnedCats.length; l++) { // loop through ~152 times
+          stackedBarData[l] = {};
+          for (var m = 0; m < binnedCats[l].length; m++) { // within each l-loop, loop through as many times as it is long
+
+            // establish vars to be set within subsequent if-statements and for-loops
+            var battleCount,
+                combinationCount,
+                conceptCount,
+                creationCount,
+                floraCount,
+                geologyCount,
+                groupCount,
+                manCount,
+                objectCount,
+                placeCount,
+                resourceCount,
+                womanCount,
+                unknownCount;
+
+            var battleNatAmCount = 0;
+            var combinationNatAmCount = 0;
+            var conceptNatAmCount = 0;
+            var creationNatAmCount = 0;
+            var floraNatAmCount = 0;
+            var geologyNatAmCount = 0;
+            var groupNatAmCount = 0;
+            var manNatAmCount = 0;
+            var objectNatAmCount = 0;
+            var placeNatAmCount = 0;
+            var resourceNatAmCount = 0;
+            var womanNatAmCount = 0;
+            var unknownNatAmCount = 0;
+
+            if (binnedCats[l][0].get('battle')) { // if this time-period's-worth of counties contains a group of counties (at least one county) named after a battle
+              var battleNatAmCount = 0; // starting tally at 0 for each time period
+              for (var q = 0; q < binnedCats[l][0].get('battle').length; q++) { // ... for each of the counties named after battles
+                if (binnedCats[l][0].get('battle')[q].language == 'natam') { // ... if that county's name is in a Native American language
+                  battleNatAmCount += 1; // add it to the tally of counties in that decade named for a battle in a Native American language
+                }
+              }
+              battleCount = binnedCats[l][0].get('battle').length; // if there was at least one county (within this time-period's-worth of counties) named for a battle, set count of counties named after battles in general
+            } else {
+              battleCount = 0; // if there were no counties (within this time-period's-worth of counties) named for a battle, set count to 0
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('combination'))) {
+              var combinationNatAmCount = 0;
+              for (var q = 0; q < binnedCats[l][0].get('combination').length; q++) {
+                if (binnedCats[l][0].get('combination')[q].language == 'natam') {
+                  combinationNatAmCount += 1;
+                }
+              }
+              combinationCount = binnedCats[l][0].get('combination').length;
+            } else {
+              combinationCount = 0;
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('concept'))) {
+              var conceptNatAmCount = 0;
+              for (var q = 0; q < binnedCats[l][0].get('concept').length; q++) {
+                if (binnedCats[l][0].get('concept')[q].language == 'natam') {
+                  conceptNatAmCount += 1;
+                }
+              }
+              conceptCount = binnedCats[l][0].get('concept').length;
+            } else {
+              conceptCount = 0;
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('creation'))) {
+              var creationNatAmCount = 0;
+              for (var q = 0; q < binnedCats[l][0].get('creation').length; q++) {
+                if (binnedCats[l][0].get('creation')[q].language == 'natam') {
+                  creationNatAmCount += 1;
+                }
+              }
+              creationCount = binnedCats[l][0].get('creation').length;
+            } else {
+              creationCount = 0;
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('flora'))) {
+              var floraNatAmCount = 0;
+              for (var q = 0; q < binnedCats[l][0].get('flora').length; q++) {
+                if (binnedCats[l][0].get('flora')[q].language == 'natam') {
+                  floraNatAmCount += 1;
+                }
+              }
+              floraCount = binnedCats[l][0].get('flora').length;
+            } else {
+              floraCount = 0;
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('geology'))) {
+              var geologyNatAmCount = 0;
+              for (var q = 0; q < binnedCats[l][0].get('geology').length; q++) {
+                if (binnedCats[l][0].get('geology')[q].language == 'natam') {
+                  geologyNatAmCount += 1;
+                }
+              }
+              geologyCount = binnedCats[l][0].get('geology').length;
+            } else {
+              geologyCount = 0;
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('group'))) {
+              var groupNatAmCount = 0;
+              for (var q = 0; q < binnedCats[l][0].get('group').length; q++) {
+                if (binnedCats[l][0].get('group')[q].language == 'natam') {
+                  groupNatAmCount += 1;
+                }
+              }
+              groupCount = binnedCats[l][0].get('group').length;
+            } else {
+              groupCount = 0;
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('man'))) {
+              var manNatAmCount = 0;
+              for (var q = 0; q < binnedCats[l][0].get('man').length; q++) {
+                if (binnedCats[l][0].get('man')[q].language == 'natam') {
+                  manNatAmCount += 1;
+                }
+              }
+              manCount = binnedCats[l][0].get('man').length;
+            } else {
+              manCount = 0;
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('object'))) {
+              var objectNatAmCount = 0;
+              for (var q = 0; q < binnedCats[l][0].get('object').length; q++) {
+                if (binnedCats[l][0].get('object')[q].language == 'natam') {
+                  objectNatAmCount += 1;
+                }
+              }
+              objectCount = binnedCats[l][0].get('object').length;
+            } else {
+              objectCount = 0;
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('place'))) {
+              var placeNatAmCount = 0;
+              for (var q = 0; q < binnedCats[l][0].get('place').length; q++) {
+                if (binnedCats[l][0].get('place')[q].language == 'natam') {
+                  placeNatAmCount += 1;
+                }
+              }
+              placeCount = binnedCats[l][0].get('place').length;
+            } else {
+              placeCount = 0;
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('resource'))) {
+              var resourceNatAmCount = 0;
+              for (var q = 0; q < binnedCats[l][0].get('resource').length; q++) {
+                if (binnedCats[l][0].get('resource')[q].language == 'natam') {
+                  resourceNatAmCount += 1;
+                }
+              }
+              resourceCount = binnedCats[l][0].get('resource').length;
+            } else {
+              resourceCount = 0;
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('woman'))) {
+              var womanNatAmCount = 0;
+              for (var q = 0; q < binnedCats[l][0].get('woman').length; q++) {
+                if (binnedCats[l][0].get('woman')[q].language == 'natam') {
+                  womanNatAmCount += 1;
+                }
+              }
+              womanCount = binnedCats[l][0].get('woman').length;
+            } else {
+              womanCount = 0;
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('unknown'))) {
+              var unknownNatAmCount = 0;
+              for (var q = 0; q < binnedCats[l][0].get('unknown').length; q++) {
+                if (binnedCats[l][0].get('unknown')[q].language == 'natam') {
+                  unknownNatAmCount += 1;
+                }
+              }
+              unknownCount = binnedCats[l][0].get('unknown').length;
+            } else {
+              unknownCount = 0;
+            }; // close count if-statement
+
+          } // m
+
+          // specify structure for ultimate dataset to be used for visualization
+          stackedBarData[l] = {
+            'battle':       ['battle',      parseFloat(battleCount),      parseFloat(battleNatAmCount)],
+            'combination':  ['combination', parseFloat(combinationCount), parseFloat(combinationNatAmCount)],
+            'concept':      ['concept',     parseFloat(conceptCount),     parseFloat(conceptNatAmCount)],
+            'creation':     ['creation',    parseFloat(creationCount),    parseFloat(creationNatAmCount)],
+            'flora':        ['flora',       parseFloat(floraCount),       parseFloat(floraNatAmCount)],
+            'geology':      ['geology',     parseFloat(geologyCount),     parseFloat(geologyNatAmCount)],
+            'group':        ['group',       parseFloat(groupCount),       parseFloat(groupNatAmCount)],
+            'man':          ['man',         parseFloat(manCount),         parseFloat(manNatAmCount)],
+            'object':       ['object',      parseFloat(objectCount),      parseFloat(objectNatAmCount)],
+            'place':        ['place',       parseFloat(placeCount),       parseFloat(placeNatAmCount)],
+            'resource':     ['resource',    parseFloat(resourceCount),    parseFloat(resourceNatAmCount)],
+            'woman':        ['woman',       parseFloat(womanCount),       parseFloat(womanNatAmCount)],
+            'unknown':      ['unknown',     parseFloat(unknownCount),     parseFloat(unknownNatAmCount)]
+          };
+
+        } // l
+
+        /*
+        // add a map object(?) to hold metadata per time period x category, to be used in positioning symbols
+        stackedBarData.forEach(function(d){
+          var y0 = 0;
+          d.offsets = [d.battle, d.combination, d.concept, d.creation, d.flora, d.geology, d.group, d.man, d.object, d.place, d.resource, d.woman, d.unknown]
+            .map(function(category){
+            return {category: category[0], y0: y0, y1: y0 += +category[1], value : category[1], natam : category[2]}
+          });
+        });
+        */
+        stackedBarData.forEach(function(d){
+        var y0 = 0;
+        var reset = 0;
+        d.offsets = [d.battle, d.combination, d.concept, d.creation, d.flora, d.geology, d.group, d.man, d.object, d.place, d.resource, d.woman, d.unknown]
+          .map(function(type){
+            var cross;
+            cross = reset += type[2]
+            return {type: type[0], y0: y0, y1: y0 += +type[1], value : type[1], language : type[2], crossheight: cross }
+          });
+        });
+
+        // view various phases of datasets in the console for troubleshooting
+        console.log(data);
+        console.log('data ^^^');
+        console.log(binnedCounties);
+        console.log('binnedCounties ^^^');
+        console.log(binnedCats);
+        console.log('binnedCats ^^^');
+        console.log(stackedBarData);
+        console.log('stackedBarData ^^^');
+
+        // set dimensions
+        var margin = {top: 20, right: 20, bottom: 80, left: 40},
+            width = 1000, // width a symbol is alotted x number of time periods
+            height = 300; // height a symbol is alotted x number of counties in time period with most counties
+
+        // build a function to make translating easier (less finicky: removes the need for strings combined with non-strings)
+        var translate = function(x,y){
+          return "translate(" + x + "," + y + ")";
+        }
+
+        // scales
+        var xScale = d3.scaleLinear()
+            .domain([0, stackedBarData.length])
+            .range([0, width]);
+
+        var yScale = d3.scaleLinear()
+            .domain([0, 100])
+            .range([height, 0]);
+
+        // axes
+        // var originalTickValues = [7, 17, 27, 37, 47, 57, 67, 77, 87, 97, 107, 117, 127, 137, 147, 157, 167, 177, 187, 197]; // determine original ticks to be overtaken by new tick values
+        var originalTickValues = [9, 34, 59, 84, 109, 134, 159, 184]; // determine original ticks to be overtaken by new tick values
+        // var xAxisTicks = [1640, 1660, 1680, 1700, 1720, 1740, 1760, 1780, 1800, 1820, 1840, 1860, 1880, 1900, 1920, 1940, 1960, 1980, 2000]; // create array to pull from for x-axis ticks
+        var xAxisTicks = [1650, 1700, 1750, 1800, 1850, 1900, 1950, 2000]; // create array to pull from for x-axis ticks
+
+        console.log(originalTickValues);
+        console.log('originalTickValues ^^^');
+        console.log(xAxisTicks);
+        console.log('xAxisTicks ^^^');
+
+        var xAxis = d3.axisBottom()
+            .scale(xScale)
+            // .ticks(18)
+            .tickValues(originalTickValues)
+            .tickFormat((d,i) => xAxisTicks[i]);
+
+        var yAxis = d3.axisLeft()
+            .scale(yScale);
+
+        // assign color per category
+        var color = d3.scaleOrdinal(d3.schemePaired)
+            .domain(['battle', 'combination', 'concept', 'creation', 'flora', 'geology', 'group', 'man', 'object', 'place', 'resource', 'woman', 'unknown']);
+
+        // build the vis! ----------------------------------------------------------
+
+        // build parent container
+        var timelineSvg = d3.select("#timeline-vis").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", translate(margin.left, margin.top + 0.5));
+
+        // maxes
+        var battleMax = d3.max(stackedBarData, function(d) { return d.battle[1]; });
+        var combinationMax = d3.max(stackedBarData, function(d) { return d.combination[1]; });
+        var conceptMax = d3.max(stackedBarData, function(d) { return d.concept[1]; });
+        var creationMax = d3.max(stackedBarData, function(d) { return d.creation[1]; });
+        var floraMax = d3.max(stackedBarData, function(d) { return d.flora[1]; });
+        var geologyMax = d3.max(stackedBarData, function(d) { return d.geology[1]; });
+        var groupMax = d3.max(stackedBarData, function(d) { return d.group[1]; });
+        var manMax = d3.max(stackedBarData, function(d) { return d.man[1]; });
+        var objectMax = d3.max(stackedBarData, function(d) { return d.object[1]; });
+        var placeMax = d3.max(stackedBarData, function(d) { return d.place[1]; });
+        var resourceMax = d3.max(stackedBarData, function(d) { return d.resource[1]; });
+        var womanMax = d3.max(stackedBarData, function(d) { return d.woman[1]; });
+        var unknownMax = d3.max(stackedBarData, function(d) { return d.unknown[1]; });
+        var euroMax = d3.max(stackedBarData, function(d) { return (d.offsets[12].y1 - d.offsets[12].crossheight); });
+        var natamMax = d3.max(stackedBarData, function(d) { return d.offsets[12].crossheight; });
+
+        // line generators; one per category
+        var battleLine = d3.line()
+          .x(function(d, i) {
+            return xScale(i);
+          })
+          .y(function(d) {
+            return yScale((d.battle[1] * 100) / battleMax);
+          });
+
+        var combinationLine = d3.line()
+          .x(function(d, i) {
+            return xScale(i);
+          })
+          .y(function(d) {
+            return yScale((d.combination[1] * 100) / combinationMax);
+          });
+
+        var conceptLine = d3.line()
+          .x(function(d, i) {
+            return xScale(i);
+          })
+          .y(function(d) {
+            return yScale((d.concept[1] * 100) / conceptMax);
+          });
+
+        var creationLine = d3.line()
+          .x(function(d, i) {
+            return xScale(i);
+          })
+          .y(function(d) {
+            return yScale((d.creation[1] * 100) / creationMax);
+          });
+
+        var floraLine = d3.line()
+          .x(function(d, i) {
+            return xScale(i);
+          })
+          .y(function(d) {
+            return yScale((d.flora[1] * 100) / floraMax);
+          });
+
+        var geologyLine = d3.line()
+          .x(function(d, i) {
+            return xScale(i);
+          })
+          .y(function(d) {
+            return yScale((d.geology[1] * 100) / geologyMax);
+          });
+
+        var groupLine = d3.line()
+          .x(function(d, i) {
+            return xScale(i);
+          })
+          .y(function(d) {
+            return yScale((d.group[1] * 100) / groupMax);
+          });
+
+        var manLine = d3.line()
+          .x(function(d, i) {
+            return xScale(i);
+          })
+          .y(function(d) {
+            return yScale((d.man[1] * 100) / manMax);
+          });
+
+        var objectLine = d3.line()
+          .x(function(d, i) {
+            return xScale(i);
+          })
+          .y(function(d) {
+            return yScale((d.object[1] * 100) / objectMax);
+          });
+
+        var placeLine = d3.line()
+          .x(function(d, i) {
+            return xScale(i);
+          })
+          .y(function(d) {
+            return yScale((d.place[1] * 100) / placeMax);
+          });
+
+        var resourceLine = d3.line()
+          .x(function(d, i) {
+            return xScale(i);
+          })
+          .y(function(d) {
+            return yScale((d.resource[1] * 100) / resourceMax);
+          });
+
+        var womanLine = d3.line()
+          .x(function(d, i) {
+            return xScale(i);
+          })
+          .y(function(d) {
+            return yScale((d.woman[1] * 100) / womanMax);
+          });
+
+        var unknownLine = d3.line()
+          .x(function(d, i) {
+            return xScale(i);
+          })
+          .y(function(d) {
+            return yScale((d.unknown[1] * 100) / unknownMax);
+          });
+
+        var euroLine = d3.line()
+          .x(function(d, i) {
+            return xScale(i);
+          })
+          .y(function(d) {
+            return yScale(((d.offsets[12].y1 - d.offsets[12].crossheight) * 100) / euroMax);
+          });
+
+        var natamLine = d3.line()
+          .x(function(d, i) {
+            return xScale(i);
+          })
+          .y(function(d) {
+            return yScale((d.offsets[12].crossheight * 100) / natamMax);
+          });
+
+        var lineList = [battleLine, combinationLine, conceptLine, creationLine, floraLine, geologyLine, groupLine, manLine, objectLine, placeLine, resourceLine, unknownLine];
+
+        // call lines
+        for (var h = 0; h < lineList.length; h++) {
+          timelineSvg.append("path")
+            .datum(stackedBarData)
+              .attr('class', 'line')
+              .attr('d', lineList[h])
+              .attr('stroke', color(h));
+        }
+
+        timelineSvg.append("path")
+          .datum(stackedBarData)
+            .attr('fill', 'none')
+            .attr('d', euroLine)
+            .attr('stroke', 'black')
+            .attr('stroke-width', 4);
+
+        timelineSvg.append("path")
+          .datum(stackedBarData)
+            .attr('fill', 'none')
+            .attr('d', natamLine)
+            .attr('stroke', 'black')
+            .attr('stroke-width', 7);
+
+        // call axes
+        timelineSvg.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+        timelineSvg.append("g")
+            .attr("class", "y axis")
+            .call(yAxis);
+
+      }); // close CSV function
+
+    </script>
+
+  </body>
+</html>

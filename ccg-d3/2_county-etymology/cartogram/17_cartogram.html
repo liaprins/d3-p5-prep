@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Lia's D3 Template!</title>
+
+    <!-- D3 v6 -->
+    <script type="text/javascript" src="https://d3js.org/d3.v6.min.js"></script>
+
+    <!-- CSS *********************************************************************** -->
+    <style>
+      body {
+        font-family: 'Work Sans';
+      }
+      h1 {
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 20px;
+      }
+      #hex-vis-carto-lang,
+      #hex-vis-carto-cat,
+      #hex-vis-choro-lang {
+        width: 1000px;
+        margin: 0px auto;
+        background-color: #eeeeee;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HTML ********************************************************************** -->
+
+    <div id="hex-vis-carto-lang">
+      <h1>Cartogram: Languages</h1>
+    </div>
+
+    <div id="hex-vis-carto-cat">
+      <h1>Cartogram: Categories</h1>
+    </div>
+
+    <!-- JAVASCRIPT **************************************************************** -->
+
+    <!-- CARTOGRAM: LANGUAGE ======================================================= -->
+    <script type="text/javascript">
+
+      var w = 1000;
+      var h = 650;
+
+      var cartoLangSvg = d3.select('#hex-vis-carto-lang')
+        .append('svg')
+          .attr('width', w)
+          .attr('height', h);
+      var cartoLangContainer = cartoLangSvg.append('g') // group to hold centroid symbols
+        .attr('id', 'hex-container')
+        .attr('transform', 'translate(25, 25)');
+
+      // load CSV of county etymology data
+      d3.csv('../data_counties.csv')
+        .then(function(data) {
+
+          // establish county centroids
+          cartoLangContainer.selectAll('.carto-lang')
+            .data(data.filter(function(d) {
+              return d.x != ''; // leave out any without hex coordinates
+            }))
+            .enter()
+            .append('rect')
+              .attr('id', function(d) {
+                return d.fullname;
+              })
+              .attr('class', function(d) {
+                return 'carto-lang carto-lang-' + d.language + '-' + d.granularlanguage;
+              })
+              .attr('x', function(d) {
+                return (Math.round(d.x)) * 10;
+              })
+              .attr('y', function(d) {
+                return (d.y) * 10;
+              })
+              .attr('width', 10) // make width smaller to have white padding between counties
+              .attr('height', 10) // make width smaller to have white padding between counties
+              .style('fill', function(d, i) {
+                var range = 1 - 0.6;
+                if ((d.language == 'euro') && (d.granularlanguage != '')) {
+                  var j = d3.interpolateRgb("rgb(140, 159, 62)", "rgb(255, 255, 255)");
+                  var numLang = 14;
+                  var interval = range / numLang;
+                  if (d.granularlanguage == 'English') {
+                    return j(interval * 1);
+                  } else if (d.granularlanguage == 'Spanish') {
+                    return j(interval * 2);
+                  } else if (d.granularlanguage == 'French') {
+                    return j(interval * 3);
+                  } else if (d.granularlanguage == 'Dutch') {
+                    return j(interval * 4);
+                  } else if (d.granularlanguage == 'German') {
+                    return j(interval * 5);
+                  } else if (d.granularlanguage == 'Greek') {
+                    return j(interval * 6);
+                  } else if (d.granularlanguage == 'Irish') {
+                    return j(interval * 7);
+                  } else if (d.granularlanguage == 'Polish') {
+                    return j(interval * 8);
+                  } else if (d.granularlanguage == 'Latin') {
+                    return j(interval * 9);
+                  } else if (d.granularlanguage == 'Welsh') {
+                    return j(interval * 10);
+                  } else if (d.granularlanguage == 'Italian') {
+                    return j(interval * 11);
+                  } else if (d.granularlanguage == 'Scottish') {
+                    return j(interval * 12);
+                  } else if (d.granularlanguage == 'Arab') {
+                    return j(interval * 13);
+                  } else if (d.granularlanguage == 'Hebrew') {
+                    return j(interval * 14);
+                  } else if (d.granularlanguage == 'Norwegian') {
+                    return j(interval * 15);
+                  }
+                } else if ((d.language == 'natam') && (d.granularlanguage != '')) { // parent language is Nat Am
+                  var k = d3.interpolateRgb("rgb(182, 192, 191)", "rgb(255, 255, 255)");
+                  var numLang = 52;
+                  var interval = range / numLang;
+                  if (d.granularlanguage == 'Ojibwe') {
+                    return k(interval * 1);
+                  } else if (d.granularlanguage == 'Lenape') {
+                    return k(interval * 2);
+                  } else if (d.granularlanguage == 'Muscogee') {
+                    return k(interval * 3);
+                  } else if (d.granularlanguage == 'Dakota') {
+                    return k(interval * 4);
+                  } else if (d.granularlanguage == 'Miami-Illinois') {
+                    return k(interval * 5);
+                  } else if (d.granularlanguage == 'Chickasaw') {
+                    return k(interval * 6);
+                  } else if (d.granularlanguage == 'Choctaw') {
+                    return k(interval * 7);
+                  } else if (d.granularlanguage == 'Muskogean') {
+                    return k(interval * 8);
+                  } else if (d.granularlanguage == 'Hawaiian') {
+                    return k(interval * 9);
+                  } else if (d.granularlanguage == 'Iroquoian') {
+                    return k(interval * 10);
+                  } else if (d.granularlanguage == 'Mohawk') {
+                    return k(interval * 11);
+                  } else if (d.granularlanguage == 'Seneca') {
+                    return k(interval * 12);
+                  } else if (d.granularlanguage == 'Potawatomi') {
+                    return k(interval * 13);
+                  } else if (d.granularlanguage == 'Tlingit') {
+                    return k(interval * 14);
+                  } else if (d.granularlanguage == 'Ute') {
+                    return k(interval * 15);
+                  } else if (d.granularlanguage == 'Algonquian') {
+                    return k(interval * 16);
+                  } else if (d.granularlanguage == 'Tsalagi') {
+                    return k(interval * 17);
+                  } else if (d.granularlanguage == 'Wyandot') {
+                    return k(interval * 18);
+                  } else if (d.granularlanguage == 'Caddo') {
+                    return k(interval * 19);
+                  } else if (d.granularlanguage == 'Erie') {
+                    return k(interval * 20);
+                  } else if (d.granularlanguage == 'Meskwaki-Sauk') {
+                    return k(interval * 21);
+                  } else if (d.granularlanguage == 'Miwok') {
+                    return k(interval * 22);
+                  } else if (d.granularlanguage == 'Onondaga') {
+                    return k(interval * 23);
+                  } else if (d.granularlanguage == 'Otoe') {
+                    return k(interval * 24);
+                  } else if (d.granularlanguage == 'Powhatan') {
+                    return k(interval * 25);
+                  } else if (d.granularlanguage == 'Shoshone') {
+                    return k(interval * 26);
+                  } else if (d.granularlanguage == 'Abenaki') {
+                    return k(interval * 27);
+                  } else if (d.granularlanguage == 'Alutiiq') {
+                    return k(interval * 28);
+                  } else if (d.granularlanguage == 'Anishinaabemowin') {
+                    return k(interval * 29);
+                  } else if (d.granularlanguage == 'Atakapa') {
+                    return k(interval * 30);
+                  } else if (d.granularlanguage == 'Athabascan') {
+                    return k(interval * 31);
+                  } else if (d.granularlanguage == 'Aztec') {
+                    return k(interval * 32);
+                  } else if (d.granularlanguage == 'Chinook') {
+                    return k(interval * 33);
+                  } else if (d.granularlanguage == 'Chinook Jargon') {
+                    return k(interval * 34);
+                  } else if (d.granularlanguage == 'Eastern Algonquian') {
+                    return k(interval * 35);
+                  } else if (d.granularlanguage == 'Hitchiti') {
+                    return k(interval * 36);
+                  } else if (d.granularlanguage == 'Hochunk') {
+                    return k(interval * 37);
+                  } else if (d.granularlanguage == 'Klallam') {
+                    return k(interval * 38);
+                  } else if (d.granularlanguage == 'Menominee') {
+                    return k(interval * 39);
+                  } else if (d.granularlanguage == 'Mono') {
+                    return k(interval * 40);
+                  } else if (d.granularlanguage == 'Montana Salish') {
+                    return k(interval * 41);
+                  } else if (d.granularlanguage == 'Niimiipuu') {
+                    return k(interval * 42);
+                  } else if (d.granularlanguage == 'Nisenan') {
+                    return k(interval * 43);
+                  } else if (d.granularlanguage == 'Nooksack') {
+                    return k(interval * 44);
+                  } else if (d.granularlanguage == 'Omaha-Ponca') {
+                    return k(interval * 45);
+                  } else if (d.granularlanguage == 'Osage') {
+                    return k(interval * 46);
+                  } else if (d.granularlanguage == 'Papago-Pima') {
+                    return k(interval * 47);
+                  } else if (d.granularlanguage == 'Quechan') {
+                    return k(interval * 48);
+                  } else if (d.granularlanguage == 'Siouan') {
+                    return k(interval * 49);
+                  } else if (d.granularlanguage == 'Taensa') {
+                    return k(interval * 50);
+                  } else if (d.granularlanguage == 'Tiwa') {
+                    return k(interval * 51);
+                  } else if (d.granularlanguage == 'Yakama') {
+                    return k(interval * 52);
+                  }
+                } else if ((d.language == 'euro') && (d.granularlanguage == '')) {
+                  return 'white';
+                } else if ((d.language == 'natam') && (d.granularlanguage == '')) {
+                  return 'black';
+                }
+              })
+              .on('mouseover', function(d) {
+                var currentHoverLang = d3.select(this).attr('class');
+                cartoLangContainer.selectAll('.carto-lang')
+                  .each(function(d) {
+                    if (d3.select(this).attr('class') == currentHoverLang) {
+                      /* do nothing */
+                    } else {
+                      d3.select(this)
+                        .style('opacity', 0.05);
+                    }
+                  })
+              })
+              .on('mouseout', function(d) {
+                cartoLangContainer.selectAll('.carto-lang')
+                  .each(function(d) {
+                    d3.select(this)
+                      .style('opacity', 1);
+                    })
+              })
+              .append('title')
+              .text(function(d) {
+                return d.fullname + ' // ' + d.language + ': ' + d.granularlanguage;
+              });
+
+      }); // close CSV function
+
+    </script>
+
+    <!-- CARTOGRAM: CATEGORY ======================================================= -->
+    <script type="text/javascript">
+
+      var w = 1000;
+      var h = 650;
+
+      var cartoCatSvg = d3.select('#hex-vis-carto-cat')
+        .append('svg')
+          .attr('width', w)
+          .attr('height', h);
+      var cartoCatContainer = cartoCatSvg.append('g') // group to hold centroid symbols
+        .attr('id', 'hex-container')
+        .attr('transform', 'translate(25, 25)');
+
+      // load CSV of county etymology data
+      d3.csv('../data_counties.csv')
+        .then(function(data) {
+
+          // establish county centroids
+          cartoCatContainer.selectAll('.carto-cat')
+            .data(data.filter(function(d) {
+              return d.x != ''; // leave out any without hex coordinates
+            }))
+            .enter()
+            .append('rect')
+              .attr('id', function(d) {
+                return d.fullname;
+              })
+              .attr('class', function(d) {
+                return 'carto-cat carto-cat-' + d.category + '-' + d.subcategory;
+              })
+              .attr('x', function(d) {
+                return (Math.round(d.x)) * 10;
+              })
+              .attr('y', function(d) {
+                return (d.y) * 10;
+              })
+              .attr('width', 10) // make width smaller to have white padding between counties
+              .attr('height', 10) // make width smaller to have white padding between counties
+              .style('fill', function(d, i) {
+                var range = 1 - 0.6;
+                if (d.category == 'people') {
+                  var j = d3.interpolateRgb("rgb(201, 85, 116)", "rgb(255, 255, 255)");
+                  var numCat = 3;
+                  var interval = range / numCat;
+                  if (d.subcategory == 'man') {
+                    return j(interval * 1);
+                  } else if (d.subcategory == 'woman') {
+                    return j(interval * 2);
+                  } else if (d.subcategory == 'group') {
+                    return j(interval * 3);
+                  }
+                } else if (d.category == 'place') {
+                  var j = d3.interpolateRgb("rgb(116, 127, 202)", "rgb(255, 255, 255)");
+                  var numCat = 2;
+                  var interval = range / numCat;
+                  if (d.subcategory == 'america') {
+                    return j(interval * 1);
+                  } else if (d.subcategory == 'abroad') {
+                    return j(interval * 2);
+                  }
+                } else if (d.category == 'nature') {
+                  var j = d3.interpolateRgb("rgb(78, 172, 124)", "rgb(255, 255, 255)");
+                  var numCat = 4;
+                  var interval = range / numCat;
+                  if (d.subcategory == 'flora') {
+                    return j(interval * 1);
+                  } else if (d.subcategory == 'geology') {
+                    return j(interval * 2);
+                  } else if (d.subcategory == 'water') {
+                   return j(interval * 3);
+                  } else if (d.subcategory == 'resource') {
+                    return j(interval * 4);
+                  }
+                } else if (d.category == 'concept') {
+                  var j = d3.interpolateRgb("rgb(179, 148, 63)", "rgb(255, 255, 255)");
+                  var numCat = 3;
+                  var interval = range / numCat;
+                  if (d.subcategory == 'event') {
+                    return j(interval * 1);
+                  } else if (d.subcategory == 'object') {
+                    return j(interval * 2);
+                  } else if (d.subcategory == 'idea') {
+                    return j(interval * 3);
+                  }
+                } else if (d.category == 'unknown') {
+                  var j = d3.interpolateRgb("rgb(150, 150, 150)", "rgb(255, 255, 255)");
+                  var numCat = 2;
+                  var interval = range / numCat;
+                  if (d.subcategory == 'uncertain') {
+                    return j(interval * 1);
+                  } else if (d.subcategory == 'combination') {
+                    return j(interval * 2);
+                  }
+                }
+              })
+              .on('mouseover', function(d) {
+                var currentHoverLang = d3.select(this).attr('class');
+                cartoCatContainer.selectAll('.carto-cat')
+                  .each(function(d) {
+                    if (d3.select(this).attr('class') == currentHoverLang) {
+                      /* do nothing */
+                    } else {
+                      d3.select(this)
+                        .style('opacity', 0.05);
+                    }
+                  })
+              })
+              .on('mouseout', function(d) {
+                cartoCatContainer.selectAll('.carto-cat')
+                  .each(function(d) {
+                    d3.select(this)
+                      .style('opacity', 1);
+                    })
+              })
+              .append('title')
+              .text(function(d) {
+                return d.fullname + ' // ' + d.category + ': ' + d.subcategory;
+              });
+
+      }); // close CSV function
+
+    </script>
+
+
+  </body>
+</html>

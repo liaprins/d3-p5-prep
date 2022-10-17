@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Timeline | County etymologies | CCG</title>
+    <!-- v6(.7) -->
+    <script type="text/javascript" src="../../../d3-library/d3.js"></script>
+    <!-- v4(.5) -->
+    <!-- <script type="text/javascript" src="../../../d3-book-master/d3.js"></script> -->
+
+    <!-- CSS *********************************************************************** -->
+    <style>
+
+    #timeline-vis {
+      width: 1000px;
+      margin: 10px auto;
+    }
+    .timedot {
+      fill: red;
+    }
+
+    </style>
+  </head>
+  <body>
+    <!-- HTML ********************************************************************** -->
+
+    <div id="timeline-vis"></div>
+
+    <!-- JAVASCRIPT **************************************************************** -->
+    <script type="text/javascript">
+
+			//Width and height
+      var w = 1000;
+      var h = 300;
+			var padding = 40;
+
+      var xScale, yScale;  //Empty, for now
+
+			//For converting strings to Dates
+      var parseTime = d3.timeParse("%m/%d/%Y");
+
+			//For converting Dates to strings
+			var formatTime = d3.timeFormat("%Y");
+
+			//Load in the data
+      d3.csv("../data_county-etymologies.csv")
+        .then(function(data) {
+
+        // binning
+        var bin = d3.bin()
+          .domain([
+						  d3.min(data, function(d) { return parseFloat(d.year); }),
+						  d3.max(data, function(d) { return parseFloat(d.year); })
+						])
+          .value(function(d) {
+            return parseFloat(d.year);
+          })
+          .thresholds(38);
+
+        var binnedCounties = bin(data);
+        var binnedCountiesCount = binnedCounties.length;
+
+        console.log(binnedCountiesCount);
+
+				// create scale functions
+				xScale = d3.scaleLinear()
+				    .domain([0, binnedCountiesCount])
+						.range([padding, w - padding]);
+
+				/* yScale = d3.scaleLinear()
+							   .domain([
+									d3.min(countiesPerYear, function(d) { return d[1].length; }),
+									d3.max(countiesPerYear, function(d) { return d[1].length; })
+								])
+							   .range([padding, h - padding]); */
+
+        /* var xAxis = d3.axisBottom()
+          .scale(xScale)
+          .tickFormat(formatTime)
+          .ticks(10);    // set rough # of ticks */
+
+				// create SVG element
+        var svg = d3.select('#timeline-vis')
+          .append('svg')
+            .attr('id', 'timeline-svg')
+            .attr('width', w)
+            .attr('height', h)
+            .style('background', '#eeeeee');
+
+				// draw bars
+				svg.selectAll("rect")
+           .data(binnedCounties)
+				   .enter()
+				   .append("rect")
+             .attr('class', function(d) {
+               return 'timedot ' + d.x0 + '-' + d.x1;
+             })
+             .attr('x', function(d, i) {
+               return xScale(i);
+             })
+             .attr('y', function(d) {
+               return h - (d.length * 0.5);
+             })
+  				   .attr('width', function(d, i) {
+               return ((w - (2 * padding)) / binnedCountiesCount) * 0.8;
+             })
+             .attr('height', function(d) {
+               return (d.length * 0.5);
+             });
+
+        /* svg.append("g")
+           .call(xAxis)
+           .attr("class", "axis")
+           .attr("transform", "translate(0," + (h - padding) + ")"); */
+
+			}); // close CSV reader function
+
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>NSWE | County etymologies | CCG</title>
+    <!-- v4(.5) -->
+    <!-- <script type="text/javascript" src="../../../d3-book-master/d3.js"></script> -->
+    <!-- v6(.7) USING TEMPORARILY WHILE INTERNET IS DOWN :( -->
+    <script type="text/javascript" src="../../../d3-library/d3.js"></script>
+    <!-- D3 v6 -->
+    <!-- <script type="text/javascript" src="https://d3js.org/d3.v6.min.js"></script> -->
+
+    <!-- CSS *********************************************************************** -->
+    <style>
+      body {
+        font-family: 'Work Sans';
+        line-height: 1;
+      }
+      .county-outline,
+      .state-outline {
+        /* stroke: #eeeeee; */
+      }
+      .county-outline {
+        /* fill: #ffffff; */
+        fill: rgba(255, 255, 255, 0);
+        stroke: #eeeeee;
+        stroke-width: 0.5;
+      }
+      .state-outline {
+        fill: #ffffff;
+        stroke: #eeeeee;
+        stroke-width: 1.5;
+        pointer-events: none;
+      }
+      .centroid-symbol {
+        stroke-width: 2;
+        stroke-linecap: round;
+        pointer-events: none;
+        /* mix-blend-mode: multiply; */ /* SLOWS DOWN FILTERING */
+      }
+      #nswe-percent-lang {
+        width: 1400px;
+        margin: 10px auto;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HTML ********************************************************************** -->
+
+    <div id="nswe-percent-lang">
+      <h1>Raw count: Categories</h1>
+    </div>
+
+    <!-- JAVASCRIPT **************************************************************** -->
+    <script type="text/javascript">
+
+      var w = 1400;
+      var h = 1050;
+
+      var nsweUSsvg = d3.select('#nswe-percent-lang')
+        .append('svg')
+          .attr('width', w)
+          .attr('height', h)
+          .style('background', '#eeeeee');
+
+      var nswePercentCatContainer = nsweUSsvg.append('g') // group to hold state + county outlines
+        .attr('id', 'path-container-percent-lang');
+
+      var nswePercentCatCentroidContainer = nsweUSsvg.append('g') // group to hold centroid symbols
+        .attr('id', 'centroid-container-percent-lang');
+
+      var nsweProjection = d3.geoAlbersUsa()
+        // .translate([w/2, h/2])
+        .translate([500, h * 0.7])
+        .scale([1200]);
+
+      var nswePercentCatPath = d3.geoPath()
+        .projection(nsweProjection);
+
+      // load CSV of county etymology data
+      d3.csv('../data_counties.csv')
+        .then(function(data) {
+
+        // load JSON of state outlines
+        d3.json('../data_states-20m.json')
+          .then(function(json) {
+          // dpercent state outlines
+          nswePercentCatContainer.selectAll('.state-outline-percent-lang')
+            .data(json.features.filter(function(d) {
+              return (d.properties.STATE != '02') && (d.properties.STATE != '15'); // leave out any without hex coordinates
+            }))
+            .enter()
+            .append('path')
+              .attr('d', nswePercentCatPath)
+              .attr('class', 'state-outline state-outline-percent-lang');
+        }); // close JSON function for state outlines
+
+        // load JSON of county outlines
+        d3.json('../data_counties-20m.json')
+          .then(function(json) {
+
+          // join the CSV data to the JSON data
+          for (var i = 0; i < data.length; i++) {
+
+            var csvCountyId = data[i].id; // get county id from etymology CSV
+            var csvCountyLanguage = data[i].language; // get language per county
+            var csvCountyCategory = data[i].category; // get language per county
+            var csvCountyEtymology = data[i].etymology; // get etymology per county
+            var csvCountyState = data[i].state; // get state name per county
+
+            for (var j = 0; j < json.features.length; j++) { // find the corresponding county id within the GeoJSON
+
+              var pathCountyId = json.features[j].properties.STATE + json.features[j].properties.COUNTY;
+
+              if (csvCountyId == pathCountyId) {
+                json.features[j].properties.language = csvCountyLanguage; // copy the language into the JSON per county
+                json.features[j].properties.category = csvCountyCategory; // copy the category into the JSON per county
+                json.features[j].properties.etymology = csvCountyEtymology; // copy the etymology into the JSON per county
+                json.features[j].properties.csvstate = csvCountyState; // copy the state name into the JSON per county
+                break; // stop looking through the JSON
+              } // close if
+            } // close j for-loop
+          } // close i for-loop
+
+          // dpercent county outlines
+          nswePercentCatContainer.selectAll('.county-outline-percent-lang')
+            .data(json.features.filter(function(d) {
+              return (d.properties.STATE != '02') && (d.properties.STATE != '15'); // leave out any without hex coordinates
+            }))
+            .enter()
+            .append('path')
+              .attr('d', nswePercentCatPath)
+              .attr('class', 'county-outline county-outline-percent-lang');
+
+          var color = d3.scaleOrdinal(d3.schemePaired);
+
+          var nonHiakData = json.features.filter(function(d) {
+            return (d.properties.csvstate != 'Alaska') && (d.properties.csvstate != 'Hawaii'); // leave out any without hex coordinates
+          });
+
+          // establish county centroids
+          nswePercentCatCentroidContainer.selectAll('.nswe-layer-percent-lang')
+            .data(nonHiakData)
+            .enter()
+            .append('circle')
+              // .attr('class', 'county-centroid')
+              .attr('class', function(d) {
+                if (d.properties.category == 'people') {
+                  return 'people-percent-lang nswe-layer-percent-lang';
+                } else if (d.properties.category == 'place') {
+                  return 'place-percent-lang nswe-layer-percent-lang';
+                } else if (d.properties.category == 'nature') {
+                  return 'nature-percent-lang nswe-layer-percent-lang';
+                } else if (d.properties.category == 'concept') {
+                  return 'concept-percent-lang nswe-layer-percent-lang';
+                } else if (d.properties.category == 'unknown') {
+                  return 'unknown-percent-lang nswe-layer-percent-lang';
+                }
+              })
+              .attr('cx', function(d) {
+                return nswePercentCatPath.centroid(d)[0];
+              })
+              .attr('cy', function(d) {
+                return nswePercentCatPath.centroid(d)[1];
+              })
+              .attr('r', 1.5)
+              .attr('fill', function(d) {
+                if (d.properties.category == 'people') {
+                  return 'rgb(201, 85, 116)';
+                } else if (d.properties.category == 'place') {
+                  return 'rgb(116, 127, 202)';
+                } else if (d.properties.category == 'nature') {
+                  return 'rgb(78, 172, 124)';
+                } else if (d.properties.category == 'concept') {
+                  return 'rgb(179, 148, 63)';
+                } else if (d.properties.category == 'unknown') {
+                  return 'rgb(150, 150, 150)';
+                }
+              });
+              // .attr('fill', 'gray');
+
+          // WEST-EAST ===========================================================
+
+          // binning the dataset rows, WE
+          var WEdataBin = d3.bin()
+            .domain([
+  						  d3.min(nonHiakData, function(d) { return nswePercentCatPath.centroid(d)[0]; }),
+  						  d3.max(nonHiakData, function(d) { return nswePercentCatPath.centroid(d)[0]; })
+  						])
+            .value(function(d) {
+              return nswePercentCatPath.centroid(d)[0];
+            })
+            .thresholds(50);
+
+          var binnedDataX = WEdataBin(nonHiakData, function(d) { return nswePercentCatPath.centroid(d)[0]; });
+
+          // WE: prepare the data to be able to be stack-ified (like the dataset in O'Reilly Ch 13 stack-layout.html)
+          var stackedBarWE = [];
+          for (var l = 0; l < binnedDataX.length; l++) { // loop through length of W-E bins
+            stackedBarWE[l] = {
+              'people':   binnedDataX[l].filter(function(d) { return d.properties.category == 'people' }).length,
+              'place':  binnedDataX[l].filter(function(d) { return d.properties.category == 'place' }).length,
+              'nature':  binnedDataX[l].filter(function(d) { return d.properties.category == 'nature' }).length,
+              'concept':  binnedDataX[l].filter(function(d) { return d.properties.category == 'concept' }).length,
+              'unknown':  binnedDataX[l].filter(function(d) { return d.properties.category == 'unknown' }).length,
+            };
+          } // l
+
+          stackedBarPercentWE = [];
+
+          for (var m = 0; m < stackedBarWE.length; m++) { // loop through length of W-E stacked bar dataset
+            if (stackedBarWE[m].people + stackedBarWE[m].place + stackedBarWE[m].nature + stackedBarWE[m].concept + stackedBarWE[m].unknown != 0) {
+              rowTotal = stackedBarWE[m].people + stackedBarWE[m].place + stackedBarWE[m].nature + stackedBarWE[m].concept + stackedBarWE[m].unknown;
+            } else {
+              rowTotal = 1; // preventing dividing by 0 in next section, in case there are bins without any counties (the second bin in for W-E currently is, due to Alaska)
+            }
+            stackedBarPercentWE[m] = {
+              'people':   stackedBarWE[m].people / rowTotal,
+              'place':    stackedBarWE[m].place / rowTotal,
+              'nature':   stackedBarWE[m].nature / rowTotal,
+              'concept':  stackedBarWE[m].concept / rowTotal,
+              'unknown':  stackedBarWE[m].unknown / rowTotal,
+            };
+          } // m
+
+          var weStack = d3.stack()
+            .keys([ 'people', 'place', 'nature', 'concept', 'unknown' ])
+            .order(d3.stackOrderAscending);
+
+          var weSeries = weStack(stackedBarWE);
+
+          // create scale functions USE THESE FOR RAW COUNT (NOT %)!
+          var weScaleX = d3.scaleBand()
+            .domain(d3.range(stackedBarWE.length))
+            .range([0, 850]) // should change from w to just width of the US map (need to just do contiguous US?...)
+            .paddingInner(0.05);
+
+          var weScaleY = d3.scaleLinear()
+            .domain([0, d3.max(stackedBarWE, function(d) {
+              return d.euro + d.natam;
+            })])
+            .range([400, 0]); // change from 500 to height I want the barchart to be
+
+          // define area generator
+          weArea = d3.area()
+            .x(function(d, i) { return weScaleX(parseInt(i)); })
+            .y0(function(d) { return weScaleY(parseInt(d[0])); })
+            .y1(function(d) { return weScaleY(parseInt(d[1])); });
+
+          console.log('json.features, post-join');
+          console.log(json.features);
+          console.log('binnedDataX');
+          console.log(binnedDataX);
+          console.log('stackedBarWE');
+          console.log(stackedBarWE);
+          console.log('stackedBarPercentWE');
+          console.log(stackedBarPercentWE);
+          console.log('weSeries');
+          console.log(weSeries);
+
+          var xScaleWE = d3.scaleLinear()
+              .domain([0, stackedBarWE.length])
+              .range([0, 850]);
+          var yScaleWE = d3.scaleLinear()
+              .domain([0, d3.max(stackedBarWE, function(d) { return d.people + d.place + d.nature + d.concept + d.unknown; })])
+              .range([400, 0]);
+
+          // try wrapping this + build section below in a for-loop for number of langs / categories...
+          // PEOPLE
+
+          // define area generator
+          var wePeopleArea = d3.area()
+            .x(function(d, i) { return xScaleWE(parseFloat(i)); })
+            .y0(function(d) { return yScaleWE(parseFloat(d.people + d.place + d.nature + d.concept + d.unknown)); }) // NEDED TO DO THIS TO GET IT TO FILL TO THE TOP... SHOULD I BE DOING THIS FOR NON-FULL_HEIGH DESIGN, TOO?!?!
+            .y1(function(d) { return yScaleWE(parseFloat(d.place + d.nature + d.concept + d.unknown)); })
+            .curve(d3.curveBasis);
+
+          nsweUSsvg.append("path")
+              .attr('class', 'people-percent-lang nswe-layer-percent-lang')
+              .attr("d", wePeopleArea(stackedBarWE))
+              .attr('transform', 'translate(' + 75 + ',' + 50 + ')')
+              .style("fill", function(d, i) {
+                return 'rgb(201, 85, 116)';
+              })
+              .on('mouseover', function(d) {
+                var hoverChunk = d3.select(this).attr('class');
+                nsweUSsvg.selectAll('.nswe-layer-percent-lang')
+                  .each(function(d) {
+                    if (d3.select(this).attr('class') == hoverChunk) {
+                      d3.select(this)
+                        // .style('stroke', 'rgb(201, 85, 116)');
+                    } else {
+                      d3.select(this)
+                        .style('opacity', '0.2');
+                    }
+                  })
+                })
+                .on('mouseout', function(d) {
+                  var hoverChunk = d3.select(this).attr('class');
+                  nsweUSsvg.selectAll('.nswe-layer-percent-lang')
+                    .each(function(d) {
+                      d3.select(this)
+                        .style('stroke', 'none');
+                      d3.select(this)
+                        .style('opacity', '1');
+                    })
+                  });
+
+          // PLACE
+
+          // define area generator
+          var wePlaceArea = d3.area()
+            .x(function(d, i) { return xScaleWE(parseFloat(i)); })
+            .y0(function(d) { return yScaleWE(parseFloat(d.place + d.nature + d.concept + d.unknown)); }) // NEDED TO DO THIS TO GET IT TO FILL TO THE TOP... SHOULD I BE DOING THIS FOR NON-FULL_HEIGH DESIGN, TOO?!?!
+            .y1(function(d) { return yScaleWE(parseFloat(d.nature + d.concept + d.unknown)); })
+            .curve(d3.curveBasis);
+
+          nsweUSsvg.append("path")
+              .attr('class', 'place-percent-lang nswe-layer-percent-lang')
+              .attr("d", wePlaceArea(stackedBarWE))
+              .attr('transform', 'translate(' + 75 + ',' + 50 + ')')
+              .style("fill", function(d, i) {
+                return 'rgb(116, 127, 202)';
+              })
+              .attr('opacity', 0.9)
+              .on('mouseover', function(d) {
+                var hoverChunk = d3.select(this).attr('class');
+                nsweUSsvg.selectAll('.nswe-layer-percent-lang')
+                  .each(function(d) {
+                    if (d3.select(this).attr('class') == hoverChunk) {
+                      d3.select(this)
+                        .style('stroke', 'black');
+                    } else {
+                      d3.select(this)
+                        .style('opacity', '0.2');
+                    }
+                  })
+                })
+                .on('mouseout', function(d) {
+                  var hoverChunk = d3.select(this).attr('class');
+                  nsweUSsvg.selectAll('.nswe-layer-percent-lang')
+                    .each(function(d) {
+                      d3.select(this)
+                        .style('stroke', 'none');
+                      d3.select(this)
+                        .style('opacity', '0.9');
+                    })
+                  });
+
+          // NATURE
+
+          // define area generator
+          var weNatureArea = d3.area()
+            .x(function(d, i) { return xScaleWE(parseFloat(i)); })
+            .y0(function(d) { return yScaleWE(parseFloat(d.nature + d.concept + d.unknown)); }) // NEDED TO DO THIS TO GET IT TO FILL TO THE TOP... SHOULD I BE DOING THIS FOR NON-FULL_HEIGH DESIGN, TOO?!?!
+            .y1(function(d) { return yScaleWE(parseFloat(d.concept + d.unknown)); })
+            .curve(d3.curveBasis);
+
+          nsweUSsvg.append("path")
+              .attr('class', 'nature-percent-lang nswe-layer-percent-lang')
+              .attr("d", weNatureArea(stackedBarWE))
+              .attr('transform', 'translate(' + 75 + ',' + 50 + ')')
+              .style("fill", function(d, i) {
+                return 'rgb(78, 172, 124)';
+              })
+              .attr('opacity', 0.9)
+              .on('mouseover', function(d) {
+                var hoverChunk = d3.select(this).attr('class');
+                nsweUSsvg.selectAll('.nswe-layer-percent-lang')
+                  .each(function(d) {
+                    if (d3.select(this).attr('class') == hoverChunk) {
+                      d3.select(this)
+                        .style('stroke', 'black');
+                    } else {
+                      d3.select(this)
+                        .style('opacity', '0.2');
+                    }
+                  })
+                })
+                .on('mouseout', function(d) {
+                  var hoverChunk = d3.select(this).attr('class');
+                  nsweUSsvg.selectAll('.nswe-layer-percent-lang')
+                    .each(function(d) {
+                      d3.select(this)
+                        .style('stroke', 'none');
+                      d3.select(this)
+                        .style('opacity', '0.9');
+                    })
+                  });
+
+          // CONCEPT
+
+          // define area generator
+          var weConceptArea = d3.area()
+            .x(function(d, i) { return xScaleWE(parseFloat(i)); })
+            .y0(function(d) { return yScaleWE(parseFloat(d.concept + d.unknown)); }) // NEDED TO DO THIS TO GET IT TO FILL TO THE TOP... SHOULD I BE DOING THIS FOR NON-FULL_HEIGH DESIGN, TOO?!?!
+            .y1(function(d) { return yScaleWE(parseFloat(d.unknown)); })
+            .curve(d3.curveBasis);
+
+          nsweUSsvg.append("path")
+              .attr('class', 'concept-percent-lang nswe-layer-percent-lang')
+              .attr("d", weConceptArea(stackedBarWE))
+              .attr('transform', 'translate(' + 75 + ',' + 50 + ')')
+              .style("fill", function(d, i) {
+                return 'rgb(179, 148, 63)';
+              })
+              .attr('opacity', 0.9)
+              .on('mouseover', function(d) {
+                var hoverChunk = d3.select(this).attr('class');
+                nsweUSsvg.selectAll('.nswe-layer-percent-lang')
+                  .each(function(d) {
+                    if (d3.select(this).attr('class') == hoverChunk) {
+                      d3.select(this)
+                        .style('stroke', 'black');
+                    } else {
+                      d3.select(this)
+                        .style('opacity', '0.2');
+                    }
+                  })
+                })
+                .on('mouseout', function(d) {
+                  var hoverChunk = d3.select(this).attr('class');
+                  nsweUSsvg.selectAll('.nswe-layer-percent-lang')
+                    .each(function(d) {
+                      d3.select(this)
+                        .style('stroke', 'none');
+                      d3.select(this)
+                        .style('opacity', '0.9');
+                    })
+                  });
+
+          // UNKNOWN
+
+          // define area generator
+          var weUnknownArea = d3.area()
+            .x(function(d, i) { return xScaleWE(parseFloat(i)); })
+            .y0(function(d) { return yScaleWE(parseFloat(d.unknown)); }) // NEDED TO DO THIS TO GET IT TO FILL TO THE TOP... SHOULD I BE DOING THIS FOR NON-FULL_HEIGH DESIGN, TOO?!?!
+            .y1(400)
+            .curve(d3.curveBasis);
+
+          nsweUSsvg.append("path")
+              .attr('class', 'unknown-percent-lang nswe-layer-percent-lang')
+              .attr("d", weUnknownArea(stackedBarWE))
+              .attr('transform', 'translate(' + 75 + ',' + 50 + ')')
+              .style("fill", function(d, i) {
+                return 'rgb(150, 150, 150)';
+              })
+              .attr('opacity', 0.9)
+              .on('mouseover', function(d) {
+                var hoverChunk = d3.select(this).attr('class');
+                nsweUSsvg.selectAll('.nswe-layer-percent-lang')
+                  .each(function(d) {
+                    if (d3.select(this).attr('class') == hoverChunk) {
+                      d3.select(this)
+                        .style('stroke', 'black');
+                    } else {
+                      d3.select(this)
+                        .style('opacity', '0.2');
+                    }
+                  })
+                })
+                .on('mouseout', function(d) {
+                  var hoverChunk = d3.select(this).attr('class');
+                  nsweUSsvg.selectAll('.nswe-layer-percent-lang')
+                    .each(function(d) {
+                      d3.select(this)
+                        .style('stroke', 'none');
+                      d3.select(this)
+                        .style('opacity', '0.9');
+                    })
+                  });
+
+
+          // NORTH-SOUTH ===========================================================
+
+          // binning the dataset rows, NS
+          var NSdataBin = d3.bin()
+            .domain([
+                d3.min(nonHiakData, function(d) { return nswePercentCatPath.centroid(d)[1]; }),
+                d3.max(nonHiakData, function(d) { return nswePercentCatPath.centroid(d)[1]; })
+              ])
+            .value(function(d) {
+              return nswePercentCatPath.centroid(d)[1];
+            })
+            .thresholds(25);
+
+          var binnedDataY = NSdataBin(nonHiakData, function(d) { return nswePercentCatPath.centroid(d)[1]; });
+
+          // NS: prepare the data to be able to be stack-ified (like the dataset in O'Reilly Ch 13 stack-layout.html)
+          var stackedBarNS = [];
+          for (var l = 0; l < binnedDataY.length; l++) { // loop through length of W-E bins
+            stackedBarNS[l] = {
+              'people':   binnedDataY[l].filter(function(d) { return d.properties.category == 'people' }).length,
+              'place':  binnedDataY[l].filter(function(d) { return d.properties.category == 'place' }).length,
+              'nature':  binnedDataY[l].filter(function(d) { return d.properties.category == 'nature' }).length,
+              'concept':  binnedDataY[l].filter(function(d) { return d.properties.category == 'concept' }).length,
+              'unknown':  binnedDataY[l].filter(function(d) { return d.properties.category == 'unknown' }).length,
+            };
+          } // l
+
+          stackedBarPercentNS = [];
+
+          for (var m = 0; m < stackedBarNS.length; m++) { // loop through length of W-E stacked bar dataset
+            if (stackedBarNS[m].people + stackedBarNS[m].place + stackedBarNS[m].nature + stackedBarNS[m].concept + stackedBarNS[m].unknown != 0) {
+              rowTotal = stackedBarNS[m].people + stackedBarNS[m].place + stackedBarNS[m].nature + stackedBarNS[m].concept + stackedBarNS[m].unknown;
+            } else {
+              rowTotal = 1; // preventing dividing by 0 in next section, in case there are bins without any counties (the second bin in for W-E currently is, due to Alaska)
+            }
+            stackedBarPercentNS[m] = {
+              'people':   stackedBarNS[m].people / rowTotal,
+              'place':    stackedBarNS[m].place / rowTotal,
+              'nature':   stackedBarNS[m].nature / rowTotal,
+              'concept':  stackedBarNS[m].concept / rowTotal,
+              'unknown':  stackedBarNS[m].unknown / rowTotal,
+            };
+          } // m
+
+          var nsStack = d3.stack()
+            .keys([ 'people', 'place', 'nature', 'concept', 'unknown' ])
+            .order(d3.stackOrderAscending);
+
+          var nsSeries = nsStack(stackedBarNS);
+
+          var nsScaleX = d3.scaleBand()
+            .domain(d3.range(stackedBarNS.length))
+            .range([0, 500]) // should change from w to just width of the US map (need to just do contiguous US?...)
+            .paddingInner(0.05);
+
+          var nsScaleY = d3.scaleLinear()
+            .domain([0, d3.max(stackedBarNS, function(d) {
+              return d.euro + d.natam;
+            })])
+            .range([400, 0]); // change from 500 to height I want the barchart to be
+
+          // define area generator
+          nsArea = d3.area()
+            .x(function(d, i) { return nsScaleX(parseInt(i)); })
+            .y0(function(d) { return nsScaleY(parseInt(d[0])); })
+            .y1(function(d) { return nsScaleY(parseInt(d[1])); });
+
+          console.log('json.features, post-join');
+          console.log(json.features);
+          console.log('binnedDataY');
+          console.log(binnedDataY);
+          console.log('stackedBarNS');
+          console.log(stackedBarNS);
+          console.log('stackedBarPercentNS');
+          console.log(stackedBarPercentNS);
+          console.log('nsSeries');
+          console.log(nsSeries);
+
+          var xScaleNS = d3.scaleLinear()
+              .domain([0, stackedBarNS.length])
+              .range([0, 500]);
+          var yScaleNS = d3.scaleLinear()
+              .domain([0, d3.max(stackedBarNS, function(d) { // 3.) FOR RAW, USE THIS FUNCTION
+                return d.people + d.place + d.nature + d.concept + d.unknown;
+              })])
+              .range([400, 0]);
+
+          // try wrapping this + build section below in a for-loop for number of langs / categories...
+          // PEOPLE
+
+          // define area generator
+          var nsPeopleArea = d3.area()
+            .x(function(d, i) { return xScaleNS(parseFloat(i)); })
+            .y0(function(d) { return yScaleNS(parseFloat(d.people + d.place + d.nature + d.concept + d.unknown)); }) // NEDED TO DO THIS TO GET IT TO FILL TO THE TOP... SHOULD I BE DOING THIS FOR NON-FULL_HEIGH DESIGN, TOO?!?!
+            .y1(function(d) { return yScaleNS(parseFloat(d.place + d.nature + d.concept + d.unknown)); })
+            .curve(d3.curveBasis);
+
+          nsweUSsvg.append("path")
+              .attr('class', 'people-percent-lang nswe-layer-percent-lang')
+              .attr("d", nsPeopleArea(stackedBarNS))
+              .attr('transform', 'translate(' + 1350 + ',' + 500 + ') rotate(90)')
+              .style("fill", function(d, i) {
+                return 'rgb(201, 85, 116)';
+              })
+              .on('mouseover', function(d) {
+                var hoverChunk = d3.select(this).attr('class');
+                nsweUSsvg.selectAll('.nswe-layer-percent-lang')
+                  .each(function(d) {
+                    if (d3.select(this).attr('class') == hoverChunk) {
+                      d3.select(this)
+                        .style('stroke', 'black');
+                    } else {
+                      d3.select(this)
+                        .style('opacity', '0.2');
+                    }
+                  })
+                })
+                .on('mouseout', function(d) {
+                  var hoverChunk = d3.select(this).attr('class');
+                  nsweUSsvg.selectAll('.nswe-layer-percent-lang')
+                    .each(function(d) {
+                      d3.select(this)
+                        .style('stroke', 'none');
+                      d3.select(this)
+                        .style('opacity', '1');
+                    })
+                  });
+
+          // PLACE
+
+          // define area generator
+          var nsPlaceArea = d3.area()
+            .x(function(d, i) { return xScaleNS(parseFloat(i)); })
+            .y0(function(d) { return yScaleNS(parseFloat(d.place + d.nature + d.concept + d.unknown)); }) // NEDED TO DO THIS TO GET IT TO FILL TO THE TOP... SHOULD I BE DOING THIS FOR NON-FULL_HEIGH DESIGN, TOO?!?!
+            .y1(function(d) { return yScaleNS(parseFloat(d.nature + d.concept + d.unknown)); })
+            .curve(d3.curveBasis);
+
+          nsweUSsvg.append("path")
+              .attr('class', 'place-percent-lang nswe-layer-percent-lang')
+              .attr("d", nsPlaceArea(stackedBarNS))
+              .attr('transform', 'translate(' + 1350 + ',' + 500 + ') rotate(90)')
+              .style("fill", function(d, i) {
+                return 'rgb(116, 127, 202)';
+              })
+              .attr('opacity', 0.9)
+              .on('mouseover', function(d) {
+                var hoverChunk = d3.select(this).attr('class');
+                nsweUSsvg.selectAll('.nswe-layer-percent-lang')
+                  .each(function(d) {
+                    if (d3.select(this).attr('class') == hoverChunk) {
+                      d3.select(this)
+                        .style('stroke', 'black');
+                    } else {
+                      d3.select(this)
+                        .style('opacity', '0.2');
+                    }
+                  })
+                })
+                .on('mouseout', function(d) {
+                  var hoverChunk = d3.select(this).attr('class');
+                  nsweUSsvg.selectAll('.nswe-layer-percent-lang')
+                    .each(function(d) {
+                      d3.select(this)
+                        .style('stroke', 'none');
+                      d3.select(this)
+                        .style('opacity', '0.9');
+                    })
+                  });
+
+          // NATURE
+
+          // define area generator
+          var nsNatureArea = d3.area()
+            .x(function(d, i) { return xScaleNS(parseFloat(i)); })
+            .y0(function(d) { return yScaleNS(parseFloat(d.nature + d.concept + d.unknown)); }) // NEDED TO DO THIS TO GET IT TO FILL TO THE TOP... SHOULD I BE DOING THIS FOR NON-FULL_HEIGH DESIGN, TOO?!?!
+            .y1(function(d) { return yScaleNS(parseFloat(d.concept + d.unknown)); })
+            .curve(d3.curveBasis);
+
+          nsweUSsvg.append("path")
+              .attr('class', 'nature-percent-lang nswe-layer-percent-lang')
+              .attr("d", nsNatureArea(stackedBarNS))
+              .attr('transform', 'translate(' + 1350 + ',' + 500 + ') rotate(90)')
+              .style("fill", function(d, i) {
+                return 'rgb(78, 172, 124)';
+              })
+              .attr('opacity', 0.9)
+              .on('mouseover', function(d) {
+                var hoverChunk = d3.select(this).attr('class');
+                nsweUSsvg.selectAll('.nswe-layer-percent-lang')
+                  .each(function(d) {
+                    if (d3.select(this).attr('class') == hoverChunk) {
+                      d3.select(this)
+                        .style('stroke', 'black');
+                    } else {
+                      d3.select(this)
+                        .style('opacity', '0.2');
+                    }
+                  })
+                })
+                .on('mouseout', function(d) {
+                  var hoverChunk = d3.select(this).attr('class');
+                  nsweUSsvg.selectAll('.nswe-layer-percent-lang')
+                    .each(function(d) {
+                      d3.select(this)
+                        .style('stroke', 'none');
+                      d3.select(this)
+                        .style('opacity', '0.9');
+                    })
+                  });
+
+          // CONCEPT
+
+          // define area generator
+          var nsConceptArea = d3.area()
+            .x(function(d, i) { return xScaleNS(parseFloat(i)); })
+            .y0(function(d) { return yScaleNS(parseFloat(d.concept + d.unknown)); }) // NEDED TO DO THIS TO GET IT TO FILL TO THE TOP... SHOULD I BE DOING THIS FOR NON-FULL_HEIGH DESIGN, TOO?!?!
+            .y1(function(d) { return yScaleNS(parseFloat(d.unknown)); })
+            .curve(d3.curveBasis);
+
+          nsweUSsvg.append("path")
+              .attr('class', 'concept-percent-lang nswe-layer-percent-lang')
+              .attr("d", nsConceptArea(stackedBarNS))
+              .attr('transform', 'translate(' + 1350 + ',' + 500 + ') rotate(90)')
+              .style("fill", function(d, i) {
+                return 'rgb(179, 148, 63)';
+              })
+              .attr('opacity', 0.9)
+              .on('mouseover', function(d) {
+                var hoverChunk = d3.select(this).attr('class');
+                nsweUSsvg.selectAll('.nswe-layer-percent-lang')
+                  .each(function(d) {
+                    if (d3.select(this).attr('class') == hoverChunk) {
+                      d3.select(this)
+                        .style('stroke', 'black');
+                    } else {
+                      d3.select(this)
+                        .style('opacity', '0.2');
+                    }
+                  })
+                })
+                .on('mouseout', function(d) {
+                  var hoverChunk = d3.select(this).attr('class');
+                  nsweUSsvg.selectAll('.nswe-layer-percent-lang')
+                    .each(function(d) {
+                      d3.select(this)
+                        .style('stroke', 'none');
+                      d3.select(this)
+                        .style('opacity', '0.9');
+                    })
+                  });
+
+          // UNKNOWN
+
+          // define area generator
+          var nsUnknownArea = d3.area()
+            .x(function(d, i) { return xScaleNS(parseFloat(i)); })
+            .y0(function(d) { return yScaleNS(parseFloat(d.unknown)); }) // NEDED TO DO THIS TO GET IT TO FILL TO THE TOP... SHOULD I BE DOING THIS FOR NON-FULL_HEIGH DESIGN, TOO?!?!
+            .y1(400)
+            .curve(d3.curveBasis);
+
+          nsweUSsvg.append("path")
+              .attr('class', 'unknown-percent-lang nswe-layer-percent-lang')
+              .attr("d", nsUnknownArea(stackedBarNS))
+              .attr('transform', 'translate(' + 1350 + ',' + 500 + ') rotate(90)')
+              .style("fill", function(d, i) {
+                return 'rgb(150, 150, 150)';
+              })
+              .attr('opacity', 0.9)
+              .on('mouseover', function(d) {
+                var hoverChunk = d3.select(this).attr('class');
+                nsweUSsvg.selectAll('.nswe-layer-percent-lang')
+                  .each(function(d) {
+                    if (d3.select(this).attr('class') == hoverChunk) {
+                      d3.select(this)
+                        .style('stroke', 'black');
+                    } else {
+                      d3.select(this)
+                        .style('opacity', '0.2');
+                    }
+                  })
+                })
+                .on('mouseout', function(d) {
+                  var hoverChunk = d3.select(this).attr('class');
+                  nsweUSsvg.selectAll('.nswe-layer-percent-lang')
+                    .each(function(d) {
+                      d3.select(this)
+                        .style('stroke', 'none');
+                      d3.select(this)
+                        .style('opacity', '0.9');
+                    })
+                  });
+
+
+        }); // close JSON function for county outlines
+
+      }); // close CSV function
+
+    </script>
+
+  </body>
+</html>

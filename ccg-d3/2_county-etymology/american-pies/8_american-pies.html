@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>American pies | County etymologies | CCG</title>
+
+    <!-- D3 v6 -->
+    <script type="text/javascript" src="https://d3js.org/d3.v6.min.js"></script>
+
+    <!-- CSS *********************************************************************** -->
+    <style>
+      body {
+        font-family: 'Work Sans';
+        line-height: 1;
+      }
+      #pies-vis {
+        width: 1000px;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HTML ********************************************************************** -->
+
+    <div id="pies-vis"></div>
+
+    <!-- JAVASCRIPT **************************************************************** -->
+    <script type="text/javascript">
+
+      var w = 1000;
+      var h = 700;
+      /*
+      var ampieSvg = d3.select('#pies-vis')
+        .append('svg')
+          .attr('width', w)
+          .attr('height', h)
+          .style('background', '#eeeeee');
+      var ampieContainer = ampieSvg.append('g') // group to hold centroid symbols
+        .attr('id', 'pie-container')
+        .attr('transform', 'translate(25, 25)');
+        */
+      // load CSV of county etymology data
+      d3.csv('data_etymological-trails.csv')
+        .then(function(data) {
+
+        console.log('data');
+        console.log(data);
+
+        var babyPiesDataset = [];
+        for (var i = 0; i < data.length; i++) {
+
+          var etyTrailLength = data[i].ety1.length + data[i].ety2.length + data[i].ety3.length + data[i].ety4.length + data[i].ety5.length;
+
+          if (etyTrailLength == 5) {
+            // babyPiesDataset[i].etytrail = data[i].ety1.length, data[i].ety2.length, data[i].ety3.length, data[i].ety4.length, data[i].ety5.length
+
+            babyPiesDataset[i] = {
+              etytrail: [ data[i].ety1.length, data[i].ety2.length, data[i].ety3.length, data[i].ety4.length, data[i].ety5.length ],
+              category: [ data[i].category, data[i].cat2, data[i].cat3, data[i].cat4, data[i].cat5 ]
+            } // close object
+          } else if (etyTrailLength == 4) {
+            // babyPiesDataset[i].etytrail = data[i].ety1.length, data[i].ety2.length, data[i].ety3.length, data[i].ety4.length
+            babyPiesDataset[i] = {
+              etytrail: [ data[i].ety1.length, data[i].ety2.length, data[i].ety3.length, data[i].ety4.length ],
+              category: [ data[i].category, data[i].cat2, data[i].cat3, data[i].cat4, data[i].cat5 ]
+            }
+          } else if (etyTrailLength == 3) {
+            // babyPiesDataset[i].etytrail = data[i].ety1.length, data[i].ety2.length, data[i].ety3.length
+            babyPiesDataset[i] = {
+              etytrail: [ data[i].ety1.length, data[i].ety2.length, data[i].ety3.length ],
+              category: [ data[i].category, data[i].cat2, data[i].cat3, data[i].cat4, data[i].cat5 ]
+            }
+          } else if (etyTrailLength == 2) {
+            // babyPiesDataset[i].etytrail = data[i].ety1.length, data[i].ety2.length
+            babyPiesDataset[i] = {
+              etytrail: [ data[i].ety1.length, data[i].ety2.length ],
+              category: [ data[i].category, data[i].cat2, data[i].cat3, data[i].cat4, data[i].cat5 ]
+            }
+          } else {
+            // babyPiesDataset[i].etytrail = data[i].ety1.length
+            babyPiesDataset[i] = {
+              etytrail: [ data[i].ety1.length ],
+              category: [ data[i].category, data[i].cat2, data[i].cat3, data[i].cat4, data[i].cat5 ]
+            }
+          }
+
+        };
+
+        console.log('babyPiesDataset');
+        console.log(babyPiesDataset);
+
+        var myOuterRadius = 5.6;
+        var myInnerRadius = 0;
+        var myArc = d3.arc()
+          .innerRadius(myInnerRadius)
+          .outerRadius(myOuterRadius);
+
+        var myPie = d3.pie();
+
+        // create SVG container
+        var mySvg = d3.select("body")
+                      .append("svg")
+                      .attr("width", w)
+                      .attr("height", h);
+
+        for (var i = 0; i < babyPiesDataset.length; i++) {
+
+          // set up groups ... CURRENTLY MAKING A GROUP PER SLICE, NOT PER PIE...WILL NEED TO FIX THIS FOR TOOLTIP
+          var myArcs = mySvg.selectAll(".arc-" + [i])
+            .data(myPie(babyPiesDataset[i].etytrail))
+            .enter()
+            .append("g")
+            .attr("class", "arc-" + [i])
+            .attr("transform", "translate(" + myOuterRadius + "," + myOuterRadius + ")");
+            // .attr('transform', 'translate(' + data[i].x + ',' + data[i].y + ')');
+
+          // draw arc paths
+          myArcs.append("path")
+            .attr("fill", function(d, j) {
+              // return myColor(j);
+              var pieCat = babyPiesDataset[i].category[j];
+              if (pieCat == 'man') {
+                return '#47829A';
+              } else if (pieCat == 'place') {
+                return '#33C1B1';
+              } else if (pieCat == 'geology') {
+                return '#e9c46a';
+              } else {
+                return '#f4a261'; // just doing some for proof of concept
+              }
+            })
+            .attr("d", myArc)
+            .attr('stroke', 'white')
+            .attr('stroke-width', 0.5)
+            .attr('transform', 'translate(' + (data[i].x * 11) + ',' + (data[i].y * 9.5) + ')')
+            .style('mix-blend-mode', 'multiply');
+          }
+
+          /*
+          // establish county centroids
+          ampieContainer.selectAll('.hex')
+            .data(data)
+            .enter()
+            .append('circle')
+              .attr('class', 'hex')
+              .attr('cx', function(d) {
+                return (d.x) * 11;
+              })
+              .attr('cy', function(d) {
+                return (d.y) * 11;
+              })
+              .attr('r', 4); // beware, all ye people afeared of constellations of small holes
+            */
+
+
+      }); // close CSV function
+
+    </script>
+
+  </body>
+</html>

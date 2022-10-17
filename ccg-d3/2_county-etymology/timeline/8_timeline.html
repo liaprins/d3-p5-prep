@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Timeline | County etymologies | CCG</title>
+    <!-- v6(.7) -->
+    <script type="text/javascript" src="../../../d3-library/d3.js"></script>
+    <!-- v4(.5) -->
+    <!-- <script type="text/javascript" src="../../../d3-book-master/d3.js"></script> -->
+
+    <!-- CSS *********************************************************************** -->
+    <style>
+
+    #timeline-vis {
+      width: 1000px;
+      margin: 10px auto;
+    }
+    .timebar {
+      fill: teal;
+    }
+
+    </style>
+  </head>
+  <body>
+    <!-- HTML ********************************************************************** -->
+
+    <div id="timeline-vis"></div>
+
+    <!-- JAVASCRIPT **************************************************************** -->
+    <script type="text/javascript">
+
+
+
+      let dimensions = {
+        w: 1000,
+        h: 300,
+        margins: 50
+      };
+
+      dimensions.containerW = dimensions.w - (dimensions.margins * 2);
+      dimensions.containerH = dimensions.h - (dimensions.margins * 2);
+
+      var xScale, yScale;  // empty for now
+
+			// to convert strings to Dates
+      var parseTime = d3.timeParse("%m/%d/%Y");
+
+			// to convert Dates to strings
+			var formatTime = d3.timeFormat("%Y");
+
+      // create SVG element
+      var svg = d3.select('#timeline-vis')
+        .append('svg')
+          .attr('id', 'timeline-svg')
+          .attr('width', dimensions.w)
+          .attr('height', dimensions.h)
+          .style('background', '#eeeeee');
+
+      var container = svg.append("g") // <g>
+        .attr(
+          'transform',
+          'translate(' + dimensions.margins + ', ' + dimensions.margins + ')'
+        );
+
+			// load in the data
+      d3.csv("../data_county-etymologies.csv")
+        .then(function(data) {
+
+        // binning
+        var bin = d3.bin()
+          .domain([
+						  d3.min(data, function(d) { return parseFloat(d.year); }),
+						  d3.max(data, function(d) { return parseFloat(d.year); })
+						])
+          .value(function(d) {
+            return parseFloat(d.year);
+          })
+          .thresholds(38);
+
+        var binnedCounties = bin(data);
+        var binnedCountiesCount = binnedCounties.length;
+        var binPadding = 1;
+
+        console.log(binnedCounties);
+
+				// create scale functions
+				xScale = d3.scaleLinear()
+				  .domain([0, binnedCountiesCount])
+          /* .domain([
+  			    d3.min(data, function(d) { return parseFloat(d.year); }),
+  			    d3.max(data, function(d) { return parseFloat(d.year); })
+  			  ]) */
+				  .range([0, dimensions.containerW]);
+
+        xScaleAxis = d3.scaleLinear()
+          .domain([
+  			    d3.min(data, function(d) { return parseFloat(d.year); }),
+  			    d3.max(data, function(d) { return parseFloat(d.year); })
+          ])
+				  .range([0, dimensions.containerW]);
+
+				yScale = d3.scaleLinear()
+          .domain([
+  					0,
+  					d3.max(binnedCounties, function(d, i) { return binnedCounties[i].length; })
+  				])
+  				.range([dimensions.containerH, 0]);
+
+        // create axes
+        var xAxis = d3.axisBottom()
+          // .scale(xScale)
+          .scale(xScaleAxis)
+          .ticks(13);    // set rough # of ticks
+
+        var yAxis = d3.axisLeft()
+          .scale(yScale)
+          .ticks(5);
+
+				// draw bars
+				container.selectAll("rect")
+           .data(binnedCounties)
+				   .enter()
+				   .append("rect")
+             .attr('class', function(d) {
+               return 'timebar ' + d.x0 + '-' + d.x1;
+             })
+             .attr('x', function(d, i) {
+               // return xScale(i);
+               return xScaleAxis(d.x0);
+             })
+             .attr('y', function(d) {
+               return yScale(d.length);
+             })
+  				   .attr('width', function(d, i) {
+               // return (dimensions.containerW / binnedCountiesCount) * 0.8;
+               // return xScale(0.9); // because xScales' input domain goes from 0 to number of decades shown, and I want width for one decade, start with 1, then adjust to less to allow for padding
+
+               return d3.max([0, xScaleAxis(d.x1) - xScaleAxis(d.x0) - binPadding]);
+             })
+             .attr('height', function(d) {
+               return dimensions.containerH - yScale(d.length);
+             });
+
+        // call axes
+        container.append("g")
+           .call(xAxis)
+           .attr("class", "axis")
+           .attr("transform", "translate(0," + dimensions.containerH + ")");
+
+        container.append("g")
+           .call(yAxis)
+           .attr("class", "axis");
+
+			}); // close CSV reader function
+
+    </script>
+
+  </body>
+</html>

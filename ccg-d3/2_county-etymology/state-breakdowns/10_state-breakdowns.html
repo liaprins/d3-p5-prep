@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>State breakdowns | County etymologies | CCG</title>
+
+    <!-- D3 v6 -->
+    <!-- <script type="text/javascript" src="https://d3js.org/d3.v6.min.js"></script> -->
+
+    <!-- v6(.7) // USING TEMPORARILY WHILE ON AIRPLANE -->
+    <script type="text/javascript" src="../../../d3-library/d3.js"></script>
+
+    <!-- CSS *********************************************************************** -->
+    <style>
+    body {
+      font-family: 'Work Sans';
+    }
+    #state-raw-lang {
+      width: 5000px;
+      margin: 10px auto;
+    }
+    #states-svg {
+      background: #eeeeee;
+      padding-top: 25px;
+    }
+    .state-chart {
+      background-color: teal;
+    }
+    .state-language {
+      mix-blend-mode: multiply;
+    }
+    </style>
+  </head>
+  <body>
+    <!-- HTML ********************************************************************** -->
+
+    <div id="state-raw-lang">
+      <h1>Raw counts: Languages</h1>
+    </div>
+
+    <!-- JAVASCRIPT **************************************************************** -->
+    <script type="text/javascript">
+
+      let dimensions = {
+        w: 5000,
+        h: 195,
+        margins: 50
+      };
+      dimensions.containerW = dimensions.w - (dimensions.margins * 2);
+      dimensions.containerH = dimensions.h - (dimensions.margins * 2);
+
+      // create containers
+      var svg = d3.select('#state-raw-lang')
+        .append('svg')
+          .attr('id', 'state-raw-lang')
+          .attr('width', dimensions.w)
+          .attr('height', dimensions.h)
+          .style('background', '#eeeeee');
+
+      var container = svg.append("g")
+        .attr(
+          'transform',
+          'translate(' + dimensions.margins + ', ' + dimensions.margins + ')'
+        );
+
+    // load in the data
+    d3.csv("../data_counties.csv")
+      .then(function(data) {
+
+        var stateRollups = d3.rollups(data
+            .sort((a, b) => d3.ascending(a.state, b.state) || d3.ascending(a.language, b.language))
+            .filter(function(d) { return d.state != 'District of Columbia'}),
+          v => v.length, // don't think I need this actually
+          d => d.state, d => d.language);
+
+        var stateGroups = d3.group(data
+            .sort((a, b) => d3.ascending(a.state, b.state) || d3.ascending(a.language, b.language))
+            .filter(function(d) { return d.state != 'District of Columbia'}),
+          d => d.state, d => d.language);
+
+        var stateGroupsHierarchy = d3.hierarchy(stateGroups);
+
+        var langArray = ['euro', 'natam' ];
+
+        // TO MAKE DYNAMIC, USE data-* HTML ATTRIBUTE TO PASS PARENT <g>'S STATE INDEX (LIKE I DID IN 27_timeline.html WITH data-histosymbolvalue)
+        // length scale
+        var lengthScale = function(u, v) {
+          var domainMax = d3.max(langRollupsHierarchy.data[u][1], function(f) { return f[1] } );
+          var rangeMax = w - chartSlideOver - padding;
+
+          return (v * rangeMax) / domainMax;
+
+          // SOMEHOW D3'S SCALE DOESN'T WORK WITHIN MY FUNCTION, BUT BUILDING MY OWN PROPORTION-SCALE DOES; SEE ABOVE!
+          /* return d3.scaleLinear(v)
+            .domain([0, domainMax])
+            .range([0, rangeMax]); */
+        };
+
+        var stateData = [];
+
+        for (i = 0; i < stateRollups.length; i++) {
+
+          stateData[i] = {};
+
+          for (j = 0; j < stateRollups[i][1].length; j++) {
+
+            var euroCount,
+                natamCount;
+
+            if (stateGroups.get(stateRollups[i][0]).get('euro')) { // navigate into the state for this i-loop, then into the language
+              euroCount = stateGroups.get(stateRollups[i][0]).get('euro').length;
+            } else {
+              euroCount = 0;
+            }
+
+            if (stateGroups.get(stateRollups[i][0]).get('natam')) {
+              natamCount = stateGroups.get(stateRollups[i][0]).get('natam').length;
+            } else {
+              natamCount = 0;
+            }
+
+          } // j
+
+          stateData[i] = {
+            'euro':   parseFloat(euroCount),
+            'natam':   parseFloat(natamCount)
+          }; // close object creation
+
+        } // i
+
+        var stack = d3.stack()
+          .keys([ 'euro', 'natam' ]) // try replacing with teh var langArray
+          .order(d3.stackOrderAscending);
+
+        // stack-ify the dataset
+        var series = stack(stateData);
+
+        console.log('stateRollups: ');
+        console.log(stateRollups);
+        console.log('stateGroups: ');
+        console.log(stateGroups);
+        console.log('stateGroupsHierarchy: ');
+        console.log(stateGroupsHierarchy);
+        console.log('stateData: ');
+        console.log(stateData);
+        console.log('series: ');
+        console.log(series);
+
+        // create scale functions
+        var xScale = d3.scaleBand()
+          .domain(d3.range(stateData.length))
+          .range([0, dimensions.containerW])
+          .paddingInner(0.05);
+
+        var yScale = d3.scaleLinear()
+          .domain([0, d3.max(stateData, function(d) {
+            return d.euro + d.natam;
+          })])
+         .range([dimensions.containerH, 0]);
+
+         // var color = ['rgb(140, 159, 62)', 'rgb(182, 92, 191)' ]; // euro, natam
+         var color = ['#bb9ee4', '#a0b363' ]; // euro, natam
+
+        // add a group for each language
+        var groups = container.selectAll('.state-group-lang')
+          .data(series)
+          .enter()
+          .append('g')
+            .attr('class', 'state-group-lang')
+            .style("fill", function(d, i) {
+              return color[i];
+            });
+
+        // add a rect per data value
+  			var rects = groups.selectAll('.state-rect-lang')
+          .data(function(d) { return d; })
+          .enter()
+          .append('rect')
+            .attr('class', 'state-rect-lang')
+            .attr("x", function(d, i) {
+              return xScale(i);
+            })
+            .attr("y", function(d) {
+              return yScale(d[1]);
+    				})
+    				.attr("height", function(d) {
+              return yScale(d[0]) - yScale(d[1]);
+    				})
+    				.attr("width", xScale.bandwidth());
+
+          // conver state labels to 2 letters
+          var stateConverter = function(s) {
+
+            if (s == 'Alabama') {
+              return 'AL';
+            } else if (s == 'Alaska') {
+              return 'AK';
+            } else if (s == 'Arizona') {
+              return 'AZ';
+            } else if (s == 'Arkansas') {
+              return 'AR';
+            } else if (s == 'California') {
+              return 'CA';
+            } else if (s == 'Colorado') {
+              return 'CO';
+            } else if (s == 'Connecticut') {
+              return 'CT';
+            } else if (s == 'Delaware') {
+              return 'DE';
+            } else if (s == 'Florida') {
+              return 'FL';
+            } else if (s == 'Georgia') {
+              return 'GA';
+            } else if (s == 'Hawaii') {
+              return 'HI';
+            } else if (s == 'Idaho') {
+              return 'ID';
+            } else if (s == 'Illinois') {
+              return 'IL';
+            } else if (s == 'Indiana') {
+              return 'IN';
+            } else if (s == 'Iowa') {
+              return 'IA';
+            } else if (s == 'Kansas') {
+              return 'KS';
+            } else if (s == 'Kentucky') {
+              return 'KY';
+            } else if (s == 'Louisiana') {
+              return 'LA';
+            } else if (s == 'Maine') {
+              return 'ME';
+            } else if (s == 'Maryland') {
+              return 'ML';
+            } else if (s == 'Massachusetts') {
+              return 'MA';
+            } else if (s == 'Michigan') {
+              return 'MI';
+            } else if (s == 'Minnesota') {
+              return 'MN';
+            } else if (s == 'Mississippi') {
+              return 'MS';
+            } else if (s == 'Missouri') {
+              return 'MO';
+            } else if (s == 'Montana') {
+              return 'MT';
+            } else if (s == 'Nebraska') {
+              return 'NE';
+            } else if (s == 'Nevada') {
+              return 'NV';
+            } else if (s == 'New Hampshire') {
+              return 'NH';
+            } else if (s == 'New Jersey') {
+              return 'NJ';
+            } else if (s == 'New Mexico') {
+              return 'NM';
+            } else if (s == 'New York') {
+              return 'NY';
+            } else if (s == 'North Carolina') {
+              return 'NC';
+            } else if (s == 'North Dakota') {
+              return 'ND';
+            } else if (s == 'Ohio') {
+              return 'OH';
+            } else if (s == 'Oklahoma') {
+              return 'OK';
+            } else if (s == 'Oregon') {
+              return 'OR';
+            } else if (s == 'Pennsylvania') {
+              return 'PA';
+            } else if (s == 'Rhode Island') {
+              return 'RI';
+            } else if (s == 'South Carolina') {
+              return 'SC';
+            } else if (s == 'South Dakota') {
+              return 'SD';
+            } else if (s == 'Tennessee') {
+              return 'TN';
+            } else if (s == 'Texas') {
+              return 'TX';
+            } else if (s == 'Utah') {
+              return 'UT';
+            } else if (s == 'Vermont') {
+              return 'VT';
+            } else if (s == 'Virginia') {
+              return 'VA';
+            } else if (s == 'Washington') {
+              return 'WA';
+            } else if (s == 'West Virginia') {
+              return 'WV';
+            } else if (s == 'Wisconsin') {
+              return 'WI';
+            } else if (s == 'Wyoming') {
+              return 'WY';
+            } // close if
+
+          }; // close function
+
+          var labels = container.selectAll('.state-label-lang')
+            .data(stateRollups)
+            .enter()
+            .append('text')
+              .attr('class', 'state-label-lang')
+              .attr('x', function(d, i) {
+                return xScale(i) + 2;
+              })
+              .attr('y', dimensions.containerH + 15)
+              .attr('font-size', 9)
+              .text(function(d) {
+                return stateConverter(d[0]);
+              })
+
+      }); // close CSV function
+
+    </script>
+
+  </body>
+</html>

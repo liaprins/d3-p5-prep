@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>American pies | County etymologies | CCG</title>
+
+    <!-- D3 v6 -->
+    <script type="text/javascript" src="https://d3js.org/d3.v6.min.js"></script>
+
+    <!-- CSS *********************************************************************** -->
+    <style>
+      body {
+        font-family: 'Work Sans';
+        line-height: 1;
+      }
+      #pies-vis {
+        width: 1000px;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HTML ********************************************************************** -->
+
+    <div id="pies-vis"></div>
+
+    <!-- JAVASCRIPT **************************************************************** -->
+    <script type="text/javascript">
+
+      var w = 1000;
+      var h = 700;
+      /*
+      var ampieSvg = d3.select('#pies-vis')
+        .append('svg')
+          .attr('width', w)
+          .attr('height', h)
+          .style('background', '#eeeeee');
+      var ampieContainer = ampieSvg.append('g') // group to hold centroid symbols
+        .attr('id', 'pie-container')
+        .attr('transform', 'translate(25, 25)');
+        */
+      // load CSV of county etymology data
+      d3.csv('data_etymological-trails.csv')
+        .then(function(data) {
+
+        console.log('data');
+        console.log(data);
+
+        var babyPiesDataset = [];
+        for (var i = 0; i < data.length; i++) {
+          babyPiesDataset[i] = [ data[i].ety1.length, data[i].ety2.length, data[i].ety3.length, data[i].ety4.length, data[i].ety5.length ];
+
+        };
+
+        console.log('babyPiesDataset');
+        console.log(babyPiesDataset);
+
+        w = 300;
+        h = 300;
+
+        var myDataset = [5, 10, 20, 45, 6, 25];
+
+        var myOuterRadius = 150;
+        var myInnerRadius = 0;
+        var myArc = d3.arc()
+                      .innerRadius(myInnerRadius)
+                      .outerRadius(myOuterRadius);
+
+        var myPie = d3.pie();
+
+        var myColor = d3.scaleOrdinal(d3.schemeCategory10);
+
+        // create SVG container
+        var mySvg = d3.select("body")
+                      .append("svg")
+                      .attr("width", w)
+                      .attr("height", h);
+
+        // set up groups
+        var myArcs = mySvg.selectAll("g.arc")
+                       .data(myPie(babyPiesDataset[8]))
+                       .enter()
+                       .append("g")
+                       .attr("class", "arc")
+                       .attr("transform", "translate(" + myOuterRadius + "," + myOuterRadius + ")");
+
+        // draw arc paths
+        myArcs.append("path")
+          .attr("fill", function(d, i) {
+            return myColor(i);
+          })
+          .attr("d", myArc)
+          .attr('stroke', 'white')
+          .attr('stroke-width', 1);
+
+          /*
+          // establish county centroids
+          ampieContainer.selectAll('.hex')
+            .data(data)
+            .enter()
+            .append('circle')
+              .attr('class', 'hex')
+              .attr('cx', function(d) {
+                return (d.x) * 11;
+              })
+              .attr('cy', function(d) {
+                return (d.y) * 11;
+              })
+              .attr('r', 4); // beware, all ye people afeared of constellations of small holes
+            */
+
+
+      }); // close CSV function
+
+    </script>
+
+  </body>
+</html>

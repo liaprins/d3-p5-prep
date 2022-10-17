@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Lia's D3 Project Index!</title>
+    <script type="text/javascript" src="d3-library/d3.js"></script>
+    <style>
+      body {
+        font-family: 'Work Sans';
+        font-weight: 400;
+        margin: 5vw auto;
+        width: 80vw;
+      }
+      hr {
+        margin: 5vw 0;
+        border: 0 white none;
+        border-top: 0.25vw black solid;
+        box-sizing: content-box;
+      }
+      h3 {
+        margin-top: 2.5vw;
+        margin-bottom: 1vw;
+      }
+    </style>
+  </head>
+  <body>
+
+    <h1>D3 for Curiosity-Colored Glasses</h1>
+
+
+
+
+
+    <!-- TEMPLATE vvv !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+    <!-- COPY EVERYTHING INSIDE THE "TEMPLATE!!!..." BOUNDING COMMENTS, UNCOMMENT CODE, RENAME EVERYTHING THAT'S CURRENTLY IN ALL-CAPS BUT USE lowercase! -->
+
+    <!-- Visualizations for "# | POST-SLUG" post ****************************************** -->
+    <!--
+    <h3>
+      # | POST-SLUG
+    </h3>
+    
+    <details>
+      <summary>
+        VIS-SHORT-NAME
+      </summary>
+      <ol>
+        <li><a href="ccg-d3/#_POST-SLUG/VIS-SHORTNAME/1_VIS-SHORT-NAME.html" target="_blank">DESCRIPTION OF THIS INSTANCE OF THE VIS EXPLORATION</a></li>
+      </ol>
+    </details>
+    -->
+
+    <!-- TEMPLATE ^^^ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+
+
+
+
+    <!-- VIS'S FOR "2 | place-names" POST ****************************************** -->
+    <h3>
+      2 | place-names
+    </h3>
+
+    <!-- Shows interactive map where user can drill into each county to learn more, and color by either high-level category or language  -->
+    <details>
+      <summary>
+        Interactive map
+      </summary>
+      <ol>
+        <li><a href="ccg-d3/2_county-etymology/interactive-map/1_interactive-map.html" target="_blank">Colored by category with title tooltip</a></li>
+        <li><a href="ccg-d3/2_county-etymology/interactive-map/2_interactive-map.html" target="_blank">Colored by category with HTML tooltip</a></li>
+        <li><a href="ccg-d3/2_county-etymology/interactive-map/3_interactive-map.html" target="_blank">First flag attempt</a></li>
+        <li><a href="ccg-d3/2_county-etymology/interactive-map/4_interactive-map.html" target="_blank">Toggle coded</a></li>
+        <li><a href="ccg-d3/2_county-etymology/interactive-map/5_interactive-map.html" target="_blank">Pan</a></li>
+        <li><a href="ccg-d3/2_county-etymology/interactive-map/6_interactive-map.html" target="_blank">Zoom with track pad</a></li>
+        <li><a href="ccg-d3/2_county-etymology/interactive-map/7_interactive-map.html" target="_blank">Zoom with buttons + track pad</a></li>
+        <li><a href="ccg-d3/2_county-etymology/interactive-map/8_interactive-map.html" target="_blank">Zoom, refined</a></li>
+        <li><a href="ccg-d3/2_county-etymology/interactive-map/9_interactive-map.html" target="_blank">Colors</a></li>
+        <li><a href="ccg-d3/2_county-etymology/interactive-map/10_interactive-map.html" target="_blank">Code clean-up in-progress</a></li>
+        <li><a href="ccg-d3/2_county-etymology/interactive-map/11_interactive-map.html" target="_blank">Code clean-up</a></li>
+      </ol>
+    </details>
+
+
+    <!-- Shows static grid of maps indicating each sub-category and -language -->
+    <details>
+      <summary>
+        Static grid
+      </summary>
+      <ol>
+        <li><a href="ccg-d3/2_county-etymology/static-grid/1_static-grid.html" target="_blank">Static choropleth of English-named counties</a></li>
+        <li><a href="ccg-d3/2_county-etymology/static-grid/2_static-grid.html" target="_blank">Dots of English-named counties</a></li>
+        <li><a href="ccg-d3/2_county-etymology/static-grid/3_static-grid.html" target="_blank">Language grid</a></li>
+        <li><a href="ccg-d3/2_county-etymology/static-grid/4_static-grid.html" target="_blank">Category grid</a></li>
+        <li><a href="ccg-d3/2_county-etymology/static-grid/5_static-grid.html" target="_blank">Language grid with new colors!</a></li>
+        <li><a href="ccg-d3/2_county-etymology/static-grid/6_static-grid.html" target="_blank">Category grid with new colors!</a></li>
+        <li><a href="ccg-d3/2_county-etymology/static-grid/7_static-grid.html" target="_blank">Postglasses
+        </a></li>
+      </ol>
+    </details>
+
+    <!-- Shows etymological chain per county -->
+    <details>
+      <summary>
+        American pies
+      </summary>
+      <ol>
+        <li><a href="ccg-d3/2_county-etymology/american-pies/1_american-pies.html" target="_blank">Single pie</a></li>
+        <li><a href="ccg-d3/2_county-etymology/american-pies/2_american-pies.html" target="_blank">Baby pies across America: color by index</a></li>
+        <li><a href="ccg-d3/2_county-etymology/american-pies/3_american-pies.html" target="_blank">Baby pies across America: color by category</a></li>
+        <li><a href="ccg-d3/2_county-etymology/american-pies/4_american-pies.html" target="_blank">Baby stack, broken (makes 5 rects for all counties)</a></li>
+        <li><a href="ccg-d3/2_county-etymology/american-pies/5_american-pies.html" target="_blank">Baby stacks across America: color by category (with tooltip)</a></li>
+        <li><a href="ccg-d3/2_county-etymology/american-pies/6_american-pies.html" target="_blank">Heatmap</a></li>
+        <li><a href="ccg-d3/2_county-etymology/american-pies/7_american-pies.html" target="_blank">Hex heatmap</a></li>
+        <li><a href="ccg-d3/2_county-etymology/american-pies/8_american-pies.html" target="_blank">Baby pies streamlined</a></li>
+        <li><a href="ccg-d3/2_county-etymology/american-pies/9_american-pies.html" target="_blank">Hex heatmap overlay</a></li>
+        <li><a href="ccg-d3/2_county-etymology/american-pies/10_american-pies.html" target="_blank">Stack heatmap overlay</a></li>
+        <li><a href="ccg-d3/2_county-etymology/american-pies/11_american-pies.html" target="_blank">Real data applied to stack heatmap overlay</a></li>
+        <li><a href="ccg-d3/2_county-etymology/american-pies/12_american-pies.html" target="_blank">Real data applied to pie heatmap overlay</a></li>
+        <li><a href="ccg-d3/2_county-etymology/american-pies/13_american-pies.html" target="_blank">⭐️ Real data applied to pie heatmap overlay with new colors</a></li>
+        <li><a href="ccg-d3/2_county-etymology/american-pies/14_american-pies.html" target="_blank">⭐️ Real data applied to stack heatmap overlay with new colors</a></li>
+      </ol>
+    </details>
+
+    <!-- Shows breakdowns from North to South and West to East -->
+    <details>
+      <summary>
+        NSWE
+      </summary>
+      <ol>
+        <li><a href="ccg-d3/2_county-etymology/nswe/1_nswe.html" target="_blank">WE category bar chart</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/2_nswe.html" target="_blank">NSWE category bar charts</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/3_nswe.html" target="_blank">NSWE category bar charts scaled per bin to full height/width</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/4_nswe.html" target="_blank">NSWE language bar charts scaled per bin to full height/width</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/5_nswe.html" target="_blank">NSWE language area chart</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/6_nswe.html" target="_blank">NSWE language area chart scaled to full height / width</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/7_nswe.html" target="_blank">WE language curved line chart</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/8_nswe.html" target="_blank">WE language curved area chart</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/9_nswe.html" target="_blank">NSWE language curved area chart scaled to full height</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/10_nswe.html" target="_blank">Hover on one chart's layer activates other chart's same layer</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/11_nswe.html" target="_blank">Hover with layer and centroid activation</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/12_nswe.html" target="_blank">Percent: Languages with final data</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/13_nswe.html" target="_blank">Percent: Categories with final data</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/14_nswe.html" target="_blank">Raw count: Languages with final data</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/15_nswe.html" target="_blank">Raw count: Categories with final data</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/16_nswe.html" target="_blank">Percent: Languages with final data, sans HI, AK</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/17_nswe.html" target="_blank">Percent: Categories with final data, sans HI, AK</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/18_nswe.html" target="_blank">Raw count: Languages with final data, sans HI, AK</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/19_nswe.html" target="_blank">Raw count: Categories with final data, sans HI, AK</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/20_nswe.html" target="_blank">Percent: Languages with final colors</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/21_nswe.html" target="_blank">Percent: Categories with final colors</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/22_nswe.html" target="_blank">Raw count: Languages with final colors</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/23_nswe.html" target="_blank">Raw count: Categories with final colors</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/24_nswe.html" target="_blank">Percent: Languages with final colors</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/25_nswe.html" target="_blank">Percent: Categories with Mercator projection</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/26_nswe.html" target="_blank">Raw count: Languages with Mercator projection</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/27_nswe.html" target="_blank">Raw count: Categories with Mercator projection</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/28_nswe.html" target="_blank">Percent: Languages with Mercator projection + axes</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/29_nswe.html" target="_blank">Percent: Categories with Mercator projection + axes</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/30_nswe.html" target="_blank">Raw count: Languages with Mercator projection + axes</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/31_nswe.html" target="_blank">Raw count: Categories with Mercator projection + axes</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/32_nswe.html" target="_blank">⭐️ Percent: Languages with final colors</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/33_nswe.html" target="_blank">⭐️ Percent: Categories with final colors</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/34_nswe.html" target="_blank">⭐️ Raw count: Languages with final colors</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/35_nswe.html" target="_blank">⭐️ Raw count: Categories with final colors</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/36_nswe.html" target="_blank">Percent: Categories with final colors for Process section GIF (copied from code file #13), broken</a></li>
+        <li><a href="ccg-d3/2_county-etymology/nswe/37_nswe.html" target="_blank">⭐️⭐️ Percent: Categories with final colors for Process section GIF (copied from code file #33), fixed</a></li>
+      </ol>
+    </details>
+
+    <!-- Shows breakdowns across category and language, per state -->
+    <details>
+      <summary>
+        State breakdowns
+      </summary>
+      <ol>
+        <li><a href="ccg-d3/2_county-etymology/state-breakdowns/1_state-breakdowns.html" target="_blank">State breakdowns: categories per state, as bar chart series</a></li>
+        <li><a href="ccg-d3/2_county-etymology/state-breakdowns/2_state-breakdowns.html" target="_blank">State breakdowns: language per category per state, as bar chart series</a></li>
+        <li><a href="ccg-d3/2_county-etymology/state-breakdowns/3_state-breakdowns.html" target="_blank">State breakdowns: using d3.scaleLinear</a></li>
+        <li><a href="ccg-d3/2_county-etymology/state-breakdowns/4_state-breakdowns.html" target="_blank">State breakdowns: Alabama scaled to full-width (as proof of concept)</a></li>
+        <li><a href="ccg-d3/2_county-etymology/state-breakdowns/5_state-breakdowns.html" target="_blank">State breakdowns: square per county</a></li>
+        <li><a href="ccg-d3/2_county-etymology/state-breakdowns/6_state-breakdowns.html" target="_blank">State breakdowns: all states scaled to full-width, colored by language only</a></li>
+        <li><a href="ccg-d3/2_county-etymology/state-breakdowns/7_state-breakdowns.html" target="_blank">State breakdowns: all states scaled to full-width, colored by category and language</a></li>
+        <li><a href="ccg-d3/2_county-etymology/state-breakdowns/8_state-breakdowns.html" target="_blank">⭐️ Percent: Languages with final data</a></li>
+        <li><a href="ccg-d3/2_county-etymology/state-breakdowns/9_state-breakdowns.html" target="_blank">⭐️ Percent: Categories with final data</a></li>
+        <li><a href="ccg-d3/2_county-etymology/state-breakdowns/10_state-breakdowns.html" target="_blank">⭐️ Raw count: Languages with final data</a></li>
+        <li><a href="ccg-d3/2_county-etymology/state-breakdowns/11_state-breakdowns.html" target="_blank">⭐️ Raw count: Categories with final data</a></li>
+      </ol>
+    </details>
+
+    <!-- Shows most common county names -->
+    <details>
+      <summary>
+        Name frequency
+      </summary>
+      <ol>
+        <li><a href="ccg-d3/2_county-etymology/name-frequency/1_name-frequency.html" target="_blank">Text only: unique county names with totals</a></li>
+        <li><a href="ccg-d3/2_county-etymology/name-frequency/2_name-frequency.html" target="_blank">Text only: unique county names with totals + unique etymologies per unique county with totals</a></li>
+        <li><a href="ccg-d3/2_county-etymology/name-frequency/3_name-frequency.html" target="_blank">Histogram of unique names' county counts only</a></li>
+        <li><a href="ccg-d3/2_county-etymology/name-frequency/4_name-frequency.html" target="_blank">Histogram per name, broken down by etymology</a></li>
+        <li><a href="ccg-d3/2_county-etymology/name-frequency/5_name-frequency.html" target="_blank">Rect per etymology, with length tied to number of counties with that etymology</a></li>
+        <li><a href="ccg-d3/2_county-etymology/name-frequency/6_name-frequency.html" target="_blank">Circle per county, grouped by same etymology, with tooltip</a></li>
+        <li><a href="ccg-d3/2_county-etymology/name-frequency/7_name-frequency.html" target="_blank">⭐️ Using final data</a></li>
+        <li><a href="ccg-d3/2_county-etymology/name-frequency/8_name-frequency.html" target="_blank">Cleaned up code in-progress</a></li>
+        <li><a href="ccg-d3/2_county-etymology/name-frequency/9_name-frequency.html" target="_blank">Closer to final</a></li>
+        <li><a href="ccg-d3/2_county-etymology/name-frequency/10_name-frequency.html" target="_blank">⭐️ Cleaned up code</a></li>
+      </ol>
+    </details>
+
+    <!-- Timeline of when counties were named -->
+    <details>
+      <summary>
+        Timeline
+      </summary>
+      <ol>
+        <li><a href="ccg-d3/2_county-etymology/timeline/1_timeline.html" target="_blank">Rug chart (D3 v4)</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/2_timeline.html" target="_blank">Rug chart with x-axis + d3.scaleTime() (D3 v6 from now on)</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/3_timeline.html" target="_blank">Histogram, via d3.group()</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/4_timeline.html" target="_blank">Histogram by decade (broken)</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/5_timeline.html" target="_blank">Histogram by decade (fixed!)</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/6_timeline.html" target="_blank">Histogram with margins</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/7_timeline.html" target="_blank">Histogram with scales</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/8_timeline.html" target="_blank">Histogram with axes</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/9_timeline.html" target="_blank">Histogram via manually manipulated binned-categories dataset, of "place" category only</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/10_timeline.html" target="_blank">Stacked bar chart of categories per decade</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/11_timeline.html" target="_blank">Cleaned up code for stacked bar chart of categories per decade</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/12_timeline.html" target="_blank">Stacked bar chart of categories per decade with axes</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/13_timeline.html" target="_blank">Stacked bar chart of language per decade with axes</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/14_timeline.html" target="_blank">Stacked symbols, by wrapping symbol-creator in for-loop and calling .data(binnedCounties[m]), (broken)</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/15_timeline.html" target="_blank">Stacked squares from JSFiddle</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/16_timeline.html" target="_blank">Stacked squares from JSFiddle, adapted to my categories per decade</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/17_timeline.html" target="_blank">Stacked squares, split by half-decade</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/18_timeline.html" target="_blank">Stacked squares per year</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/19_timeline.html" target="_blank">Stacked symbols turned 90 degrees for specific value</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/20_timeline.html" target="_blank">Stacked symbols turned 90 via scale() (broken)</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/21_timeline.html" target="_blank">Stacked symbols turned 90 (broken)</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/22_timeline.html" target="_blank">Stacked symbols turned 90 applied to language: Nat Am symbols at bottom (but messy code)</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/23_timeline.html" target="_blank">Stacked symbols cross-stitch style, but all types overlap</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/24_timeline.html" target="_blank">Stacked symbols turned 90 applied to language: Nat Am symbols at top (but messy code)</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/25_timeline.html" target="_blank">Stacked symbols cross-stitch style attempt (broken)</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/26_timeline.html" target="_blank">Stacked symbols turned 90 applied to language, cleaned!</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/27_timeline.html" target="_blank">Hover state</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/28_timeline.html" target="_blank">X-axis with years</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/29_timeline.html" target="_blank">US map with symbols and colors + Cartogram + Timeline</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/30_timeline.html" target="_blank">Line chart: line per category</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/31_timeline.html" target="_blank">Line chart: line per category, each line scaled to its own max</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/32_timeline.html" target="_blank">Line chart: line per category, each time-period's total name count scaled to 100%</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/33_timeline.html" target="_blank">Percent: Languages as bar chart with new data</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/34_timeline.html" target="_blank">Percent: Categories as bar chart with new data</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/35_timeline.html" target="_blank">Raw count: Languages as bar chart with new data</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/36_timeline.html" target="_blank">Raw count: Categories as bar chart with new data</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/37_timeline.html" target="_blank">Percent: Languages as bar chart with final colors</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/38_timeline.html" target="_blank">Percent: Categories as bar chart with final colors</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/39_timeline.html" target="_blank">Raw count: Languages as bar chart with final colors</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/40_timeline.html" target="_blank">Raw count: Categories as bar chart with final colors</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/41_timeline.html" target="_blank">Choropleth with opacity mapped to date, colored by category and language</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/42_timeline.html" target="_blank">⭐️ Percent: Languages as bar chart with real final colors</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/43_timeline.html" target="_blank">⭐️ Percent: Categories as bar chart with real final colors</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/44_timeline.html" target="_blank">⭐️ Raw count: Languages as bar chart with real final colors</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/45_timeline.html" target="_blank">⭐️ Raw count: Categories as bar chart with real final colors</a></li>
+        <li><a href="ccg-d3/2_county-etymology/timeline/46_timeline.html" target="_blank">Choropleth with opacity mapped to date, greyscale</a></li>
+      </ol>
+    </details>
+
+    <!-- Cartogram with one shape per county, colored by nuanced languages -->
+    <details>
+      <summary>
+        Cartogram
+      </summary>
+      <ol>
+        <li><a href="ccg-d3/2_county-etymology/cartogram/1_cartogram.html" target="_blank">Squared.js cartogram library with sample data</a></li>
+        <li><a href="ccg-d3/2_county-etymology/cartogram/2_cartogram.html" target="_blank">Squared.js cartogram library (broken)</a></li>
+        <li><a href="ccg-d3/2_county-etymology/cartogram/3_cartogram.html" target="_blank">Squared.js cartogram library using external JSON file</a></li>
+        <li><a href="ccg-d3/2_county-etymology/cartogram/4_cartogram.html" target="_blank">Hex cartogram, black dots</a></li>
+        <li><a href="ccg-d3/2_county-etymology/cartogram/5_cartogram.html" target="_blank">Hex cartogram colored by category (fake data)</a></li>
+        <li><a href="ccg-d3/2_county-etymology/cartogram/6_cartogram.html" target="_blank">Hex cartogram, interpolateCool (fake data)</a></li>
+        <li><a href="ccg-d3/2_county-etymology/cartogram/7_cartogram.html" target="_blank">Hex cartogram, "Lite Brite" edition: interpolateCool + interpolateWarm (fake data)</a></li>
+        <li><a href="ccg-d3/2_county-etymology/cartogram/8_cartogram.html" target="_blank">Hex cartogram, hover state</a></li>
+        <li><a href="ccg-d3/2_county-etymology/cartogram/9_cartogram.html" target="_blank">Hex cartogram, improved hover state + tooltip</a></li>
+        <li><a href="ccg-d3/2_county-etymology/cartogram/10_cartogram.html" target="_blank">Hex cartogram, interpolateRgb</a></li>
+        <li><a href="ccg-d3/2_county-etymology/cartogram/11_cartogram.html" target="_blank">Hex cartogram + US map with symbol and color per county</a></li>
+        <li><a href="ccg-d3/2_county-etymology/cartogram/12_cartogram.html" target="_blank">Line cartogram: line length ties to year named</a></li>
+        <li><a href="ccg-d3/2_county-etymology/cartogram/13_cartogram.html" target="_blank">"Highlighter" cartogram: angle + length tie to year named</a></li>
+        <li><a href="ccg-d3/2_county-etymology/cartogram/14_cartogram.html" target="_blank">Square cartogram</a></li>
+        <li><a href="ccg-d3/2_county-etymology/cartogram/15_cartogram.html" target="_blank">Square cartogram: tile height ties to year named</a></li>
+        <li><a href="ccg-d3/2_county-etymology/cartogram/16_cartogram.html" target="_blank">Cartogram with HI + AK</a></li>
+        <li><a href="ccg-d3/2_county-etymology/cartogram/17_cartogram.html" target="_blank">Cartograms for granular language + granular category, with final data</a></li>
+        <li><a href="ccg-d3/2_county-etymology/cartogram/18_cartogram.html" target="_blank">⭐️ Cartograms + choropleths for granular language + granular category, with final data</a></li>
+        <li><a href="ccg-d3/2_county-etymology/cartogram/19_cartogram.html" target="_blank">⭐️ Choropleths for granular language + granular category, each granularity the same color</a></li>
+      </ol>
+    </details>
+
+    <!-- US map with symbol and color per county -->
+    <details>
+      <summary>
+        US map with symbol and color per county
+      </summary>
+      <ol>
+        <li><a href="ccg-d3/2_county-etymology/us-map-symbol-color/1_us-map-symbol-color.html" target="_blank">D3 v4: Dots via county path centroids</a></li>
+        <li><a href="ccg-d3/2_county-etymology/us-map-symbol-color/2_us-map-symbol-color.html" target="_blank">Colored by language, via successive filter()s</a></li>
+        <li><a href="ccg-d3/2_county-etymology/us-map-symbol-color/3_us-map-symbol-color.html" target="_blank">Colored by category</a></li>
+        <li><a href="ccg-d3/2_county-etymology/us-map-symbol-color/4_us-map-symbol-color.html" target="_blank">Dots colored by category</a></li>
+        <li><a href="ccg-d3/2_county-etymology/us-map-symbol-color/5_us-map-symbol-color.html" target="_blank">Symbols colored by category, plus tooltips via HTML title tag</a></li>
+        <li><a href="ccg-d3/2_county-etymology/us-map-symbol-color/6_us-map-symbol-color.html" target="_blank">Mutually exclusive filters, sans ability to turn off</a></li>
+        <li><a href="ccg-d3/2_county-etymology/us-map-symbol-color/7_us-map-symbol-color.html" target="_blank">Combinatory (but overriding) filters</a></li>
+        <li><a href="ccg-d3/2_county-etymology/us-map-symbol-color/8_us-map-symbol-color.html" target="_blank">Filters with "OR" operator between dimensions (centroids selected on any dimension prevail)</a></li>
+        <li><a href="ccg-d3/2_county-etymology/us-map-symbol-color/9_us-map-symbol-color.html" target="_blank">Cleaned up</a></li>
+        <li><a href="ccg-d3/2_county-etymology/us-map-symbol-color/10_us-map-symbol-color.html" target="_blank">Attempt at typical cross-filtering (but breaks)</a></li>
+        <li><a href="ccg-d3/2_county-etymology/us-map-symbol-color/11_us-map-symbol-color.html" target="_blank">Mutually exclusive filters, with ability to turn off</a></li>
+        <li><a href="ccg-d3/2_county-etymology/us-map-symbol-color/12_us-map-symbol-color.html" target="_blank">The perfect cross-filter at last (mutually exclusive within a dimension, cross-filter across dimensions)</a></li>
+        <li><a href="ccg-d3/2_county-etymology/us-map-symbol-color/13_us-map-symbol-color.html" target="_blank">Perfect cross-filter cleaned up!</a></li>
+        <li><a href="ccg-d3/2_county-etymology/us-map-symbol-color/14_us-map-symbol-color.html" target="_blank">State outlines + centroids with blend mode (blend mode makes the filters slower)</a></li>
+        <li><a href="ccg-d3/2_county-etymology/us-map-symbol-color/15_us-map-symbol-color.html" target="_blank">D3 v6: Centroid count per facet + slanted centroid symbols</a></li>
+        <li><a href="ccg-d3/2_county-etymology/us-map-symbol-color/16_us-map-symbol-color.html" target="_blank">Final data</a></li>
+        <li><a href="ccg-d3/2_county-etymology/us-map-symbol-color/17_us-map-symbol-color.html" target="_blank">Cleaned up code</a></li>
+        <li><a href="ccg-d3/2_county-etymology/us-map-symbol-color/18_us-map-symbol-color.html" target="_blank">⭐️ Final colors</a></li>
+      </ol>
+    </details>
+
+    <h3>
+      0 | sample-post
+    </h3>
+    
+    <details>
+      <summary>
+        ix-map
+      </summary>
+      <ol>
+        <li><a href="ccg-d3/0_sample-post/ix-map/1_ix-map.html" target="_blank">Prepping to add to sample-post's codebase</a></li>
+      </ol>
+    </details>
+
+    <details>
+      <summary>
+        mouse-drawing-circles
+      </summary>
+      <ol>
+        <li><a href="ccg-d3/0_sample-post/mouse-drawing-circles/1_mouse-drawing-circles.html" target="_blank">P5 mouse drawing circles, first attempt</a></li>
+      </ol>
+    </details>
+
+    <details>
+      <summary>
+        tableau-name-frequency
+      </summary>
+      <ol>
+        <li><a href="ccg-d3/0_sample-post/tableau-name-frequency/1_tableau-name-frequency.html" target="_blank">Trying a Tableau embedded vis</a></li>
+      </ol>
+    </details>
+
+    <details>
+      <summary>
+        nswe
+      </summary>
+      <ol>
+        <li><a href="ccg-d3/0_sample-post/nswe/1_nswe.html" target="_blank">NSWE categories only</a></li>
+      </ol>
+    </details>
+
+    <hr />
+
+
+    <h1>D3 practice exercises</h1>
+
+    <h3>
+      "Interactive Data Visualization for the Web" book
+    </h3>
+
+    <!-- Chapter 3 -->
+    <details>
+      <summary>
+        Chapter 3
+      </summary>
+      <ul>
+        <li><a href="oreilly-book/chapter-3/svg-examples.html" target="_blank">SVG</a></li>
+      </ul>
+    </details>
+
+    <!-- Chapter 5 -->
+    <details>
+      <summary>
+        Chapter 5
+      </summary>
+      <ul>
+        <li><a href="oreilly-book/chapter-5/generating-page-elements.html" target="_blank">Generating Page Elements</a></li>
+        <li><a href="oreilly-book/chapter-5/binding-data.html" target="_blank">Binding Data</a></li>
+      </ul>
+    </details>
+
+    <!-- Chapter 6 -->
+    <details>
+      <summary>
+        Chapter 6
+      </summary>
+      <ul>
+        <li><a href="oreilly-book/chapter-6/drawing-divs.html" target="_blank">Drawing divs</a></li>
+        <li><a href="oreilly-book/chapter-6/the-power-of-data.html" target="_blank">The Power of data()</a></li>
+        <li><a href="oreilly-book/chapter-6/drawing-svgs.html" target="_blank">Drawings SVGs</a></li>
+        <li><a href="oreilly-book/chapter-6/making-a-bar-chart.html" target="_blank">Making a Bar Chart</a></li>
+        <li><a href="oreilly-book/chapter-6/making-a-scatterplot.html" target="_blank">Making a Scatterplot</a></li>
+      </ul>
+    </details>
+
+    <!-- Chapter 7 -->
+    <details>
+      <summary>
+        Chapter 7
+      </summary>
+      <ul>
+        <li><a href="oreilly-book/chapter-7/scaling-the-scatterplot.html" target="_blank">Scaling the Scatterplot</a></li>
+        <li><a href="oreilly-book/chapter-7/scaling-the-scatterplot-2.html" target="_blank">Scaling the Scatterplot, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-7/time-scales.html" target="_blank">Time scales, 2nd edition</a></li>
+      </ul>
+    </details>
+
+    <!-- Chapter 8 -->
+    <details>
+      <summary>
+        Chapter 8
+      </summary>
+      <ul>
+        <li><a href="oreilly-book/chapter-8/axes.html" target="_blank">Axes</a></li>
+        <li><a href="oreilly-book/chapter-8/introducing-axes.html" target="_blank">Introducing Axes, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-8/time-based-axes.html" target="_blank">Time-Based Axes, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-8/time-series-cleaned-up.html" target="_blank">Time Series, Cleaned Up, 2nd edition</a></li>
+      </ul>
+    </details>
+
+    <!-- Chapter 9 -->
+    <details>
+      <summary>
+        Chapter 9
+      </summary>
+      <ul>
+        <li><a href="oreilly-book/chapter-9/modernizing-the-bar-chart.html" target="_blank">Modernizing the Bar Chart</a></li>
+        <li><a href="oreilly-book/chapter-9/modernizing-the-bar-chart-2.html" target="_blank">Modernizing the Bar Chart, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-9/updating-data-once.html" target="_blank">Updating Data</a></li>
+        <li><a href="oreilly-book/chapter-9/updating-data-2.html" target="_blank">Updating Data, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-9/transitions.html" target="_blank">Transitions</a></li>
+        <li><a href="oreilly-book/chapter-9/transitions-2.html" target="_blank">Transitions, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-9/delay.html" target="_blank">delay(), Randomized Data, and Updating Scales</a></li>
+        <li><a href="oreilly-book/chapter-9/transitions-randomized-2.html" target="_blank">Transitions with Randomized Data Values, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-9/updating-axes.html" target="_blank">Updating Axes</a></li>
+        <li><a href="oreilly-book/chapter-9/updating-axes-2.html" target="_blank">Updating Axes, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-9/on.html" target="_blank">on()</a></li>
+        <li><a href="oreilly-book/chapter-9/on-2.html" target="_blank">on(), 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-9/multiple-transitions.html" target="_blank">Multiple Transitions, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-9/clipping-paths.html" target="_blank">Clipping Paths</a></li>
+        <li><a href="oreilly-book/chapter-9/clipping-paths-2.html" target="_blank">Clipping Paths, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-9/adding-data.html" target="_blank">Adding Data</a></li>
+        <li><a href="oreilly-book/chapter-9/adding-values-2.html" target="_blank">Adding Values, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-9/removing-data.html" target="_blank">Removing Data</a></li>
+        <li><a href="oreilly-book/chapter-9/removing-values-2.html" target="_blank">Removing Values, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-9/removing-values-with-pop.html" target="_blank">Removing Values with pop(), 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-9/data-joins-keys.html" target="_blank">Data Joins with Keys</a></li>
+        <li><a href="oreilly-book/chapter-9/data-joins-keys-2.html" target="_blank">Data Joins with Keys, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-9/add-remove.html" target="_blank">Add and Remove</a></li>
+        <li><a href="oreilly-book/chapter-9/add-remove-2.html" target="_blank">Add and Remove, 2nd edition</a></li>
+      </ul>
+    </details>
+
+    <!-- Chapter 10 -->
+    <details>
+      <summary>
+        Chapter 10
+      </summary>
+      <ul>
+        <li><a href="oreilly-book/chapter-10/introducing-behaviors.html" target="_blank">Introducing Behaviors</a></li>
+        <li><a href="oreilly-book/chapter-10/introducing-behaviors-2.html" target="_blank">Introducing Behaviors, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-10/hover-to-highlight-2.html" target="_blank">Hover to Highlight, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-10/grouping-svg-elements.html" target="_blank">Grouping SVG Elements</a></li>
+        <li><a href="oreilly-book/chapter-10/click-to-sort.html" target="_blank">Click to Sort</a></li>
+        <li><a href="oreilly-book/chapter-10/click-to-sort-2.html" target="_blank">Click to Sort, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-10/default-browser-tooltips.html" target="_blank">Default Browser Tooltips</a></li>
+        <li><a href="oreilly-book/chapter-10/default-browser-tooltips-2.html" target="_blank">Default Browser Tooltips, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-10/svg-element-tooltips.html" target="_blank">SVG Element Tooltips</a></li>
+        <li><a href="oreilly-book/chapter-10/svg-element-tooltips-2.html" target="_blank">SVG Element Tooltips, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-10/html-div-tooltips.html" target="_blank">HTML div Tooltips</a></li>
+        <li><a href="oreilly-book/chapter-10/html-div-tooltips-2.html" target="_blank">HTML div Tooltips, 2nd edition</a></li>
+      </ul>
+    </details>
+
+    <!-- Chapter 11 -->
+    <details>
+      <summary>
+        Chapter 11
+      </summary>
+      <ul>
+        <li><a href="oreilly-book/chapter-11/line-chart-2.html" target="_blank">Line Chart, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-11/area-chart-2.html" target="_blank">Area Chart, 2nd edition</a></li>
+        <!--
+        <li><a href="oreilly-book/chapter-11/pie-layout.html" target="_blank">Pie Layout</a></li>
+        <li><a href="oreilly-book/chapter-11/stack-layout.html" target="_blank">Stack Layout</a></li>
+        <li><a href="oreilly-book/chapter-11/force-layout.html" target="_blank">Force Layout</a></li>
+        -->
+      </ul>
+    </details>
+
+    <!-- Chapter 12 -->
+    <details>
+      <summary>
+        Chapter 12
+      </summary>
+      <ul>
+        <!--
+        <li><a href="oreilly-book/chapter-12/geojson.html" target="_blank">GeoJSON</a></li>
+        -->
+        <li><a href="oreilly-book/chapter-12/filter.html" target="_blank">filter(), 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-12/filter-by-slider.html" target="_blank">Filter by slider, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-12/radio-buttons.html" target="_blank">Filter by radio buttons I, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-12/radio-buttons-ii.html" target="_blank">Filter by radio buttons II, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-12/freakout.html" target="_blank">Freakout, 2nd edition</a></li>
+      </ul>
+    </details>
+
+    <!-- Chapter 13 -->
+    <details>
+      <summary>
+        Chapter 13
+      </summary>
+      <ul>
+        <li><a href="oreilly-book/chapter-13/pie-layout.html" target="_blank">Pie Layout, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-13/stack-layout.html" target="_blank">Stack Layout, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-13/area-layout.html" target="_blank">Area Layout, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-13/force-layout.html" target="_blank">Force Layout, 2nd edition</a></li>
+      </ul>
+    </details>
+
+    <!-- Chapter 14 -->
+    <details>
+      <summary>
+        Chapter 14
+      </summary>
+      <ul>
+        <li><a href="oreilly-book/chapter-14/geomapping-paths.html" target="_blank">Geomapping Paths, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-14/choropleth.html" target="_blank">Choropleth, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-14/choropleth-points.html" target="_blank">Choropleth with Points, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-14/choropleth-panning.html" target="_blank">Choropleth with Panning via Buttons, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-14/choropleth-dragging.html" target="_blank">Choropleth with Dragging, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-14/choropleth-zoom.html" target="_blank">Choropleth with Zooming, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-14/choropleth-zoom-buttons.html" target="_blank">Choropleth with Zoom Buttons, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-14/choropleth-preset-views.html" target="_blank">Choropleth with Preset Views, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-14/choropleth-value-labels.html" target="_blank">Choropleth with Value Labels, 2nd edition</a></li>
+      </ul>
+    </details>
+
+    <!-- Chapter 16 -->
+    <details>
+      <summary>
+        Chapter 16
+      </summary>
+      <ul>
+        <li><a href="oreilly-book/chapter-16/project-1.html" target="_blank">Project: Colored by Vehicle, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-16/project-2.html" target="_blank">Project: Colored by Type, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-16/project-3.html" target="_blank">Project: Type Fades to Vehicles, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-16/project-4.html" target="_blank">Project: Click Transition, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-16/project-5.html" target="_blank">Project: Axes Scale with Transition, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-16/project-6.html" target="_blank">Project: Hide and Reveal Vehicles, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-16/project-7.html" target="_blank">Project: Drill Down, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-16/project-8.html" target="_blank">Project: Back Button, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-16/project-9.html" target="_blank">Project: Refined Styling, 2nd edition</a></li>
+        <li><a href="oreilly-book/chapter-16/project-10.html" target="_blank">Project: Final Chart in Context, 2nd edition</a></li>
+      </ul>
+    </details>
+
+    <h3>
+      "Learn and Understand D3.js for Data Visualization" Udemy course
+    </h3>
+
+    <!-- Section 3 -->
+    <details>
+      <summary>
+        Section 3
+      </summary>
+      <ul>
+        <li><a href="udemy-course/section-3/selections.html" target="_blank">Selections</a></li>
+        <li><a href="udemy-course/section-3/json-requests.html" target="_blank">JSON Requests</a></li>
+        <li><a href="udemy-course/section-3/csv-requests.html" target="_blank">CSV Requests</a></li>
+      </ul>
+    </details>
+
+    <!-- Section 4 -->
+    <details>
+      <summary>
+        Section 4
+      </summary>
+      <ul>
+        <li><a href="udemy-course/section-4/scatterplot.html" target="_blank">Drawing a Scatterplot</a></li>
+      </ul>
+    </details>
+
+    <!-- Section 5 -->
+    <details>
+      <summary>
+        Section 5
+      </summary>
+      <ul>
+        <li><a href="udemy-course/section-5/heatmap.html" target="_blank">Heatmaps</a></li>
+        <li><a href="udemy-course/section-5/logscale.html" target="_blank">Log Scale</a></li>
+      </ul>
+    </details>
+
+    <!-- Section 6 -->
+    <details>
+      <summary>
+        Section 6
+      </summary>
+      <ul>
+        <li><a href="udemy-course/section-6/histogram.html" target="_blank">Histogram with Transitions</a></li>
+        <li><a href="udemy-course/section-6/scatterplot.html" target="_blank">Scatterplot with Interactivity</a></li>
+      </ul>
+    </details>
+
+    <!-- Section 7 -->
+    <details>
+      <summary>
+        Section 7
+      </summary>
+      <ul>
+        <li><a href="udemy-course/section-7/linechart.html" target="_blank">Line Chart</a></li>
+        <li><a href="udemy-course/section-7/piechart.html" target="_blank">Pie Chart</a></li>
+        <li><a href="udemy-course/section-7/stackedbars.html" target="_blank">Stacked Bar Chart</a></li>
+      </ul>
+    </details>
+
+    <h3>
+      "Learning Data visualization with D3.js" LinkedIn Learning course
+    </h3>
+
+    <!-- Chapter 1 -->
+    <details>
+      <summary>
+        Chapter 1
+      </summary>
+      <ul>
+        <li><a href="linkedin-course-1/chapter-1/chapter-1.html" target="_blank">Getting Started</a></li>
+      </ul>
+    </details>
+
+    <!-- Chapter 2 -->
+    <details>
+      <summary>
+        Chapter 2
+      </summary>
+      <ul>
+        <li><a href="linkedin-course-1/chapter-2/chapter-2.html" target="_blank">Understanding SVG Graphics</a></li>
+      </ul>
+    </details>
+
+    <!-- Chapter 3 -->
+    <details>
+      <summary>
+        Chapter 3
+      </summary>
+      <ul>
+        <li><a href="linkedin-course-1/chapter-3/chapter-3.html" target="_blank">Using D3 Methods</a></li>
+      </ul>
+    </details>
+
+    <!-- Chapter 4 -->
+    <details>
+      <summary>
+        Chapter 4
+      </summary>
+      <ul>
+        <li><a href="linkedin-course-1/chapter-4/chapter-4.html" target="_blank">Using Data</a></li>
+      </ul>
+    </details>
+
+    <h3>
+      Rare as One 
+    </h3>
+
+    <details>
+      <summary>
+        Iterations
+      </summary>
+      <ol>
+        <li><a href="ra1/ra1-1.html" target="_blank">Hover state on bars</a></li>
+        <li><a href="ra1/ra1-2.html" target="_blank">Hover state surrounding bars</a></li>
+        <li><a href="ra1/ra1-3.html" target="_blank">Correct number of rects, within rects</a></li>
+        <li><a href="ra1/ra1-4.html" target="_blank">Grouped SVGs (but broken)</a></li>
+        <li><a href="ra1/ra1-5.html" target="_blank">(Broken: rects outside of groups)</a></li>
+        <li><a href="ra1/ra1-6.html" target="_blank">Grouped bars</a></li>
+        <li><a href="ra1/ra1-7.html" target="_blank">Grouped bars, aligned, with colors</a></li>
+        <li><a href="ra1/ra1-8.html" target="_blank">With group labels</a></li>
+        <li><a href="ra1/ra1-9.html" target="_blank">With axis ticks</a></li>
+        <li><a href="ra1/ra1-10.html" target="_blank">With chart title</a></li>
+        <li><a href="ra1/ra1-11.html" target="_blank">With rounded surrounding hover state</a></li>
+        <li><a href="ra1/ra1-12.html" target="_blank">Reorganized code</a></li>
+        <li><a href="ra1/ra1-13.html" target="_blank">Final</a></li>
+      </ol>
+    </details>
+
+  </body>
+</html>

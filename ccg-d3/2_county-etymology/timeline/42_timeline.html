@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Timeline | County etymologies | CCG</title>
+
+    <!-- D3 v6 FINAL -->
+    <!-- <script type="text/javascript" src="https://d3js.org/d3.v6.min.js"></script> -->
+    <!-- v6(.7) -->
+    <script type="text/javascript" src="../../../d3-library/d3.js"></script>
+    <!-- v4(.5) -->
+    <!-- <script type="text/javascript" src="../../../d3-book-master/d3.js"></script> -->
+
+    <!-- CSS *********************************************************************** -->
+    <style>
+    body {
+      font-family: 'Work Sans';
+    }
+    #timeline-vis {
+      width: 1000px;
+      margin: 10px auto;
+    }
+
+    </style>
+  </head>
+  <body>
+    <!-- HTML ********************************************************************** -->
+
+    <div id="timeline-vis">
+      <h1>Percent: Languages</h1>
+    </div>
+
+    <!-- JAVASCRIPT **************************************************************** -->
+    <script type="text/javascript">
+
+      let dimensions = {
+        w: 1000,
+        h: 350,
+        margins: 50
+      };
+      dimensions.containerW = dimensions.w - (dimensions.margins * 2);
+      dimensions.containerH = dimensions.h - (dimensions.margins * 2);
+
+      // create containers
+      var svg = d3.select('#timeline-vis')
+        .append('svg')
+          .attr('id', 'timeline-svg')
+          .attr('width', dimensions.w)
+          .attr('height', dimensions.h)
+          .style('background', '#f5f5f5');
+
+      var container = svg.append("g")
+        .attr(
+          'transform',
+          'translate(' + dimensions.margins + ', ' + dimensions.margins + ')'
+        );
+
+			// load in the data
+      d3.csv("../data_counties.csv")
+        .then(function(data) {
+
+        // bin the data by decade
+        var bin = d3.bin()
+          .domain([
+						  d3.min(data, function(d) { return parseFloat(d.year); }),
+						  d3.max(data, function(d) { return parseFloat(d.year); })
+						])
+          .value(function(d) {
+            return parseFloat(d.year);
+          })
+          .thresholds(38); // approximately one bin per decade
+
+        var binnedCounties = bin(data);
+
+        // group by language within each bin
+        var binnedLangs = [];
+
+        for (var j = 0; j < binnedCounties.length; j++) { // loop through 39 times
+
+          binnedLangs[j] = [];
+
+          for (var k = 0; k < binnedCounties[j].length; k++) { // within each j-loop, loop through as many times as it is long
+
+            if (binnedLangs[j] == []) {
+              binnedLangs[j] = [];
+            } else {
+              binnedLangs[j] = [d3.group(binnedCounties[j], function(d) {
+                return d.language; })];
+            } // close if
+          } // k
+        } // j
+
+        var stackedBarData = [];
+
+        // prepare the data to be able to be stack-ified (like the dataset in O'Reilly Ch 13 stack-layout.html)
+        for (var l = 0; l < binnedLangs.length; l++) { // loop through 39 times
+
+          stackedBarData[l] = {};
+
+          for (var m = 0; m < binnedLangs[l].length; m++) { // within each l-loop, loop through as many times as it is long
+
+            var euroCount,
+                natamCount;
+
+            if (binnedLangs[l][0].get('euro')) {
+              euroCount = binnedLangs[l][0].get('euro').length;
+            } else {
+              euroCount = 0;
+            }; // close count if-statement
+
+            if ((binnedLangs[l][0].get('natam'))) {
+              natamCount = binnedLangs[l][0].get('natam').length;
+            } else {
+              natamCount = 0;
+            }; // close count if-statement
+
+          } // m
+
+          stackedBarData[l] = {
+            'euro':  parseFloat(euroCount),
+            'natam':  parseFloat(natamCount)
+          };
+
+        } // l
+
+        var stack = d3.stack()
+          .keys([ 'euro', 'natam' ])
+          .order(d3.stackOrderDescending);
+
+        // stack-ify the dataset
+        var series = stack(stackedBarData);
+
+        // determine original ticks to be overtaken by new tick values
+        var originalTickValues = [];
+        for (var m = 0; m < stackedBarData.length; m++) { // loop through each time-period
+          if((stackedBarData.indexOf(stackedBarData[m]) - 1) % 5 == 0) { // if (one less than) the index is divisible by the number of columns I want between each tick
+            originalTickValues[(m - 1) / 5] = stackedBarData.indexOf(stackedBarData[m]); // within the same index of the originalTickValues dataset, assign the stackedBarData current index
+          }
+        }
+
+        // create array to pull from for x-axis ticks
+        var xAxisTicks = [];
+        for ( var n = 0; n < binnedCounties.length; n++) { // loop through each time-period
+          // xAxisTicks[n] = binnedCounties[m].x1;
+          if (binnedCounties[n].x1 % 50 == 0) { // if the ending year of the time-period is evenly divisible by the chunk of time I want between each tick (must be properly proportional with "the number of columns I want between each tick", see chunk of code, above)
+            xAxisTicks[(n - 1) / 5] = binnedCounties[n].x1; // then within the same index as used above, in the final dataset to be used for tick number generation, assign the ending year of the time-period
+          // } else {
+            // xAxisTicks[n] = '';
+          }
+        }
+
+        // view various phases of datasets in the console for troubleshooting
+        console.log(binnedCounties);
+        console.log('binnedCounties ^^^');
+        console.log(binnedLangs);
+        console.log('binnedLangs ^^^');
+        console.log(stackedBarData);
+        console.log('stackedBarData ^^^');
+        console.log(series);
+        console.log('series ^^^');
+        console.log(originalTickValues);
+        console.log('originalTickValues ^^^');
+        console.log(xAxisTicks);
+        console.log('xAxisTicks ^^^');
+
+				// create scale functions
+        var xScale = d3.scaleBand()
+          .domain(d3.range(stackedBarData.length))
+          .range([0, dimensions.containerW])
+          // .paddingInner(0.05);
+
+        var yScale = d3.scaleLinear()
+          .domain([0, d3.max(stackedBarData, function(d) {
+            return d.euro + d.natam;
+          })])
+         .range([dimensions.containerH, 0]);
+
+        // axes
+        var xAxis = d3.axisBottom()
+          .scale(xScale)
+          .tickValues(originalTickValues)
+          .tickFormat((d,i) => xAxisTicks[i])
+          .tickSizeOuter(0); // remove last end tick without a number
+
+        var yAxis = d3.axisLeft()
+          .scale(yScale)
+          .ticks(5)
+          .tickSizeOuter(0); // remove last end tick without a number
+
+        // var color = ['rgb(140, 159, 62)', 'rgb(182, 92, 191)' ]; // euro, natam
+        var color = ['#A0C1D7', '#8F3D64' ]; // euro, natam
+
+        // add a group for each language
+        var groups = container.selectAll('.language-layer')
+          .data(series)
+          .enter()
+          .append('g')
+            .attr('class', 'language-layer')
+            .style("fill", function(d, i) {
+              return color[i];
+            });
+
+        // add a rect per data value
+  			var rects = groups.selectAll('.language-rect')
+          .data(function(d) { return d; })
+          .enter()
+          .append('rect')
+            .attr('class', 'language-rect')
+            .attr("x", function(d, i) {
+              return xScale(i);
+            })
+            .attr("y", function(d, i) {
+              // return yScale(d[1]);
+              var domainMax = parseInt(stackedBarData[i].euro) + parseInt(stackedBarData[i].natam);
+              var rangeMax = dimensions.containerH;
+
+              var percentScale = d3.scaleLinear()
+                .domain([0, domainMax])
+                // .range([dimensions.margins, rangeMax]);
+                .range([0, rangeMax]);
+
+              return percentScale(d[0]);
+    				})
+            .attr('stroke','#f5f5f5')
+            .attr('stroke-width', 1)
+    				.attr("height", function(d, i) {
+              // return yScale(d[0]) - yScale(d[1]);
+              var domainMax = parseInt(stackedBarData[i].euro) + parseInt(stackedBarData[i].natam);
+              var rangeMax = dimensions.containerH;
+
+              var percentScale = d3.scaleLinear()
+                .domain([0, domainMax])
+                // .range([dimensions.margins, rangeMax]);
+                .range([0, rangeMax]);
+
+              return percentScale(d[1]) - percentScale(d[0]);
+    				})
+    				.attr("width", xScale.bandwidth());
+
+        container.append("g")
+          .call(xAxis)
+           .attr("class", "axis")
+           .attr("transform", "translate(0," + (dimensions.containerH) + ")");
+
+        container.append("g")
+          .call(yAxis)
+           .attr("class", "axis");
+
+			}); // close CSV reader function
+
+    </script>
+
+  </body>
+</html>

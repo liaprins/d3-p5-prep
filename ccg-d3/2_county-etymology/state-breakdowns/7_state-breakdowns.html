@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>State breakdowns | County etymologies | CCG</title>
+
+    <!-- D3 v6 -->
+    <script type="text/javascript" src="https://d3js.org/d3.v6.min.js"></script>
+
+    <!-- CSS *********************************************************************** -->
+    <style>
+    body {
+      font-family: 'Work Sans';
+    }
+    #state-breakdowns-vis {
+      width: 1000px;
+      margin: 10px auto;
+    }
+    #states-svg {
+      background: #eeeeee;
+      padding-top: 25px;
+    }
+    .state-chart {
+      background-color: teal;
+    }
+    .state-category {
+      mix-blend-mode: multiply;
+    }
+    #alabama-label {
+      font-weight: bold;
+    }
+    </style>
+  </head>
+  <body>
+    <!-- HTML ********************************************************************** -->
+
+    <div id="state-breakdowns-vis"></div>
+
+    <!-- JAVASCRIPT **************************************************************** -->
+    <script type="text/javascript">
+
+    // load in the data
+    d3.csv("../data_county-etymologies.csv")
+      .then(function(data) {
+
+        var stateRollups = d3.rollups(data
+            .sort((a, b) => d3.ascending(a.state, b.state) || d3.ascending(a.category, b.category) || d3.ascending(a.language, b.language))
+            .filter(function(d) { return d.state != 'District of Columbia'}),
+          v => v.length,
+          d => d.state, d => d.category, d => d.language);
+
+        var stateRollupsHierarchy = d3.hierarchy(stateRollups);
+
+        var catRollups = d3.rollups(data
+            .sort((a, b) => d3.ascending(a.state, b.state) || d3.ascending(a.category, b.category) || d3.ascending(a.language, b.language))
+            .filter(function(d) { return d.state != 'District of Columbia'}),
+          v => v.length,
+          d => d.state, d => d.category);
+
+        var catRollupsHierarchy = d3.hierarchy(catRollups);
+
+        console.log('stateRollups: ');
+        console.log(stateRollups);
+        console.log('stateRollupsHierarchy: ');
+        console.log(stateRollupsHierarchy);
+        console.log('catRollups: ');
+        console.log(catRollups);
+        console.log('catRollupsHierarchy: ');
+        console.log(catRollupsHierarchy);
+
+
+        var w = 1000;
+        var stateH = 50;
+        var h = stateH * 50;
+        var chartSlideOver = 200;
+        var padding = 50;
+
+        var catArray = ['battle', 'combination', 'concept', 'creation', 'flora', 'geology', 'group', 'man', 'object', 'place', 'resource', 'woman', 'unknown'];
+        var numCats = catArray.length;
+
+        var euroColor = d3.scaleOrdinal(d3.schemeDark2)
+            .domain(catArray);
+
+        var natamColor = d3.scaleOrdinal(d3.schemePastel2)
+            .domain(catArray);
+
+        var categoryStep = function(w) {
+          for (var j = 0; j < numCats; j++){
+            if (w == catArray[j]) {
+              return (stateH / numCats) * j;
+            } // if
+          } // for
+        } // fx
+
+        // TO MAKE DYNAMIC, USE data-* HTML ATTRIBUTE TO PASS PARENT <g>'S STATE INDEX (LIKE I DID IN 27_timeline.html WITH data-histosymbolvalue)
+        // length scale
+        var lengthScale = function(u, v) {
+          var domainMax = d3.max(catRollupsHierarchy.data[u][1], function(f) { return f[1] } );
+          var rangeMax = w - chartSlideOver - padding;
+
+          return (v * rangeMax) / domainMax;
+
+          // SOMEHOW D3'S SCALE DOESN'T WORK WITHIN MY FUNCTION, BUT BUILDING MY OWN PROPORTION-SCALE DOES; SEE ABOVE!
+          /* return d3.scaleLinear(v)
+            .domain([0, domainMax])
+            .range([0, rangeMax]); */
+        }
+        console.log('line125: ' + typeof(d3.max(catRollupsHierarchy.data[9][1], function(f) { return f[1] } )));
+        console.log('line126: ' + lengthScale(9, 145));
+
+        var statesSvg = d3.select('#state-breakdowns-vis')
+          .append('svg')
+            .attr('id', 'states-svg')
+            .attr('width', w)
+            .attr('height', h);
+
+        var stateCharts = statesSvg.selectAll('.state-chart')
+          .data(stateRollupsHierarchy.data)
+          .enter()
+          .append('g')
+            .attr('id', d => d[0] + '-chart')
+            .attr('data-state-index', function(d, i) {
+              return i;
+            })
+            .attr('class', 'state-chart')
+            .attr('transform', function(d, i) {
+              return 'translate(0,' + (stateH * i) + ')'
+            });
+
+        var stateEuroBars = stateCharts.selectAll('.state-category-euro')
+          .data(function(f) {
+            return f[1].filter(function(d) { return d[1][0][0] == 'euro'})
+          })
+          .enter()
+          .append('rect')
+            .attr('id', d => d[0] + '-bar')
+            .attr('class', 'state-category state-category-euro');
+
+        var stateNatamBars = stateCharts.selectAll('.state-category-natam')
+          .data(function(f) {
+            return f[1].filter(function(d) {
+              if (d[1][1]) {
+                return d[1][1][0] == 'natam';
+              } else {
+                return d[1][0][0] == 'natam';
+              }
+            })
+          })
+          .enter()
+          .append('rect')
+            .attr('id', d => d[0] + '-bar')
+            .attr('class', 'state-category state-category-natam');
+
+        // use JS to pull the state's index from parent group's `data-state-index` (since this is stored in the data at a level above what I am using with d3 to build the bars themselves)
+        var stateList = document.getElementsByClassName('state-chart'); // get all states' chart containers
+        for (var r = 0; r < stateList.length; r++) { // loop through all states
+          var stateIndex = parseFloat(stateList[r].getAttribute('data-state-index')); // get state index
+          var stateCategoryBars = stateList[r].children; // each symbol-holder
+          for (var s = 0; s < stateCategoryBars.length; s++) { // loop through all categories
+            stateCategoryBars[s].setAttribute('data-parent-state-index', stateIndex); // pass index to category bars
+          } // s
+        } // r
+
+        stateEuroBars.attr('x', chartSlideOver)
+          .attr('y', function(d) {
+            return categoryStep(d[0]);
+          })
+          .attr('width', function(d) {
+            var thisStateIndex = parseFloat(d3.select(this).attr('data-parent-state-index'));
+            console.log('line187: ' + typeof(d[1][0][1]));
+            return lengthScale(thisStateIndex, d[1][0][1]);
+            // return lScale(d[1][0][1]);
+          })
+          .attr('height', (stateH / numCats))
+          .attr('fill', function(d) {
+            return euroColor(d[0]);
+          });
+
+        stateNatamBars.attr('x', function(d, i) {
+            if (d[1][1]) { // if it is the second language listed
+              var thisStateIndex = parseFloat(d3.select(this).attr('data-parent-state-index'));
+              return chartSlideOver + lengthScale(thisStateIndex, d[1][0][1]);
+              // return chartSlideOver + lScale(d[1][0][1]);
+            } else { // if it is the first language listed
+              return chartSlideOver;
+            }
+          })
+          .attr('y', function(d) {
+            return categoryStep(d[0]);
+          })
+          .attr('width', function(d) {
+            var thisStateIndex = parseFloat(d3.select(this).attr('data-parent-state-index'));
+            if (d[1][1]) { // if it is the second language listed
+              return lengthScale(thisStateIndex, d[1][1][1]);
+              // return lScale(d[1][1][1]);
+            } else { // if it is the first language listed
+              return lengthScale(thisStateIndex, d[1][0][1]);
+              // return lScale(d[1][0][1]);
+            }
+          })
+          .attr('height', (stateH / numCats))
+          .attr('fill', function(d) {
+            return natamColor(d[0]);
+          });
+
+        stateCharts.append('text')
+            .attr('class', 'state-label')
+            .text(d => d[0])
+            .attr('x', 50)
+            .attr('y', stateH / 2);
+
+      }); // close CSV function
+
+    </script>
+
+  </body>
+</html>

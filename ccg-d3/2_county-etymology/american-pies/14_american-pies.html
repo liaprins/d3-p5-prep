@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>American pies | County etymologies | CCG</title>
+
+    <!-- D3 v6 -->
+    <script type="text/javascript" src="https://d3js.org/d3.v6.min.js"></script>
+
+    <!-- CSS *********************************************************************** -->
+    <style>
+      body {
+        font-family: 'Work Sans';
+        line-height: 1;
+      }
+      #pies-vis {
+        width: 1000px;
+        margin: 0 auto;
+      }
+      .baby-stack-layer {
+        /* mix-blend-mode: multiply; */
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HTML ********************************************************************** -->
+
+    <div id="pies-vis"></div>
+
+    <!-- JAVASCRIPT **************************************************************** -->
+    <script type="text/javascript">
+
+      var w = 1000;
+      var h = 700;
+
+      // load CSV of county etymology data
+      d3.csv('../data_counties.csv')
+        .then(function(data) {
+
+          var hexData = data.filter(function(d) {
+            return d.x != ''; // leave out any without hex coordinates
+          });
+
+        console.log('hexData');
+        console.log(hexData);
+
+        var babyStacksDataset = [];
+        for (var i = 0; i < hexData.length; i++) {
+          // var etyTrailLength = hexData[i].ety1.length + hexData[i].ety2.length + hexData[i].ety3.length + hexData[i].ety4.length +hexData[i].ety5.length;
+
+          var etyTrailLength,
+              ety1Length,
+              ety2Length,
+              ety3Length,
+              ety4Length;
+
+          if (hexData[i].ety4 != '') {
+            etyTrailLength = 4;
+            ety1Length = 1;
+            ety2Length = 1;
+            ety3Length = 1;
+            ety4Length = 1;
+          } else if (hexData[i].ety3 != '') {
+            etyTrailLength = 3;
+            ety1Length = 1;
+            ety2Length = 1;
+            ety3Length = 1;
+            ety4Length = 0;
+          } else if (hexData[i].ety2 != '') {
+            etyTrailLength = 2;
+            ety1Length = 1;
+            ety2Length = 1;
+            ety3Length = 0;
+            ety4Length = 0;
+          } else {
+            etyTrailLength = 1;
+            ety1Length = 1;
+            ety2Length = 0;
+            ety3Length = 0;
+            ety4Length = 0;
+          }
+
+          babyStacksDataset[i] = {
+            etytrail: [
+              [ parseInt(ety1Length), etyTrailLength ],
+              [ parseInt(ety2Length), etyTrailLength ],
+              [ parseInt(ety3Length), etyTrailLength ],
+              [ parseInt(ety4Length), etyTrailLength ]
+            ],
+            category: [ hexData[i].category, hexData[i].cat2, hexData[i].cat3, hexData[i].cat4 ]
+          }
+        };
+
+        // create SVG container
+        var pieSvg = d3.select("#pies-vis")
+                      .append("svg")
+                      .attr("width", w)
+                      .attr("height", h);
+
+        console.log('babyStacksDataset');
+        console.log(babyStacksDataset);
+
+        var pieBoxSize = 9.5;
+
+        for (var i = 0; i < babyStacksDataset.length; i++) { // per county
+
+          var etyTrailCount = parseInt(babyStacksDataset[i].etytrail[0][1]);
+
+          pieSvg.append('g')
+              .attr('class', 'baby-stack-group' + '-' + i)
+              .attr('transform', 'translate(' + (Math.round(hexData[i].x)) * 10 + ',' + parseInt(hexData[i].y) * 10 + ')')
+            .append('title')
+              .text(function() {
+                if (etyTrailCount == 4) {
+                  return hexData[i].ety1 + ' (' + babyStacksDataset[i].category[0] + ') ' +
+                         hexData[i].ety2 + ' (' + babyStacksDataset[i].category[1] + ') ' +
+                         hexData[i].ety3 + ' (' + babyStacksDataset[i].category[2] + ') ' +
+                         hexData[i].ety4 + ' (' + babyStacksDataset[i].category[3] + ') '
+                } else if (etyTrailCount == 3) {
+                  return hexData[i].ety1 + ' (' + babyStacksDataset[i].category[0] + ') ' +
+                         hexData[i].ety2 + ' (' + babyStacksDataset[i].category[1] + ') ' +
+                         hexData[i].ety3 + ' (' + babyStacksDataset[i].category[2] + ') '
+                } else if (etyTrailCount == 2) {
+                  return hexData[i].ety1 + ' (' + babyStacksDataset[i].category[0] + ') ' +
+                         hexData[i].ety2 + ' (' + babyStacksDataset[i].category[1] + ') '
+                } else {
+                  return hexData[i].ety1 + ' (' + babyStacksDataset[i].category[0] + ') '
+                }
+              });
+
+          var color = ['rgb(202, 165, 105)', 'rgb(104, 188, 143)', 'rgb(119, 178, 224)', 'rgb(219, 147, 199)', 'rgb(123, 123, 123)']; // people, nature, place, concept, unknown
+
+          for (var j = 0; j < etyTrailCount; j++) { // per ety trail length (arbitrarily getting length from first listed ety array)
+            // console.log(typeof(etyTrailCount));
+
+          pieSvg.selectAll('.baby-stack-group' + '-' + i)
+            .append('rect')
+              // .attr('class', 'baby-stack-layer' + i + '-' + j)
+              .attr('class', function(d) {
+                return 'baby-stack-layer-' + hexData[i].name;
+              })
+              .attr('height', function(d, i) {
+                if (etyTrailCount == 4) {
+                  return pieBoxSize / 4;
+                } else if (etyTrailCount == 3) {
+                  return pieBoxSize / 3;
+                } else if (etyTrailCount == 2) {
+                  return pieBoxSize / 2;
+                } else {
+                  return pieBoxSize;
+                }
+              })
+              .attr('width', pieBoxSize)
+              .attr('y', function(d) {
+                if (etyTrailCount == 4) {
+                  return j * (pieBoxSize / 4)
+                } else if (etyTrailCount == 3) {
+                  return j * (pieBoxSize / 3)
+                } else if (etyTrailCount == 2) {
+                  return j * (pieBoxSize / 2)
+                } else {
+                  return j * pieBoxSize;
+                }
+              })
+              // .attr('x', 5)
+              .attr('x', function(d, i) {
+                return 5;
+              })
+              .attr('fill', function(d) {
+                // return color(j);
+                var babyStackCat = babyStacksDataset[i].category[j];
+                if (babyStackCat == 'people') {
+                  return color[0];
+                } else if (babyStackCat == 'nature') {
+                  return color[1];
+                } else if (babyStackCat == 'place') {
+                  return color[2];
+                } else if (babyStackCat == 'concept') {
+                  return color[3];
+                } else if (babyStackCat == 'unknown') {
+                  return color[4]; // just doing some for proof of concept
+                }
+              })
+              .attr('opacity', function(d) {
+                var stackDepth = babyStacksDataset[i].etytrail[0][1];
+                if (stackDepth == 4) {
+                  return 1;
+                } else if (stackDepth == 3) {
+                  return 0.75;
+                } else if (stackDepth == 2) {
+                  return 0.5;
+                } else {
+                  return 0.25;
+                }
+              })
+              .attr('stroke', 'white')
+              .attr('stroke-width', 0.5); // keep this to show multi-ety counties with similar cats
+          } // j
+        } // i
+
+      }); // close CSV function
+
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Lia's D3 Template!</title>
+    <!--
+    <script type="text/javascript" src="../../d3-library/d3.js"></script>
+    -->
+    <script type="text/javascript" src="../../d3-book-master/d3.js"></script>
+    <style>
+      h1 {
+        font-family: Helvetica, sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+      }
+      .area {
+        stroke: none;
+      }
+      .area:hover {
+        fill: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+
+        var w = 800;
+        var h = 500;
+        var padding = 20;
+
+        var myDataset, xScale, yScale, xAxis, yAxis, myArea;
+
+        // to convert strings to dates
+        var parseTime = d3.timeParse("%Y-%m");
+        // to convert dates to strings
+        var formatTime = d3.timeFormat("%b %Y");
+
+        // function to convert CSV values from strings to Dates and numbers
+        // one column named "Date" and several others that will be converted to ints
+			var rowConverter = function(d, i, cols) {
+
+				//Initial 'row' object includes only date
+				var row = {
+					date: parseTime(d.Date),  //Make a new Date object for each year + month
+				};
+
+				//Loop once for each vehicle type
+				for (var i = 1; i < cols.length; i++) {
+					var col = cols[i];
+
+					//If the value exists…
+					if (d[cols[i]]) {
+						row[cols[i]] = +d[cols[i]];  //Convert from string to int
+					} else {  //Otherwise…
+						row[cols[i]] = 0;  //Set to zero
+					}
+				}
+
+				return row;
+			}
+
+        // setup stack method
+        var myStack = d3.stack()
+                        .order(d3.stackOrderDescending);    // flipped order
+
+        // load in data
+        d3.csv("ev_sales_data.csv", rowConverter, function(data) {
+
+          var myDataset = data;
+          console.log(myDataset);
+
+				var keys = myDataset.columns;
+				keys.shift();  //Remove first column name ('Date')
+				myStack.keys(keys);  //Stack using what's left (the car names)
+
+          // stack-ify the dataset
+          var series = myStack(myDataset);
+
+          xScale = d3.scaleTime()
+                     .domain([
+                       d3.min(myDataset, function(d) { return d.date; }),
+                       d3.max(myDataset, function(d) { return d.date; })
+                     ])
+                     .range([padding, w - (padding * 2)]);
+
+          yScale = d3.scaleLinear()
+                     .domain([
+                       0,
+                       d3.max(myDataset, function(d) {
+                         var sum = 0;
+                         // calculate sum of all vehicles
+                         for (var i = 0; i < keys.length; i++) {
+                           sum += d[keys[i]];
+                         };
+                         return sum;
+                       })
+                     ])
+                     .range([h - padding, padding / 2])
+                     .nice();
+
+          xAxis = d3.axisBottom()
+                    .scale(xScale)
+                    .ticks(10)
+                    .tickFormat(formatTime);
+
+          yAxis = d3.axisRight()
+                    .scale(yScale)
+                    .ticks(5);
+
+          // define area generator
+          myArea = d3.area()
+                     .x(function(d) { return xScale(d.data.date); })
+                     .y0(function(d) { return yScale(d[0]); })
+                     .y1(function(d) { return yScale(d[1]); });
+
+          // create SVG container
+          var mySvg = d3.select("body")
+                        .append("svg")
+                        .attr("width", w)
+                        .attr("height", h);
+
+          // create areas
+          mySvg.selectAll("path")
+            .data(series)
+            .enter()
+            .append("path")
+            .attr("class", "area")
+            .attr("d", myArea)
+            .attr("fill", function(d, i) {
+              return d3.schemeCategory20[i];
+            })
+            .append("title")    // make tooltip
+            .text(function(d) {
+              return d.key;
+            });
+
+          // create axes
+          mySvg.append("g")
+            .attr("class", "axis")
+            .attr("transform", "translate(0," + (h - padding) + ")")
+            .call(xAxis);
+
+          mySvg.append("g")
+            .attr("class", "axis")
+            .attr("transform", "translate(" + (w - padding * 2) + ",0)")
+            .call(yAxis);
+
+        }) // close CSV loader
+
+    </script>
+  </body>
+</html>

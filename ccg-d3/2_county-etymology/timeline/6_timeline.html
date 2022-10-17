@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Timeline | County etymologies | CCG</title>
+    <!-- v6(.7) -->
+    <script type="text/javascript" src="../../../d3-library/d3.js"></script>
+    <!-- v4(.5) -->
+    <!-- <script type="text/javascript" src="../../../d3-book-master/d3.js"></script> -->
+
+    <!-- CSS *********************************************************************** -->
+    <style>
+
+    #timeline-vis {
+      width: 1000px;
+      margin: 10px auto;
+    }
+    .timebar {
+      fill: teal;
+    }
+
+    </style>
+  </head>
+  <body>
+    <!-- HTML ********************************************************************** -->
+
+    <div id="timeline-vis"></div>
+
+    <!-- JAVASCRIPT **************************************************************** -->
+    <script type="text/javascript">
+
+
+
+      let dimensions = {
+        w: 1000,
+        h: 300,
+        margins: 50
+      };
+
+      dimensions.containerW = dimensions.w - (dimensions.margins * 2);
+      dimensions.containerH = dimensions.h - (dimensions.margins * 2);
+
+      var xScale, yScale;  // empty for now
+
+			// to convert strings to Dates
+      var parseTime = d3.timeParse("%m/%d/%Y");
+
+			// to convert Dates to strings
+			var formatTime = d3.timeFormat("%Y");
+
+      // create SVG element
+      var svg = d3.select('#timeline-vis')
+        .append('svg')
+          .attr('id', 'timeline-svg')
+          .attr('width', dimensions.w)
+          .attr('height', dimensions.h)
+          .style('background', '#eeeeee');
+
+      var container = svg.append("g") // <g>
+        .attr(
+          'transform',
+          'translate(' + dimensions.margins + ', ' + dimensions.margins + ')'
+        );
+
+			// load in the data
+      d3.csv("../data_county-etymologies.csv")
+        .then(function(data) {
+
+        // binning
+        var bin = d3.bin()
+          .domain([
+						  d3.min(data, function(d) { return parseFloat(d.year); }),
+						  d3.max(data, function(d) { return parseFloat(d.year); })
+						])
+          .value(function(d) {
+            return parseFloat(d.year);
+          })
+          .thresholds(38);
+
+        var binnedCounties = bin(data);
+        var binnedCountiesCount = binnedCounties.length;
+
+        console.log(binnedCountiesCount);
+
+				// create scale functions
+				xScale = d3.scaleLinear()
+				    .domain([0, binnedCountiesCount])
+						.range([0, dimensions.containerW]);
+
+				/* yScale = d3.scaleLinear()
+							   .domain([
+									d3.min(countiesPerYear, function(d) { return d[1].length; }),
+									d3.max(countiesPerYear, function(d) { return d[1].length; })
+								])
+							   .range([padding, h - padding]); */
+
+        /* var xAxis = d3.axisBottom()
+          .scale(xScale)
+          .tickFormat(formatTime)
+          .ticks(10);    // set rough # of ticks */
+
+
+				// draw bars
+				container.selectAll("rect")
+           .data(binnedCounties)
+				   .enter()
+				   .append("rect")
+             .attr('class', function(d) {
+               return 'timebar ' + d.x0 + '-' + d.x1;
+             })
+             .attr('x', function(d, i) {
+               return xScale(i);
+             })
+             .attr('y', function(d) {
+               console.log(d.length)
+               return dimensions.containerH - (d.length * 0.5);
+             })
+  				   .attr('width', function(d, i) {
+               return ((dimensions.containerW - (2 * dimensions.margins)) / binnedCountiesCount) * 0.8;
+             })
+             .attr('height', function(d) {
+               return (d.length * 0.5);
+             });
+
+        /* svg.append("g")
+           .call(xAxis)
+           .attr("class", "axis")
+           .attr("transform", "translate(0," + (h - padding) + ")"); */
+
+			}); // close CSV reader function
+
+    </script>
+
+  </body>
+</html>

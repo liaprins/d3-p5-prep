@@ -1,0 +1,49 @@
+body {
+  font-family: 'Work Sans';
+  line-height: 1;
+}
+.county-outline,
+.state-outline {
+  /* stroke: #eeeeee; */
+}
+.county-outline {
+  /* fill: #ffffff; */
+  fill: rgba(255, 255, 255, 0);
+  stroke: #eeeeee;
+  stroke-width: 0.5;
+}
+.state-outline {
+  fill: #ffffff;
+  stroke: #eeeeee;
+  stroke-width: 1.5;
+  pointer-events: none;
+}
+.centroid-symbol {
+  stroke-width: 2;
+  stroke-linecap: round;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+#vis,
+#filter-container {
+  width: 1000px;
+  margin: 10px auto;
+}
+#language-filter-group,
+#category-filter-group {
+  margin-top: 20px;
+}
+.filter {
+  display: inline-block;
+  padding: 0 15px;
+  margin: 0 5px 10px 0;
+  background-color: #eeeeee;
+  cursor: pointer;
+  border: 2px solid rgba(0, 0, 0, 0);
+}
+.on {
+  border: 2px solid black;
+}
+.centroid-on {
+  stroke-width: 4;
+}

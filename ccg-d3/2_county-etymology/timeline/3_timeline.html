@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Timeline | County etymologies | CCG</title>
+    <!-- v6(.7) -->
+    <script type="text/javascript" src="../../../d3-library/d3.js"></script>
+    <!-- v4(.5) -->
+    <!-- <script type="text/javascript" src="../../../d3-book-master/d3.js"></script> -->
+
+    <!-- CSS *********************************************************************** -->
+    <style>
+
+    #timeline-vis {
+      width: 1000px;
+      margin: 10px auto;
+    }
+    .timedot {
+      fill: red;
+    }
+
+    </style>
+  </head>
+  <body>
+    <!-- HTML ********************************************************************** -->
+
+    <div id="timeline-vis"></div>
+
+    <!-- JAVASCRIPT **************************************************************** -->
+    <script type="text/javascript">
+
+			//Width and height
+      var w = 1000;
+      var h = 300;
+			var padding = 40;
+
+      var xScale, yScale;  //Empty, for now
+
+			//For converting strings to Dates
+      var parseTime = d3.timeParse("%m/%d/%Y");
+
+			//For converting Dates to strings
+			var formatTime = d3.timeFormat("%Y");
+
+			//Load in the data
+      d3.csv("../data_county-etymologies.csv")
+        .then(function(data) {
+
+        // group the CSV rows together by unique year
+        var countiesPerYear = d3.group(data, function(d) {
+          return parseTime(d.date);
+        });
+
+				//Create scale functions
+				xScale = d3.scaleTime()
+				    .domain([
+						  d3.min(countiesPerYear, function(d) { return d[0]; }),
+						  d3.max(countiesPerYear, function(d) { return d[0]; })
+						])
+						.range([padding, w - padding]);
+
+        console.log(countiesPerYear.get(parseTime(01/01/1680)));
+
+				yScale = d3.scaleLinear()
+							   .domain([
+									d3.min(countiesPerYear, function(d) { return d[1].length; }),
+									d3.max(countiesPerYear, function(d) { return d[1].length; })
+								])
+							   .range([padding, h - padding]);
+
+        /* var xAxis = d3.axisBottom()
+          .scale(xScale)
+          .tickFormat(formatTime)
+          .ticks(10);    // set rough # of ticks */
+
+				//Create SVG element
+        var svg = d3.select('#timeline-vis')
+          .append('svg')
+            .attr('id', 'timeline-svg')
+            .attr('width', w)
+            .attr('height', h)
+            .style('background', '#eeeeee');
+
+				//Generate circles last, so they appear in front
+				svg.selectAll("rect")
+				   // .data(dataset)
+           .data(countiesPerYear)
+				   .enter()
+				   .append("rect")
+             .attr('class', function(d) {
+               return 'timedot ' + d[0]; // access date via the first [0] element of array-ish (map) returned by d3.group in countiesPerYear var
+             })
+             .attr('x', function(d, i) {
+               return xScale(d[0]);
+             })
+             .attr('y', function(d) {
+               return h - yScale(d[1].length);
+             })
+  				   .attr('width', 1)
+             .attr('height', function(d) {
+               return yScale(d[1].length) - padding; // access all county info belonging to each year via the second [1] element of array-ish (map) returned by d3.group in countiesPerYear var
+             });
+
+        /* svg.append("g")
+           .call(xAxis)
+           .attr("class", "axis")
+           .attr("transform", "translate(0," + (h - padding) + ")"); */
+
+			}); // close CSV reader function
+
+    </script>
+
+  </body>
+</html>

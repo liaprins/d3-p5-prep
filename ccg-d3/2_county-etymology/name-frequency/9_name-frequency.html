@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Name frequency | County etymologies | CCG</title>
+
+    <!-- D3 v6 -->
+    <script type="text/javascript" src="https://d3js.org/d3.v6.min.js"></script>
+
+    <!-- CSS *********************************************************************** -->
+    <style>
+    body {
+      font-family: 'Work Sans';
+    }
+    .name-freq-bar {
+      display: inline-block;
+    }
+    .name-freq-subbar {
+      display: inline-block;
+      background-color: rgb(255, 155, 0, 0.5);
+      margin-right: 2px;
+      border-radius: 18px;
+      box-sizing: border-box;
+    }
+    #namefreq-tooltip {
+        position: absolute;
+        width: 200px;
+        height: auto;
+        padding: 10px;
+        background-color: rgba(255, 255, 255, 0.9);
+        border: solid 2px black;
+        pointer-events: none;
+
+        /* cursor: pointer; */
+    }
+    .hidden-tooltip {
+      display: none;
+    }
+    </style>
+  </head>
+  <body>
+    <!-- HTML ********************************************************************** -->
+
+    <div id="name-frequency-vis"></div>
+
+    <div id="namefreq-tooltip" class="hidden-tooltip">
+      <p id="namefreq-county"></p>
+      <p id="namefreq-subbarcount"></p>
+      <p id="namefreq-barcount"></p>
+      <p id="namefreq-ety"></p>
+      <p id="namefreq-states"></p>
+    </div>
+
+    <!-- JAVASCRIPT **************************************************************** -->
+    <script type="text/javascript">
+
+    // load in the data
+    d3.csv("../data_name-frequency.csv")
+      .then(function(data) {
+
+      // Step 1: isolate names of counties into their own set
+      var countyNames = [];
+      for (var i = 0; i < data.length; i++) {
+        countyNames[i] = data[i].name;
+      }
+
+      // Step 2: throw out any repeated names, so each county name is only listed once (will be used to access d3.group's map, below)
+      var uniqueCountyNames = [];
+      uniqueCountyNames = countyNames.filter((d, i, array)=>{
+        return countyNames.indexOf(d) === i;
+      });
+
+      // Step 3: group the CSV rows together by unique name
+      var countiesByName = d3.group(data, d => d.name);
+      // var countiesByNameZh = d3.hierarchy(countiesByName);
+
+      // step 4: create JSONified dataset
+      var nameFreqJson = [];
+      for (var i = 0; i < uniqueCountyNames.length; i++) {
+        nameFreqJson[i] = countiesByName.get(uniqueCountyNames[i]);
+      } // i
+
+      console.log('data');
+      console.log(data);
+
+      console.log('countyNames');
+      console.log(countyNames);
+
+      console.log('uniqueCountyNames');
+      console.log(uniqueCountyNames);
+
+      console.log('countiesByName');
+      console.log(countiesByName);
+
+      console.log('nameFreqJson');
+      console.log(nameFreqJson);
+
+      var nameFreqDiv = d3.selectAll('#name-frequency-vis');
+
+      var nameFreqBoxWidth = 30;
+
+      var nameFreqBar = nameFreqDiv.selectAll('.name-freq-bar')
+        .data(nameFreqJson)
+        .enter()
+        .append('div')
+          .attr('class', 'name-freq-bar')
+          .style('position', 'absolute')
+          .style('left', 250 + 'px')
+          .style('top', function(d, i) {
+            return ((i * (nameFreqBoxWidth + 10)) + nameFreqBoxWidth) + 'px'
+          });
+
+      var nameFreqSubBar = nameFreqBar.selectAll('.name-freq-subbar')
+        .data(function(d) {
+          return d;
+        })
+        .enter()
+        .append('div')
+          .attr('class', 'name-freq-subbar')
+          .style('position', 'absolute')
+          .style('left', function(d, i) {
+            return d.shift * nameFreqBoxWidth + 'px';
+          })
+          .style('width', function(d) {
+            return d.frequency * nameFreqBoxWidth + 'px';
+          })
+          .style('height', nameFreqBoxWidth + 'px')
+          .style('background-color', function(d) {
+            if (d.category == 'people') {
+              return '#CAA569';
+            } else if (d.category == 'nature') {
+              return '#68BC8F';
+            } else if (d.category == 'place') {
+              return '#77B2E0';
+            } else if (d.category == 'concept') {
+              return '#DB93C7';
+            } else {
+              return '#AEAEAE';
+            }
+          })
+          .on('click', function(q, d, r) { // NOT SURE WHY, BUT WITH NEWER VERSIONS OF D3, d IS THE SECOND VAR IN THE .on() FUNCTIONS...
+
+            var clickedBead = d3.select(this);
+            var selectedBead = clickedBead.classed('selected-bead'); // Is the bead selected right now?
+
+            nameFreqSubBar
+            .classed('selected-bead', function() { // this turns off previously selected button
+              if (!clickedBead) { // apply to all but currently clicked button
+                return true;
+              }
+            })
+            .style('border', '2px solid rgba(0, 0, 0, 0)');
+
+            if (selectedBead) { // If selected prior to click
+
+              // affect the tooltip
+              d3.select("#namefreq-tooltip")
+                .classed("hidden-tooltip", true);
+
+              // affect the bead
+              clickedBead.classed('selected-bead', false) // affect the filter button
+                .style('border', '2px solid rgba(0, 0, 0, 0)');
+
+            } else { // If NOT selected prior to click
+
+              // affect the tooltip
+              var nameFreqTooltip = d3.select("#namefreq-tooltip");
+
+              nameFreqTooltip
+                .style('left', function() {
+                  return d.shift * nameFreqBoxWidth + (nameFreqBoxWidth / 2) + 250 + 'px';
+                })
+                .style('top', function() {
+                  return ((d.group * (nameFreqBoxWidth + 10)) + nameFreqBoxWidth) + (nameFreqBoxWidth / 2) + 'px'
+                })
+                .select("#namefreq-county")
+                .text(d.name);
+
+                nameFreqTooltip
+                  .select("#namefreq-subbarcount")
+                  .text(d.frequency);
+
+                nameFreqTooltip
+                  .select("#namefreq-barcount")
+                  .text(d.total);
+
+                nameFreqTooltip
+                  .select("#namefreq-ety")
+                  .text(d.etymology);
+
+                nameFreqTooltip
+                  .select("#namefreq-states")
+                  .text(d.states);
+
+              d3.select("#namefreq-tooltip")
+                .classed("hidden-tooltip", false);
+
+              // affect the bead
+              clickedBead.classed('selected-bead', true) // affect the filter button
+                .style('border', '2px solid black');
+
+            } // if
+          }); // on
+
+          nameFreqBar.append('p')
+            .attr('class', 'name-freq-label')
+            .text(function(d) {
+              console.log(d[0]);
+              return d[0].name;
+            })
+            .style('position', 'absolute')
+            .style('left', -125 + 'px')
+            .style('top', -10 + 'px');
+
+    }); // close CSV function
+
+    </script>
+
+  </body>
+</html>

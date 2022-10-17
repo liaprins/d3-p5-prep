@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Lia's D3 Template!</title>
+    <!-- v6(.7) -->
+    <script type="text/javascript" src="../../../d3-library/d3.js"></script>
+    <!-- v4(.5) -->
+    <!-- <script type="text/javascript" src="../../../d3-book-master/d3.js"></script> -->
+    <link rel="stylesheet" href="11_cartogram.css">
+    <link rel="stylesheet" href="../us-map-symbol-color/15_us-map-symbol-color.css">
+  </head>
+  <body>
+
+
+    <div id="vis"></div>
+
+    <div id="filter-container">
+
+      <!-- Filters for language -->
+      <div id="language-filter-group">
+        <h2>Language family</h2>
+        <div id="filter-language-euro" class="filter filter-language" data-group="language" data-field="euro" data-existinggroup-language="" data-existinggroup-category="">
+          <p>European</p>
+        </div>
+        <div id="filter-language-natam" class="filter filter-language" data-group="language" data-field="natam" data-existinggroup-language="" data-existinggroup-category="">
+          <p>Native American</p>
+        </div>
+      </div>
+
+      <!-- Filters for etymology -->
+      <div id="category-filter-group">
+        <h2>Category</h2>
+        <div id="filter-category-man" class="filter filter-category" data-group="category" data-field="man" data-existinggroup-language="" data-existinggroup-category="">
+          <p>Man</p>
+        </div>
+        <div id="filter-category-woman" class="filter filter-category" data-group="category" data-field="woman" data-existinggroup-language="" data-existinggroup-category="">
+          <p>Woman</p>
+        </div>
+        <div id="filter-category-group" class="filter filter-category" data-group="category" data-field="group" data-existinggroup-language="" data-existinggroup-category="">
+          <p>Group of people</p>
+        </div>
+        <div id="filter-category-flora" class="filter filter-category" data-group="category" data-field="flora" data-existinggroup-language="" data-existinggroup-category="">
+          <p>Flora, fauna</p>
+        </div>
+        <div id="filter-category-geology" class="filter filter-category" data-group="category" data-field="geology" data-existinggroup-language="" data-existinggroup-category="">
+          <p>Geologic feature</p>
+        </div>
+        <div id="filter-category-resource" class="filter filter-category" data-group="category" data-field="resource" data-existinggroup-language="" data-existinggroup-category="">
+          <p>Natural resource, crop</p>
+        </div>
+        <div id="filter-category-place" class="filter filter-category" data-group="category" data-field="place" data-existinggroup-language="" data-existinggroup-category="">
+          <p>Pre-existing place</p>
+        </div>
+        <div id="filter-category-battle" class="filter filter-category" data-group="category" data-field="battle" data-existinggroup-language="" data-existinggroup-category="">
+          <p>Battle</p>
+        </div>
+        <div id="filter-category-object" class="filter filter-category" data-group="category" data-field="object" data-existinggroup-language="" data-existinggroup-category="">
+          <p>Man-made object</p>
+        </div>
+        <div id="filter-category-concept" class="filter filter-category" data-group="category" data-field="concept" data-existinggroup-language="" data-existinggroup-category="">
+          <p>Abstract concept</p>
+        </div>
+        <div id="filter-category-creation" class="filter filter-category" data-group="category" data-field="creation" data-existinggroup-language="" data-existinggroup-category="">
+          <p>Aspect of county’s creation</p>
+        </div>
+        <div id="filter-category-combination" class="filter filter-category" data-group="category" data-field="combination" data-existinggroup-language="" data-existinggroup-category="">
+          <p>Combination of reasons</p>
+        </div>
+        <div id="filter-category-unknown" class="filter filter-category" data-group="category" data-field="unknown" data-existinggroup-language="" data-existinggroup-category="">
+          <p>Unknown reason</p>
+        </div>
+      </div>
+
+    </div> <!-- close #filter-container -->
+
+    <div id="hex-vis"></div>
+
+    <script type="text/javascript"
+            src="../us-map-symbol-color/15_us-map-symbol-color.js">
+    </script>
+
+    <script type="text/javascript"
+            src="11_cartogram.js">
+    </script>
+
+  </body>
+</html>

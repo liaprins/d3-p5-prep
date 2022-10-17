@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Lia's D3 Template!</title>
+    <!--
+    <script type="text/javascript" src="../../d3-library/d3.js"></script>
+    -->
+
+    <script type="text/javascript" src="../../d3-book-master/d3.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: Helvetica, sans-serif;
+        background-color: #EEEEEE;
+      }
+      #container {
+        width: 1000px;
+        margin: 25px auto;
+        padding: 50px;
+        background-color: white;
+        box-shadow: 0 0 20px #CCCCCC;
+      }
+      h1 {
+        margin-bottom: 25px;
+        font-size: 24px;
+        font-weight: bold;
+      }
+      h2 {
+        margin-top: 30px;
+        margin-left: 20px;
+        font-size: 14px;
+      }
+      p {
+        margin-bottom: 25px;
+        font-size: 14px;
+        line-height: 18px;
+      }
+      button {
+        padding: 15px;
+      }
+      #footer p {
+        margin-top: 50px;
+        margin-bottom: 50px;
+        font-size: 10px;
+        line-height: 14px;
+        color: gray;
+      }
+      #footer p a {
+        color: gray;
+      }
+
+      /* chart styles */
+      .area {
+        stroke: none;
+        cursor: pointer;
+      }
+      .area:hover {
+        fill: rgb(175, 240, 91);
+      }
+      #backButton {
+        cursor: pointer;
+      }
+      #backButton rect {
+        fill: rgb(175, 240, 91);
+      }
+      #backButton text {
+        font-family: Helvetica, sans-serif;
+        font-weight: bold;
+        font-size: 14px;
+        fill: black;
+      }
+      #backButton:hover rect {
+        fill: rgb(26, 199, 194);
+      }
+      #backButton:hover text {
+        fill: white;
+      }
+      .unclickable {
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div id="container">
+
+      <h1>U.S. Electric-Drive Vehicle Sales</h1>
+
+			<p>Rerum culpa qui libero. Non quidem suscipit facere ea totam. Sed ut reprehenderit non. Consequuntur alias minima qui saepe enim. Voluptatem quia quia eligendi temporibus dolor voluptas voluptatem recusandae. Quia minima delectus aliquid totam voluptatem enim alias quas.<p>
+
+			<div id="chartContainer">
+				<h2>Monthly Number of Electric-Drive Vehicles Sold in the U.S. (by Type): January 2005&ndash;February 2017</h2>
+			</div>
+
+			<p>Reiciendis reiciendis quia labore porro ratione. Asperiores est ipsam voluptate. Itaque in magni qui veritatis aliquam fugiat. Et qui aliquid et. Assumenda qui et quis ut. Dolores aut ea fuga corporis enim. Corporis iusto facere quidem architecto rerum pariatur. Libero nam et cupiditate quibusdam.</p>
+
+			<p>Est voluptates sint rerum nostrum dignissimos. Accusantium eius voluptate et libero dignissimos. Aspernatur eum asperiores et rerum. Consequatur et in neque accusantium ipsam officiis. Eligendi ex quia praesentium voluptate nihil suscipit.</p>
+
+			<div id="footer">
+				<p><strong>Source:</strong> Data was derived from data compiled by Yan (Joann) Zhou at Argonne National Laboratory, U.S. Department of Energy. See the &rdquo;<a href="https://www.anl.gov/energy-systems/project/light-duty-electric-drive-vehicles-monthly-sales-updates">Light Duty Electric Drive Vehicles Monthly Sales Updates</a>&ldquo; project. Some values are estimates; others have been interpolated for this project.</p>
+			</div>
+
+    </div>
+
+    <script>
+
+      var w = 1000;
+      var h = 300;
+      var padding = 20;
+
+      // track view state:
+      // 0 = default view (all types)
+      // 1 = vehicles of selected type only
+      // 2 = single selected vehicle
+      var viewState = 0;
+
+      // track most recently selected type:
+      // "HEV", "PHEV", "BEV", "FCEV", undefined
+      var viewType;
+
+      var myDataset, thisTypeDataset, xScale, yScale, xAxis, yAxis, myArea;
+
+      // for converting strings to dates
+      var parseTime = d3.timeParse("%Y-%m");
+
+      // for converting Dates to strings
+      var formatTime = d3.timeFormat("%b %Y");
+
+      // define key function, to be used when binding data
+      var myKey = function(d) {
+        return d.key;
+      };
+
+      // set up stack methods
+      var vehicleStack = d3.stack();
+      var typeStack = d3.stack();
+                      // .order(d3.stackOrderDescending);    // flipped order
+
+      // load in data
+      d3.request("vehicle_sales_data.csv")
+        .mimeType("text/csv")
+        .get(function(response) {
+
+          //
+          // DATA PARSING
+          //
+
+          // parse each row of the CSV into an array of string values
+          var rows = d3.csvParseRows(response.responseText);
+          // console.log(rows);
+
+          myDataset = [];
+
+          // loop through CSV rows, starting at row 3 (bypassing rows 0-2 that don't have the sales values)
+          for (var i = 3; i < rows.length; i++) {
+
+            // create a new object
+            myDataset[i - 3] = {
+              date: parseTime(rows[i][0])
+            };
+
+            // console.log(myDataset);
+
+            // loop through the vehicles within the current row
+            for (var j = 1; j < rows[i].length; j++) {
+
+              var make =      rows[0][j];    // 'Make' from row 0 in CSVv
+              var model =     rows[1][j];    // 'Model' from row 1 in CSV
+              var makeModel = rows[0][j] + " " + rows[1][j];    // 'Make' + 'Model' will serve as the key
+              var type =      rows[2][j];    // 'Type' from row 3 in CSV
+              var sales =     rows[i][j];    // Sales value for this vehicle and month
+
+              if (sales) {
+                sales = parseInt(sales);
+              } else {
+                sales = 0;
+              }
+
+              // Append a new object with data for this vehicle and month
+              myDataset[i - 3][makeModel] = {
+                "make": make,
+                "model": model,
+                "type": type,
+                "sales": sales
+              };
+
+            }
+
+          }
+
+
+          //
+          // TYPE DATA SERIES
+          //
+
+          // Making a separate dataset for type of vehicles' monthly totals overall
+
+          typeDataset = [];
+
+          // loop thorugh all rows of the CSV that contain sales data
+          for (var i = 3; i < rows.length; i++) {
+
+            // create new object
+            typeDataset[i - 3] = {
+              date: parseTime(rows[i][0]),    // make a  new object for each year and month
+              "HEV": 0,
+              "PHEV": 0,
+              "BEV": 0,
+              "FCEV": 0
+            };
+
+            // loop through each vehicle within this row
+            for (var j = 1; j < rows[i].length; j++) {
+
+              var type = rows[2][j];    // 'Type' from row 3 of CSV
+              var sales = rows[i][j];
+
+              if (sales) {
+                sales = parseInt(sales);
+              } else {
+                sales = 0;
+              }
+
+              // add sales value to existing sum
+              typeDataset[i - 3][type] += sales;
+
+            }
+
+          }
+
+
+          //
+          // STACKING
+          //
+
+          // tell stack function where to find the keys
+					var types = [ "HEV", "PHEV", "BEV", "FCEV" ];
+					typeStack.keys(types);
+
+          // stack the data and log it out
+          var typeSeries = typeStack(typeDataset);
+
+
+          //
+          // MAKE THE CHART
+          //
+
+          // create scale functions
+          xScale = d3.scaleTime()
+                     .domain([
+                       d3.min(myDataset, function(d) { return d.date; }),
+                       d3.max(myDataset, function(d) { return d.date; })
+                     ])
+                     .range([padding, w - padding * 2]);
+
+          yScale = d3.scaleLinear()
+                     .domain([
+                       0,
+                       d3.max(typeDataset, function(d) {
+                         var sum = 0;
+
+                         // loop through each row to calculate sum of all vehicles' sales
+                         for (var i = 0; i < types.length; i++) {
+                           sum += d[types[i]];
+                         };
+
+                         return sum;
+
+                       })
+                     ])
+                     .range([h - padding, padding / 2])
+                     .nice();
+
+          // define axes
+          xAxis = d3.axisBottom()
+                    .scale(xScale)
+                    .ticks(10)
+                    .tickFormat(formatTime);
+
+          yAxis = d3.axisRight()
+                    .scale(yScale)
+                    .ticks(5);
+
+          // define area generator
+          myArea = d3.area()
+                     .x(function(d) { return xScale(d.data.date); })
+                     .y0(function(d) { return yScale(d[0]); })
+                     .y1(function(d) { return yScale(d[1]); });
+
+          // create SVG element
+          var mySvg = d3.select("#chartContainer")
+                        .append("svg")
+                        .attr("width", w)
+                        .attr("height", h);
+
+          mySvg.append("g")
+            .attr("id", "vehicles");
+
+          // create areas for types
+          mySvg.append("g")
+            .attr("id", "types")
+            .selectAll("path")
+            .data(typeSeries, myKey)
+            .enter()
+            .append("path")
+            .attr("class", "area")
+            .attr("opacity", 1)
+            .attr("d", myArea)
+            .attr("fill", function(d) {
+
+              // which type is this?
+              var thisType = d.key;
+
+              var myColor;
+
+              switch (thisType) {
+                case "HEV":
+                  myColor = "rgb(110, 64, 170)";
+                  break;
+                case "PHEV":
+                  myColor = "rgb(76, 110, 219)";
+                  break;
+                case "BEV":
+                  myColor = "rgb(35, 171, 216)";
+                  break;
+                case "FCEV":
+                  myColor = "rgb(29, 223, 163)";
+                  break;
+              }
+
+              return myColor;
+
+            })
+            .on("click", function(d) {
+
+              // update viewState
+              viewState++;
+
+
+              //
+              // TYPES
+              //
+
+              // which type was clicked?
+              var thisType = d.key;
+
+              // update this for later reference
+              viewType = thisType;
+
+              // generate new dataset with all-0 values, except for this type's data
+              thisTypeDataset = [];
+
+              for (var i = 0; i < typeDataset.length; i++) {
+                thisTypeDataset[i] = {
+                  date:       typeDataset[i].date,
+                  HEV:        0,
+                  PHEV:       0,
+                  BEV:        0,
+                  FCEV:       0,
+                  [thisType]: typeDataset[i][thisType]    // overrides the appropriate 0 value from above
+                }
+
+            }
+
+            // "stack" the data (even though now there's just one "layer"!)
+            var thisTypeSeries = typeStack(thisTypeDataset);
+
+            // bind the new dataset to paths, overriding old bound data
+            var paths = d3.selectAll("#types path")
+                          .data(thisTypeSeries, myKey)
+                          .classed("unclickable", true);
+
+            // transition areas into new positions (i.e. thisType's area will go to a 0-baseline, all others will flatten out)
+            var areaTransitions = paths.transition()
+                                    .duration(1000)
+                                    .attr("d", myArea);
+
+            // update yScale
+            yScale.domain([
+              0,
+              d3.max(thisTypeDataset, function(d) {
+                var sum = 0;
+
+                // calculate the sum for this type, ignoring other types for now
+                sum += d[thisType];
+
+                return sum;
+              })
+            ]);
+
+            /*
+            // FIND THE FIRST SALE DATE FOR THE CLICKED TYPE
+            var minDateDataset = [];
+            for (var i = 0; i < thisTypeDataset.length; i++) {
+              if ((thisTypeDataset[i].HEV == 0) && (thisTypeDataset[i].PHEV == 0) && (thisTypeDataset[i].BEV == 0) && (thisTypeDataset[i].FCEV == 0)) {
+              } else {
+                var minDate = thisTypeDataset[i].date;
+                minDateDataset.push(minDate);
+                // console.log(minDateDataset[0]);
+                // return thisTypeDataset[i].date;
+                break;
+              }
+            }
+
+            // update xScale
+            xScale.domain([
+              minDateDataset[0],
+              d3.max(thisTypeDataset, function(d) { return d.date; })
+            ]);
+            */
+
+            // append this transition to the one already in progress (from above); transition areas to newly updated scale
+            areaTransitions.transition()
+              .delay(200)
+              .on("start", function() {
+
+                // transition axes to a new scale concurrently
+                d3.select("g.axis.y")
+                  .transition()
+                  .duration(1000)
+                  .call(yAxis)
+
+                d3.select("g.axis.x")
+                  .transition()
+                  .duration(1000)
+                  .call(xAxis)
+
+              })
+              .duration(1000)
+              .attr("d", myArea)
+              .transition()
+              .on("start", function() {
+                // make vehicles visible instantly, so they are revealed when this fades out
+                d3.selectAll("g#vehicles path")
+                  .attr("opacity", 1);
+              })
+              .duration(1000)
+              .attr("opacity", 0)
+              .on("end", function(d, i) {
+                // reveal back button
+                if (i == 0) {
+                  toggleBackButton();
+                }
+              });
+
+
+              //
+              // VEHICLES
+              //
+
+              // get all possible keys (make + model), but toss out 'date'
+              var keysAll = Object.keys(myDataset[0]).slice(1);
+              // console.log(keysAll);
+
+              // loop through each key, and save out just the ones of this type (e.g. BEVs)
+              var keysOfThisType = [];
+              for (var i = 0; i < keysAll.length; i++) {
+                if (myDataset[0][keysAll[i]].type == thisType) {
+                  keysOfThisType.push(keysAll[i]);
+                }
+              }
+
+              // give the new keys to the stack function
+              vehicleStack.keys(keysOfThisType)
+                .value(function value(d, key) {
+                  return d[key].sales;
+                });
+
+              // stack the data and log it out
+              var vehicleSeries = vehicleStack(myDataset);
+
+              // create areas for individual vehicles
+              mySvg.select("g#vehicles")
+                .selectAll("path")
+                .data(vehicleSeries, myKey)
+                .enter()
+                .append("path")
+                .attr("class", "area")
+                .attr("opacity", 0)
+                .attr("d", myArea)
+                .attr("fill", function(d, i) {
+
+                  // which vehicle is this?
+                  var thisKey = d.key;
+
+                  // what 'type' is this vehicle?
+                  var thisType = d[0].data[thisKey].type;
+
+                  // used when making cool colors lower down
+                  var spread = 0.2;
+                  var startingPoint;
+
+                  // choose where in the color spectrum we start, based on type
+                  switch (thisType) {
+                    case "HEV":
+                      startingPoint = 0;
+                      break;
+                    case "PHEV":
+                      startingPoint = 0.2;
+                      break;
+                    case "BEV":
+                      startingPoint = 0.4;
+                      break;
+                    case "FCEV":
+                      startingPoint = 0.6;
+                      break;
+                  }
+
+                  // how many cars?
+                  var numVehicles = keysOfThisType.length;
+
+                  // get a value between 0.0 and 1.0
+                  var normalized = startingPoint + ((i / numVehicles) * spread);
+
+                  // get that color from the spectrum
+                  return d3.interpolateCool(normalized);
+
+                })
+                .on("click", function(d) {
+
+                  // update view state
+                  viewState++;
+
+                  // hide the back button during this view transition
+                  toggleBackButton();
+
+                  // which vehicle was clicked?
+                  var thisType = d.key;
+
+                  // fade out all other vehicle areas
+                  d3.selectAll("g#vehicles path")
+                    // .classed("unclickable", "true")
+                    .classed("unclickable", true)
+                    .filter(function(d) {    // 'this' one gets filtered out
+                      if (d.key !== thisType) {
+                        return true;
+                      }
+                    })
+                    .transition()
+                    .duration(1000)
+                    .attr("opacity", 0);
+
+                    // define area generator to be used just this one time
+                    var singleVehicleArea = d3.area()
+                                              .x(function(d) { return xScale(d.data.date); })
+                                              .y0(function(d) { return yScale(0); })
+                                              .y1(function(d) { return yScale(d.data[thisType].sales); });
+
+                    // use this new area generator to transition the area downward, to the 0-baseline
+                    var thisAreaTransition = d3.select(this)
+                                               .transition()
+                                               .delay(1000)
+                                               .duration(1000)
+                                               .attr("d", singleVehicleArea);
+
+                    // update yScale domain, based on the sales for just this vehicle
+                    yScale.domain([
+                      0,
+                      d3.max(myDataset, function(d) {
+                        return d[thisType].sales;
+                      })
+                    ]);
+
+                    // transitions the clicked area and yAxis into place, to fit the new domain
+                    thisAreaTransition.transition()
+                      .duration(1000)
+                      .attr("d", singleVehicleArea)
+                      .on("start", function() {
+                        // transition axis to new scale concurrently
+                        d3.select("g.axis.y")
+                          .transition()
+                          .duration(1000)
+                          .call(yAxis);
+                      })
+                      .on("end", function() {
+                        d3.select(this).classed("unclickable", "false");
+                        // reveal back button
+                        toggleBackButton();
+                      });
+                })
+                .append("title")
+                .text(function(d) {
+                  return d.key;
+                });
+            })
+            .append("title")
+            .text(function(d) {
+              return d.key;
+            });
+
+          // create axes
+          mySvg.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + (h - padding) + ")")
+            .call(xAxis);
+
+          mySvg.append("g")
+            .attr("class", "y axis")
+            .attr("transform", "translate(" + (w - padding * 2) + ",0)")
+            .call(yAxis);
+
+
+          //
+          // BACK BUTTON
+          //
+
+          // create back button
+          var backButton = mySvg.append("g")
+                             .attr("id", "backButton")
+                             .attr("opacity", 0)
+                             .classed("unclickable", true)
+                             .attr("transform", "translate(" + xScale.range()[0] + "," + yScale.range()[1] + ")");
+
+          backButton.append("rect")
+            .attr("x", 0)
+            .attr("y", 0)
+            .attr("width", 70)
+            .attr("height", 30);
+
+          backButton.append("text")
+            .attr("x", 7)
+            .attr("y", 20)
+            .html("&larr; Back");
+
+          // define click behavior
+          backButton.on("click", function() {
+
+            // hide back button
+            toggleBackButton();
+
+						if (viewState == 1) {
+							//Go back to default view
+
+							//Update view state
+							viewState--;
+
+							//Re-bind type data and fade in types
+							var typeAreaTransitions = d3.selectAll("g#types path")
+								.data(typeSeries, myKey)
+								.transition()
+								.duration(250)
+								.attr("opacity", 1)
+								.on("end", function() {
+									//Remove all vehicles once this fades in;
+									//they will be recreated later as needed.
+									d3.selectAll("g#vehicles path").remove();
+								});
+
+							//Set y scale back to original domain
+							yScale.domain([
+									0,
+									d3.max(typeDataset, function(d) {
+										var sum = 0;
+
+										//Loops once for each row, to calculate
+										//the total (sum) of sales of all vehicles
+										for (var i = 0; i < types.length; i++) {
+											sum += d[types[i]];
+										};
+
+										return sum;
+									})
+								]);
+
+							//Transition type areas and y scale back into place
+							typeAreaTransitions.transition()
+								.duration(1000)
+								.on("start", function() {
+
+									//Transition axis to new scale concurrently
+									d3.select("g.axis.y")
+										.transition()
+										.duration(1000)
+										.call(yAxis);
+
+								})
+								.attr("d", myArea)
+								.on("end", function() {
+									d3.select(this).classed("unclickable", false);
+								});
+
+						} else if (viewState == 2) {
+							//Go back to vehicles view
+
+							//Update view state
+							viewState--;
+
+
+
+
+
+
+
+							//Restore the old y scale
+							yScale.domain([
+									0,
+									d3.max(thisTypeDataset, function(d) {
+										var sum = 0;
+
+										//Calculate the total (sum) of sales of this type
+										sum += d[viewType];
+
+										return sum;
+									})
+								]);
+
+							//Transition the y axis and visible area back into place
+							d3.selectAll("g#vehicles path")
+								.transition()
+								.on("start", function() {
+
+									//Transition y axis to new scale concurrently
+									d3.select("g.axis.y")
+										.transition()
+										.duration(1000)
+										.call(yAxis);
+
+								})
+								.duration(1000)
+								.attr("d", myArea)  //Effectively changes only the selected area
+								.transition()
+								.duration(1000)
+								.attr("opacity", 1)  //Fade in all areas
+								.on("end", function(d, i) {
+
+									//Restore clickability
+									d3.select(this).classed("unclickable", false);
+
+									//Reveal back button
+									if (i == 0) {
+										toggleBackButton();
+									}
+
+								});
+
+						}
+
+					});
+
+				});
+
+
+
+        // console.log(viewState);
+
+
+
+
+			var toggleBackButton = function() {
+
+				//Select the button
+				var backButton = d3.select("#backButton");
+
+				//Is the button hidden right now?
+				var hidden = backButton.classed("unclickable");
+
+				//Decide whether to reveal or hide it
+				if (hidden) {
+
+          // set up dynamic button text
+          var buttonText = "&larr; Back to ";
+
+          // vary text by mode and type
+          if (viewState == 1) {
+            buttonText += "all types";
+          } else if (viewState == 2) {
+            buttonText += "all " + viewType + " vehicles";
+          }
+
+          // set text
+          backButton.select("text").html(buttonText);
+
+          // resize button according to text width
+          var rectWidth = Math.round(backButton.select("text").node().getBBox().width + 16);
+          backButton.select("rect").attr("width", rectWidth);
+
+					//Reveal it
+					backButton.classed("unclickable", false)
+						.transition()
+						.duration(500)
+						.attr("opacity", 1);
+
+				} else {
+
+					//Hide it
+					backButton.classed("unclickable", true)
+						.transition()
+						.duration(200)
+						.attr("opacity", 0);
+
+				}
+
+			};
+
+    </script>
+  </body>
+</html>

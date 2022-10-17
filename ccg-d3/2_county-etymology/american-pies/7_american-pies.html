@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>American pies | County etymologies | CCG</title>
+
+    <!-- D3 v6 -->
+    <script type="text/javascript" src="https://d3js.org/d3.v6.min.js"></script>
+
+    <!-- CSS *********************************************************************** -->
+    <style>
+      body {
+        font-family: 'Work Sans';
+        line-height: 1;
+      }
+      #pies-vis {
+        width: 1000px;
+        margin: 0 auto;
+      }
+      .baby-stack-layer {
+        /* mix-blend-mode: multiply; */
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HTML ********************************************************************** -->
+
+    <div id="pies-vis"></div>
+
+    <!-- JAVASCRIPT **************************************************************** -->
+    <script type="text/javascript">
+
+      var w = 1000;
+      var h = 700;
+      /*
+      var ampieSvg = d3.select('#pies-vis')
+        .append('svg')
+          .attr('width', w)
+          .attr('height', h)
+          .style('background', '#eeeeee');
+      var ampieContainer = ampieSvg.append('g') // group to hold centroid symbols
+        .attr('id', 'pie-container')
+        .attr('transform', 'translate(25, 25)');
+        */
+      // load CSV of county etymology data
+      d3.csv('data_etymological-trails.csv')
+        .then(function(data) {
+
+        console.log('data');
+        console.log(data);
+
+        var babyStacksDataset = [];
+        for (var i = 0; i < data.length; i++) {
+          var etyTrailLength = data[i].ety1.length + data[i].ety2.length + data[i].ety3.length + data[i].ety4.length +data[i].ety5.length;
+          babyStacksDataset[i] = {
+            etytrail: [
+              [ data[i].ety1.length, etyTrailLength ],
+              [ data[i].ety2.length, etyTrailLength ],
+              [ data[i].ety3.length, etyTrailLength ],
+              [ data[i].ety4.length, etyTrailLength ],
+              [ data[i].ety5.length, etyTrailLength ]
+            ],
+            category: [ data[i].category, data[i].cat2, data[i].cat3, data[i].cat4, data[i].cat5 ]
+          }
+        };
+
+        // create SVG container
+        var mySvg = d3.select("body")
+                      .append("svg")
+                      .attr("width", w)
+                      .attr("height", h);
+
+        console.log('babyStacksDataset');
+        console.log(babyStacksDataset);
+
+        var color = d3.scaleOrdinal(d3.schemePaired);
+
+        var pieBoxSize = 10;
+
+        for (var i = 0; i < babyStacksDataset.length; i++) { // per county
+
+          var etyTrailCount = parseInt(babyStacksDataset[i].etytrail[0][1]);
+
+          mySvg.append('circle')
+              .attr('class', 'baby-stack-group' + '-' + i)
+              // .attr('transform', 'translate(' + parseInt(data[i].x) * 10 + ',' + parseInt(data[i].y) * 10 + ')')
+              .attr('r', pieBoxSize / 2)
+              .attr('cx', data[i].x * 11)
+              .attr('cy', data[i].y * 9.5)
+              .style('fill', 'blue')
+              .attr('opacity', etyTrailCount * 0.2)
+            .append('title')
+              .text(function() {
+                if (etyTrailCount == 5) { // if there are five levels to the ety trail // (change 0 to '' (empty) later when want to build babyStacksDataset to hold actual etys, not lengths)
+                  return babyStacksDataset[i].etytrail[0][0] + ' (' + babyStacksDataset[i].category[0] + ')' + ' in turn named for ' +
+                         babyStacksDataset[i].etytrail[1][0] + ' (' + babyStacksDataset[i].category[1] + ')' + ' in turn named for ' +
+                         babyStacksDataset[i].etytrail[2][0] + ' (' + babyStacksDataset[i].category[2] + ')' + ' in turn named for ' +
+                         babyStacksDataset[i].etytrail[3][0] + ' (' + babyStacksDataset[i].category[3] + ')' + ' in turn named for ' +
+                         babyStacksDataset[i].etytrail[4][0] + ' (' + babyStacksDataset[i].category[4] + ')'
+                } else if (etyTrailCount == 4) {
+                  return babyStacksDataset[i].etytrail[0][0] + ' (' + babyStacksDataset[i].category[0] + ')' + ' in turn named for ' +
+                         babyStacksDataset[i].etytrail[1][0] + ' (' + babyStacksDataset[i].category[1] + ')' + ' in turn named for ' +
+                         babyStacksDataset[i].etytrail[2][0] + ' (' + babyStacksDataset[i].category[2] + ')' + ' in turn named for ' +
+                         babyStacksDataset[i].etytrail[3][0] + ' (' + babyStacksDataset[i].category[3] + ')'
+                } else if (etyTrailCount == 3) {
+                  return babyStacksDataset[i].etytrail[0][0] + ' (' + babyStacksDataset[i].category[0] + ')' + ' in turn named for ' +
+                         babyStacksDataset[i].etytrail[1][0] + ' (' + babyStacksDataset[i].category[1] + ')' + ' in turn named for ' +
+                         babyStacksDataset[i].etytrail[2][0] + ' (' + babyStacksDataset[i].category[2] + ')'
+                } else if (etyTrailCount == 2) {
+                  return babyStacksDataset[i].etytrail[0][0] + ' (' + babyStacksDataset[i].category[0] + ')' + ' in turn named for ' +
+                         babyStacksDataset[i].etytrail[1][0] + ' (' + babyStacksDataset[i].category[1] + ')'
+                } else {
+                  return babyStacksDataset[i].etytrail[0][0] + ' (' + babyStacksDataset[i].category[0] + ')'
+                }
+              });
+
+          /*
+          for (var j = 0; j < etyTrailCount; j++) { // per ety trail length (arbitrarily getting length from first listed ety array)
+            // console.log(typeof(etyTrailCount));
+
+          mySvg.selectAll('.baby-stack-group' + '-' + i)
+            .append('rect')
+              .attr('class', 'baby-stack-layer' + i + '-' + j)
+              .attr('width', function(d, i) {
+                if (etyTrailCount == 5) { // if there are five levels to the ety trail // (change 0 to '' (empty) later when want to build babyStacksDataset to hold actual etys, not lengths)
+                  return pieBoxSize / 5;
+                } else if (etyTrailCount == 4) {
+                  return pieBoxSize / 4;
+                } else if (etyTrailCount == 3) {
+                  return pieBoxSize / 3;
+                } else if (etyTrailCount == 2) {
+                  return pieBoxSize / 2;
+                } else {
+                  return pieBoxSize;
+                }
+              })
+              .attr('height', pieBoxSize)
+              .attr('x', function(d) {
+                // return 5;
+                if (etyTrailCount == 5) { // if there are five levels to the ety trail (change 0 to '' (empty) later when want to build babyStacksDataset to hold actual etys, not lengths)
+                  return j * (pieBoxSize / 5);
+                } else if (etyTrailCount == 4) {
+                  return j * (pieBoxSize / 4)
+                } else if (etyTrailCount == 3) {
+                  return j * (pieBoxSize / 3)
+                } else if (etyTrailCount == 2) {
+                  return j * (pieBoxSize / 2)
+                } else {
+                  return j * pieBoxSize;
+                }
+              })
+              // .attr('x', 5)
+              .attr('y', function(d, i) {
+                return 5;
+              })
+              .attr('fill', function(d) {
+                // return color(j);
+                var babyStackCat = babyStacksDataset[i].category[j];
+                if (babyStackCat == 'man') {
+                  return 'red';
+                } else if (babyStackCat == 'place') {
+                  return 'aqua';
+                } else if (babyStackCat == 'geology') {
+                  return 'yellow';
+                } else {
+                  return 'black'; // just doing some for proof of concept
+                }
+              })
+              .attr('stroke', 'white')
+              .attr('stroke-width', 1);
+          } // j */
+
+        } // i
+
+      }); // close CSV function
+
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Lia's D3 Template!</title>
+		<!--
+		<script type="text/javascript" src="../../d3-library/d3.js"></script>
+    -->
+		<!-- POINTING TO AN OLDER VERSION OF D3 THAT SCOTT USED IN EXAMPLE CODE, BECAUSE NEWER D3 VERSION WON'T WORK WITH CSVs THE SAME WAY -->
+    <script type="text/javascript" src="../../d3-book-master/d3.js"></script>
+    <style>
+			.line {
+				fill: none;
+				stroke: teal;
+				stroke-width: 1;
+			}
+			.danger {
+				stroke: red;
+			}
+			.threshold {
+				stroke: red;
+				stroke-width: 1;
+				stroke-dasharray: 1, 1;
+			}
+			.dangerlabel {
+				font-family: Helvetica, sans-serif;
+				font-size: 11px;
+				fill: red;
+			}
+    </style>
+  </head>
+  <body>
+    <script type="text/javascript">
+
+			var w = 800;
+			var h = 300;
+			var padding = 40;
+
+			var myDataset, xScale, yScale, xAxis, yAxis, myLine;
+
+			// convert dates to strings
+			var formatTime = d3.timeFormat("%Y");
+
+			// convert CSV rows from strings to Date's and numbers
+			var rowConverter = function(d) {
+				return {
+					date: new Date(+d.year, (+d.month - 1)),  //Make a new Date object for each year + month
+					avgPpm: parseFloat(d.average)  //Convert from string to float
+				};
+			}
+
+			// load in the data
+			d3.csv("mauna_loa_co2_monthly_averages.csv", rowConverter, function(data) {
+
+				var myDataset = data;
+        console.log(myDataset);
+
+				// print data to console as a table, to verify
+				// console.table(myDataset, ["date", "avgPpm"]);
+
+				// make scale functions
+				xScale = d3.scaleTime()
+							   .domain([
+										d3.min(myDataset, function(d) { return d.date; }),
+										d3.max(myDataset, function(d) { return d.date; })
+								])
+							   .range([padding, w]);
+				yScale = d3.scaleLinear()
+								.domain([
+									d3.min(myDataset, function(d) { if (d.avgPpm >= 0) { return d.avgPpm; } }) - 10,
+									d3.max(myDataset, function(d) { return d.avgPpm; })])
+								.range([h - padding, 0]);
+
+				// define axes
+				xAxis = d3.axisBottom()
+									.scale(xScale)
+									.ticks(10)
+									.tickFormat(formatTime);
+				yAxis = d3.axisLeft()
+									.scale(yScale)
+									.ticks(10);
+
+				// define line generators
+				myLine = d3.line()
+									 .defined(function(d) { return d.avgPpm >= 0 && d.avgPpm <= 350; })
+									 .x(function(d) { return xScale(d.date); })
+									 .y(function(d) { return yScale(d.avgPpm); });
+				dangerLine = d3.line()
+									 .defined(function(d) { return d.avgPpm > 350; })
+									 .x(function(d) { return xScale(d.date); })
+									 .y(function(d) { return yScale(d.avgPpm); });
+
+			  // create SVG container
+				var mySvg = d3.select("body")
+											.append("svg")
+											.attr("width", w)
+											.attr("height", h);
+
+				// draw threshold line at 350ppm
+				mySvg.append("line")
+						 .attr("class", "threshold")
+						 .attr("x1", padding)
+						 .attr("y1", yScale(350))
+						 .attr("x2", w)
+						 .attr("y2", yScale(350));
+
+				// label the dangerLine
+				mySvg.append("text")
+						 .attr("class", "dangerlabel")
+						 .attr("x", padding * 1.5)
+						 .attr("y", yScale(350) - 7)
+						 .text("Danger! Hold your breath!")
+
+				// create line!
+				mySvg.append("path")
+						 .datum(myDataset)
+						 .attr("class", "line")
+						 .attr("d", myLine);
+
+			  // create dangerLine!
+				mySvg.append("path")
+						 .datum(myDataset)
+						 .attr("class", "line danger")
+						 .attr("d", dangerLine);
+
+				// create axes
+				mySvg.append("g")
+						 .attr("class", "axes")
+						 .attr("transform", "translate(0," + (h - padding) + ")")
+						 .call(xAxis);
+				mySvg.append("g")
+						 .attr("class", "axes")
+						 .attr("transform", "translate(" + padding + ",0)")
+						 .call(yAxis);
+
+			});
+
+    </script>
+  </body>
+</html>

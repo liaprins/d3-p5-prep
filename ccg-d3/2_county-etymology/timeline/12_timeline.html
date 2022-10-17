@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Timeline | County etymologies | CCG</title>
+
+    <!-- D3 v6 FINAL -->
+    <script type="text/javascript" src="https://d3js.org/d3.v6.min.js"></script>
+    <!-- v6(.7) -->
+    <!-- <script type="text/javascript" src="../../../d3-library/d3.js"></script> -->
+    <!-- v4(.5) -->
+    <!-- <script type="text/javascript" src="../../../d3-book-master/d3.js"></script> -->
+
+    <!-- CSS *********************************************************************** -->
+    <style>
+
+    #timeline-vis {
+      width: 1000px;
+      margin: 10px auto;
+    }
+    .timebar {
+      fill: teal;
+    }
+
+    </style>
+  </head>
+  <body>
+    <!-- HTML ********************************************************************** -->
+
+    <div id="timeline-vis"></div>
+
+    <!-- JAVASCRIPT **************************************************************** -->
+    <script type="text/javascript">
+
+      let dimensions = {
+        w: 1000,
+        h: 300,
+        margins: 50
+      };
+      dimensions.containerW = dimensions.w - (dimensions.margins * 2);
+      dimensions.containerH = dimensions.h - (dimensions.margins * 2);
+
+      // create containers
+      var svg = d3.select('#timeline-vis')
+        .append('svg')
+          .attr('id', 'timeline-svg')
+          .attr('width', dimensions.w)
+          .attr('height', dimensions.h)
+          .style('background', '#eeeeee');
+
+      var container = svg.append("g")
+        .attr(
+          'transform',
+          'translate(' + dimensions.margins + ', ' + dimensions.margins + ')'
+        );
+
+			// load in the data
+      d3.csv("../data_county-etymologies.csv")
+        .then(function(data) {
+
+        // bin the data by decade
+        var bin = d3.bin()
+          .domain([
+						  d3.min(data, function(d) { return parseFloat(d.year); }),
+						  d3.max(data, function(d) { return parseFloat(d.year); })
+						])
+          .value(function(d) {
+            return parseFloat(d.year);
+          })
+          .thresholds(38); // approximately one bin per decade
+
+        var binnedCounties = bin(data);
+
+        // group by category within each bin
+        var binnedCats = [];
+
+        for (var j = 0; j < binnedCounties.length; j++) { // loop through 39 times
+
+          binnedCats[j] = [];
+
+          for (var k = 0; k < binnedCounties[j].length; k++) { // within each j-loop, loop through as many times as it is long
+
+            if (binnedCats[j] == []) {
+              binnedCats[j] = [];
+            } else {
+              binnedCats[j] = [d3.group(binnedCounties[j], function(d) {
+                return d.category; })];
+            } // close if
+          } // k
+        } // j
+
+        var stackedBarData = [];
+
+        // prepare the data to be able to be stack-ified (like the dataset in O'Reilly Ch 13 stack-layout.html)
+        for (var l = 0; l < binnedCats.length; l++) { // loop through 39 times
+
+          stackedBarData[l] = {};
+
+          for (var m = 0; m < binnedCats[l].length; m++) { // within each l-loop, loop through as many times as it is long
+
+            var battleCount,
+                combinationCount,
+                conceptCount,
+                creationCount,
+                floraCount,
+                geologyCount,
+                groupCount,
+                manCount,
+                objectCount,
+                placeCount,
+                resourceCount,
+                womanCount,
+                unknownCount;
+
+            if (binnedCats[l][0].get('battle')) {
+              battleCount = binnedCats[l][0].get('battle').length;
+            } else {
+              battleCount = 0;
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('combination'))) {
+              combinationCount = binnedCats[l][0].get('combination').length;
+            } else {
+              combinationCount = 0;
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('concept'))) {
+              conceptCount = binnedCats[l][0].get('concept').length;
+            } else {
+              conceptCount = 0;
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('creation'))) {
+              creationCount = binnedCats[l][0].get('creation').length;
+            } else {
+              creationCount = 0;
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('flora'))) {
+              floraCount = binnedCats[l][0].get('flora').length;
+            } else {
+              floraCount = 0;
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('geology'))) {
+              geologyCount = binnedCats[l][0].get('geology').length;
+            } else {
+              geologyCount = 0;
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('group'))) {
+              groupCount = binnedCats[l][0].get('group').length;
+            } else {
+              groupCount = 0;
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('man'))) {
+              manCount = binnedCats[l][0].get('man').length;
+            } else {
+              manCount = 0;
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('object'))) {
+              objectCount = binnedCats[l][0].get('object').length;
+            } else {
+              objectCount = 0;
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('place'))) {
+              placeCount = binnedCats[l][0].get('place').length;
+            } else {
+              placeCount = 0;
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('resource'))) {
+              resourceCount = binnedCats[l][0].get('resource').length;
+            } else {
+              resourceCount = 0;
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('woman'))) {
+              womanCount = binnedCats[l][0].get('woman').length;
+            } else {
+              womanCount = 0;
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('unknown'))) {
+              unknownCount = binnedCats[l][0].get('unknown').length;
+            } else {
+              unknownCount = 0;
+            }; // close count if-statement
+
+          } // m
+
+          stackedBarData[l] = {
+            'battle':       parseFloat(battleCount),
+            'combination':  parseFloat(combinationCount),
+            'concept':      parseFloat(conceptCount),
+            'creation':     parseFloat(creationCount),
+            'flora':        parseFloat(floraCount),
+            'geology':      parseFloat(geologyCount),
+            'group':        parseFloat(groupCount),
+            'man':          parseFloat(manCount),
+            'object':       parseFloat(objectCount),
+            'place':        parseFloat(placeCount),
+            'resource':     parseFloat(resourceCount),
+            'woman':        parseFloat(womanCount),
+            'unknown':      parseFloat(unknownCount)
+          };
+
+        } // l
+
+        var stack = d3.stack()
+          .keys([ 'battle', 'combination', 'concept', 'creation', 'flora', 'geology', 'man', 'object', 'place', 'resource', 'woman', 'unknown' ])
+          .order(d3.stackOrderAscending);
+
+        // stack-ify the dataset
+        var series = stack(stackedBarData);
+
+        // determine original ticks to be overtaken by new tick values
+        var originalTickValues = [];
+        for (var m = 0; m < stackedBarData.length; m++) { // loop through each time-period
+          if((stackedBarData.indexOf(stackedBarData[m]) - 1) % 5 == 0) { // if (one less than) the index is divisible by the number of columns I want between each tick
+            originalTickValues[(m - 1) / 5] = stackedBarData.indexOf(stackedBarData[m]); // within the same index of the originalTickValues dataset, assign the stackedBarData current index
+          }
+        }
+
+        // create array to pull from for x-axis ticks
+        var xAxisTicks = [];
+        for ( var n = 0; n < binnedCounties.length; n++) { // loop through each time-period
+          // xAxisTicks[n] = binnedCounties[m].x1;
+          if (binnedCounties[n].x1 % 50 == 0) { // if the ending year of the time-period is evenly divisible by the chunk of time I want between each tick (must be properly proportional with "the number of columns I want between each tick", see chunk of code, above)
+            xAxisTicks[(n - 1) / 5] = binnedCounties[n].x1; // then within the same index as used above, in the final dataset to be used for tick number generation, assign the ending year of the time-period
+          // } else {
+            // xAxisTicks[n] = '';
+          }
+        }
+
+        // view various phases of datasets in the console for troubleshooting
+        console.log(binnedCounties);
+        console.log('binnedCounties ^^^');
+        console.log(binnedCats);
+        console.log('binnedCats ^^^');
+        console.log(stackedBarData);
+        console.log('stackedBarData ^^^');
+        console.log(series);
+        console.log('series ^^^');
+        console.log(originalTickValues);
+        console.log('originalTickValues ^^^');
+        console.log(xAxisTicks);
+        console.log('xAxisTicks ^^^');
+
+				// create scale functions
+        var xScale = d3.scaleBand()
+          .domain(d3.range(stackedBarData.length))
+          .range([0, dimensions.containerW])
+          .paddingInner(0.05);
+
+        var yScale = d3.scaleLinear()
+          .domain([0, d3.max(stackedBarData, function(d) {
+            return d.battle + d.combination + d.concept + d.creation + d.flora + d.geology + d.man + d.object + d.place + d.resource + d.woman + d.unknown;
+          })])
+         .range([dimensions.containerH, 0]);
+
+        // axes
+        var xAxis = d3.axisBottom()
+          .scale(xScale)
+          .tickValues(originalTickValues)
+          .tickFormat((d,i) => xAxisTicks[i]);
+
+        var yAxis = d3.axisLeft()
+          .scale(yScale)
+          .ticks(5);
+
+        var color = d3.scaleOrdinal(d3.schemePaired);
+
+        // add a group for each category
+        var groups = container.selectAll('.category-layer')
+          .data(series)
+          .enter()
+          .append('g')
+            .attr('class', 'category-layer')
+            .style("fill", function(d, i) {
+              return color(i);
+            });
+
+        // add a rect per data value
+  			var rects = groups.selectAll('.category-rect')
+          .data(function(d) { return d; })
+          .enter()
+          .append('rect')
+            .attr('class', 'category-rect')
+            .attr("x", function(d, i) {
+              return xScale(i);
+            })
+            .attr("y", function(d) {
+              return yScale(d[1]);
+    				})
+    				.attr("height", function(d) {
+              return yScale(d[0]) - yScale(d[1]);
+    				})
+    				.attr("width", xScale.bandwidth());
+
+        container.append("g")
+          .call(xAxis)
+           .attr("class", "axis")
+           .attr("transform", "translate(0," + (dimensions.containerH) + ")");
+
+        container.append("g")
+          .call(yAxis)
+           .attr("class", "axis");
+
+			}); // close CSV reader function
+
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Lia's D3 Template!</title>
+    <script type="text/javascript" src="../../d3-library/d3.js"></script>
+    <style>
+      div.bar {
+        display: inline-block;
+        width: 20px;
+        height: 75px;    /* Will be overridden by D3 */
+        background-color: teal;
+        margin-right: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <script type="text/javascript">
+
+      var randomDataset = [];
+      for (var i = 0; i < 25; i++) {
+        var newNumber = Math.random() * 30;
+        randomDataset.push(newNumber);
+      }
+
+      d3.select("body")
+        .selectAll("div")
+        .data(randomDataset)
+        .enter()
+        .append("div")
+        .attr("class", "bar")
+        .style("height", function(d) {
+          var barHeight = d * 5;
+          return barHeight + "px";
+        });
+
+    </script>
+  </body>
+</html>

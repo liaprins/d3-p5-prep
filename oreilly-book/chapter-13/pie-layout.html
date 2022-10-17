@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Lia's D3 Template!</title>
+    <script type="text/javascript" src="../../d3-library/d3.js"></script>
+    <style>
+      text {
+        font-family: Helvetica, sans-serif;
+        font-size: 12px;
+        fill: white;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+
+        var w = 300;
+        var h = 300;
+
+        var myDataset = [5, 10, 20, 45, 6, 25];
+
+        var myOuterRadius = w / 2;
+        // var myInnerRadius = 0;
+        var myInnerRadius = w / 3;
+        var myArc = d3.arc()
+                      .innerRadius(myInnerRadius)
+                      .outerRadius(myOuterRadius);
+
+        var myPie = d3.pie();
+
+        var myColor = d3.scaleOrdinal(d3.schemeCategory10);
+
+        // create SVG container
+        var mySvg = d3.select("body")
+                      .append("svg")
+                      .attr("width", w)
+                      .attr("height", h);
+
+        // set up groups
+        var myArcs = mySvg.selectAll("g.arc")
+                       .data(myPie(myDataset))
+                       .enter()
+                       .append("g")
+                       .attr("class", "arc")
+                       .attr("transform", "translate(" + myOuterRadius + "," + myOuterRadius + ")");
+
+        // draw arc paths
+        myArcs.append("path")
+          .attr("fill", function(d, i) {
+            return myColor(i);
+          })
+          .attr("d", myArc);
+
+        // labels
+        myArcs.append("text")
+          .attr("transform", function(d) {
+            return "translate(" + myArc.centroid(d) + ")";
+          })
+          .attr("text-anchor", "middle")
+          .text(function(d) {
+            return d.value;
+          });
+
+    </script>
+  </body>
+</html>

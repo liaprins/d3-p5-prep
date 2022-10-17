@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Lia's D3 Template!</title>
+
+    <!-- D3 v6 -->
+    <!-- <script type="text/javascript" src="https://d3js.org/d3.v6.min.js"></script> -->
+
+    <!-- v6(.7) // USING TEMPORARILY WHILE ON AIRPLANE -->
+    <script type="text/javascript" src="../../../d3-library/d3.js"></script>
+
+    <!-- CSS *********************************************************************** -->
+    <style>
+      body {
+        font-family: 'Work Sans';
+        margin-top: 0;
+      }
+      #colorflag {
+        background-color: red;
+      }
+      .state-outline {
+        fill: #ffffff00;
+        stroke: #f5f5f5;
+        stroke-width: 0.5;
+        pointer-events: none;
+      }
+      #ix-map {
+        width: 1000px;
+        margin: 0px auto;
+        /* background-color: #f5f5f5; */
+        font-family: 'Work Sans';
+        font-weight: 600;
+      }
+      #tooltip {
+        position: absolute;
+        width: 400px;
+        height: auto;
+        padding: 15px;
+        background-color: #ffffffbb;
+        border-color: black;
+        border-width: 2px;
+        border-style: solid;
+        pointer-events: none;
+        /* cursor: pointer; */
+      }
+      #tooltip p {
+        margin: 0;
+        font-size: 16px;
+        line-height: 1.5;
+      }
+      #county-topline span {
+        font-size: 19px;
+        padding-bottom: 5px;
+        font-weight: 600;
+      }
+      #tooltip-cat-label,
+      #tooltip-lang-label {
+        font-weight: 600;
+      }
+      #tooltip-cat,
+      #tooltip-lang {
+        text-transform: capitalize;
+      }
+      .hidden {
+        display: none;
+      }
+      #dot-cat,
+      #dot-lang {
+        width: 12px;
+        height: 12px;
+        background-color: red;
+        display: inline-block;
+        border-radius: 6px;
+        margin-right: 6px;
+      }
+      #cat,
+      #lang {
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HTML ********************************************************************** -->
+
+    <div id="ix-map">
+    </div>
+
+    <div id="colorflag">
+      <p>Click to change color-coding :)</p>
+    </div>
+
+    <div id="tooltip" class="hidden">
+      <p id="county-topline">
+          <span id="tooltip-name">[County Name]</span>
+          <span id="tooltip-type">[Type]</span><span>, </span>
+          <span id="tooltip-state">[State]</span>
+      </p>
+      <p id="tooltip-ety">[Etymology]</p>
+
+      <div>
+        <div id="dot-cat">
+        </div>
+        <p id="cat">
+          <span id="tooltip-cat-label">Category: </span>
+          <span id="tooltip-cat">[Category]</span>
+          <span id="tooltip-subcat"></span>
+        </p>
+      </div>
+
+      <div id="dot-lang">
+      </div>
+      <p id="lang">
+        <span id="tooltip-lang-label">Language: </span>
+        <span id="tooltip-lang">[Language]</span>
+        <span id="tooltip-granlang"></span>
+      </p>
+    </div>
+
+    <!-- JAVASCRIPT **************************************************************** -->
+
+    <!-- CHOROPLETH: CATEGORY ======================================================= -->
+    <script type="text/javascript">
+
+      var w = 1000;
+      var h = 700;
+
+      var ixMapSvg = d3.select('#ix-map')
+        .append('svg')
+          .attr('width', w)
+          .attr('height', h);
+
+      var colorFlag = d3.select('#colorflag');
+
+      var projection = d3.geoAlbersUsa()
+        .translate([w/2, h/2])
+        .scale([1200]);
+
+      var statePath = d3.geoPath()
+        .projection(projection);
+
+      var path = d3.geoPath()
+        .projection(projection);
+
+      // load CSV of county etymology data
+      d3.csv('../data_counties.csv')
+        .then(function(data) {
+
+        // load JSON of county outlines
+        d3.json('../data_counties-20m.json')
+        .then(function(json) {
+
+          for (var i = 0; i < data.length; i++) {
+
+            var csvCountyId = data[i].id; // get county id from etymology CSV
+            var csvCountyName = data[i].name; // get name per county from etymology CSV
+            var csvCountyType = data[i].type; // get type per county from etymology CSV
+            var csvCountyState = data[i].state; // get state per county from etymology CSV
+            var csvCountyTooltipState = data[i].tooltipstate; // get state abbreviation per county from etymology CSV
+            var csvCountyLanguage = data[i].language; // get high-level language per county from etymology CSV
+            var csvCountyTooltipLanguage = data[i].tooltiplanguage; // get high-level language per county (in everyday phrasing) from etymology CSV
+            var csvCountyGranularlanguage = data[i].granularlanguage; // get granular language per county from etymology CSV
+            var csvCountyTooltipGranularlanguage = data[i].tooltipgranularlanguage; // get granular language per county from etymology CSV
+            var csvCountyCategory = data[i].category; // get high-level category per county from etymology CSV
+            var csvCountySubcategory = data[i].subcategory; // get subcategory per county from etymology CSV
+            var csvCountyTooltipSubcategory = data[i].tooltipsubcategory; // get subcategory (in everyday phrasing) per county from etymology CSV
+            var csvCountyEtymology = data[i].etymology; // get etymology per county from etymology CSV
+
+            for (var j = 0; j < json.features.length; j++) { // find the corresponding county id within the GeoJSON
+
+              var pathCountyId = json.features[j].properties.STATE + json.features[j].properties.COUNTY;
+
+              if (csvCountyId == pathCountyId) {
+                json.features[j].properties.name = csvCountyName; // copy the county name into the JSON per county
+                json.features[j].properties.type = csvCountyType; // copy the county type into the JSON per county
+                json.features[j].properties.state = csvCountyState; // copy the county type into the JSON per county
+                json.features[j].properties.tooltipstate = csvCountyTooltipState; // copy the county type into the JSON per county
+                json.features[j].properties.language = csvCountyLanguage; // copy the high-level language into the JSON per county
+                json.features[j].properties.tooltiplanguage = csvCountyTooltipLanguage; // copy the high-level language into the JSON per county
+                json.features[j].properties.granularlanguage = csvCountyGranularlanguage; // copy the granular language into the JSON per county
+                json.features[j].properties.tooltipgranularlanguage = csvCountyTooltipGranularlanguage; // copy the granular language into the JSON per county
+                json.features[j].properties.category = csvCountyCategory; // copy the high-level category into the JSON per county
+                json.features[j].properties.subcategory = csvCountySubcategory; // copy the subcategory into the JSON per county
+                json.features[j].properties.tooltipsubcategory = csvCountyTooltipSubcategory; // copy the subcategory into the JSON per county
+                json.features[j].properties.etymology = csvCountyEtymology; // copy the etymology into the JSON per county
+                break; // stop looking through the JSON
+              } // close if
+            } // close j for-loop
+          } // close i for-loop
+
+          // drawing county paths
+          ixMapSvg.selectAll('.ix-map')
+            .data(json.features)
+            .enter()
+            .append('path')
+              .attr('d', path)
+              .attr('class', function(d) {
+                return 'ix-map ix-map-' + d.properties.category;
+              })
+              .style('stroke', '#f5f5f5')
+              .style('stroke-width', 0.3)
+              .style('fill', function(d, i) {
+                // if (colorCodeFlag == 'color-cat') {
+                  if (d.properties.category == 'people') {
+                    return '#caa569';
+                  } else if (d.properties.category == 'place') {
+                    return '#77b2e0';
+                  } else if (d.properties.category == 'nature') {
+                    return '#68bc8f';
+                  } else if (d.properties.category == 'concept') {
+                    return '#db93c7';
+                  } else if (d.properties.category == 'unknown') {
+                    return '#aeaeae';
+                  }
+                /* } else {
+                  if (d.properties.language == 'euro') {
+                    return '#A0B363';
+                  } else if (d.properties.language == 'natam') {
+                    return '#BB9EE4';
+                  }
+                } */
+              })
+              .on('mouseover', function(q, d, r) { // NOT SURE WHY, BUT WITH NEWER VERSIONS OF D3, d (TO ACCESS THE DATASET) IS THE SECOND VAR IN THE .on() FUNCTIONS...
+                var currentCounty = d3.select(this);
+                var centroid = path.centroid(currentCounty.datum());
+                var centroidH = centroid[0];
+                var centroidV = centroid[1];
+                var windowW = window.innerWidth;
+                var bodyTop = document.body.getBoundingClientRect().top;
+                var map = document.getElementById('ix-map');
+                var mapTop = map.getBoundingClientRect().top;
+                var yDiff = mapTop - bodyTop;
+                var tooltipW = 400;
+                var tooltipPadding = 15;
+                var tooltipH = document.getElementById('tooltip').getBoundingClientRect().height;
+                var mapH = map.getBoundingClientRect().height;
+                console.log(tooltipH);
+                d3.select(this)
+                  .style('fill', 'black');
+                d3.select("#tooltip")
+                  .classed("hidden", false)
+                  .style('left', function() {
+                    if ((centroidH + ((windowW - w) / 2)) < (windowW - ((windowW - w) / 2) - (tooltipW + (tooltipPadding * 2)))) {
+                      return (centroidH + ((windowW - w) / 2)) + 'px';
+                    } else {
+                      return ((centroidH + ((windowW - w) / 2)) - tooltipW - (tooltipPadding * 2)) + 'px';
+                    }
+                  })
+                  .style('top', (centroidV + yDiff) + 'px')
+                  /* .style('top', function() {
+                    if ((mapTop + mapH) > (centroidV + yDiff + tooltipH)) {
+                      return (centroidV + yDiff) + 'px';
+                    } else {
+                      return (centroidV + yDiff - tooltipH) + 'px';
+                    }
+                  }) */
+                  .style('width', tooltipW + 'px')
+                  .style('padding', tooltipPadding + 'px');
+                d3.select("#tooltip-name")
+                  .text(d.properties.name);
+                d3.select("#tooltip-type")
+                  .text(d.properties.type);
+                d3.select("#tooltip-state")
+                  .text(d.properties.tooltipstate);
+                d3.select("#tooltip-ety")
+                  .text(d.properties.etymology);
+                d3.select("#dot-cat")
+                  .style('background-color', function() {
+                    if (d.properties.category == 'people') {
+                      return '#caa569';
+                    } else if (d.properties.category == 'place') {
+                      return '#77b2e0';
+                    } else if (d.properties.category == 'nature') {
+                      return '#68bc8f';
+                    } else if (d.properties.category == 'concept') {
+                      return '#db93c7';
+                    } else if (d.properties.category == 'unknown') {
+                      return '#aeaeae';
+                    }
+                  })
+                d3.select("#tooltip-cat")
+                  .text(d.properties.category);
+                d3.select("#tooltip-subcat")
+                  .text('(' + d.properties.tooltipsubcategory + ')');
+                d3.select("#dot-lang")
+                  .style('background-color', function() {
+                    if (d.properties.language == 'euro') {
+                      return '#A0B363';
+                    } else if (d.properties.language == 'natam') {
+                      return '#BB9EE4';
+                    }
+                  })
+                d3.select("#tooltip-lang")
+                  .text(d.properties.tooltiplanguage);
+                d3.select("#tooltip-granlang")
+                  .text(d.properties.tooltipgranularlanguage);
+              })
+              .on('mouseout', function() {
+                d3.select("#tooltip")
+                  .classed("hidden", true);
+                d3.select(this)
+                  .style('fill', function(d, i) {
+                    if (colorFlag.attr('class') != 'color-lang') {
+                      if (d.properties.category == 'people') {
+                        return '#caa569';
+                      } else if (d.properties.category == 'place') {
+                        return '#77b2e0';
+                      } else if (d.properties.category == 'nature') {
+                        return '#68bc8f';
+                      } else if (d.properties.category == 'concept') {
+                        return '#db93c7';
+                      } else if (d.properties.category == 'unknown') {
+                        return '#aeaeae';
+                      }
+                    } else {
+                      if (d.properties.language == 'euro') {
+                        return '#A0B363';
+                      } else if (d.properties.language == 'natam') {
+                        return '#BB9EE4';
+                      }
+                    }
+                })
+              }); // close .on for tooltip
+
+          // load JSON of state outlines
+          d3.json('../data_states-20m.json')
+            .then(function(json) {
+            ixMapSvg.selectAll('.state-outline')
+              .data(json.features.filter(function(d) {
+                return (d.properties.STATE != '02') && (d.properties.STATE != '15'); // leave out any without hex coordinates
+              }))
+              .enter()
+              .append('path')
+                .attr('d', statePath)
+                .attr('class', 'state-outline');
+          }); // close JSON function for state outlines
+
+        }); // close JSON function for county outlines
+
+      }); // close CSV function
+
+      colorFlag
+        .on('click', function() {
+
+          // if being set to LANG; therefore colored by CAT prior to click
+          if (!colorFlag.classed('color-lang')) { // if not set to lang currently
+
+            ixMapSvg.selectAll('.ix-map')
+              .style('fill', function(d) {
+                if (d.properties.language == 'euro') {
+                  return '#A0B363';
+                } else if (d.properties.language == 'natam') {
+                  return '#BB9EE4';
+                }
+              });
+
+            colorFlag.classed('color-lang', true);
+
+          } else {
+
+            ixMapSvg.selectAll('.ix-map')
+              .style('fill', function(d, i) {
+                if (d.properties.category == 'people') {
+                  return '#caa569';
+                } else if (d.properties.category == 'place') {
+                  return '#77b2e0';
+                } else if (d.properties.category == 'nature') {
+                  return '#68bc8f';
+                } else if (d.properties.category == 'concept') {
+                  return '#db93c7';
+                } else if (d.properties.category == 'unknown') {
+                  return '#aeaeae';
+                }
+              });
+
+            colorFlag.classed('color-lang', false);
+
+          } // close if
+
+        }); // close .on for colorFlag
+
+    </script>
+
+  </body>
+</html>

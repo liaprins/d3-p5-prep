@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Lia's D3 Template!</title>
+
+    <!-- D3 v6 -->
+    <!-- <script type="text/javascript" src="https://d3js.org/d3.v6.min.js"></script> -->
+
+    <!-- v6(.7) // USING TEMPORARILY WHILE ON AIRPLANE -->
+    <script type="text/javascript" src="../../../d3-library/d3.js"></script>
+
+    <!-- CSS *********************************************************************** -->
+    <style>
+
+body {
+  font-family: 'Work Sans';
+  margin-top: 0;
+}
+#ixmap-container {
+  display: inline-block;
+  width: 1000px;
+  margin: 0px auto;
+  background-color: #f5f5f5;
+  font-family: 'Work Sans';
+  font-weight: 600;
+}
+.ixmap-county {
+  stroke: #f5f5f5;
+  stroke-width: 0.3;
+}
+.ixmap-state {
+  fill: #ffffff00;
+  stroke: #f5f5f5;
+  stroke-width: 0.5;
+  pointer-events: none;
+}
+#ixmap-sidebar {
+  display: inline-block;
+  vertical-align: top;
+  width: 200px;
+}
+
+/* toggle */
+#ixmap-toggle {
+  border: black solid 2px;
+  border-radius: 20px;
+  display: inline-block;
+  padding: 2px;
+  cursor: pointer;
+  vertical-align: top;
+}
+.ixmap-toggle-pill-cat,
+.ixmap-toggle-pill-lang {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background-color: white;
+}
+.ixmap-toggle-pill-on {
+  background-color: black;
+}
+.ixmap-toggle-text-cat,
+.ixmap-toggle-text-lang {
+  font-size: 16px;
+  font-weight: 600;
+  color: black;
+}
+.ixmap-toggle-text-on {
+  color: white;
+}
+
+/* legend */
+.dot-people {
+  color: #D9C775;
+}
+.dot-nature {
+  color: #77B7B4;
+}
+.dot-place {
+  color: #5B6988;
+}
+.dot-concept {
+  color: #BC80A5;
+}
+.dot-unknown {
+  color: #B2AEA9;
+}
+.ixmap-dot {
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+  border-radius: 6px;
+  margin-right: 6px;
+}
+#ixmap-dot-legend-people {
+  background-color: blue;
+}
+
+/* tooltip */
+#ixmap-tooltip {
+  position: absolute;
+  width: 400px;
+  height: auto;
+  padding: 15px;
+  background-color: #ffffffdd;
+  border-color: black;
+  border-width: 2px;
+  border-style: solid;
+  pointer-events: none;
+}
+#ixmap-tooltip p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+}
+#ixmap-tooltip-topline span {
+  font-size: 19px;
+  padding-bottom: 5px;
+  font-weight: 600;
+}
+#ixmap-tooltip-cat-label,
+#ixmap-tooltip-lang-label {
+  font-weight: 600;
+}
+#ixmap-tooltip-cat-value,
+#ixmap-tooltip-lang-value {
+  text-transform: capitalize;
+}
+.hidden {
+  display: none;
+}
+/* #ixmap-tooltip-dot-cat,
+#ixmap-tooltip-dot-lang {
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+  border-radius: 6px;
+  margin-right: 6px;
+} */
+#ixmap-tooltip-cat-container,
+#ixmap-tooltip-lang-container {
+  display: inline-block;
+}
+
+/* zoom buttons */
+.zoom-button rect {
+  fill: black;
+  stroke: 2px;
+  stroke-color: black;
+}
+.zoom-button text {
+  fill: white;
+  font-size: 18px;
+  text-anchor: middle;
+}
+.zoom-button:hover rect,
+.zoom-button:hover text {
+  fill: #00000000;
+}
+
+    </style>
+  </head>
+  <body>
+    <!-- HTML ********************************************************************** -->
+
+<!-- Map container -->
+<div id="ixmap-container">
+</div>
+
+<!-- Toggle + legend -->
+<div id="ixmap-sidebar">
+  <!-- Toggle -->
+  <p>Color counties by:</p>
+  <div id="ixmap-toggle">
+    <div class="ixmap-toggle-pill-cat ixmap-toggle-pill-on">
+      <span class="ixmap-toggle-text-cat ixmap-toggle-text-on">
+        Category
+      </span>
+    </div>
+    <div class="ixmap-toggle-pill-lang">
+      <span class="ixmap-toggle-text-lang">
+        Language
+      </span>
+    </div>
+  </div>
+  <!-- Legend -->
+  <div id="ixmap-legend-container">
+    <!--
+    <p id="ix-map-legend-1" class="legend-people"><span class="dot-people">&#9679;</span> People</p>
+    <p id="ix-map-legend-2" class="legend-nature"><span class="dot-nature">&#9679;</span> Nature</p>
+    <p id="ix-map-legend-3" class="legend-place"><span class="dot-place">&#9679;</span> Place</p>
+    <p id="ix-map-legend-4" class="legend-concept"><span class="dot-concept">&#9679;</span> Concept</p>
+    <p id="ix-map-legend-5" class="legend-unknown"><span class="dot-unknown">&#9679;</span> Unknown or multiple reasons</p>
+    -->
+  </div>
+</div>
+
+<!-- Tooltip -->
+<div id="ixmap-tooltip" class="hidden">
+  <p id="ixmap-tooltip-topline">
+      <span id="ixmap-tooltip-name">[County Name]</span>
+      <span id="ixmap-tooltip-type">[Type]</span><span>, </span>
+      <span id="ixmap-tooltip-state">[State]</span>
+  </p>
+  <p id="ixmap-tooltip-ety">[Etymology]</p>
+
+  <div>
+    <div id="ixmap-tooltip-dot-cat" class="ixmap-dot">
+    </div>
+    <p id="ixmap-tooltip-cat-container">
+      <span id="ixmap-tooltip-cat-label">Category: </span>
+      <span id="ixmap-tooltip-cat-value">[Category]</span>
+      <span id="ixmap-tooltip-cat-child"></span>
+    </p>
+  </div>
+
+  <div id="ixmap-tooltip-dot-lang" class="ixmap-dot">
+  </div>
+  <p id="ixmap-tooltip-lang-container">
+    <span id="ixmap-tooltip-lang-label">Language: </span>
+    <span id="ixmap-tooltip-lang-value">[Language]</span>
+    <span id="ixmap-tooltip-lang-child"></span>
+  </p>
+</div>
+
+    <!-- JAVASCRIPT **************************************************************** -->
+
+    <!-- CHOROPLETH: CATEGORY ======================================================= -->
+    <script type="text/javascript">
+
+var ixmapW = 1000;
+var ixmapH = 700;
+
+var ixmapScale = 1250;
+
+var ixmapProjection = d3.geoAlbersUsa()
+  .translate([ixmapW/2, ixmapH/2])
+  .scale([ixmapScale]);
+
+var ixmapSvg = d3.select('#ixmap-container')
+  .append('svg')
+    .attr('width', ixmapW)
+    .attr('height', ixmapH);
+
+var ixmapToggle = d3.select('#ixmap-toggle');
+
+var ixmapStatePath = d3.geoPath()
+  .projection(ixmapProjection);
+
+var ixmapCountyPath = d3.geoPath()
+  .projection(ixmapProjection);
+
+// colors (global vars for this post, could be called in other JS vis files for this post, if there were other or new vises using same color)
+/*
+var placenameColorCat = function(v) {
+  if (v == 'people') {
+    return '#D9C775';
+  } else if (v == 'place') {
+    return '#5B6988';
+  } else if (v == 'nature') {
+    return '#77B7B4';
+  } else if (v == 'concept') {
+    return '#BC80A5';
+  } else if (v == 'unknown') {
+    return '#B2AEA9';
+  }
+};
+*/
+var placenameColorCat = function(v) {
+  if (v == 'people') {
+    return {
+      catLabel: 'People',
+      catColor: '#D9C775',
+    };
+  } else if (v == 'place') {
+    return {
+      catLabel: 'Place',
+      catColor: '#5B6988',
+    };
+  } else if (v == 'nature') {
+    return {
+      catLabel: 'Nature',
+      catColor: '#77B7B4',
+    };
+  } else if (v == 'concept') {
+    return {
+      catLabel: 'Concept',
+      catColor: '#BC80A5',
+    };
+  } else if (v == 'unknown') {
+    return {
+      catLabel: 'Concept',
+      catColor: '#B2AEA9',
+    };
+  } // close if
+}; // close fx
+/*
+var placenameColorLang = function(v) {
+  if (v == 'euro') {
+    return '#A0C1D7';
+  } else if (v == 'natam') {
+    return '#8F3D54';
+  }
+};
+*/
+var placenameColorLang = function(v) {
+  if (v == 'euro') {
+    return {
+      langLabel: 'Non-Indigenous',
+      langColor: '#A0C1D7'
+    };
+  } else if (v == 'natam') {
+    return {
+      langLabel: 'Indigenous',
+      langColor: '#8F3D54'
+    };
+  }
+};
+
+// ZOOM
+var ixmapZooming = function(event, d) {
+
+  var offset = [event.transform.x, event.transform.y]; // get the current (pre-zooming) translation offset of mouse position
+  var newScale = event.transform.k * ixmapScale; // calculate new scale
+
+  ixmapProjection.translate(offset) // update projection with new offset
+    .scale(newScale);
+
+  ixmapSvg.selectAll("path") // update all paths
+    .attr("d", ixmapCountyPath);
+} // close ixmapZooming
+
+// define zoom behavior
+var ixmapZoom = d3.zoom()
+  .scaleExtent([ 1, 7.0 ]) // constrain zoom-out and zoom-in, respectively
+  .translateExtent([[ -(ixmapW/2), -(ixmapH/2) ], [ ixmapW/2, ixmapH/2 ]]) // constrain pan to keep map from disappearing
+  .on("zoom", ixmapZooming);
+
+// create group to hold all zoomable elements (county paths + state paths)
+var ixmapZoomableGroup = ixmapSvg.append('g')
+  .call(ixmapZoom) // bind the zooming behavior
+  .call(ixmapZoom.transform, d3.zoomIdentity // then apply the initial transform
+    .translate(ixmapW/2, ixmapH/2)
+    .scale(1)); // can change this if needed
+
+// create invisible BG rect to catch zooming events
+ixmapZoomableGroup.append("rect")
+  .attr("x", 0)
+  .attr("y", 0)
+  .attr("width", ixmapW)
+  .attr("height", ixmapH)
+  .attr("opacity", 0);
+
+// load CSV of county etymology data
+d3.csv('../data_counties.csv')
+  .then(function(data) {
+
+  // load JSON of county outlines
+  d3.json('../data_counties-20m.json')
+    .then(function(json) {
+
+    for (var i = 0; i < data.length; i++) {
+
+      // MOVE DATA FROM CSV INTO JSON
+      var csvCountyId = data[i].id; // get county id from etymology CSV
+      var csvCountyName = data[i].name; // get name per county from etymology CSV
+      var csvCountyType = data[i].type; // get type per county from etymology CSV
+      var csvCountyState = data[i].state; // get state per county from etymology CSV
+      var csvCountyTooltipState = data[i].tooltipstate; // get state abbreviation per county from etymology CSV
+      var csvCountyLanguage = data[i].language; // get high-level language per county from etymology CSV
+      var csvCountyTooltipLanguage = data[i].tooltiplanguage; // get high-level language per county (in everyday phrasing) from etymology CSV
+      var csvCountyGranularlanguage = data[i].granularlanguage; // get granular language per county from etymology CSV
+      var csvCountyTooltipGranularlanguage = data[i].tooltipgranularlanguage; // get granular language (in everyday phrasing) per county from etymology CSV
+      var csvCountyCategory = data[i].category; // get high-level category per county from etymology CSV
+      var csvCountySubcategory = data[i].subcategory; // get subcategory per county from etymology CSV
+      var csvCountyTooltipSubcategory = data[i].tooltipsubcategory; // get subcategory (in everyday phrasing) per county from etymology CSV
+      var csvCountyEtymology = data[i].etymology; // get etymology per county from etymology CSV
+
+      for (var j = 0; j < json.features.length; j++) { // find the corresponding county id within the GeoJSON
+
+        var pathCountyId = json.features[j].properties.STATE + json.features[j].properties.COUNTY;
+
+        if (csvCountyId == pathCountyId) {
+          json.features[j].properties.name = csvCountyName; // copy the county name into the JSON per county
+          json.features[j].properties.type = csvCountyType; // copy the county type into the JSON per county
+          json.features[j].properties.state = csvCountyState; // copy the state name into the JSON per county
+          json.features[j].properties.tooltipstate = csvCountyTooltipState; // copy the state abbreviation into the JSON per county
+          json.features[j].properties.language = csvCountyLanguage; // copy the high-level language into the JSON per county
+          json.features[j].properties.tooltiplanguage = csvCountyTooltipLanguage; // copy the high-level language (in everyday phrasing) into the JSON per county
+          json.features[j].properties.granularlanguage = csvCountyGranularlanguage; // copy the granular language into the JSON per county
+          json.features[j].properties.tooltipgranularlanguage = csvCountyTooltipGranularlanguage; // copy the granular language (in everyday phrasing) into the JSON per county
+          json.features[j].properties.category = csvCountyCategory; // copy the high-level category into the JSON per county
+          json.features[j].properties.subcategory = csvCountySubcategory; // copy the subcategory into the JSON per county
+          json.features[j].properties.tooltipsubcategory = csvCountyTooltipSubcategory; // copy the subcategory (in everyday phrasing) into the JSON per county
+          json.features[j].properties.etymology = csvCountyEtymology; // copy the etymology into the JSON per county
+          break; // stop looking through the JSON
+        } // close if
+      } // close j for-loop
+    } // close i for-loop
+
+    // draw county paths
+    var countyGroup = ixmapZoomableGroup.append("g");
+
+    countyGroup.selectAll('.ixmap-county')
+      .data(json.features)
+      .enter()
+      .append('path')
+        .attr('d', ixmapCountyPath)
+        .attr('class', function(d) {
+          return 'ixmap-county';
+        })
+        .attr('fill', function(d) {
+          // return placenameColorCat(d.properties.category);
+          return placenameColorCat(d.properties.category).catColor;
+        })
+        .on('mouseover', function(q, d, r) { // d (to access the dataset) is the second var in the .on() in newer versions of D3
+          var currentCounty = d3.select(this);
+          var centroid = ixmapCountyPath.centroid(currentCounty.datum());
+          var centroidH = centroid[0];
+          var centroidV = centroid[1];
+          var windowW = window.innerWidth;
+          var bodyTop = document.body.getBoundingClientRect().top;
+          var map = document.getElementById('ixmap-container');
+          var mapTop = map.getBoundingClientRect().top;
+          var yDiff = mapTop - bodyTop;
+          var tooltipW = 400;
+          var tooltipPadding = 15;
+          var tooltipH = document.getElementById('ixmap-tooltip').getBoundingClientRect().height;
+          var mapH = map.getBoundingClientRect().height;
+          d3.select(this)
+            .style('fill', 'black');
+          d3.select("#ixmap-tooltip")
+            .classed("hidden", false)
+            .style('left', function() { // position tooltip depending how close it is to edge
+              if ((centroidH + ((windowW - ixmapW) / 2)) < (windowW - ((windowW - ixmapW) / 2) - (tooltipW + (tooltipPadding * 2)))) {
+                return (centroidH + ((windowW - ixmapW) / 2)) + 'px';
+              } else {
+                return ((centroidH + ((windowW - ixmapW) / 2)) - tooltipW - (tooltipPadding * 2)) + 'px';
+              }
+            })
+            .style('top', (centroidV + yDiff) + 'px')
+            .attr('width', tooltipW + 'px')
+            .attr('padding', tooltipPadding + 'px');
+          d3.select("#ixmap-tooltip-name")
+            .text(d.properties.name);
+          d3.select("#ixmap-tooltip-type")
+            .text(d.properties.type);
+          d3.select("#ixmap-tooltip-state")
+            .text(d.properties.tooltipstate);
+          d3.select("#ixmap-tooltip-ety")
+            .text(d.properties.etymology);
+          d3.select("#ixmap-tooltip-dot-cat")
+            .style('background-color', function() {
+              // return placenameColorCat(d.properties.category);
+              return placenameColorCat(d.properties.category).catColor;
+            });
+          d3.select("#ixmap-tooltip-cat-value")
+            .text(d.properties.category);
+          d3.select("#ixmap-tooltip-cat-child")
+            .text('(' + d.properties.tooltipsubcategory + ')');
+          d3.select("#ixmap-tooltip-dot-lang")
+            .style('background-color', function() {
+              // return placenameColorLang(d.properties.language);
+              return placenameColorLang(d.properties.language).langColor;
+            });
+          d3.select("#ixmap-tooltip-lang-value")
+            .text(d.properties.tooltiplanguage);
+          d3.select("#ixmap-tooltip-lang-child")
+            .text(d.properties.tooltipgranularlanguage);
+          })
+        .on('mouseout', function() {
+          d3.select("#ixmap-tooltip")
+            .classed("hidden", true);
+          d3.select(this)
+            .style('fill', function(d, i) {
+              // if (ixmapToggle.attr('class') != 'ixmap-toggle-flag-lang') {
+              if (ixmapToggle.selectAll('.ixmap-toggle-pill-cat').classed('ixmap-toggle-pill-on')) {
+                // return placenameColorCat(d.properties.category);
+                return placenameColorCat(d.properties.category).catColor;
+              } else {
+                // return placenameColorLang(d.properties.language);
+                return placenameColorLang(d.properties.language).langColor;
+              }
+            }) // close .on for tooltip
+          }); // finish drawing county paths
+
+    // load JSON of state outlines
+    d3.json('../data_states-20m.json')
+      .then(function(json) {
+
+      var stateGroup = ixmapZoomableGroup.append("g");
+
+      stateGroup.selectAll('.ixmap-state')
+        .data(json.features)
+        .enter()
+        .append('path')
+          .attr('d', ixmapStatePath)
+          .attr('class', 'ixmap-state');
+        }); // close JSON function for state outlines
+
+      }); // close JSON function for county outlines
+
+    }); // close CSV function
+
+// legend
+var ixmapLegendListCat = [
+  'people',
+  'place',
+  'nature',
+  'concept',
+  'unknown'
+];
+
+var ixmapLegendListLang = [
+  'euro',
+  'natam'
+];
+
+var ixmapLegendContainer = d3.select('#ixmap-legend-container');
+
+var ixmapLegendCat = function() {
+  for (i = 0; i < ixmapLegendListCat.length; i++) {
+  ixmapLegendContainer.append('div')
+    .attr('class', 'ixmapLegendEntry')
+    .attr('id', 'ixmapLegendEntry-' + i)
+    .append('div')
+      .attr('class', 'ixmap-dot')
+    // .style('background-color', placenameColorCat(ixmapLegendListCat[i]));
+    .style('background-color', placenameColorCat(ixmapLegendListCat[i]).catColor);
+  ixmapLegendContainer.select('#ixmapLegendEntry-' + i)
+    .append('p')
+      .text(ixmapLegendListCat[i]);
+  } // for
+}// fx
+
+ixmapLegendCat();
+
+// toggle functionality
+ixmapToggle
+  .on('click', function() {
+
+    if (ixmapToggle.selectAll('.ixmap-toggle-pill-cat').classed('ixmap-toggle-pill-on')) { // if being set to language; therefore colored by category prior to click
+
+      ixmapSvg.selectAll('.ixmap-county')
+        .style('fill', function(d) { // color counties by language
+          // return placenameColorLang(d.properties.language);
+          return placenameColorLang(d.properties.language).langColor;
+        });
+
+      // update pill and text colors
+      ixmapToggle.selectAll('.ixmap-toggle-pill-lang')
+        .classed('ixmap-toggle-pill-on', true);
+      ixmapToggle.selectAll('.ixmap-toggle-text-lang')
+        .classed('ixmap-toggle-text-on', true);
+      ixmapToggle.selectAll('.ixmap-toggle-pill-cat')
+        .classed('ixmap-toggle-pill-on', false);
+      ixmapToggle.selectAll('.ixmap-toggle-text-cat')
+        .classed('ixmap-toggle-text-on', false);
+
+      // legend
+      ixmapLegendContainer.selectAll('.ixmapLegendEntry').remove();
+      for (i = 0; i < ixmapLegendListLang.length; i++) {
+        ixmapLegendContainer.append('div')
+          .attr('class', 'ixmapLegendEntry')
+          .attr('id', 'ixmapLegendEntry-' + i)
+          .append('div')
+            .attr('class', 'ixmap-dot')
+          // .style('background-color', placenameColorLang(ixmapLegendListLang[i]));
+          .style('background-color', placenameColorLang(ixmapLegendListLang[i]).langColor);
+        ixmapLegendContainer.select('#ixmapLegendEntry-' + i)
+          .append('p')
+            .text(ixmapLegendListLang[i]);
+      }
+
+    } else { // if being set to category; therefore colored by language prior to click
+
+      ixmapSvg.selectAll('.ixmap-county')
+        .style('fill', function(d) {
+          // return placenameColorCat(d.properties.category);
+          return placenameColorCat(d.properties.category).catColor;
+        })
+
+      // update pill and text colors
+      ixmapToggle.select('.ixmap-toggle-pill-lang')
+        .classed('ixmap-toggle-pill-on', false);
+      ixmapToggle.select('.ixmap-toggle-text-lang')
+        .classed('ixmap-toggle-text-on', false);
+      ixmapToggle.select('.ixmap-toggle-pill-cat')
+        .classed('ixmap-toggle-pill-on', true);
+      ixmapToggle.select('.ixmap-toggle-text-cat')
+        .classed('ixmap-toggle-text-on', true);
+
+      // legend
+      ixmapLegendContainer.selectAll('.ixmapLegendEntry').remove();
+      ixmapLegendCat();
+
+    } // close if
+
+  }); // close .on for toggle
+
+// zoom in button
+var zoomIn = ixmapSvg.append("g")
+  .attr("class", "zoom-button")
+  .attr("id", "in")    // use this to identify which direction to zoom
+  .attr("transform", "translate(" + (ixmapW - 110) + "," + (ixmapH - 70) + ")");
+
+zoomIn.append("rect")
+  .attr("x", 0)
+  .attr("y", 0)
+  .attr("width", 30)
+  .attr("height", 30);
+
+zoomIn.append("text")
+  .attr("x", 15)
+  .attr("y", 20)
+  .text("+");
+
+// zoom out button
+var zoomOut = ixmapSvg.append("g")
+  .attr("class", "zoom-button")
+  .attr("id", "out")    // use this to identify which direction to zoom
+  .attr("transform", "translate(" + (ixmapW - 70) + "," + (ixmapH - 70) + ")");
+
+zoomOut.append("rect")
+  .attr("x", 0)
+  .attr("y", 0)
+  .attr("width", 30)
+  .attr("height", 30);
+
+zoomOut.append("text")
+  .attr("x", 15)
+  .attr("y", 20)
+  .html("&ndash;");
+
+// zooming interaction
+d3.selectAll(".zoom-button")
+  .on("click", function() {
+
+  // set how much to scale on each click
+  var scaleFactor;
+
+  // which way are we headed?
+  var direction = d3.select(this).attr("id");
+
+  // modify the k scale value, depending on the direction
+  switch (direction) {
+    case "in":
+      scaleFactor = 1.5;
+      break;
+    case "out":
+      scaleFactor = 0.75;
+      break;
+    default:
+      break;
+  }
+
+  // this triggers a zoom event, scaling by scaleFactor
+  ixmapZoomableGroup.transition()
+    // .duration(500)
+    .call(ixmapZoom.scaleBy, scaleFactor);
+}); // close zooming interaction
+
+    </script>
+
+  </body>
+</html>

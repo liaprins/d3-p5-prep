@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Lia's D3 Template!</title>
+    <script type="text/javascript" src="../../d3-library/d3.js"></script>
+    <style type="text/css">
+
+			text {
+				font-family: sans-serif;
+				font-size: 12px;
+				fill: white;
+			}
+
+		</style>
+	</head>
+	<body>
+
+    <div style="width: 50%; font-family: sans-serif; margin: 10% auto; line-height: 1.6; font-size: 20px;">
+      <p>Okay, this GeoJSON map code is not working for me (I have tried everything); but it is working in the sample code provided by Scott Murray:</p>
+      <ul>
+        <li>
+          <a href="http://localhost:8888/d3/d3-book-master/" target="_blank">Try the local source (if I still have it downloaded) by navigating into Chapter 14 and choosing a file</a>
+        </li>
+        <li>
+          Or go to <a href="https://github.com/scotthmurray/d3-book" target="_blank">Scott Murray's GitHub</a> for the source code related to this book and download it into my "Applications / MAMP / htdocs folder", then navigate to "<a href="http://localhost:8888/d3/d3-book-master/" target="_blank">http://localhost:8888/d3/d3-book-master/</a>" to view it
+        </li>
+      </ul>
+    </div>
+
+    <script type="text/javascript">
+
+      //Width and height
+      var w = 500;
+      var h = 300;
+
+      //Define path generator, using the Albers USA projection
+      var path = d3.geoPath()
+             .projection(d3.geoAlbersUsa());
+
+      //Create SVG element
+      var svg = d3.select("body")
+            .append("svg")
+            .attr("width", w)
+            .attr("height", h);
+
+      //Load in GeoJSON data
+      d3.json("us-states.json", function(json) {
+
+        //Bind data and create one path per GeoJSON feature
+        svg.selectAll("path")
+           .data(json.features)
+           .enter()
+           .append("path")
+           .attr("d", path);
+
+      });
+
+		</script>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+name,states,total,frequency,shift,group,etymology,category,subcategory
+Washington ,"AL, AR, CO, DC, FL, GA, IA, ID, IL, IN, KS, KY, LA, ME, ML, MN, MO, MS, NE, NY, NC, OH, OK, OR, RI, TN, TX, UT, VT, VA, WI",31,31,0,0,"Named for George Washington, first President of the United States.",people,man
+Jefferson ,"AL, AR, FL, GA, IA, ID, IL, IN, KS, KY, LA, MO, MS, MT, NE, NY, OH, OK, OR, PA, RI, TN, TX, WA, WV, WI",26,25,0,1,"Named for Thomas Jefferson, the third President of the United States.",people,man
+Jefferson ,CO,26,1,25,1,"Named for the extralegal Jefferson Territory (itself named for U.S. President Thomas Jefferson), of which the county was a part from 1859 to 1861.",place,america
+Franklin ,"AL, AR, FL, GA, IA, IL, IN, KS, KY, LA, MA, ME, MO, MS, NE, NY, OH, PA, TN, VA, VA, VT, WA",25,23,0,2,"Named for Benjamin Franklin (1706–1790), one of the Founding Fathers of the United States.",people,man
+Franklin ,ID,25,1,23,2,"Named for Franklin D. Richards (1821–1899), an early apostle of the LDS Church.",people,man
+Franklin ,TX,25,1,24,2,"Generally believed to have been named after Judge Benjamin C. Franklin, the first appointed justice in the Republic of Texas.",people,man
+Jackson ,"AL, AR, CO, FL, IA, IL, IN, KS, KY, LA, MI, MN, MS, MO, NC, OH, OK, OR, TN, TX, WI, WV",24,22,0,3,"Named for Andrew Jackson, the 7th President of the United States.",people,man
+Jackson ,GA,24,1,22,3,"Named for James Jackson, a U.S. Congressman and the 23rd Governor of Georgia.",people,man
+Jackson ,SD,24,1,23,3,"Named for J.R. Jackson, a legislator of the Dakota Territory.",people,man
+Lincoln ,"AR, CO, ID, KS, LA, MN, MS, MT, NE, NM, NV, OK, OR, WA, WI, WV, WY",24,17,0,4,"Named for Abraham Lincoln, the 16th President of the United States.",people,man
+Lincoln ,"GA, KY, MO, NC, TN",24,5,17,4,"Named for Benjamin Lincoln, a leading general in the American Revolutionary War and the first U.S. Secretary of War.",people,man
+Lincoln ,ME,24,1,22,4,"Named for the city of Lincoln, England.",place,abroad
+Lincoln ,SD,24,1,23,4,"Named after Lincoln County, Maine, in turn named for the city of Lincoln, England.",place,america
+Madison ,"AL, AR, FL, GA, IA, ID, IL, IN, KY, LA, MO, MS, NC, NY, OH, TN, TX, VA",20,18,0,5,"Named for James Madison, the 4th President of the United States.",people,man
+Madison ,MT,20,1,18,5,"Named for the Madison River, itself named for James Madison.",people,man
+Madison ,NE,20,1,19,5,"Named for Madison, the capital of Wisconsin and the origin of most early settlers in the county, which was itself named for James Madison.",place,america
+Clay ,"AL, FL, GA, IL, IN, KS, MN, MO, MS, NC, NE, SD, TN, TX, WV",18,15,0,6,"Named for Henry Clay (1777–1852), U.S. legislator from Kentucky.",people,man
+Clay ,AR,18,1,15,6,"Named for John M. Clayton, a state senator.",people,man
+Clay ,IA,18,1,16,6,"Named for Henry Clay, Jr. (1807–1847), officer in the Mexican–American War.",people,man
+Clay ,KY,18,1,17,6,"Named for Green Clay (1757–1826), a Kentucky politician and cousin of Henry Clay who fought in the Revolutionary War and War of 1812.",people,man
+Montgomery ,"AL, AR, GA, IA, IL, IN, KY, ML, MO, MS, NY, NC, OH, TX, VA",18,15,0,7,"Named for Richard Montgomery, an officer during the American Revolutionary War.",people,man
+Montgomery ,PA,18,1,15,7,"Named for either Richard Montgomery or Montgomeryshire, a county in Wales (which was named in turn after one of William the Conqueror's main counselors, Roger de Montgomerie), as that part of Pennsylvania was settled by Welsh Quakers.",unknown,uncertain
+Montgomery ,KS,18,1,16,7,"Named for either James M. Montgomery, an abolitionist and preacher, or Richard Montgomery.",people,man
+Montgomery ,TN,18,1,17,7,"Named for John Montgomery, an explorer and Native American fighter.",people,man
+Union ,"IA, NJ, SD, PA, OR",18,5,0,8,Named in honor of the Federal Union because of Civil War sentiment.,concept,idea
+Union ,"IN, NM, MS, OH",18,4,5,8,So named because it is the product of a union of parts of other counties.,concept,idea
+Union ,"AR, KY",18,2,9,8,Named for the unanimous decision of the residents to unite together and create a new county.,concept,idea
+Union ,"FL, LA",18,2,11,8,Named to honor the concept of unity.,concept,idea
+Union ,TN,18,1,13,8,Named either for its creation from parts of five counties or to memorialize East Tennessee’s support for preservation of the Union in the years before the Civil War.,unknown,uncertain
+Union ,IL,18,1,14,8,"Named for a joint revival meeting of the Baptists and Dunkards, called a “union meeting”.",concept,event
+Union ,SC,18,1,15,8,Named for the old Union Church near Monarch Mill.,place,america
+Union ,NC,18,1,16,8,"Its name was a compromise between Whigs, who wanted to name the new county for Henry Clay, and Democrats, who wanted to name it for Andrew Jackson.",concept,idea
+Union ,GA,18,1,17,8,"Likely named for the Union Party, a political group that supported removing Native Americans from the area and opening it to white settlers.",people,group
+Monroe ,"AL, AR, FL, GA, IA, IL, IN, KY, MI, MS, MO, NY, OH, PA, TN, WI, WV",17,17,0,9,"Named for James Monroe, the 5th President of the United States.",people,man
+Wayne ,"IN, GA, IA, IL, KY, MI, MS, MO, NE, NY, NC, OH, PA, TN, WV",16,15,0,10,Named for Revolutionary War general Anthony Wayne.,people,man
+Wayne ,UT,16,1,15,10,"Named for Wayne County, Tennessee, in turn named for Revolutionary War general Anthony Wayne.",place,america
+Grant ,"AR, LA, KS, MN, NE, NM, ND, OK, OR, SD, WA, WV",15,12,0,11,"Named for Ulysses S Grant, 18th President of the United States (1869–1877).",people,man
+Grant ,KY,15,1,12,11,"Named for Samuel Grant (1762–1789 or 1794), John Grant (1754–1826), and/or Squire Grant (1764–1833), early settlers of Kentucky.",people,man
+Grant ,IN,15,1,13,11,Named for Captains Samuel and Moses Grant of Kentucky.,people,group
+Grant ,WI,15,1,14,11,"Named for the Grant River, which was likely named for James Grant, an early trapper on the river.",nature,water
+Marion ,"FL, GA, IL, IN, IA, KY, MO, MS, OH, OR, SC, TN, TX, WV",15,14,0,12,"Named for Francis Marion, a Continental Army officer nicknamed the “Swamp Fox” for his activity in the Southern Theater of the American Revolutionary War.",people,man
+Marion ,KS,15,1,14,12,"Named after Marion County, Ohio, in turn named for Francis Marion, a Continental Army officer nicknamed the “Swamp Fox” for his activity in the Southern Theater of the American Revolutionary War.",place,america

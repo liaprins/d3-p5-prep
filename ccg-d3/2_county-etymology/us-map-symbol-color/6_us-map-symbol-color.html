@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Lia's D3 Template!</title>
+
+    <!-- v6(.7) -->
+    <!--
+    <script type="text/javascript" src="../../../d3-library/d3.js"></script>
+    -->
+
+    <!-- v4(.5) -->
+    <script type="text/javascript" src="../../../d3-book-master/d3.js"></script>
+
+    <style>
+      #vis,
+      #filter-container {
+        width: 1000px;
+        margin: 10px auto;
+      }
+      #language-filter-group,
+      #etymology-filter-group {
+        margin-top: 50px;
+      }
+      .filter-language,
+      .filter-etymology {
+        display: inline-block;
+        padding: 0 15px;
+        margin: 10px;
+        font-family: 'Work Sans';
+        background-color: #eeeeee;
+        cursor: pointer;
+      }
+    </style>
+
+  </head>
+  <body>
+
+    <div id="vis"></div>
+
+    <div id="filter-container">
+
+      <!-- Filters for language -->
+      <div id="language-filter-group">
+        <div class="filter-language" data-language="European">
+          <p><strong>Language:</strong> European</p>
+        </div>
+        <div class="filter-language" data-language="Native American">
+          <p><strong>Language:</strong> Native American</p>
+        </div>
+      </div>
+
+      <!-- Filters for etymology -->
+      <div id="etymology-filter-group">
+        <div class="filter-etymology" data-etymology="Man">
+          <p><strong>Etymology:</strong> Man</p>
+        </div>
+        <div class="filter-etymology" data-etymology="Woman">
+          <p><strong>Etymology:</strong> Woman</p>
+        </div>
+        <div class="filter-etymology" data-etymology="Group of people">
+          <p><strong>Etymology:</strong> Group of people</p>
+        </div>
+        <div class="filter-etymology" data-etymology="Flora, fauna">
+          <p><strong>Etymology:</strong> Flora, fauna</p>
+        </div>
+        <div class="filter-etymology" data-etymology="Geologic feature">
+          <p><strong>Etymology:</strong> Geologic feature</p>
+        </div>
+        <div class="filter-etymology" data-etymology="Natural resource, crop">
+          <p><strong>Etymology:</strong> Natural resource, crop</p>
+        </div>
+        <div class="filter-etymology" data-etymology="Pre-existing place">
+          <p><strong>Etymology:</strong> Pre-existing place</p>
+        </div>
+        <div class="filter-etymology" data-etymology="Battle">
+          <p><strong>Etymology:</strong> Battle</p>
+        </div>
+        <div class="filter-etymology" data-etymology="Man-made object">
+          <p><strong>Etymology:</strong> Man-made object</p>
+        </div>
+        <div class="filter-etymology" data-etymology="Abstract concept">
+          <p><strong>Etymology:</strong> Abstract concept</p>
+        </div>
+        <div class="filter-etymology" data-etymology="Aspect of county’s creation">
+          <p><strong>Etymology:</strong> Aspect of county’s creation</p>
+        </div>
+        <div class="filter-etymology" data-etymology="Combination of reasons">
+          <p><strong>Etymology:</strong> Combination of reasons</p>
+        </div>
+        <div class="filter-etymology" data-etymology="Unknown reason">
+          <p><strong>Etymology:</strong> Unknown reason</p>
+        </div>
+      </div>
+
+    </div> <!-- close #filter-container -->
+
+    <script type="text/javascript"
+            src="6_us-map-symbol-color.js">
+    </script>
+
+  </body>
+</html>

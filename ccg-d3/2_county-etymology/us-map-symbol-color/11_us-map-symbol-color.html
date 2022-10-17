@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>US map with symbols + colors</title>
+
+    <!-- v6(.7) -->
+    <!--
+    <script type="text/javascript" src="../../../d3-library/d3.js"></script>
+    -->
+
+    <!-- v4(.5) -->
+    <script type="text/javascript" src="../../../d3-book-master/d3.js"></script>
+
+    <link rel="stylesheet" href="11_us-map-symbol-color.css">
+  </head>
+  <body>
+
+    <div id="vis"></div>
+
+    <div id="filter-container">
+
+      <!-- Filters for language -->
+      <div id="language-filter-group">
+        <h2>Language family</h2>
+        <div class="filter" data-group="language" data-field="European">
+          <p>European</p>
+        </div>
+        <div class="filter" data-group="language" data-field="Native American">
+          <p>Native American</p>
+        </div>
+      </div>
+
+      <!-- Filters for category -->
+      <div id="category-filter-group">
+        <h2>Category</h2>
+        <div class="filter" data-group="category" data-field="Man">
+          <p>Man</p>
+        </div>
+        <div class="filter" data-group="category" data-field="Woman">
+          <p>Woman</p>
+        </div>
+        <div class="filter" data-group="category" data-field="Group of people">
+          <p>Group of people</p>
+        </div>
+        <div class="filter" data-group="category" data-field="Flora, fauna">
+          <p>Flora, fauna</p>
+        </div>
+        <div class="filter" data-group="category" data-field="Geologic feature">
+          <p>Geologic feature</p>
+        </div>
+        <div class="filter" data-group="category" data-field="Natural resource, crop">
+          <p>Natural resource, crop</p>
+        </div>
+        <div class="filter" data-group="category" data-field="Pre-existing place">
+          <p>Pre-existing place</p>
+        </div>
+        <div class="filter" data-group="category" data-field="Battle">
+          <p>Battle</p>
+        </div>
+        <div class="filter" data-group="category" data-field="Man-made object">
+          <p>Man-made object</p>
+        </div>
+        <div class="filter" data-group="category" data-field="Abstract concept">
+          <p>Abstract concept</p>
+        </div>
+        <div class="filter" data-group="category" data-field="Aspect of county’s creation">
+          <p>Aspect of county’s creation</p>
+        </div>
+        <div class="filter" data-group="category" data-field="Combination of reasons">
+          <p>Combination of reasons</p>
+        </div>
+        <div class="filter" data-group="category" data-field="Unknown reason">
+          <p>Unknown reason</p>
+        </div>
+      </div>
+
+    </div> <!-- close #filter-container -->
+
+    <script type="text/javascript"
+            src="11_us-map-symbol-color.js">
+    </script>
+
+  </body>
+</html>

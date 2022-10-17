@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Timeline | County etymologies | CCG</title>
+    <!-- v6(.7) -->
+    <script type="text/javascript" src="../../../d3-library/d3.js"></script>
+    <!-- v4(.5) -->
+    <!-- <script type="text/javascript" src="../../../d3-book-master/d3.js"></script> -->
+
+    <!-- CSS *********************************************************************** -->
+    <style>
+
+    #timeline-vis {
+      width: 1000px;
+      margin: 10px auto;
+    }
+    .timebar {
+      fill: teal;
+    }
+
+    </style>
+  </head>
+  <body>
+    <!-- HTML ********************************************************************** -->
+
+    <div id="timeline-vis"></div>
+
+    <!-- JAVASCRIPT **************************************************************** -->
+    <script type="text/javascript">
+
+      let dimensions = {
+        w: 1000,
+        h: 300,
+        margins: 50
+      };
+      dimensions.containerW = dimensions.w - (dimensions.margins * 2);
+      dimensions.containerH = dimensions.h - (dimensions.margins * 2);
+
+      // create containers
+      var svg = d3.select('#timeline-vis')
+        .append('svg')
+          .attr('id', 'timeline-svg')
+          .attr('width', dimensions.w)
+          .attr('height', dimensions.h)
+          .style('background', '#eeeeee');
+
+      var container = svg.append("g")
+        .attr(
+          'transform',
+          'translate(' + dimensions.margins + ', ' + dimensions.margins + ')'
+        );
+
+			// load in the data
+      d3.csv("../data_county-etymologies.csv")
+        .then(function(data) {
+
+        // bin the data by decade
+        var bin = d3.bin()
+          .domain([
+						  d3.min(data, function(d) { return parseFloat(d.year); }),
+						  d3.max(data, function(d) { return parseFloat(d.year); })
+						])
+          .value(function(d) {
+            return parseFloat(d.year);
+          })
+          .thresholds(38); // approximately one bin per decade
+
+        var binnedCounties = bin(data);
+
+        // group by language within each bin
+        var binnedLang = [];
+
+        for (var j = 0; j < binnedCounties.length; j++) { // loop through 39 times
+
+          binnedLang[j] = [];
+
+          for (var k = 0; k < binnedCounties[j].length; k++) { // within each j-loop, loop through as many times as it is long
+
+            if (binnedLang[j] == []) {
+              binnedLang[j] = [];
+            } else {
+              binnedLang[j] = [d3.group(binnedCounties[j], function(d) {
+                return d.language; })];
+            } // close if
+          } // k
+        } // j
+
+        // determine original ticks to be overtaken by new tick values
+        var originalTickValues = [];
+        for ( var m = 0; m < binnedCounties.length; m++) {
+          if((binnedCounties.indexOf(binnedCounties[m]) - 1) % 5 == 0) {
+            originalTickValues[(m - 1) / 5] = binnedCounties.indexOf(binnedCounties[m]);
+          }
+        }
+
+        // create array to pull from for x-axis ticks
+        var xAxisTicks = [];
+        for ( var n = 0; n < binnedCounties.length; n++) {
+          if (binnedCounties[n].x1 % 50 == 0) {
+            xAxisTicks[(n - 1) / 5] = binnedCounties[n].x1;
+          }
+        }
+
+        // view various phases of datasets in the console for troubleshooting
+        console.log(binnedCounties);
+        console.log('binnedCounties ^^^');
+        console.log(binnedLang);
+        console.log('binnedLang ^^^');
+        console.log(originalTickValues);
+        console.log('originalTickValues ^^^');
+        console.log(xAxisTicks);
+        console.log('xAxisTicks ^^^');
+
+				// create scale functions
+        var xScale = d3.scaleBand()
+          .domain(d3.range(binnedCounties.length))
+          .range([0, dimensions.containerW])
+          .paddingInner(0.05);
+        /*
+        var yScale = d3.scaleLinear()
+          .domain([0, d3.max(stackedBarData, function(d) {
+            return d.euro + d.natam;
+          })])
+          .range([dimensions.containerH, 0]);
+          */
+        // axes
+        var xAxis = d3.axisBottom()
+          .scale(xScale)
+          .tickValues(originalTickValues)
+          .tickFormat((d,i) => xAxisTicks[i]);
+        /*
+        var yAxis = d3.axisLeft()
+          .scale(yScale)
+          .ticks(5);
+        */
+        var color = d3.scaleOrdinal(d3.schemePaired);
+        /*
+        // add a group for each category
+        var groups = container.selectAll('.category-layer')
+          .data(binnedLang)
+          .enter()
+          .append('g')
+            .attr('class', 'category-layer')
+            .style("fill", function(d, i) {
+              return color(i);
+            });
+            */
+
+        for (var m = 0; m < binnedCounties.length; m++) {
+          // add a rect per data value
+    			var histoSymbols = container.selectAll('.category-symbol')
+            .data(binnedCounties[m]) // or TRY CREATING A NEW DATASET PER BIN?
+            .enter()
+            .append('circle')
+              .attr('class', 'category-symbol')
+              .attr("cx", xScale(m))
+              .attr("cy", function(d, i) {
+                // console.log('cy: ' + (i * 5));
+                console.log('cy: ' + m.length);
+                return i * 5;
+                // return (i / m) * 10;
+              })
+      				.attr('r', 2)
+              .attr('opacity', 0.2);
+            }
+
+          container.append("g")
+            .call(xAxis)
+             .attr("class", "axis")
+             .attr("transform", "translate(0," + (dimensions.containerH) + ")");
+        /*
+        container.append("g")
+          .call(yAxis)
+           .attr("class", "axis");
+           */
+
+			}); // close CSV reader function
+
+    </script>
+
+  </body>
+</html>

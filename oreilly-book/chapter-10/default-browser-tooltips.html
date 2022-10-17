@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Lia's D3 Template!</title>
+    <script type="text/javascript" src="../../d3-library/d3.js"></script>
+    <style>
+      svg text {
+        pointer-events: none;
+      }
+    /*
+      rect {
+        -moz-transition: all 0.3s;
+        -o-transition: all 0.3s;
+        -webkit-transition: all 0.3s;
+        transition: all 0.3s;
+      }
+      rect:hover {
+        fill: orange;
+      }
+      */
+    </style>
+  </head>
+  <body>
+
+    <script type="text/javascript">
+
+    //Width and height
+			var w = 600;
+			var h = 250;
+
+			var myDataset = [ 5, 10, 13, 19, 21, 25, 22, 18, 15, 13,
+							11, 12, 15, 20, 18, 17, 16, 18, 23, 25 ];
+
+			var xScale = d3.scaleBand()
+							.domain(d3.range(myDataset.length))
+							.rangeRound([0, w])
+							.paddingInner(0.05);
+
+			var yScale = d3.scaleLinear()
+							.domain([0, d3.max(myDataset)])
+							.range([0, h]);
+
+			//Create mySvg element
+			var mySvg = d3.select("body")
+						.append("svg")
+						.attr("width", w)
+						.attr("height", h);
+
+      // create groups
+      mySvg.selectAll("g")
+           .data(myDataset)
+           .enter()
+           .append("g")
+           .on("mouseover", function() {
+  			   		d3.select(this.firstElementChild)
+                .transition()
+                .duration(250)
+  			   			.attr("fill", "orange");
+  			   })
+  			   .on("mouseout", function(d) {
+  				   d3.select(this.firstElementChild)
+  				   		.transition()
+  				   		.duration(250)
+  						  .attr("fill", "green");    // don't know why this isn't working with rgb :(
+  			   });
+
+      // create rects to hold data
+      mySvg.selectAll("g")
+           .append("rect")    // adding the rect's to the g's by tacking them on right after creating the g's; or could do it like I do for the text labels below
+  			   .attr("class", "realrect")
+           .attr("x", function(d, i) {
+  			   		return xScale(i);
+  			   })
+  			   .attr("y", function(d) {
+  			   		return h - yScale(d);
+  			   })
+  			   .attr("width", xScale.bandwidth())
+  			   .attr("height", function(d) {
+  			   		return yScale(d);
+  			   })
+  			   .attr("fill", function(d) {
+  					return "green";
+  			   });
+
+           /*
+			//Create labels
+			mySvg.selectAll("g")
+			   .append("text")
+			   .text(function(d) {
+			   		return d;
+			   })
+			   .attr("text-anchor", "middle")
+			   .attr("x", function(d, i) {
+			   		return xScale(i) + xScale.bandwidth() / 2;
+			   })
+			   .attr("y", function(d) {
+			   		return h - yScale(d) + 14;
+			   })
+			   .attr("font-family", "sans-serif")
+			   .attr("font-size", "11px")
+			   .attr("fill", "white");
+      */
+
+      // create invisible rect's for hovering
+      mySvg.selectAll("g")
+     			  .append("rect")
+     			  .attr("x", function(d, i) {
+     			    return xScale(i);
+     			  })
+     			  .attr("y", 0)
+     			  .attr("width", xScale.bandwidth())
+     			  .attr("height", h)
+            .attr("pointer-events", "all")
+     			  .attr("fill", "none")
+            .append("title")
+            .text(function(d) {
+              return d;
+            });
+
+    </script>
+  </body>
+</html>

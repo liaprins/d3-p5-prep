@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Timeline | County etymologies | CCG</title>
+    <!-- v6(.7) -->
+    <script type="text/javascript" src="../../../d3-library/d3.js"></script>
+    <!-- v4(.5) -->
+    <!-- <script type="text/javascript" src="../../../d3-book-master/d3.js"></script> -->
+
+    <!-- CSS *********************************************************************** -->
+    <style>
+
+    #timeline-vis {
+      width: 1000px;
+      margin: 10px auto;
+    }
+    .timebar {
+      fill: teal;
+    }
+
+    </style>
+  </head>
+  <body>
+    <!-- HTML ********************************************************************** -->
+
+    <div id="timeline-vis"></div>
+
+    <!-- JAVASCRIPT **************************************************************** -->
+    <script type="text/javascript">
+
+      var boxheight = 6;
+
+      // load in the data
+      d3.csv("../data_county-etymologies.csv")
+        .then(function(data) {
+
+        // bin the data by decade
+        var bin = d3.bin()
+          .domain([
+						  d3.min(data, function(d) { return parseFloat(d.year); }),
+						  d3.max(data, function(d) { return parseFloat(d.year); })
+						])
+          .value(function(d) {
+            return parseFloat(d.year);
+          })
+          .thresholds(379); // one bin per year (in this case don't need to bin at all, but am doing this as a quick experiment)
+
+        var binnedCounties = bin(data);
+
+        // group by category within each bin
+        var binnedCats = [];
+
+        for (var j = 0; j < binnedCounties.length; j++) { // loop through 39 times
+          binnedCats[j] = [];
+          for (var k = 0; k < binnedCounties[j].length; k++) { // within each j-loop, loop through as many times as it is long
+            if (binnedCats[j] == []) {
+              binnedCats[j] = [];
+            } else {
+              binnedCats[j] = [d3.group(binnedCounties[j], function(d) {
+                return d.category; })];
+            } // close if
+          } // k
+        } // j
+
+        var stackedBarData = [];
+
+        // prepare the data to be able to be stack-ified (like the dataset in O'Reilly Ch 13 stack-layout.html)
+        for (var l = 0; l < binnedCats.length; l++) { // loop through 39 times
+          stackedBarData[l] = {};
+          for (var m = 0; m < binnedCats[l].length; m++) { // within each l-loop, loop through as many times as it is long
+            var battleCount,
+                combinationCount,
+                conceptCount,
+                creationCount,
+                floraCount,
+                geologyCount,
+                groupCount,
+                manCount,
+                objectCount,
+                placeCount,
+                resourceCount,
+                womanCount,
+                unknownCount;
+
+            if (binnedCats[l][0].get('battle')) {
+              battleCount = binnedCats[l][0].get('battle').length;
+            } else {
+              battleCount = 0;
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('combination'))) {
+              combinationCount = binnedCats[l][0].get('combination').length;
+            } else {
+              combinationCount = 0;
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('concept'))) {
+              conceptCount = binnedCats[l][0].get('concept').length;
+            } else {
+              conceptCount = 0;
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('creation'))) {
+              creationCount = binnedCats[l][0].get('creation').length;
+            } else {
+              creationCount = 0;
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('flora'))) {
+              floraCount = binnedCats[l][0].get('flora').length;
+            } else {
+              floraCount = 0;
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('geology'))) {
+              geologyCount = binnedCats[l][0].get('geology').length;
+            } else {
+              geologyCount = 0;
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('group'))) {
+              groupCount = binnedCats[l][0].get('group').length;
+            } else {
+              groupCount = 0;
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('man'))) {
+              manCount = binnedCats[l][0].get('man').length;
+            } else {
+              manCount = 0;
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('object'))) {
+              objectCount = binnedCats[l][0].get('object').length;
+            } else {
+              objectCount = 0;
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('place'))) {
+              placeCount = binnedCats[l][0].get('place').length;
+            } else {
+              placeCount = 0;
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('resource'))) {
+              resourceCount = binnedCats[l][0].get('resource').length;
+            } else {
+              resourceCount = 0;
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('woman'))) {
+              womanCount = binnedCats[l][0].get('woman').length;
+            } else {
+              womanCount = 0;
+            }; // close count if-statement
+
+            if ((binnedCats[l][0].get('unknown'))) {
+              unknownCount = binnedCats[l][0].get('unknown').length;
+            } else {
+              unknownCount = 0;
+            }; // close count if-statement
+
+          } // m
+
+          stackedBarData[l] = {
+            'battle':       parseFloat(battleCount),
+            'combination':  parseFloat(combinationCount),
+            'concept':      parseFloat(conceptCount),
+            'creation':     parseFloat(creationCount),
+            'flora':        parseFloat(floraCount),
+            'geology':      parseFloat(geologyCount),
+            'group':        parseFloat(groupCount),
+            'man':          parseFloat(manCount),
+            'object':       parseFloat(objectCount),
+            'place':        parseFloat(placeCount),
+            'resource':     parseFloat(resourceCount),
+            'woman':        parseFloat(womanCount),
+            'unknown':      parseFloat(unknownCount)
+          };
+
+        } // l
+
+        // view various phases of datasets in the console for troubleshooting
+        console.log(data);
+        console.log('data ^^^');
+        console.log(binnedCounties);
+        console.log('binnedCounties ^^^');
+        console.log(binnedCats);
+        console.log('binnedCats ^^^');
+        console.log(stackedBarData);
+        console.log('stackedBarData ^^^');
+
+        var margin = {top: 20, right: 20, bottom: 80, left: 40},
+            width = boxheight * stackedBarData.length;
+
+        var translate = function(x,y){
+          return "translate(" + x + "," + y + ")";
+        }
+
+        var x = d3.scaleLinear()
+            .range([0,width])
+            .domain([0,stackedBarData.length])
+
+        var max = d3.max(stackedBarData, function(d) { return d.battle + d.combination + d.concept + d.creation + d.flora + d.geology + d.group + d.man + d.object + d.place + d.resource + d.woman + d.unknown });
+        var height = max * boxheight;
+
+
+        var svg = d3.select("#timeline-vis").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", translate(margin.left, margin.top + 0.5))
+
+        var y = d3.scaleLinear()
+            .domain([0, max])
+            .rangeRound([height, 0])
+
+        var color = d3.scaleOrdinal(d3.schemePaired)
+            .domain(['battle', 'combination', 'concept', 'creation', 'flora', 'geology', 'group', 'man', 'object', 'place', 'resource', 'woman', 'unknown']);
+
+        stackedBarData.forEach(function(d){
+          var y0 = 0;
+          d.offsets = color.domain().map(function(type){
+            return {type: type, y0: y0, y1: y0 += +d[type], value : d[type]}
+          });
+        });
+
+        var xAxis = d3.axisBottom()
+            .scale(x);
+
+        var yAxis = d3.axisLeft()
+            .scale(y);
+
+        svg.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+        svg.append("g")
+            .attr("class", "y axis")
+            .call(yAxis);
+
+        var groups = svg.selectAll(".group")
+            .data(stackedBarData)
+              .enter().append("g")
+                .attr("transform", function(d,i){return "translate(" + x(i) + ", 0)"})
+                .attr("class", "group")
+
+        var types = groups.selectAll(".type")
+            .data(function(d){return d.offsets})
+            .enter().append("g")
+              .attr("transform", function(d){ return translate(0,y(d.y1))})
+              .attr("class", "type")
+              .attr("fill", function(d){return color(d.type)})
+
+        types.selectAll("rect")
+            .data(function(d){return d3.range(0,d.value)})
+            .enter().append("rect")
+              .attr("height", boxheight-0.5)
+              .attr("width", boxheight-0.5)
+              .attr("y", function(d){ return boxheight * d })
+
+      }); // close CSV function
+
+    </script>
+
+  </body>
+</html>

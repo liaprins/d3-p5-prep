@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Lia's D3 Template!</title>
+    <!--
+    <script type="text/javascript" src="../../d3-library/d3.js"></script>
+    -->
+    <script type="text/javascript" src="../../d3-book-master/d3.js"></script>
+    <style>
+      h1 {
+        font-family: Helvetica, sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+      }
+      .area {
+        stroke: none;
+      }
+      .area:hover {
+        fill: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+
+      var w = 1400;
+      var h = 300;
+      var padding = 20;
+
+      var myDataset, xScale, yScale, xAxis, yAxis, myArea;
+
+      // for converting strings to dates
+      var parseTime = d3.timeParse("%Y-%m");
+
+      // for converting Dates to strings
+      var formatTime = d3.timeFormat("%b %Y");
+
+      // set up stack method
+      var myStack = d3.stack();
+                      // .order(d3.stackOrderDescending);    // flipped order
+
+      // load in data
+      d3.request("vehicle_sales_data.csv")
+        .mimeType("text/csv")
+        .get(function(response) {
+
+          //
+          // DATA PARSING
+          //
+
+          // parse each row of the CSV into an array of string values
+          var rows = d3.csvParseRows(response.responseText);
+
+          var myDataset = [];
+
+          // loop through CSV rows, starting at row 3 (bypassing rows 0-2 that don't have the sales values)
+          for (var i = 3; i < rows.length; i++) {
+
+            // create a new object
+            myDataset[i - 3] = {
+              date: parseTime(rows[i][0])
+            };
+
+            // loop through the vehicles within the current row
+            for (var j = 1; j < rows[i].length; j++) {
+
+              var make =      rows[0][j];    // 'Make' from row 0 in CSVv
+              var model =     rows[1][j];    // 'Model' from row 1 in CSV
+              var makeModel = rows[0][j] + " " + rows[1][j];    // 'Make' + 'Model' will serve as the key
+              var type =      rows[2][j];    // 'Type' from row 3 in CSV
+              var sales =     rows[i][j];    // Sales value for this vehicle and month
+
+              if (sales) {
+                sales = parseInt(sales);
+              } else {
+                sales = 0;
+              }
+
+              // Append a new object with data for this vehicle and month
+              myDataset[i - 3][makeModel] = {
+                "make": make,
+                "model": model,
+                "type": type,
+                "sales": sales
+              };
+
+            }
+
+          }
+
+
+          //
+          // STACKING
+          //
+
+          // get all the keys (make + model), but toss out 'date'
+          var myKeys = Object.keys(myDataset[0]).slice(1);
+
+          // Tell stack function where to find the keys
+          myStack.keys(myKeys)
+            .value(function value(d, key) {
+              return d[key].sales;
+            });
+
+          // stack the data and log it out
+          var series = myStack(myDataset);
+
+
+          //
+          // MAKE THE CHART
+          //
+
+          // create scale functions
+          xScale = d3.scaleTime()
+                     .domain([
+                       d3.min(myDataset, function(d) { return d.date; }),
+                       d3.max(myDataset, function(d) { return d.date; })
+                     ])
+                     .range([padding, w - padding * 2]);
+
+          yScale = d3.scaleLinear()
+                     .domain([
+                       0,
+                       d3.max(myDataset, function(d) {
+                         var sum = 0;
+
+                         // loop through each row to calculate sum of all vehicles' sales
+                         for (var i = 0; i < myKeys.length; i++) {
+                           sum += d[myKeys[i]].sales;
+                         };
+
+                         return sum;
+
+                       })
+                     ])
+                     .range([h - padding, padding / 2])
+                     .nice();
+
+          // define axes
+          xAxis = d3.axisBottom()
+                    .scale(xScale)
+                    .ticks(10)
+                    .tickFormat(formatTime);
+
+          yAxis = d3.axisRight()
+                    .scale(yScale)
+                    .ticks(5);
+
+          // define area generator
+          myArea = d3.area()
+                     .x(function(d) { return xScale(d.data.date); })
+                     .y0(function(d) { return yScale(d[0]); })
+                     .y1(function(d) { return yScale(d[1]); });
+
+          // create SVG element
+          var mySvg = d3.select("body")
+                        .append("svg")
+                        .attr("width", w)
+                        .attr("height", h);
+
+          // create areas
+          mySvg.selectAll("path")
+            .data(series)
+            .enter()
+            .append("path")
+            .attr("class", "area")
+            .attr("d", myArea)
+            .attr("fill", function(d) {
+
+              // which vehicle is this?
+              var thisKey = d.key;
+
+              // what "Type" is this vehicle?
+              var thisType = d[0].data[thisKey].type;
+
+              var myColor;
+
+              switch (thisType) {
+                case "HEV":
+                  myColor = d3.schemeCategory20[0];
+                  break;
+                case "PHEV":
+                  myColor = d3.schemeCategory20[1];
+                  break;
+                case "BEV":
+                  myColor = d3.schemeCategory20[2];
+                  break;
+                case "FCEV":
+                  myColor = d3.schemeCategory20[3];
+                  break;
+              }
+
+              return myColor;
+
+            })
+            .append("title")
+            .text(function(d) {
+              return d.key;
+            });
+
+          // create axes
+          mySvg.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + (h - padding) + ")")
+            .call(xAxis);
+
+          mySvg.append("g")
+            .attr("class", "y axis")
+            .attr("transform", "translate(" + (w - padding * 2) + ",0)")
+            .call(yAxis);
+
+        });
+
+    </script>
+  </body>
+</html>

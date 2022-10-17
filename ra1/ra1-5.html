@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+        <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <title>Lia's D3 Template!</title>
+            <script type="text/javascript" src="../d3-library/d3.js"></script>
+            <style>
+              svg text {
+                pointer-events: none;
+              }
+
+            </style>
+          </head>
+          <body>
+
+            <script type="text/javascript">
+
+            //Width and height
+        			var w = 650;
+        			var h = 480;
+              var barLength = 320;
+
+              var myDataset = [
+                [
+                  { value: 7,   bucket: "General", label: "Disease nomenclature" },
+                  { value: 231, bucket: "General", label: "Related diseases" }
+                ],
+                [
+                  { value: 318, bucket: "Clinical", label: "Clinical characteristics" },
+                  { value: 36,  bucket: "Clinical", label: "Quality of life" },
+                  { value: 817, bucket: "Clinical", label: "Disease pathology" },
+                  { value: 210, bucket: "Clinical", label: "Therapeutics in the clinic" },
+                  { value: 58,  bucket: "Clinical", label: "Epidemiology" },
+                  { value: 116, bucket: "Clinical", label: "Influence of geography, environment" }
+                ],
+                [
+                  { value: 651, bucket: "Basic", label: "Disease mechanisms" },
+                  { value: 72,  bucket: "Basic", label: "Normal biology" },
+                  { value: 188, bucket: "Basic", label: "Non-human model system" },
+                  { value: 51,  bucket: "Basic", label: "Basic research: human subjects" },
+                  { value: 94,  bucket: "Basic", label: "Computational biology, informatics" }
+                ],
+                [
+                  { value: 36,  bucket: "Translational", label: "Therapeutic hypothesis" },
+                  { value: 7,   bucket: "Translational", label: "Drug mechanism" },
+                  { value: 14,  bucket: "Translational", label: "Preclinical therapeutics" },
+                  { value: 2,   bucket: "Translational", label: "Patient-driven therapeutics" }
+                ]
+              ];
+
+              var yScale = d3.scaleBand()
+                      .domain(d3.range(17))
+                      .rangeRound([0, h]);
+
+              var xScale = d3.scaleLinear()
+                      .domain([0, 817])
+                      .range([0, barLength]);
+
+              // create SVG element
+              var mySvg = d3.select("body")
+                            .append("svg")
+                            .attr("width", w)
+                            .attr("height", h)
+                            .attr("transform", "translate(50)")
+                            .attr("id", "mysvg");
+
+
+              // loop through buckets and create a div for each
+              for (l = 0; l < myDataset.length; l++) {
+                var bucket = document.createElement('g');
+                var svgContainer = document.getElementById('mysvg')
+                bucket.setAttribute('id', myDataset[l][0].bucket);
+                svgContainer.appendChild(bucket);
+              }
+
+
+              for (j = 0; j < myDataset.length; j++) {
+
+                // create rects to hold data
+                // mySvg.select("#" + myDataset[j][0].bucket).selectAll("rect")    // SOMEHOW THIS IS PREVENTING THE ATTRIBUTES FROM RENDERING
+                mySvg.selectAll("rect")
+                     .data(myDataset[j])
+                     .enter()
+                     .append("rect")    // adding the rect's to the g's by tacking them on right after creating the g's; or could do it like I do for the text labels below
+                     .attr("y", function(d, i) {
+                        return yScale(i) + 5;
+                     })
+                     .attr("x", barLength)
+                     .attr("height", yScale.bandwidth() - 10)
+                     .attr("width", function(d) {
+                        return xScale(d.value);
+                     })
+                     .attr("fill", function(d) {
+                      return "blue";
+                     });
+
+              }    // close outer for-loop
+
+            </script>
+          </body>
+        </html>

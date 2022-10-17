@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Timeline | County etymologies | CCG</title>
+    <!-- v6(.7) -->
+    <script type="text/javascript" src="../../../d3-library/d3.js"></script>
+    <!-- v4(.5) -->
+    <!-- <script type="text/javascript" src="../../../d3-book-master/d3.js"></script> -->
+
+    <!-- CSS *********************************************************************** -->
+    <style>
+
+    #timeline-vis {
+      width: 1000px;
+      margin: 10px auto;
+    }
+    .timebar {
+      fill: teal;
+    }
+
+    </style>
+  </head>
+  <body>
+    <!-- HTML ********************************************************************** -->
+
+    <div id="timeline-vis"></div>
+
+    <!-- JAVASCRIPT **************************************************************** -->
+    <script type="text/javascript">
+
+
+
+      let dimensions = {
+        w: 1000,
+        h: 300,
+        margins: 50
+      };
+
+      dimensions.containerW = dimensions.w - (dimensions.margins * 2);
+      dimensions.containerH = dimensions.h - (dimensions.margins * 2);
+
+      var xScale, yScale;  // empty for now
+
+			// to convert strings to Dates
+      var parseTime = d3.timeParse("%m/%d/%Y");
+
+			// to convert Dates to strings
+			var formatTime = d3.timeFormat("%Y");
+
+      // create SVG element
+      var svg = d3.select('#timeline-vis')
+        .append('svg')
+          .attr('id', 'timeline-svg')
+          .attr('width', dimensions.w)
+          .attr('height', dimensions.h)
+          .style('background', '#eeeeee');
+
+      var container = svg.append("g") // <g>
+        .attr(
+          'transform',
+          'translate(' + dimensions.margins + ', ' + dimensions.margins + ')'
+        );
+
+			// load in the data
+      d3.csv("../data_county-etymologies.csv")
+        .then(function(data) {
+
+        // group the CSV rows together by unique year
+        var countiesByCategory = d3.group(data, function(d) {
+          return d.category;
+        });
+
+        // binning
+        var bin = d3.bin()
+          .domain([
+						  d3.min(data, function(d) { return parseFloat(d.year); }),
+						  d3.max(data, function(d) { return parseFloat(d.year); })
+						])
+          .value(function(d) {
+            return parseFloat(d.year);
+          })
+          .thresholds(38);
+
+        var binnedCounties = bin(data);
+        var binnedCountiesCount = binnedCounties.length;
+        var binPadding = 1;
+
+        // group by category within each bin
+        var binnedCats = [];
+
+        for (var j = 0; j < binnedCountiesCount; j++) { // loop through 39 times
+          binnedCats[j] = [];
+
+          var newX0 = { newX0: binnedCounties[j].x0 };
+          var newX1 = { newX1: binnedCounties[j].x1 };
+
+          var newX = [newX0, newX1];
+          binnedCats[j] = newX;
+
+          for (var k = 0; k < binnedCounties[j].length; k++) { // within each j-loop, loop through as many times as it is long
+
+            // binnedCats[j] = [d3.group(binnedCounties[j], function(d) {
+              // return d.category; }), newX0, newX1];
+
+            if (binnedCats[j] == []) {
+              binnedCats[j] = newX; // if don't do if-statement, won't assign x0 and x1 to decade when there are no counties named (1930s), which would cause problems when referencing these to build chart
+            } else {
+              binnedCats[j] = d3.merge([newX, [d3.group(binnedCounties[j], function(d) {
+                return d.category; })] ]);
+            } // close if
+          } // k
+        } // j
+
+        console.log(countiesByCategory);
+        console.log('countiesByCategory');
+
+        console.log(binnedCounties);
+        console.log('binnedCounties');
+
+        console.log(binnedCats);
+        console.log('binnedCats');
+
+
+        /*
+        var stackedBarData = [];
+
+        // trying to manually create a dataset that looks like the one in O'Reilly Ch 13 stack-layout.html
+        for (var l = 0; l < binnedCountiesCount; l++) { // loop through 39 times
+
+          stackedBarData[l] = {};
+
+          for (var m = 0; m < binnedCounties[l].length; m++) { // within each j-loop, loop through as many times as it is long
+
+            var sumBattle = 0;
+            if (binnedCounties[l].category == 'battle') {
+              sumBattle += 1;
+              console.log(sumBattle);
+            }
+
+          }
+
+        }
+
+        console.log(stackedBarData);
+
+        var stack = d3.stack()
+          .keys([ 'battle', 'combination', 'concept', 'creation', 'flora', 'geology', 'man', 'object', 'place', 'resource', 'woman', 'unknown' ])
+          .order(d3.stackOrderDescending);
+
+        var series = stack(binnedCats, function(d, i) {
+          for (var j = 0; j < d[0].length; j++) {
+            for (var k = 0; k < d[0][j].length; j++) {
+              console.log('help')
+            }
+          }
+        })
+        */
+
+				// create scale functions
+				xScale = d3.scaleLinear()
+				  .domain([0, binnedCountiesCount])
+          /* .domain([
+  			    d3.min(data, function(d) { return parseFloat(d.year); }),
+  			    d3.max(data, function(d) { return parseFloat(d.year); })
+  			  ]) */
+				  .range([0, dimensions.containerW]);
+
+        xScaleAxis = d3.scaleLinear()
+          .domain([
+  			    d3.min(data, function(d) { return parseFloat(d.year); }),
+  			    d3.max(data, function(d) { return parseFloat(d.year); })
+          ])
+				  .range([0, dimensions.containerW]);
+
+				yScale = d3.scaleLinear()
+          .domain([
+  					0,
+  					d3.max(binnedCounties, function(d, i) { return binnedCounties[i].length; })
+  				])
+  				.range([dimensions.containerH, 0]);
+
+        // create axes
+        var xAxis = d3.axisBottom()
+          // .scale(xScale)
+          .scale(xScaleAxis)
+          .ticks(13);    // set rough # of ticks
+
+        var yAxis = d3.axisLeft()
+          .scale(yScale)
+          .ticks(5);
+
+				// draw bars
+				container.selectAll("rect")
+           .data(binnedCats)
+				   .enter()
+				   .append("rect")
+             .attr('class', function(d) {
+               return 'timebar ' + d[0].newX0 + '-' + d[1].newX1;
+             })
+             .attr('x', function(d, i) {
+               return xScaleAxis(d[0].newX0);
+             })
+             .attr('y', function(d) {
+               if ((d.length == 3) && (d[2].get('place'))) {
+                 console.log(d[2].get('place').length);
+                 return yScale(d[2].get('place').length);
+               } else {
+                 console.log('No "place" category');
+                 return yScale(0);
+               };
+             })
+  				   .attr('width', function(d, i) {
+               return d3.max([0, xScaleAxis(d[1].newX1) - xScaleAxis(d[0].newX0) - binPadding]);
+             })
+             .attr('height', function(d) {
+               if ((d.length == 3) && (d[2].get('place'))) {
+                 console.log(d[2].get('place').length);
+                 return dimensions.containerH - yScale(d[2].get('place').length);
+               } else {
+                 console.log('No "place" category');
+                 return dimensions.containerH - yScale(0);
+               };
+             });
+
+        // call axes
+        container.append("g")
+           .call(xAxis)
+           .attr("class", "axis")
+           .attr("transform", "translate(0," + dimensions.containerH + ")");
+
+        container.append("g")
+           .call(yAxis)
+           .attr("class", "axis");
+
+			}); // close CSV reader function
+
+    </script>
+
+  </body>
+</html>

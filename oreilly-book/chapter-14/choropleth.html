@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Lia's D3 Template!</title>
+    <!--
+    <script type="text/javascript" src="../../d3-library/d3.js"></script>
+    -->
+    <script type="text/javascript" src="../../d3-book-master/d3.js"></script>
+    <style>
+    </style>
+  </head>
+  <body>
+    <script>
+
+      var w = 500;
+      var h = 300;
+
+      // define selected projection (Albers USA here)
+      var myProjection = d3.geoAlbersUsa()
+                         .translate([w / 2, h / 2])
+                         .scale([500]);
+
+      // define path generator, using a projection from above
+      var myPath = d3.geoPath()
+                    .projection(myProjection);
+
+      // set up color scale
+      var myColor = d3.scaleQuantize()
+                      .range(["rgb(237,248,233)", "rgb(186,228,179)", "rgb(116,196,118)", "rgb(49,163,84)", "rgb(0,109,44)"]);
+
+      // create SVG container
+      var mySvg = d3.select("body")
+                    .append("svg")
+                    .attr("width", w)
+                    .attr("height", h);
+
+      // load in GeoJSON data
+      d3.csv("us-ag-productivity.csv", function(data) {
+
+        // set color scale's domain
+        myColor.domain([
+          d3.min(data, function(d) { return d.value; }),
+          d3.max(data, function(d) { return d.value; })
+        ]);
+
+        d3.json("us-states.json", function(json) {
+
+          // merge the ag data (CSV) and GeoJSON state outline data (JSON)
+          // loop through each ag data value
+          for (var i = 0; i < data.length; i++) {
+
+            // grab state name
+            var dataState = data[i].state;
+
+            // grab data value, and convert from string to float
+            var dataValue = parseFloat(data[i].value);
+
+            // match up the corresponding state inside the GeoJSON file
+            for (var j = 0; j < json.features.length; j++) {
+
+              var jsonState = json.features[j].properties.name;
+
+              if (dataState == jsonState) {
+
+                // copy the data value into the JSON
+                json.features[j].properties.value = dataValue;
+
+                // stop looking through the JSON
+                break;
+
+              }
+
+            }
+
+          }
+
+          // bind data and create one path per GeoJSON feature
+          mySvg.selectAll("path")
+            .data(json.features)
+            .enter()
+            .append("path")
+            .attr("d", myPath)
+            .style("fill", function(d) {
+              var value = d.properties.value;
+              if (value) {
+                return myColor(value);
+              } else {
+                return "#CCCCCC";
+              }
+            });
+
+        });
+
+      });
+
+    </script>
+  </body>
+</html>

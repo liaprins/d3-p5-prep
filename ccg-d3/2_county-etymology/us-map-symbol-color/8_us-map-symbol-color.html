@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Lia's D3 Template!</title>
+
+    <!-- v6(.7) -->
+    <!--
+    <script type="text/javascript" src="../../../d3-library/d3.js"></script>
+    -->
+
+    <!-- v4(.5) -->
+    <script type="text/javascript" src="../../../d3-book-master/d3.js"></script>
+
+    <style>
+      body {
+        font-family: 'Work Sans';
+        line-height: 1;
+      }
+      #vis,
+      #filter-container {
+        width: 1000px;
+        margin: 10px auto;
+      }
+      #language-filter-group,
+      #etymology-filter-group {
+        margin-top: 20px;
+      }
+      .filter-language,
+      .filter-etymology {
+        display: inline-block;
+        padding: 0 15px;
+        margin: 0 5px 10px 0;
+        background-color: #eeeeee;
+        cursor: pointer;
+      }
+    </style>
+
+  </head>
+  <body>
+
+    <div id="vis"></div>
+
+    <div id="filter-container">
+
+      <!-- Filters for language -->
+      <div id="language-filter-group">
+        <h2>Language family</h2>
+        <div id="euro-lang-filter" class="filter-language" data-language="European">
+          <p>European</p>
+        </div>
+        <div class="filter-language" data-language="Native American">
+          <p>Native American</p>
+        </div>
+      </div>
+
+      <!-- Filters for etymology -->
+      <div id="etymology-filter-group">
+        <h2>Category</h2>
+        <div class="filter-etymology" data-etymology="Man">
+          <p>Man</p>
+        </div>
+        <div class="filter-etymology" data-etymology="Woman">
+          <p>Woman</p>
+        </div>
+        <div class="filter-etymology" data-etymology="Group of people">
+          <p>Group of people</p>
+        </div>
+        <div class="filter-etymology" data-etymology="Flora, fauna">
+          <p>Flora, fauna</p>
+        </div>
+        <div class="filter-etymology" data-etymology="Geologic feature">
+          <p>Geologic feature</p>
+        </div>
+        <div class="filter-etymology" data-etymology="Natural resource, crop">
+          <p>Natural resource, crop</p>
+        </div>
+        <div class="filter-etymology" data-etymology="Pre-existing place">
+          <p>Pre-existing place</p>
+        </div>
+        <div class="filter-etymology" data-etymology="Battle">
+          <p>Battle</p>
+        </div>
+        <div class="filter-etymology" data-etymology="Man-made object">
+          <p>Man-made object</p>
+        </div>
+        <div class="filter-etymology" data-etymology="Abstract concept">
+          <p>Abstract concept</p>
+        </div>
+        <div class="filter-etymology" data-etymology="Aspect of county’s creation">
+          <p>Aspect of county’s creation</p>
+        </div>
+        <div class="filter-etymology" data-etymology="Combination of reasons">
+          <p>Combination of reasons</p>
+        </div>
+        <div class="filter-etymology" data-etymology="Unknown reason">
+          <p>Unknown reason</p>
+        </div>
+      </div>
+
+    </div> <!-- close #filter-container -->
+
+    <script type="text/javascript"
+            src="8_us-map-symbol-color.js">
+    </script>
+
+  </body>
+</html>

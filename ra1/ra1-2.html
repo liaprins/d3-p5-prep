@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+        <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <title>Lia's D3 Template!</title>
+            <script type="text/javascript" src="../d3-library/d3.js"></script>
+            <style>
+              svg text {
+                pointer-events: none;
+              }
+
+            </style>
+          </head>
+          <body>
+
+            <script type="text/javascript">
+
+            //Width and height
+        			var w = 650;
+        			var h = 480;
+              var barLength = 320;
+
+              var myDataset = [
+                { value: 7, label: "Disease nomenclature" },
+                { value: 231, label: "Related diseases" },
+                { value: 318, label: "Clinical characteristics" },
+                { value: 36, label: "Quality of life" },
+                { value: 817, label: "Disease pathology" },
+                { value: 210, label: "Therapeutics in the clinic" },
+                { value: 58, label: "Epidemiology" },
+                { value: 116, label: "Influence of geography, environment" },
+                { value: 651, label: "Disease mechanisms" },
+                { value: 72, label: "Normal biology" },
+                { value: 188, label: "Non-human model system" },
+                { value: 51, label: "Basic research: human subjects" },
+                { value: 94, label: "Computational biology, informatics" },
+                { value: 36, label: "Therapeutic hypothesis" },
+                { value: 7, label: "Drug mechanism" },
+                { value: 14, label: "Preclinical therapeutics" },
+                { value: 2, label: "Patient-driven therapeutics" } ];
+
+        			var yScale = d3.scaleBand()
+        							.domain(d3.range(myDataset.length))
+                      // .paddingInner(0.4)
+        							.rangeRound([0, h]);
+
+        			var xScale = d3.scaleLinear()
+        							.domain([0, d3.max(myDataset, function(d) { return d.value; })])
+        							.range([0, barLength]);
+
+              // NOT SURE THAT THIS IS ACTUALLY DOING ANYTHING IN THIS VIS...
+              //Define key function, to be used when binding data
+        			var key = function(d) {
+        				return d.label;
+        			};
+
+        			// create SVG element
+        			var mySvg = d3.select("body")
+        						.append("svg")
+        						.attr("width", w)
+        						.attr("height", h)
+                    .attr("transform", "translate(50)");
+
+              // create groups
+              mySvg.selectAll("g")
+                   .data(myDataset)
+                   .enter()
+                   .append("g")
+                   .on("mouseover", function() {
+                     d3.select(this.lastElementChild)
+                        .transition()
+                        .duration(250)
+                        .attr("opacity", "0.05")
+                        .attr("fill", "blue");
+                  })
+                  .on("mouseout", function(d) {
+                    d3.select(this.lastElementChild)
+                       .transition()
+                       .duration(250)
+                       .attr("opacity", "0");
+                  });
+
+              // create rects to hold data
+              mySvg.selectAll("g")
+                   .append("rect")    // adding the rect's to the g's by tacking them on right after creating the g's; or could do it like I do for the text labels below
+          			   .attr("class", "realrect")
+                   .attr("y", function(d, i) {
+          			   		return yScale(i) + 5;
+          			   })
+          			   .attr("x", barLength)
+          			   .attr("height", yScale.bandwidth() - 10)
+          			   .attr("width", function(d) {
+          			   		return xScale(d.value);
+          			   })
+          			   .attr("fill", function(d) {
+          					return "blue";
+          			   });
+
+        			// create labels
+        			mySvg.selectAll("g")
+        			   .append("text")
+        			   .text(function(d) {
+        			   		return d.label + " (" + d.value + ")";
+        			   })
+        			   .attr("text-anchor", "end")
+        			   .attr("y", function(d, i) {
+        			   		return yScale(i) + yScale.bandwidth() / 2 + 4;
+        			   })
+        			   .attr("x", barLength - 10)
+        			   .attr("font-family", "Barlow")
+                 .attr("text-decoration", "underline")
+        			   .attr("font-size", "11px");
+
+
+              // create invisible rect's for hovering
+              mySvg.selectAll("g")
+             			  .append("rect")
+             			  .attr("y", function(d, i) {
+             			    return yScale(i);
+             			  })
+             			  .attr("x", 0)
+             			  .attr("height", yScale.bandwidth())
+             			  .attr("width", w)
+                    .attr("pointer-events", "all")
+             			  .attr("opacity", "0");
+
+            </script>
+          </body>
+        </html>

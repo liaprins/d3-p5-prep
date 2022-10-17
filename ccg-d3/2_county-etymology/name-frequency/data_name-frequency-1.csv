@@ -1,0 +1,309 @@
+id,name,x,y,type,fullname,state,etymology,common,hamilton,language,granularlanguage,etycount,category,subcategory,ety1,cat2,subcat2,ety2,cat3,subcat3,ety3,cat4,subcat4,ety4,year
+51620,Franklin,,,City,City of Franklin,Virginia,"Named for Benjamin Franklin (1706–1790), one of the Founding Fathers of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1961
+21051,Clay ,57.0,29.0,County,Clay County,Kentucky,"Named for Green Clay (1757–1826), a Kentucky politician and cousin of Henry Clay who fought in the Revolutionary War and War of 1812.",TRUE,,euro,,,people,man,,,,,,,,,,,1807
+20027,Clay ,27.0,21.0,County,Clay County,Kansas,"Named for Henry Clay (1777–1852), U.S. legislator from Kentucky.",TRUE,,euro,,,people,man,,,,,,,,,,,1857
+01027,Clay ,51.5,42.0,County,Clay County,Alabama,"Named for Henry Clay (1777–1852), U.S. legislator from Kentucky.",TRUE,,euro,,,people,man,,,,,,,,,,,1866
+12019,Clay ,64.5,50.0,County,Clay County,Florida,"Named for Henry Clay (1777–1852), U.S. legislator from Kentucky.",TRUE,,euro,,,people,man,,,,,,,,,,,1858
+13061,Clay ,53.0,47.0,County,Clay County,Georgia,"Named for Henry Clay (1777–1852), U.S. legislator from Kentucky.",TRUE,,euro,,,people,man,,,,,,,,,,,1854
+17025,Clay ,44.5,22.0,County,Clay County,Illinois,"Named for Henry Clay (1777–1852), U.S. legislator from Kentucky.",TRUE,,euro,,,people,man,,,,,,,,,,,1824
+18021,Clay ,47.5,20.0,County,Clay County,Indiana,"Named for Henry Clay (1777–1852), U.S. legislator from Kentucky.",TRUE,,euro,,,people,man,,,,,,,,,,,1830
+27027,Clay ,30.5,4.0,County,Clay County,Minnesota,"Named for Henry Clay (1777–1852), U.S. legislator from Kentucky.",TRUE,,euro,,,people,man,,,,,,,,,,,1858
+28025,Clay ,45.5,40.0,County,Clay County,Mississippi,"Named for Henry Clay (1777–1852), U.S. legislator from Kentucky.",TRUE,,euro,,,people,man,,,,,,,,,,,1871
+29047,Clay ,33.0,21.0,County,Clay County,Missouri,"Named for Henry Clay (1777–1852), U.S. legislator from Kentucky.",TRUE,,euro,,,people,man,,,,,,,,,,,1822
+31035,Clay ,24.5,18.0,County,Clay County,Nebraska,"Named for Henry Clay (1777–1852), U.S. legislator from Kentucky.",TRUE,,euro,,,people,man,,,,,,,,,,,1855
+37043,Clay ,58.0,35.0,County,Clay County,North Carolina,"Named for Henry Clay (1777–1852), U.S. legislator from Kentucky.",TRUE,,euro,,,people,man,,,,,,,,,,,1861
+46027,Clay ,27.0,11.0,County,Clay County,South Dakota,"Named for Henry Clay (1777–1852), U.S. legislator from Kentucky.",TRUE,,euro,,,people,man,,,,,,,,,,,1862
+47027,Clay ,52.0,31.0,County,Clay County,Tennessee,"Named for Henry Clay (1777–1852), U.S. legislator from Kentucky.",TRUE,,euro,,,people,man,,,,,,,,,,,1870
+48077,Clay ,26.5,34.0,County,Clay County,Texas,"Named for Henry Clay (1777–1852), U.S. legislator from Kentucky.",TRUE,,euro,,,people,man,,,,,,,,,,,1857
+54015,Clay ,63.0,23.0,County,Clay County,West Virginia,"Named for Henry Clay (1777–1852), U.S. legislator from Kentucky.",TRUE,,euro,,,people,man,,,,,,,,,,,1858
+19041,Clay ,31.5,10.0,County,Clay County,Iowa,"Named for Henry Clay, Jr. (1807–1847), officer in the Mexican–American War.",TRUE,,euro,,,people,man,,,,,,,,,,,1851
+05021,Clay ,40.5,30.0,County,Clay County,Arkansas,"Named for John M. Clayton, a state senator.",TRUE,,euro,,,people,man,,,,,,,,,,,1873
+01059,Franklin ,47.5,38.0,County,Franklin County,Alabama,"Named for Benjamin Franklin (1706–1790), one of the Founding Fathers of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1818
+05047,Franklin ,34.5,32.0,County,Franklin County,Arkansas,"Named for Benjamin Franklin (1706–1790), one of the Founding Fathers of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1837
+12037,Franklin ,56.5,52.0,County,Franklin County,Florida,"Named for Benjamin Franklin (1706–1790), one of the Founding Fathers of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1832
+13119,Franklin ,59.5,38.0,County,Franklin County,Georgia,"Named for Benjamin Franklin (1706–1790), one of the Founding Fathers of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1784
+17055,Franklin ,43.5,24.0,County,Franklin County,Illinois,"Named for Benjamin Franklin (1706–1790), one of the Founding Fathers of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1818
+18047,Franklin ,52.5,20.0,County,Franklin County,Indiana,"Named for Benjamin Franklin (1706–1790), one of the Founding Fathers of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1811
+19069,Franklin ,36.0,11.0,County,Franklin County,Iowa,"Named for Benjamin Franklin (1706–1790), one of the Founding Fathers of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1851
+20059,Franklin ,30.0,23.0,County,Franklin County,Kansas,"Named for Benjamin Franklin (1706–1790), one of the Founding Fathers of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1855
+21073,Franklin ,53.0,25.0,County,Franklin County,Kentucky,"Named for Benjamin Franklin (1706–1790), one of the Founding Fathers of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1794
+23007,Franklin ,82.5,8.0,County,Franklin County,Maine,"Named for Benjamin Franklin (1706–1790), one of the Founding Fathers of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1838
+25011,Franklin ,79.0,15.0,County,Franklin County,Massachusetts,"Named for Benjamin Franklin (1706–1790), one of the Founding Fathers of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1811
+28037,Franklin ,42.5,46.0,County,Franklin County,Mississippi,"Named for Benjamin Franklin (1706–1790), one of the Founding Fathers of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1809
+29071,Franklin ,39.0,23.0,County,Franklin County,Missouri,"Named for Benjamin Franklin (1706–1790), one of the Founding Fathers of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1818
+31061,Franklin ,23.0,19.0,County,Franklin County,Nebraska,"Named for Benjamin Franklin (1706–1790), one of the Founding Fathers of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1867
+36033,Franklin ,74.0,9.0,County,Franklin County,New York,"Named for Benjamin Franklin (1706–1790), one of the Founding Fathers of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1808
+37069,Franklin ,71.0,35.0,County,Franklin County,North Carolina,"Named for Benjamin Franklin (1706–1790), one of the Founding Fathers of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1779
+39049,Franklin ,58.5,18.0,County,Franklin County,Ohio,"Named for Benjamin Franklin (1706–1790), one of the Founding Fathers of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1803
+42055,Franklin ,68.5,18.0,County,Franklin County,Pennsylvania,"Named for Benjamin Franklin (1706–1790), one of the Founding Fathers of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1784
+47051,Franklin ,50.5,36.0,County,Franklin County,Tennessee,"Named for Benjamin Franklin (1706–1790), one of the Founding Fathers of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1807
+50011,Franklin ,77.0,9.0,County,Franklin County,Vermont,"Named for Benjamin Franklin (1706–1790), one of the Founding Fathers of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1792
+51067,Franklin ,67.5,30.0,County,Franklin County,Virginia,"Named for Benjamin Franklin (1706–1790), one of the Founding Fathers of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1785
+53021,Franklin ,6.0,9.0,County,Franklin County,Washington,"Named for Benjamin Franklin (1706–1790), one of the Founding Fathers of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1883
+16041,Franklin ,10.5,16.0,County,Franklin County,Idaho,"Named for Franklin D. Richards (1821–1899), an early apostle of the LDS Church.",TRUE,,euro,English,,people,man,,,,,,,,,,,1913
+48159,Franklin ,33.0,37.0,County,Franklin County,Texas,"Named for Generally believed to have been named after Judge Benjamin C. Franklin, the first appointed justice in the Republic of Texas.",TRUE,,euro,,,people,man,,,,,,,,,,,1875
+22041,Franklin ,40.0,43.0,Parish,Franklin Parish,Louisiana,"Named for Benjamin Franklin (1706–1790), one of the Founding Fathers of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1843
+18053,Grant ,51.0,15.0,County,Grant County,Indiana,Named for Captains Samuel and Moses Grant of Kentucky.,TRUE,,euro,,,people,group,,,,,,,,,,,1831
+21081,Grant ,54.0,23.0,County,Grant County,Kentucky,"Named for Samuel Grant (1762–1789 or 1794), John Grant (1754–1826), and/or Squire Grant (1764–1833), early settlers of Kentucky.",TRUE,,euro,,,people,man,,,,,,,,,,,1820
+55043,Grant ,43.0,9.0,County,Grant County,Wisconsin,"Named for the Grant River, which was likely named for James Grant, an early trapper on the river.",TRUE,,euro,,2,nature,water,Named for the Grant River,people,man,"which was likely named for James Grant, an early trapper on the river",,,,,,,1836
+41023,Grant ,5.5,14.0,County,Grant County,Oregon,"Named for Ulysses S Grant, 18th President of the United States (1869–1877).",TRUE,,euro,,,people,man,,,,,,,,,,,1864
+05053,Grant ,37.5,36.0,County,Grant County,Arkansas,"Named for Ulysses S. Grant, 18th President of the United States (1869–1877).",TRUE,,euro,,,people,man,,,,,,,,,,,1869
+20067,Grant ,19.5,24.0,County,Grant County,Kansas,"Named for Ulysses S. Grant, 18th President of the United States (1869–1877).",TRUE,,euro,,,people,man,,,,,,,,,,,1873
+22043,Grant ,39.0,45.0,County,Grant County,Louisiana,"Named for Ulysses S. Grant, 18th President of the United States (1869–1877).",TRUE,,euro,,,people,man,,,,,,,,,,,1869
+27051,Grant ,31.0,5.0,County,Grant County,Minnesota,"Named for Ulysses S. Grant, 18th President of the United States (1869–1877).",TRUE,,euro,,,people,man,,,,,,,,,,,1868
+31075,Grant ,19.0,13.0,County,Grant County,Nebraska,"Named for Ulysses S. Grant, 18th President of the United States (1869–1877).",TRUE,,euro,,,people,man,,,,,,,,,,,1887
+35017,Grant ,11.5,30.0,County,Grant County,New Mexico,"Named for Ulysses S. Grant, 18th President of the United States (1869–1877).",TRUE,,euro,,,people,man,,,,,,,,,,,1868
+38037,Grant ,20.0,7.0,County,Grant County,North Dakota,"Named for Ulysses S. Grant, 18th President of the United States (1869–1877).",TRUE,,euro,,,people,man,,,,,,,,,,,1916
+40053,Grant ,26.0,27.0,County,Grant County,Oklahoma,"Named for Ulysses S. Grant, 18th President of the United States (1869–1877).",TRUE,,euro,,,people,man,,,,,,,,,,,1893
+46051,Grant ,28.5,6.0,County,Grant County,South Dakota,"Named for Ulysses S. Grant, 18th President of the United States (1869–1877).",TRUE,,euro,,,people,man,,,,,,,,,,,1873
+53025,Grant ,5.5,8.0,County,Grant County,Washington,"Named for Ulysses S. Grant, 18th President of the United States (1869–1877).",TRUE,,euro,,,people,man,,,,,,,,,,,1909
+54023,Grant ,66.0,21.0,County,Grant County,West Virginia,"Named for Ulysses S. Grant, 18th President of the United States (1869–1877).",TRUE,,euro,,,people,man,,,,,,,,,,,1866
+01071,Jackson ,51.0,37.0,County,Jackson County,Alabama,"Named for Andrew Jackson, the 7th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1819
+05067,Jackson ,39.5,32.0,County,Jackson County,Arkansas,"Named for Andrew Jackson, the 7th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1829
+08057,Jackson ,13.5,16.0,County,Jackson County,Colorado,"Named for Andrew Jackson, the 7th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1909
+12063,Jackson ,54.5,50.0,County,Jackson County,Florida,"Named for Andrew Jackson, the 7th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1822
+17077,Jackson ,42.0,25.0,County,Jackson County,Illinois,"Named for Andrew Jackson, the 7th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1816
+18071,Jackson ,50.0,21.0,County,Jackson County,Indiana,"Named for Andrew Jackson, the 7th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1816
+19097,Jackson ,42.0,11.0,County,Jackson County,Iowa,"Named for Andrew Jackson, the 7th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1837
+20085,Jackson ,29.0,21.0,County,Jackson County,Kansas,"Named for Andrew Jackson, the 7th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1859
+21109,Jackson ,56.5,28.0,County,Jackson County,Kentucky,"Named for Andrew Jackson, the 7th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1858
+26075,Jackson ,55.0,9.0,County,Jackson County,Michigan,"Named for Andrew Jackson, the 7th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1832
+27063,Jackson ,32.0,9.0,County,Jackson County,Minnesota,"Named for Andrew Jackson, the 7th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1857
+28059,Jackson ,48.0,51.0,County,Jackson County,Mississippi,"Named for Andrew Jackson, the 7th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1812
+29095,Jackson ,33.5,22.0,County,Jackson County,Missouri,"Named for Andrew Jackson, the 7th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1826
+37099,Jackson ,60.0,35.0,County,Jackson County,North Carolina,"Named for Andrew Jackson, the 7th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1851
+39079,Jackson ,58.5,22.0,County,Jackson County,Ohio,"Named for Andrew Jackson, the 7th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1816
+40065,Jackson ,24.5,32.0,County,Jackson County,Oklahoma,"Named for Andrew Jackson, the 7th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1907
+41029,Jackson ,3.5,16.0,County,Jackson County,Oregon,"Named for Andrew Jackson, the 7th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1852
+47087,Jackson ,51.5,32.0,County,Jackson County,Tennessee,"Named for Andrew Jackson, the 7th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1801
+48239,Jackson ,36.0,51.0,County,Jackson County,Texas,"Named for Andrew Jackson, the 7th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1836
+54035,Jackson ,61.5,22.0,County,Jackson County,West Virginia,"Named for Andrew Jackson, the 7th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1831
+55053,Jackson ,41.5,6.0,County,Jackson County,Wisconsin,"Named for Andrew Jackson, the 7th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1853
+46071,Jackson ,19.0,11.0,County,Jackson County,South Dakota,"Named for J.R. Jackson, a legislator of the Dakota Territory.",TRUE,,euro,,,people,man,,,,,,,,,,,1883
+13157,Jackson ,59.0,39.0,County,Jackson County,Georgia,"Named for James Jackson, a U.S. Congressman and the 23rd Governor of Georgia.",TRUE,,euro,,,people,man,,,,,,,,,,,1796
+22049,Jackson ,38.5,42.0,Parish,Jackson Parish,Louisiana,"Named for Andrew Jackson, the 7th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1845
+08059,Jefferson ,15.0,19.0,County,Jefferson County,Colorado,"Named for the extralegal Jefferson Territory (itself named for U.S. President Thomas Jefferson), of which the county was a part from 1859 to 1861.",TRUE,jefferson,euro,,2,place,america,Named for the extralegal Jefferson Territory,people,man,itself named for U.S. President Thomas Jefferson,,,,,,,1861
+01073,Jefferson ,49.5,40.0,County,Jefferson County,Alabama,"Named for Thomas Jefferson, the third President of the United States.",TRUE,jefferson,euro,,,people,man,,,,,,,,,,,1819
+05069,Jefferson ,38.5,36.0,County,Jefferson County,Arkansas,"Named for Thomas Jefferson, the third President of the United States.",TRUE,jefferson,euro,,,people,man,,,,,,,,,,,1829
+12065,Jefferson ,57.5,50.0,County,Jefferson County,Florida,"Named for Thomas Jefferson, the third President of the United States.",TRUE,jefferson,euro,,,people,man,,,,,,,,,,,1827
+13163,Jefferson ,63.0,43.0,County,Jefferson County,Georgia,"Named for Thomas Jefferson, the third President of the United States.",TRUE,jefferson,euro,,,people,man,,,,,,,,,,,1796
+16051,Jefferson ,10.5,12.0,County,Jefferson County,Idaho,"Named for Thomas Jefferson, the third President of the United States.",TRUE,jefferson,euro,,,people,man,,,,,,,,,,,1913
+17081,Jefferson ,43.0,23.0,County,Jefferson County,Illinois,"Named for Thomas Jefferson, the third President of the United States.",TRUE,jefferson,euro,,,people,man,,,,,,,,,,,1839
+18077,Jefferson ,51.5,22.0,County,Jefferson County,Indiana,"Named for Thomas Jefferson, the third President of the United States.",TRUE,jefferson,euro,,,people,man,,,,,,,,,,,1810
+19101,Jefferson ,38.0,15.0,County,Jefferson County,Iowa,"Named for Thomas Jefferson, the third President of the United States.",TRUE,jefferson,euro,,,people,man,,,,,,,,,,,1839
+20087,Jefferson ,30.0,21.0,County,Jefferson County,Kansas,"Named for Thomas Jefferson, the third President of the United States.",TRUE,jefferson,euro,,,people,man,,,,,,,,,,,1855
+21111,Jefferson ,51.0,25.0,County,Jefferson County,Kentucky,"Named for Thomas Jefferson, the third President of the United States.",TRUE,jefferson,euro,,,people,man,,,,,,,,,,,1780
+28063,Jefferson ,42.0,45.0,County,Jefferson County,Mississippi,"Named for Thomas Jefferson, the third President of the United States.",TRUE,jefferson,euro,,,people,man,,,,,,,,,,,1799
+29099,Jefferson ,40.5,24.0,County,Jefferson County,Missouri,"Named for Thomas Jefferson, the third President of the United States.",TRUE,jefferson,euro,,,people,man,,,,,,,,,,,1818
+30043,Jefferson ,11.5,8.0,County,Jefferson County,Montana,"Named for Thomas Jefferson, the third President of the United States.",TRUE,jefferson,euro,,,people,man,,,,,,,,,,,1865
+31095,Jefferson ,27.0,19.0,County,Jefferson County,Nebraska,"Named for Thomas Jefferson, the third President of the United States.",TRUE,jefferson,euro,,,people,man,,,,,,,,,,,1856
+36045,Jefferson ,72.5,10.0,County,Jefferson County,New York,"Named for Thomas Jefferson, the third President of the United States.",TRUE,jefferson,euro,,,people,man,,,,,,,,,,,1805
+39081,Jefferson ,62.5,16.0,County,Jefferson County,Ohio,"Named for Thomas Jefferson, the third President of the United States.",TRUE,jefferson,euro,,,people,man,,,,,,,,,,,1797
+40067,Jefferson ,27.5,34.0,County,Jefferson County,Oklahoma,"Named for Thomas Jefferson, the third President of the United States.",TRUE,jefferson,euro,,,people,man,,,,,,,,,,,1907
+41031,Jefferson ,4.0,13.0,County,Jefferson County,Oregon,"Named for Thomas Jefferson, the third President of the United States.",TRUE,jefferson,euro,,,people,man,,,,,,,,,,,1914
+42065,Jefferson ,66.0,15.0,County,Jefferson County,Pennsylvania,"Named for Thomas Jefferson, the third President of the United States.",TRUE,jefferson,euro,,,people,man,,,,,,,,,,,1804
+47089,Jefferson ,58.5,32.0,County,Jefferson County,Tennessee,"Named for Thomas Jefferson, the third President of the United States.",TRUE,jefferson,euro,,,people,man,,,,,,,,,,,1792
+48245,Jefferson ,37.5,50.0,County,Jefferson County,Texas,"Named for Thomas Jefferson, the third President of the United States.",TRUE,jefferson,euro,,,people,man,,,,,,,,,,,1836
+53031,Jefferson ,2.0,5.0,County,Jefferson County,Washington,"Named for Thomas Jefferson, the third President of the United States.",TRUE,jefferson,euro,,,people,man,,,,,,,,,,,1852
+54037,Jefferson ,69.0,21.0,County,Jefferson County,West Virginia,"Named for Thomas Jefferson, the third President of the United States.",TRUE,jefferson,euro,,,people,man,,,,,,,,,,,1801
+55055,Jefferson ,46.0,9.0,County,Jefferson County,Wisconsin,"Named for Thomas Jefferson, the third President of the United States.",TRUE,jefferson,euro,,,people,man,,,,,,,,,,,1836
+22053,Jefferson ,38.0,49.0,Parish,Jefferson Parish,Louisiana,"Named for Thomas Jefferson, the third President of the United States.",TRUE,jefferson,euro,,,people,man,,,,,,,,,,,1825
+46083,Lincoln ,28.0,11.0,County,Lincoln County,South Dakota,"Named after Lincoln County, Maine.",TRUE,,euro,English,1+,place,america,,,,,,,,,,,1862
+05079,Lincoln ,39.0,37.0,County,Lincoln County,Arkansas,"Named for Abraham Lincoln, the 16th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1871
+08073,Lincoln ,17.0,21.0,County,Lincoln County,Colorado,"Named for Abraham Lincoln, the 16th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1889
+16063,Lincoln ,9.0,15.0,County,Lincoln County,Idaho,"Named for Abraham Lincoln, the 16th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1895
+20105,Lincoln ,24.5,22.0,County,Lincoln County,Kansas,"Named for Abraham Lincoln, the 16th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1867
+22061,Lincoln ,38.0,41.0,County,Lincoln County,Louisiana,"Named for Abraham Lincoln, the 16th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1873
+27081,Lincoln ,29.5,8.0,County,Lincoln County,Minnesota,"Named for Abraham Lincoln, the 16th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1873
+28085,Lincoln ,43.0,45.0,County,Lincoln County,Mississippi,"Named for Abraham Lincoln, the 16th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1870
+30053,Lincoln ,9.5,4.0,County,Lincoln County,Montana,"Named for Abraham Lincoln, the 16th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1909
+31111,Lincoln ,20.5,16.0,County,Lincoln County,Nebraska,"Named for Abraham Lincoln, the 16th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1860
+32017,Lincoln ,8.5,24.0,County,Lincoln County,Nevada,"Named for Abraham Lincoln, the 16th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1866
+35027,Lincoln ,14.0,31.0,County,Lincoln County,New Mexico,"Named for Abraham Lincoln, the 16th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1869
+40081,Lincoln ,28.5,30.0,County,Lincoln County,Oklahoma,"Named for Abraham Lincoln, the 16th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1893
+41041,Lincoln ,1.5,14.0,County,Lincoln County,Oregon,"Named for Abraham Lincoln, the 16th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1893
+53043,Lincoln ,6.5,6.0,County,Lincoln County,Washington,"Named for Abraham Lincoln, the 16th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1883
+54043,Lincoln ,61.0,25.0,County,Lincoln County,West Virginia,"Named for Abraham Lincoln, the 16th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1867
+55069,Lincoln ,43.0,3.0,County,Lincoln County,Wisconsin,"Named for Abraham Lincoln, the 16th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1874
+56023,Lincoln ,12.0,15.0,County,Lincoln County,Wyoming,"Named for Abraham Lincoln, the 16th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1911
+13181,Lincoln ,62.5,40.0,County,Lincoln County,Georgia,"Named for Benjamin Lincoln, a leading general in the American Revolutionary War and the first U.S. Secretary of War.",TRUE,,euro,,,people,man,,,,,,,,,,,1796
+21137,Lincoln ,54.0,29.0,County,Lincoln County,Kentucky,"Named for Benjamin Lincoln, a leading general in the American Revolutionary War and the first U.S. Secretary of War.",TRUE,,euro,,,people,man,,,,,,,,,,,1780
+29113,Lincoln ,39.0,21.0,County,Lincoln County,Missouri,"Named for Benjamin Lincoln, a leading general in the American Revolutionary War and the first U.S. Secretary of War.",TRUE,,euro,,,people,man,,,,,,,,,,,1818
+37109,Lincoln ,64.0,35.0,County,Lincoln County,North Carolina,"Named for Benjamin Lincoln, a leading general in the American Revolutionary War and the first U.S. Secretary of War.",TRUE,,euro,,,people,man,,,,,,,,,,,1779
+47103,Lincoln ,48.5,36.0,County,Lincoln County,Tennessee,"Named for Benjamin Lincoln, a leading general in the American Revolutionary War and the first U.S. Secretary of War.",TRUE,,euro,,,people,man,,,,,,,,,,,1809
+23015,Lincoln ,83.5,10.0,County,Lincoln County,Maine,"Named for the city of Lincoln, England.",TRUE,,euro,English,,place,abroad,,,,,,,,,,,1760
+01089,Madison ,50.0,37.0,County,Madison County,Alabama,"Named for James Madison, the 4th President of the United States.",TRUE,madison,euro,,,people,man,,,,,,,,,,,1808
+05087,Madison ,34.0,31.0,County,Madison County,Arkansas,"Named for James Madison, the 4th President of the United States.",TRUE,madison,euro,,,people,man,,,,,,,,,,,1836
+12079,Madison ,58.5,50.0,County,Madison County,Florida,"Named for James Madison, the 4th President of the United States.",TRUE,madison,euro,,,people,man,,,,,,,,,,,1827
+13195,Madison ,63.0,41.0,County,Madison County,Georgia,"Named for James Madison, the 4th President of the United States.",TRUE,madison,euro,,,people,man,,,,,,,,,,,1811
+16065,Madison ,11.5,12.0,County,Madison County,Idaho,"Named for James Madison, the 4th President of the United States.",TRUE,madison,euro,,,people,man,,,,,,,,,,,1913
+17119,Madison ,42.0,17.0,County,Madison County,Illinois,"Named for James Madison, the 4th President of the United States.",TRUE,madison,euro,,,people,man,,,,,,,,,,,1829
+18095,Madison ,51.0,17.0,County,Madison County,Indiana,"Named for James Madison, the 4th President of the United States.",TRUE,madison,euro,,,people,man,,,,,,,,,,,1823
+19121,Madison ,33.5,14.0,County,Madison County,Iowa,"Named for James Madison, the 4th President of the United States.",TRUE,madison,euro,,,people,man,,,,,,,,,,,1846
+21151,Madison ,45.0,29.0,County,Madison County,Kentucky,"Named for James Madison, the 4th President of the United States.",TRUE,madison,euro,,,people,man,,,,,,,,,,,1785
+28089,Madison ,43.5,42.0,County,Madison County,Mississippi,"Named for James Madison, the 4th President of the United States.",TRUE,madison,euro,,,people,man,,,,,,,,,,,1828
+29123,Madison ,37.5,24.0,County,Madison County,Missouri,"Named for James Madison, the 4th President of the United States.",TRUE,madison,euro,,,people,man,,,,,,,,,,,1818
+36053,Madison ,71.5,12.0,County,Madison County,New York,"Named for James Madison, the 4th President of the United States.",TRUE,madison,euro,,,people,man,,,,,,,,,,,1806
+37115,Madison ,73.5,36.0,County,Madison County,North Carolina,"Named for James Madison, the 4th President of the United States.",TRUE,madison,euro,,,people,man,,,,,,,,,,,1851
+39097,Madison ,57.0,17.0,County,Madison County,Ohio,"Named for James Madison, the 4th President of the United States.",TRUE,madison,euro,,,people,man,,,,,,,,,,,1810
+47113,Madison ,49.0,35.0,County,Madison County,Tennessee,"Named for James Madison, the 4th President of the United States.",TRUE,madison,euro,,,people,man,,,,,,,,,,,1821
+48313,Madison ,27.0,41.0,County,Madison County,Texas,"Named for James Madison, the 4th President of the United States.",TRUE,madison,euro,,,people,man,,,,,,,,,,,1853
+51113,Madison ,68.5,24.0,County,Madison County,Virginia,"Named for James Madison, the 4th President of the United States.",TRUE,madison,euro,,,people,man,,,,,,,,,,,1792
+31119,Madison ,20.0,15.0,County,Madison County,Nebraska,"Named for Madison, the capital of Wisconsin and the origin of most early settlers in the county, which was itself named for James Madison.",TRUE,madison,euro,,,place,america,,,,,,,,,,,1856
+30057,Madison ,15.5,4.0,County,Madison County,Montana,"Named for The Madison River, itself named for James Madison.",TRUE,madison,euro,,,people,man,,,,,,,,,,,1865
+22065,Madison ,41.0,43.0,Parish,Madison Parish,Louisiana,"Named for James Madison, the 4th President of the United States.",TRUE,madison,euro,,,people,man,,,,,,,,,,,1838
+20115,Marion ,27.5,20.0,County,Marion County,Kansas,"Named after Marion County, Ohio.",TRUE,,euro,,1+,place,america,,,,,,,,,,,1855
+12083,Marion ,64.0,51.0,County,Marion County,Florida,"Named for Francis Marion, a Continental Army officer nicknamed the “Swamp Fox” for his activity in the Southern Theater of the American Revolutionary War.",TRUE,,euro,,,people,man,,,,,,,,,,,1844
+13189,Marion ,57.0,45.0,County,Marion County,Georgia,"Named for Francis Marion, a Continental Army officer nicknamed the “Swamp Fox” for his activity in the Southern Theater of the American Revolutionary War.",TRUE,,euro,,,people,man,,,,,,,,,,,1827
+17125,Marion ,47.0,11.0,County,Marion County,Illinois,"Named for Francis Marion, a Continental Army officer nicknamed the “Swamp Fox” for his activity in the Southern Theater of the American Revolutionary War.",TRUE,,euro,,,people,man,,,,,,,,,,,1839
+18097,Marion ,50.5,18.0,County,Marion County,Indiana,"Named for Francis Marion, a Continental Army officer nicknamed the “Swamp Fox” for his activity in the Southern Theater of the American Revolutionary War.",TRUE,,euro,,,people,man,,,,,,,,,,,1820
+19125,Marion ,35.5,14.0,County,Marion County,Iowa,"Named for Francis Marion, a Continental Army officer nicknamed the “Swamp Fox” for his activity in the Southern Theater of the American Revolutionary War.",TRUE,,euro,,,people,man,,,,,,,,,,,1851
+21155,Marion ,57.0,23.0,County,Marion County,Kentucky,"Named for Francis Marion, a Continental Army officer nicknamed the “Swamp Fox” for his activity in the Southern Theater of the American Revolutionary War.",TRUE,,euro,,,people,man,,,,,,,,,,,1834
+28091,Marion ,45.0,47.0,County,Marion County,Mississippi,"Named for Francis Marion, a Continental Army officer nicknamed the “Swamp Fox” for his activity in the Southern Theater of the American Revolutionary War.",TRUE,,euro,,,people,man,,,,,,,,,,,1811
+29127,Marion ,33.0,29.0,County,Marion County,Missouri,"Named for Francis Marion, a Continental Army officer nicknamed the “Swamp Fox” for his activity in the Southern Theater of the American Revolutionary War.",TRUE,,euro,,,people,man,,,,,,,,,,,1826
+39101,Marion ,56.0,15.0,County,Marion County,Ohio,"Named for Francis Marion, a Continental Army officer nicknamed the “Swamp Fox” for his activity in the Southern Theater of the American Revolutionary War.",TRUE,,euro,,,people,man,,,,,,,,,,,1820
+41047,Marion ,3.0,13.0,County,Marion County,Oregon,"Named for Francis Marion, a Continental Army officer nicknamed the “Swamp Fox” for his activity in the Southern Theater of the American Revolutionary War.",TRUE,,euro,,,people,man,,,,,,,,,,,1849
+45067,Marion ,68.5,40.0,County,Marion County,South Carolina,"Named for Francis Marion, a Continental Army officer nicknamed the “Swamp Fox” for his activity in the Southern Theater of the American Revolutionary War.",TRUE,,euro,,,people,man,,,,,,,,,,,1800
+47117,Marion ,55.0,35.0,County,Marion County,Tennessee,"Named for Francis Marion, a Continental Army officer nicknamed the “Swamp Fox” for his activity in the Southern Theater of the American Revolutionary War.",TRUE,,euro,,,people,man,,,,,,,,,,,1817
+48315,Marion ,36.0,53.0,County,Marion County,Texas,"Named for Francis Marion, a Continental Army officer nicknamed the “Swamp Fox” for his activity in the Southern Theater of the American Revolutionary War.",TRUE,,euro,,,people,man,,,,,,,,,,,1860
+54049,Marion ,63.5,18.0,County,Marion County,West Virginia,"Named for Francis Marion, a Continental Army officer nicknamed the “Swamp Fox” for his activity in the Southern Theater of the American Revolutionary War.",TRUE,,euro,,,people,man,,,,,,,,,,,1842
+01099,Monroe ,49.0,47.0,County,Monroe County,Alabama,"Named for James Monroe, the 5th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1815
+05095,Monroe ,40.0,35.0,County,Monroe County,Arkansas,"Named for James Monroe, the 5th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1829
+12087,Monroe ,66.5,60.0,County,Monroe County,Florida,"Named for James Monroe, the 5th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1823
+13207,Monroe ,58.0,43.0,County,Monroe County,Georgia,"Named for James Monroe, the 5th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1821
+17133,Monroe ,41.0,23.0,County,Monroe County,Illinois,"Named for James Monroe, the 5th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1825
+18105,Monroe ,49.0,21.0,County,Monroe County,Indiana,"Named for James Monroe, the 5th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1833
+19135,Monroe ,36.0,15.0,County,Monroe County,Iowa,"Named for James Monroe, the 5th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1851
+21171,Monroe ,51.5,30.0,County,Monroe County,Kentucky,"Named for James Monroe, the 5th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1820
+26115,Monroe ,57.5,10.0,County,Monroe County,Michigan,"Named for James Monroe, the 5th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1817
+28095,Monroe ,46.0,39.0,County,Monroe County,Mississippi,"Named for James Monroe, the 5th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1821
+29137,Monroe ,37.5,20.0,County,Monroe County,Missouri,"Named for James Monroe, the 5th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1831
+36055,Monroe ,66.5,12.0,County,Monroe County,New York,"Named for James Monroe, the 5th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1821
+39111,Monroe ,62.0,19.0,County,Monroe County,Ohio,"Named for James Monroe, the 5th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1813
+42089,Monroe ,73.5,16.0,County,Monroe County,Pennsylvania,"Named for James Monroe, the 5th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1836
+47123,Monroe ,56.5,34.0,County,Monroe County,Tennessee,"Named for James Monroe, the 5th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1819
+54063,Monroe ,64.5,26.0,County,Monroe County,West Virginia,"Named for James Monroe, the 5th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1799
+55081,Monroe ,42.5,6.0,County,Monroe County,Wisconsin,"Named for James Monroe, the 5th President of the United States.",TRUE,,euro,,,people,man,,,,,,,,,,,1854
+20125,Montgomery ,29.5,26.0,County,Montgomery County,Kansas,"Named for either James M. Montgomery, an abolitionist and preacher, or Richard Montgomery.",TRUE,,euro,,,people,man,,,,,,,,,,,1867
+42091,Montgomery ,74.5,20.0,County,Montgomery County,Pennsylvania,"Named for either Richard Montgomery or Montgomeryshire, a county in Wales (which was named in turn after one of William the Conqueror's main counselors, Roger de Montgomerie), as that part of Pennsylvania was settled by Welsh Quakers.",TRUE,,euro,Welsh,,unknown,uncertain,"Named for either Richard Montgomery or Montgomeryshire, a county in Wales",place,abroad,"which, if in fact named for the Welsh county, was named in turn after one of William the Conqueror's main counselors, Roger de Montgomerie)",,,,,,,1784
+47125,Montgomery ,47.0,31.0,County,Montgomery County,Tennessee,"Named for John Montgomery, an explorer and Native American fighter.",TRUE,,euro,,,people,man,,,,,,,,,,,1796
+01101,Montgomery ,51.0,45.0,County,Montgomery County,Alabama,"Named for Richard Montgomery, an officer during the American Revolutionary War.",TRUE,,euro,,,people,man,,,,,,,,,,,1816
+05097,Montgomery ,35.0,35.0,County,Montgomery County,Arkansas,"Named for Richard Montgomery, an officer during the American Revolutionary War.",TRUE,,euro,,,people,man,,,,,,,,,,,1842
+13209,Montgomery ,63.0,45.0,County,Montgomery County,Georgia,"Named for Richard Montgomery, an officer during the American Revolutionary War.",TRUE,,euro,,,people,man,,,,,,,,,,,1793
+17135,Montgomery ,42.5,20.0,County,Montgomery County,Illinois,"Named for Richard Montgomery, an officer during the American Revolutionary War.",TRUE,,euro,,,people,man,,,,,,,,,,,1843
+18107,Montgomery ,48.5,18.0,County,Montgomery County,Indiana,"Named for Richard Montgomery, an officer during the American Revolutionary War.",TRUE,,euro,,,people,man,,,,,,,,,,,1822
+19137,Montgomery ,31.5,16.0,County,Montgomery County,Iowa,"Named for Richard Montgomery, an officer during the American Revolutionary War.",TRUE,,euro,,,people,man,,,,,,,,,,,1851
+21173,Montgomery ,56.0,25.0,County,Montgomery County,Kentucky,"Named for Richard Montgomery, an officer during the American Revolutionary War.",TRUE,,euro,,,people,man,,,,,,,,,,,1796
+24031,Montgomery ,71.0,21.0,County,Montgomery County,Maryland,"Named for Richard Montgomery, an officer during the American Revolutionary War.",TRUE,,euro,,,people,man,,,,,,,,,,,1776
+28097,Montgomery ,44.0,41.0,County,Montgomery County,Mississippi,"Named for Richard Montgomery, an officer during the American Revolutionary War.",TRUE,,euro,,,people,man,,,,,,,,,,,1871
+29139,Montgomery ,38.5,22.0,County,Montgomery County,Missouri,"Named for Richard Montgomery, an officer during the American Revolutionary War.",TRUE,,euro,,,people,man,,,,,,,,,,,1818
+36057,Montgomery ,73.5,12.0,County,Montgomery County,New York,"Named for Richard Montgomery, an officer during the American Revolutionary War.",TRUE,,euro,,,people,man,,,,,,,,,,,1772
+37123,Montgomery ,67.5,36.0,County,Montgomery County,North Carolina,"Named for Richard Montgomery, an officer during the American Revolutionary War.",TRUE,,euro,,,people,man,,,,,,,,,,,1779
+39113,Montgomery ,55.0,19.0,County,Montgomery County,Ohio,"Named for Richard Montgomery, an officer during the American Revolutionary War.",TRUE,,euro,,,people,man,,,,,,,,,,,1803
+48339,Montgomery ,35.0,47.0,County,Montgomery County,Texas,"Named for Richard Montgomery, an officer during the American Revolutionary War.",TRUE,,euro,,,people,man,,,,,,,,,,,1837
+51121,Montgomery ,65.0,29.0,County,Montgomery County,Virginia,"Named for Richard Montgomery, an officer during the American Revolutionary War.",TRUE,,euro,,,people,man,,,,,,,,,,,1776
+37179,Union ,66.0,37.0,County,Union County,North Carolina,"Its name was a compromise between Whigs, who wanted to name the new county for Henry Clay, and Democrats, who wanted to name it for Andrew Jackson.",TRUE,,euro,,,concept,idea,,,,,,,,,,,1842
+13291,Union ,56.5,36.0,County,Union County,Georgia,"Likely named for the Union Party, a political group that supported removing Native Americans from the area and opening it to white settlers.",TRUE,,euro,,,people,group,,,,,,,,,,,1832
+47173,Union ,56.5,32.0,County,Union County,Tennessee,Named either for its creation from parts of five counties or to memorialize East Tennessee’s support for preservation of the Union in the years before the Civil War.,TRUE,,euro,,,unknown,uncertain,,,,,,,,,,,1850
+17181,Union ,42.5,26.0,County,Union County,Illinois,"Named for a joint revival meeting of the Baptists and Dunkards, called a “union meeting”.",TRUE,,euro,,,concept,event,,,,,,,,,,,1818
+45087,Union ,64.5,38.0,County,Union County,South Carolina,Named for the old Union Church near Monarch Mill.,TRUE,,euro,,,place,america,,,,,,,,,,,1798
+21225,Union ,45.5,26.0,County,Union County,Kentucky,Named for the unanimous decision of the residents to unite together and create a new county.,TRUE,,euro,,,concept,idea,,,,,,,,,,,1811
+19175,Union ,33.5,16.0,County,Union County,Iowa,Named in honour of the Union which the people wished to preserve at the time of founding.,TRUE,,euro,,,concept,idea,,,,,,,,,,,1851
+05139,Union ,38.0,39.0,County,Union County,Arkansas,"Named in recognition of the 1829 citizens’ petition for a new county, stating that they were petitioning “in the spirit of Union and Unity”.",TRUE,,euro,,,concept,idea,,,,,,,,,,,1829
+34039,Union ,77.0,19.0,County,Union County,New Jersey,Named inn reference to the Federal Union of the United States.,TRUE,,euro,,,concept,idea,,,,,,,,,,,1857
+12125,Union ,62.5,50.0,County,Union County,Florida,Named to honor the concept of unity.,TRUE,,euro,,,concept,idea,,,,,,,,,,,1921
+46127,Union ,27.5,12.0,County,Union County,South Dakota,"Originally named Cole County, the named was changed to Union because of Civil War sentiment.",TRUE,,euro,,,concept,idea,,,,,,,,,,,1864
+18161,Union ,53.0,19.0,County,Union County,Indiana,"So named because it is the product of a union of parts of Fayette, Franklin and Wayne counties, united into one county in 1821.",TRUE,,euro,,,concept,idea,,,,,,,,,,,1821
+35059,Union ,16.5,26.0,County,Union County,New Mexico,"So named because the citizens, were united in their desire for the creation of a new county out of three existing New Mexico counties.",TRUE,,euro,,,concept,idea,,,,,,,,,,,1893
+28145,Union ,45.0,37.0,County,Union County,Mississippi,So named because the county was formed as a union of pieces of several other counties.,TRUE,,euro,,,concept,idea,,,,,,,,,,,1870
+42119,Union ,69.5,16.0,County,Union County,Pennsylvania,The name is an allusion to the Federal Union.,TRUE,,euro,,,concept,idea,,,,,,,,,,,1813
+39159,Union ,57.5,16.0,County,Union County,Ohio,"The name is reflective of the county’s origins, being the union of pieces of Franklin, Delaware, Madison, and Logan Counties.",TRUE,,euro,,,concept,idea,,,,,,,,,,,1820
+41061,Union ,6.5,12.0,County,Union County,Oregon,"The name, which is taken from the city of Union within the county’s borders, references the Union states, or Northern States, of the American Civil War.",TRUE,,euro,,,place,america,,,,,,,,,,,1864
+22111,Union ,38.5,40.0,Parish,Union Parish,Louisiana,"Reportedly took its name from a statement made by Daniel Webster: “liberty and union, now and forever, one and inseparable”.",TRUE,,euro,,,concept,idea,,,,,,,,,,,1839
+11001,Washington,72.0,23.0,District of Columbia,Washington,District of Columbia,"Named for George Washington, first President of the United States.",TRUE,washington,euro,,,people,man,,,,,,,,,,,1790
+01129,Washington ,48.0,47.0,County,Washington County,Alabama,"Named for George Washington, first President of the United States.",TRUE,washington,euro,,,people,man,,,,,,,,,,,1800
+05143,Washington ,33.0,31.0,County,Washington County,Arkansas,"Named for George Washington, first President of the United States.",TRUE,washington,euro,,,people,man,,,,,,,,,,,1828
+08121,Washington ,17.0,19.0,County,Washington County,Colorado,"Named for George Washington, first President of the United States.",TRUE,washington,euro,,,people,man,,,,,,,,,,,1887
+12133,Washington ,54.0,51.0,County,Washington County,Florida,"Named for George Washington, first President of the United States.",TRUE,washington,euro,,,people,man,,,,,,,,,,,1825
+13303,Washington ,61.0,43.0,County,Washington County,Georgia,"Named for George Washington, first President of the United States.",TRUE,washington,euro,,,people,man,,,,,,,,,,,1784
+16087,Washington ,7.0,13.0,County,Washington County,Idaho,"Named for George Washington, first President of the United States.",TRUE,washington,euro,,,people,man,,,,,,,,,,,1879
+17189,Washington ,42.0,23.0,County,Washington County,Illinois,"Named for George Washington, first President of the United States.",TRUE,washington,euro,,,people,man,,,,,,,,,,,1818
+18175,Washington ,50.0,23.0,County,Washington County,Indiana,"Named for George Washington, first President of the United States.",TRUE,washington,euro,,,people,man,,,,,,,,,,,1827
+19183,Washington ,39.5,14.0,County,Washington County,Iowa,"Named for George Washington, first President of the United States.",TRUE,washington,euro,,,people,man,,,,,,,,,,,1839
+20201,Washington ,26.5,20.0,County,Washington County,Kansas,"Named for George Washington, first President of the United States.",TRUE,washington,euro,,,people,man,,,,,,,,,,,1855
+21229,Washington ,53.0,27.0,County,Washington County,Kentucky,"Named for George Washington, first President of the United States.",TRUE,washington,euro,,,people,man,,,,,,,,,,,1792
+23029,Washington ,85.0,9.0,County,Washington County,Maine,"Named for George Washington, first President of the United States.",TRUE,washington,euro,,,people,man,,,,,,,,,,,1789
+24043,Washington ,69.0,19.0,County,Washington County,Maryland,"Named for George Washington, first President of the United States.",TRUE,washington,euro,,,people,man,,,,,,,,,,,1776
+27163,Washington ,38.5,4.0,County,Washington County,Minnesota,"Named for George Washington, first President of the United States.",TRUE,washington,euro,,,people,man,,,,,,,,,,,1849
+28151,Washington ,41.5,40.0,County,Washington County,Mississippi,"Named for George Washington, first President of the United States.",TRUE,washington,euro,,,people,man,,,,,,,,,,,1827
+29221,Washington ,39.5,24.0,County,Washington County,Missouri,"Named for George Washington, first President of the United States.",TRUE,washington,euro,,,people,man,,,,,,,,,,,1813
+31177,Washington ,29.5,14.0,County,Washington County,Nebraska,"Named for George Washington, first President of the United States.",TRUE,washington,euro,,,people,man,,,,,,,,,,,1854
+36115,Washington ,76.5,12.0,County,Washington County,New York,"Named for George Washington, first President of the United States.",TRUE,washington,euro,,,people,man,,,,,,,,,,,1784
+37187,Washington ,74.0,37.0,County,Washington County,North Carolina,"Named for George Washington, first President of the United States.",TRUE,washington,euro,,,people,man,,,,,,,,,,,1799
+39167,Washington ,61.0,19.0,County,Washington County,Ohio,"Named for George Washington, first President of the United States.",TRUE,washington,euro,,,people,man,,,,,,,,,,,1788
+40147,Washington ,29.5,28.0,County,Washington County,Oklahoma,"Named for George Washington, first President of the United States.",TRUE,washington,euro,,,people,man,,,,,,,,,,,1907
+41067,Washington ,2.0,11.0,County,Washington County,Oregon,"Named for George Washington, first President of the United States.",TRUE,washington,euro,,,people,man,,,,,,,,,,,1845
+42125,Washington ,64.0,17.0,County,Washington County,Pennsylvania,"Named for George Washington, first President of the United States.",TRUE,washington,euro,,,people,man,,,,,,,,,,,1781
+44009,Washington ,81.0,19.0,County,Washington County,Rhode Island,"Named for George Washington, first President of the United States.",TRUE,washington,euro,,,people,man,,,,,,,,,,,1729
+47179,Washington ,60.5,32.0,County,Washington County,Tennessee,"Named for George Washington, first President of the United States.",TRUE,washington,euro,,,people,man,,,,,,,,,,,1777
+48477,Washington ,33.5,46.0,County,Washington County,Texas,"Named for George Washington, first President of the United States.",TRUE,washington,euro,,,people,man,,,,,,,,,,,1836
+49053,Washington ,9.0,25.0,County,Washington County,Utah,"Named for George Washington, first President of the United States.",TRUE,washington,euro,,,people,man,,,,,,,,,,,1852
+50023,Washington ,77.0,11.0,County,Washington County,Vermont,"Named for George Washington, first President of the United States.",TRUE,washington,euro,,,people,man,,,,,,,,,,,1814
+51191,Washington ,62.5,30.0,County,Washington County,Virginia,"Named for George Washington, first President of the United States.",TRUE,washington,euro,,,people,man,,,,,,,,,,,1776
+55131,Washington ,47.5,8.0,County,Washington County,Wisconsin,"Named for George Washington, first President of the United States.",TRUE,washington,euro,,,people,man,,,,,,,,,,,1836
+22117,Washington ,44.5,48.0,Parish,Washington Parish,Louisiana,"Named for George Washington, first President of the United States.",TRUE,washington,euro,,,people,man,,,,,,,,,,,1819
+18177,Wayne ,53.5,18.0,County,Wayne County,Indiana,"Named for Gen. “Mad” Anthony Wayne, who was an officer during the Revolutionary War",TRUE,,euro,,,people,man,,,,,,,,,,,1813
+13305,Wayne ,64.0,47.0,County,Wayne County,Georgia,Named for Revolutionary War general Anthony Wayne.,TRUE,,euro,,,people,man,,,,,,,,,,,1803
+17191,Wayne ,44.0,23.0,County,Wayne County,Illinois,Named for Revolutionary War general Anthony Wayne.,TRUE,,euro,,,people,man,,,,,,,,,,,1819
+19185,Wayne ,35.5,16.0,County,Wayne County,Iowa,Named for Revolutionary War general Anthony Wayne.,TRUE,,euro,,,people,man,,,,,,,,,,,1846
+21231,Wayne ,54.5,30.0,County,Wayne County,Kentucky,Named for Revolutionary War general Anthony Wayne.,TRUE,,euro,,,people,man,,,,,,,,,,,1800
+26163,Wayne ,57.0,9.0,County,Wayne County,Michigan,Named for Revolutionary War general Anthony Wayne.,TRUE,,euro,,,people,man,,,,,,,,,,,1815
+28153,Wayne ,47.5,46.0,County,Wayne County,Mississippi,Named for Revolutionary War general Anthony Wayne.,TRUE,,euro,,,people,man,,,,,,,,,,,1809
+29223,Wayne ,39.5,28.0,County,Wayne County,Missouri,Named for Revolutionary War general Anthony Wayne.,TRUE,,euro,,,people,man,,,,,,,,,,,1818
+31179,Wayne ,26.0,13.0,County,Wayne County,Nebraska,Named for Revolutionary War general Anthony Wayne.,TRUE,,euro,,,people,man,,,,,,,,,,,1867
+36117,Wayne ,69.0,11.0,County,Wayne County,New York,Named for Revolutionary War general Anthony Wayne.,TRUE,,euro,,,people,man,,,,,,,,,,,1823
+37191,Wayne ,71.5,38.0,County,Wayne County,North Carolina,Named for Revolutionary War general Anthony Wayne.,TRUE,,euro,,,people,man,,,,,,,,,,,1779
+39169,Wayne ,59.0,15.0,County,Wayne County,Ohio,Named for Revolutionary War general Anthony Wayne.,TRUE,,euro,,,people,man,,,,,,,,,,,1808
+42127,Wayne ,74.0,15.0,County,Wayne County,Pennsylvania,Named for Revolutionary War general Anthony Wayne.,TRUE,,euro,,,people,man,,,,,,,,,,,1798
+47181,Wayne ,46.5,34.0,County,Wayne County,Tennessee,Named for Revolutionary War general Anthony Wayne.,TRUE,,euro,,,people,man,,,,,,,,,,,1817
+54099,Wayne ,60.5,24.0,County,Wayne County,West Virginia,Named for Revolutionary War general Anthony Wayne.,TRUE,,euro,,,people,man,,,,,,,,,,,1842
+49055,Wayne ,11.0,23.0,County,Wayne County,Utah,"Named for Wayne County, Tennessee.",TRUE,,euro,,,place,america,,,,,,,,,,,1892
+12047,Hamilton ,60.0,49.0,County,Hamilton County,Florida,"Named for Alexander Hamilton (1757–1804), first United States Secretary of the Treasury and one of the Founding Fathers.",,hamilton,euro,,,people,man,,,,,,,,,1827,,
+17065,Hamilton ,44.5,24.0,County,Hamilton County,Illinois,"Named for Alexander Hamilton (1757–1804), first United States Secretary of the Treasury and one of the Founding Fathers.",,hamilton,euro,,,people,man,,,,,,,,,1821,,
+18057,Hamilton ,50.0,17.0,County,Hamilton County,Indiana,"Named for Alexander Hamilton (1757–1804), first United States Secretary of the Treasury and one of the Founding Fathers.",,hamilton,euro,,,people,man,,,,,,,,,1823,,
+20075,Hamilton ,18.0,23.0,County,Hamilton County,Kansas,"Named for Alexander Hamilton (1757–1804), first United States Secretary of the Treasury and one of the Founding Fathers.",,hamilton,euro,,,people,man,,,,,,,,,1873,,
+31081,Hamilton ,25.0,17.0,County,Hamilton County,Nebraska,"Named for Alexander Hamilton (1757–1804), first United States Secretary of the Treasury and one of the Founding Fathers.",,hamilton,euro,,,people,man,,,,,,,,,1867,,
+36041,Hamilton ,74.5,10.0,County,Hamilton County,New York,"Named for Alexander Hamilton (1757–1804), first United States Secretary of the Treasury and one of the Founding Fathers.",,hamilton,euro,,,people,man,,,,,,,,,1816,,
+39061,Hamilton ,54.0,19.0,County,Hamilton County,Ohio,"Named for Alexander Hamilton (1757–1804), first United States Secretary of the Treasury and one of the Founding Fathers.",,hamilton,euro,,,people,man,,,,,,,,,1790,,
+47065,Hamilton ,53.5,36.0,County,Hamilton County,Tennessee,"Named for Alexander Hamilton (1757–1804), first United States Secretary of the Treasury and one of the Founding Fathers.",,hamilton,euro,,,people,man,,,,,,,,,1819,,
+12067,Lafayette ,59.0,51.0,County,Lafayette County,Florida,"Named for Gilbert du Motier, Marquis de Lafayette, a French general who played a major role in the American Revolutionary War.",,lafayette,euro,French,,people,man,,,,,,,,,1856,,
+22057,Lafayette ,38.5,50.0,Parish,Lafayette Parish,Louisiana,"Named for Gilbert du Motier, Marquis de Lafayette, a French general who played a major role in the American Revolutionary War.",,lafayette,euro,French,,people,man,,,,,,,,,1807,,
+28071,Lafayette ,44.0,37.0,County,Lafayette County,Mississippi,"Named for Gilbert du Motier, Marquis de Lafayette, a French general who played a major role in the American Revolutionary War.",,lafayette,euro,French,,people,man,,,,,,,,,1836,,
+29107,Lafayette ,34.5,22.0,County,Lafayette County,Missouri,"Gilbert du Motier, Marquis de Lafayette, a French general who played a major role in the American Revolutionary War.",,lafayette,euro,French,,people,man,,,,,,,,,1821,,
+55065,Lafayette ,44.0,9.0,County,Lafayette County,Wisconsin,"Gilbert du Motier, Marquis de Lafayette, a French general who played a major role in the American Revolutionary War.",,lafayette,euro,French,,people,man,,,,,,,,,1846,,
+05073,Lafayette ,36.0,39.0,County,Lafayette County,Arkansas,"Named for Gilbert du Motier, Marquis de Lafayette, a French general who played a major role in the American Revolutionary War.",,lafayette,euro,,,people,man,,,,,,,,,1827,,
+13113,Fayette ,55.0,41.0,County,Fayette County,Georgia,"From La Fayette, the original spelling for the title used by Gilbert du Motier, Marquis de Lafayette (1757–1834), a French general who played a major role in the Revolutionary War.",,lafayette,euro,French,,people,man,,,,,,,,,1821,,
+17051,Fayette ,44.0,21.0,County,Fayette County,Illinois,"From La Fayette, the original spelling for the title used by Gilbert du Motier, Marquis de Lafayette (1757–1834), a French general who played a major role in the Revolutionary War.",,lafayette,euro,French,,people,man,,,,,,,,,1821,,
+39047,Fayette ,57.5,20.0,County,Fayette County,Ohio,"From La Fayette, the original spelling for the title used by Gilbert du Motier, Marquis de Lafayette (1757–1834), a French general who played a major role in the Revolutionary War.",,lafayette,euro,French,,people,man,,,,,,,,,1810,,
+42051,Fayette ,65.5,18.0,County,Fayette County,Pennsylvania,"From La Fayette, the original spelling for the title used by Gilbert du Motier, Marquis de Lafayette (1757–1834), a French general who played a major role in the Revolutionary War.",,lafayette,euro,French,,people,man,,,,,,,,,1783,,
+48149,Fayette ,33.0,47.0,County,Fayette County,Texas,"From La Fayette, the original spelling for the title used by Gilbert du Motier, Marquis de Lafayette (1757–1834), a French general who played a major role in the Revolutionary War.",,lafayette,euro,French,,people,man,,,,,,,,,1837,,
+54019,Fayette ,63.0,25.0,County,Fayette County,West Virginia,"From La Fayette, the original spelling for the title used by Gilbert du Motier, Marquis de Lafayette (1757–1834), a French general who played a major role in the Revolutionary War.",,lafayette,euro,French,,people,man,,,,,,,,,1831,,
+01057,Fayette ,48.0,41.0,County,Fayette County,Alabama,"From La Fayette, the original spelling for the title used by Gilbert du Motier, Marquis de Lafayette (1757–1834), a French general who played a major role in the Revolutionary War.",,lafayette,euro,,,people,man,,,,,,,,,1824,,
+18041,Fayette ,52.5,18.0,County,Fayette County,Indiana,"From La Fayette, the original spelling for the title used by Gilbert du Motier, Marquis de Lafayette (1757–1834), a French general who played a major role in the Revolutionary War.",,lafayette,euro,,,people,man,,,,,,,,,1818,,
+19065,Fayette ,39.5,10.0,County,Fayette County,Iowa,"From La Fayette, the original spelling for the title used by Gilbert du Motier, Marquis de Lafayette (1757–1834), a French general who played a major role in the Revolutionary War.",,lafayette,euro,,,people,man,,,,,,,,,1837,,
+21067,Fayette ,55.0,25.0,County,Fayette County,Kentucky,"From La Fayette, the original spelling for the title used by Gilbert du Motier, Marquis de Lafayette (1757–1834), a French general who played a major role in the Revolutionary War.",,lafayette,euro,,,people,man,,,,,,,,,1780,,
+47047,Fayette ,43.0,35.0,County,Fayette County,Tennessee,"From La Fayette, the original spelling for the title used by Gilbert du Motier, Marquis de Lafayette (1757–1834), a French general who played a major role in the Revolutionary War.",,lafayette,euro,,,people,man,,,,,,,,,1824,,
+18089,Lagrange ,52.0,11.0,County,Lagrange County,Indiana,"Named for the home of the Marquis de Lafayette outside of Paris, France.",,lafayette,euro,French,,place,abroad,,,,,,,,,1832,,
+51570,Colonial Heights,70.5,30.0,City,City of Colonial Heights,Virginia,"Named for  the Coloniels, French troops under the command of Gilbert du Motier, marquis de Lafayette, who occupied the site in 1781 during the Revolutionary War.",,lafayette,euro,French,,people,group,,,,,,,,,1948,,
+55123,Vernon ,42.5,8.0,County,Vernon County,Wisconsin,"Named for Mount Vernon, in turn named after British Admiral Edward Vernon. ",,washington,euro,English,2,place,america,Named for Mount Vernon,in turn named after British Admiral Edward Vernon,,,,,,,1851,,
+22115,Vernon ,38.0,45.0,Parish,Vernon Parish,Louisiana,"There are four versions of how the parish was named; the only official State version is that it was named in honor of Mt. Vernon, the home of George Washington.",,washington,euro,,,place,america,,,,,,,,,1871,,
+37119,Mecklenburg ,65.5,36.0,County,Mecklenburg County,North Carolina,"Named for either the German state of Mecklenburg-Strelitz for Charlotte of Mecklenburg, queen consort of George III of Great Britain.",,kinggeorge,euro,English,,unknown,uncertain,,,,,,,,,1762,,
+51117,Mecklenburg ,70.0,33.0,County,Mecklenburg County,Virginia,"Named for Charlotte of Mecklenburg-Strelitz, a British queen consort of German origin.",,kinggeorge,euro,English,,people,woman,,,,,,,,,1764,,
+12015,Charlotte ,65.0,57.0,County,Charlotte County,Florida,"Directly named for Charlotte Harbor, a bay of the Gulf of Mexico that borders on the county, which in turn was named for Charlotte, queen consort of King George III. The bay was originally named “Carlos” by the area’s earlier Spanish explorers, from the native Calusa people and their leaders, known as Carlos to the Spanish.",,kinggeorge,euro,English,2,nature,water,"Directly named for Charlotte Harbor, a bay of the Gulf of Mexico that borders on the county","which in turn was named for Charlotte, queen consort of King George III",,,,,,,1921,,
+51037,Charlotte ,69.0,31.0,County,Charlotte County,Virginia,"Named for Charlotte, queen consort of King George III.",,kinggeorge,euro,English,,people,woman,,,,,,,,,1764,,
+51540,Charlottesville,69.5,26.0,City,City of Charlottesville,Virginia,"Named for Charlotte, queen consort of King George III.",,kinggeorge,euro,English,,people,woman,,,,,,,,,1888,,
+51015,Augusta ,66.5,26.0,County,Augusta County,Virginia,"Named for Augusta of Saxe-Gotha, the wife of Prince Frederick of Wales and mother of George III of Great Britain.",,kinggeorge,euro,,,people,woman,,,,,,,,,1738,,
+13175,Laurens ,61.5,44.0,County,Laurens County,Georgia,"Named for Colonel John Laurens, a soldier and statesman during the American Revolutionary War.",,laurens,euro,,,people,man,,,,,,,,,1807,,
+17169,Schuyler ,41.0,17.0,County,Schuyler County,Illinois,"Named for Philip Schuyler, Revolutionary War general and U.S. Senator.",,schuyler,euro,,,people,man,,,,,,,,,1825,,
+29197,Schuyler ,37.0,17.0,County,Schuyler County,Missouri,"Named for Philip Schuyler, Revolutionary War general and U.S. Senator.",,schuyler,euro,,,people,man,,,,,,,,,1843,,
+36097,Schuyler ,69.0,13.0,County,Schuyler County,New York,"Named for Philip Schuyler, Revolutionary War general and U.S. Senator.",,schuyler,euro,,,people,man,,,,,,,,,1854,,

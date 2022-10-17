@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Lia's D3 Template!</title>
+
+    <!-- D3 v6 -->
+    <!-- <script type="text/javascript" src="https://d3js.org/d3.v6.min.js"></script> -->
+
+    <!-- v6(.7) // USING TEMPORARILY BECAUSE MOM AND DAD'S INTERNET IS SO SLOW! -->
+    <script type="text/javascript" src="../../../d3-library/d3.js"></script>
+
+    <!-- CSS *********************************************************************** -->
+    <style>
+      body {
+        font-family: 'Work Sans';
+      }
+      #title {
+        font-size: 117px;
+        font-weight: 600;
+        margin-bottom: 50px;
+        padding-left: 0;
+        padding-left: 7px;
+      }
+      p {
+        padding-left: 50px;
+        padding-right: 20px;
+        margin-bottom: 0px;
+        margin-top: 50px;
+        font-size: 72px;
+      }
+      #ctr-man,
+      #ctr-group,
+      #ctr-woman,
+      #ctr-water,
+      #ctr-geology,
+      #ctr-flora,
+      #ctr-resource,
+      #ctr-america,
+      #ctr-abroad,
+      #ctr-concept,
+      #ctr-object,
+      #ctr-unknown {
+        width: 1000px;
+        margin: 12px 10px;
+        background-color: #f5f5f5;
+        background-color: #f0f0f0;
+        font-family: 'Work Sans';
+        font-weight: 600;
+        display: inline-block;
+      }
+      .count {
+        font-weight: normal;
+        font-size: 55px;
+      }
+      .county-grid-centroid {
+        mix-blend-mode: multiply;
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- HTML ********************************************************************** -->
+
+    <p id="title">What are counties named for?</p>
+
+    <div>
+      <div id="ctr-man">
+        <p>Man <span class="count"> 2,096</span></p>
+      </div>
+
+      <div id="ctr-group">
+        <p>Group of people <span class="count"> 181</span></p>
+      </div>
+
+      <div id="ctr-woman">
+        <p>Woman <span class="count"> 36</span></p>
+      </div>
+    </div>
+
+    <div>
+      <div id="ctr-water">
+        <p>Body of water <span class="count"> 285</span></p>
+      </div>
+
+      <div id="ctr-geology">
+        <p>Geologic feature <span class="count"> 100</span></p>
+      </div>
+
+      <div id="ctr-flora">
+        <p>Plant or animal <span class="count"> 46</span></p>
+      </div>
+    </div>
+
+    <div>
+      <div id="ctr-resource">
+        <p>Natural resource <span class="count"> 32</span></p>
+      </div>
+
+      <div id="ctr-america">
+        <p>Place within America <span class="count"> 153</span></p>
+      </div>
+
+      <div id="ctr-abroad">
+        <p>Place outside America <span class="count"> 99</span></p>
+      </div>
+    </div>
+
+    <div>
+      <div id="ctr-concept">
+        <p>Abstract concept <span class="count"> 61</span></p>
+      </div>
+
+      <div id="ctr-object">
+        <p>Man-made object <span class="count"> 5</span></p>
+      </div>
+
+      <div id="ctr-unknown">
+        <p>Unknown reason <span class="count"> 37</span></p>
+      </div>
+    </div>
+
+    <!-- JAVASCRIPT **************************************************************** -->
+
+    <script type="text/javascript">
+
+      var w = 1000;
+      var h = 650;
+
+      var svgMan = d3.select('#ctr-man')
+        .append('svg')
+          .attr('width', w)
+          .attr('height', h);
+
+      var svgGroup = d3.select('#ctr-group')
+        .append('svg')
+          .attr('width', w)
+          .attr('height', h);
+
+      var svgWoman = d3.select('#ctr-woman')
+        .append('svg')
+          .attr('width', w)
+          .attr('height', h);
+
+      var svgWater = d3.select('#ctr-water')
+        .append('svg')
+          .attr('width', w)
+          .attr('height', h);
+
+      var svgGeology = d3.select('#ctr-geology')
+        .append('svg')
+          .attr('width', w)
+          .attr('height', h);
+
+      var svgFlora = d3.select('#ctr-flora')
+        .append('svg')
+          .attr('width', w)
+          .attr('height', h);
+
+      var svgResource = d3.select('#ctr-resource')
+        .append('svg')
+          .attr('width', w)
+          .attr('height', h);
+
+      var svgAmerica = d3.select('#ctr-america')
+        .append('svg')
+          .attr('width', w)
+          .attr('height', h);
+
+      var svgAbroad = d3.select('#ctr-abroad')
+        .append('svg')
+          .attr('width', w)
+          .attr('height', h);
+
+      var svgConcept = d3.select('#ctr-concept')
+        .append('svg')
+          .attr('width', w)
+          .attr('height', h);
+
+      var svgObject = d3.select('#ctr-object')
+        .append('svg')
+          .attr('width', w)
+          .attr('height', h);
+
+      var svgUnknown = d3.select('#ctr-unknown')
+        .append('svg')
+          .attr('width', w)
+          .attr('height', h);
+
+      // set up projection
+      var projection = d3.geoAlbersUsa()
+        .translate([w/2, h/2])
+        .scale([1275]);
+
+      var path = d3.geoPath()
+        .projection(projection);
+
+      // load CSV of county etymology data
+      d3.csv('../data_counties.csv')
+        .then(function(data) {
+
+        // load JSON of county outlines
+        d3.json('../data_counties-20m.json')
+        .then(function(json) {
+
+          for (var i = 0; i < data.length; i++) {
+
+            var csvCountyId = data[i].id; // get county id from etymology CSV
+            var csvCountyName = data[i].name; // get name of county
+            var csvCountyLanguage = data[i].language; // get high-level language per county
+            var csvCountyGranularlanguage = data[i].granularlanguage; // get granular language per county
+            var csvCountyCategory = data[i].category; // get high-level category per county
+            var csvCountySubcategory = data[i].subcategory; // get granular language per county
+            var csvCountyEtymology = data[i].etymology; // get etymology per county
+
+            for (var j = 0; j < json.features.length; j++) { // find the corresponding county id within the GeoJSON
+
+              var pathCountyId = json.features[j].properties.STATE + json.features[j].properties.COUNTY;
+
+              if (csvCountyId == pathCountyId) {
+                json.features[j].properties.name = csvCountyName; // copy the county's name into the JSON per county
+                json.features[j].properties.language = csvCountyLanguage; // copy the high-level language into the JSON per county
+                json.features[j].properties.granularlanguage = csvCountyGranularlanguage;
+                json.features[j].properties.category = csvCountyCategory;
+                json.features[j].properties.subcategory = csvCountySubcategory;
+                json.features[j].properties.etymology = csvCountyEtymology;
+                break; // stop looking through the JSON
+              } // close if
+            } // close j for-loop
+          } // close i for-loop
+
+          // drawing county paths
+          svgMan.selectAll('.county-grid-path')
+            .data(json.features)
+            .enter()
+            .append('path')
+              .attr('d', path)
+              .attr('class', 'county-grid-path')
+              .style('fill', 'white');
+
+          svgGroup.selectAll('.county-grid-path')
+            .data(json.features)
+            .enter()
+            .append('path')
+              .attr('d', path)
+              .attr('class', 'county-grid-path')
+              .style('fill', 'white');
+
+          svgWoman.selectAll('.county-grid-path')
+            .data(json.features)
+            .enter()
+            .append('path')
+              .attr('d', path)
+              .attr('class', 'county-grid-path')
+              .style('fill', 'white');
+
+          svgWater.selectAll('.county-grid-path')
+            .data(json.features)
+            .enter()
+            .append('path')
+              .attr('d', path)
+              .attr('class', 'county-grid-path')
+              .style('fill', 'white');
+
+          svgGeology.selectAll('.county-grid-path')
+            .data(json.features)
+            .enter()
+            .append('path')
+              .attr('d', path)
+              .attr('class', 'county-grid-path')
+              .style('fill', 'white');
+
+          svgFlora.selectAll('.county-grid-path')
+            .data(json.features)
+            .enter()
+            .append('path')
+              .attr('d', path)
+              .attr('class', 'county-grid-path')
+              .style('fill', 'white');
+
+          svgResource.selectAll('.county-grid-path')
+            .data(json.features)
+            .enter()
+            .append('path')
+              .attr('d', path)
+              .attr('class', 'county-grid-path')
+              .style('fill', 'white');
+
+          svgAmerica.selectAll('.county-grid-path')
+            .data(json.features)
+            .enter()
+            .append('path')
+              .attr('d', path)
+              .attr('class', 'county-grid-path')
+              .style('fill', 'white');
+
+          svgAbroad.selectAll('.county-grid-path')
+            .data(json.features)
+            .enter()
+            .append('path')
+              .attr('d', path)
+              .attr('class', 'county-grid-path')
+              .style('fill', 'white');
+
+          svgConcept.selectAll('.county-grid-path')
+            .data(json.features)
+            .enter()
+            .append('path')
+              .attr('d', path)
+              .attr('class', 'county-grid-path')
+              .style('fill', 'white');
+
+          svgObject.selectAll('.county-grid-path')
+            .data(json.features)
+            .enter()
+            .append('path')
+              .attr('d', path)
+              .attr('class', 'county-grid-path')
+              .style('fill', 'white');
+
+          svgUnknown.selectAll('.county-grid-path')
+            .data(json.features)
+            .enter()
+            .append('path')
+              .attr('d', path)
+              .attr('class', 'county-grid-path')
+              .style('fill', 'white');
+
+          // draw the dots
+          svgMan.selectAll('.county-grid-centroid')
+            .data(json.features)
+            .enter()
+            .append('circle')
+            .attr('class', 'county-grid-centroid')
+            .attr('cx', function(d) {
+              return path.centroid(d)[0];
+            })
+            .attr('cy', function(d) {
+              return path.centroid(d)[1];
+            })
+            .attr('r', function(d) {
+              if (d.properties.subcategory == 'man') {
+                return 7;
+              } else {
+                return 0;
+              }
+            })
+            .style('fill', '#D9C775')
+            .style('opacity', 1);
+
+          svgGroup.selectAll('.county-grid-centroid')
+            .data(json.features)
+            .enter()
+            .append('circle')
+            .attr('class', 'county-grid-centroid')
+            .attr('cx', function(d) {
+              return path.centroid(d)[0];
+            })
+            .attr('cy', function(d) {
+              return path.centroid(d)[1];
+            })
+            .attr('r', function(d) {
+              if (d.properties.subcategory == 'group') {
+                return 7;
+              } else {
+                return 0;
+              }
+            })
+            .style('fill', '#D9C775')
+            .style('opacity', 1);
+
+          svgWoman.selectAll('.county-grid-centroid')
+            .data(json.features)
+            .enter()
+            .append('circle')
+            .attr('class', 'county-grid-centroid')
+            .attr('cx', function(d) {
+              return path.centroid(d)[0];
+            })
+            .attr('cy', function(d) {
+              return path.centroid(d)[1];
+            })
+            .attr('r', function(d) {
+              if (d.properties.subcategory == 'woman') {
+                return 7;
+              } else {
+                return 0;
+              }
+            })
+            .style('fill', '#D9C775')
+            .style('opacity', 1);
+
+          svgWater.selectAll('.county-grid-centroid')
+            .data(json.features)
+            .enter()
+            .append('circle')
+            .attr('class', 'county-grid-centroid')
+            .attr('cx', function(d) {
+              return path.centroid(d)[0];
+            })
+            .attr('cy', function(d) {
+              return path.centroid(d)[1];
+            })
+            .attr('r', function(d) {
+              if (d.properties.subcategory == 'water') {
+                return 7;
+              } else {
+                return 0;
+              }
+            })
+            .style('fill', '#77B7B4')
+            .style('opacity', 1);
+
+          svgGeology.selectAll('.county-grid-centroid')
+            .data(json.features)
+            .enter()
+            .append('circle')
+            .attr('class', 'county-grid-centroid')
+            .attr('cx', function(d) {
+              return path.centroid(d)[0];
+            })
+            .attr('cy', function(d) {
+              return path.centroid(d)[1];
+            })
+            .attr('r', function(d) {
+              if (d.properties.subcategory == 'geology') {
+                return 7;
+              } else {
+                return 0;
+              }
+            })
+            .style('fill', '#77B7B4')
+            .style('opacity', 1);
+
+          svgFlora.selectAll('.county-grid-centroid')
+            .data(json.features)
+            .enter()
+            .append('circle')
+            .attr('class', 'county-grid-centroid')
+            .attr('cx', function(d) {
+              return path.centroid(d)[0];
+            })
+            .attr('cy', function(d) {
+              return path.centroid(d)[1];
+            })
+            .attr('r', function(d) {
+              if (d.properties.subcategory == 'flora') {
+                return 7;
+              } else {
+                return 0;
+              }
+            })
+            .style('fill', '#77B7B4')
+            .style('opacity', 1);
+
+          svgResource.selectAll('.county-grid-centroid')
+            .data(json.features)
+            .enter()
+            .append('circle')
+            .attr('class', 'county-grid-centroid')
+            .attr('cx', function(d) {
+              return path.centroid(d)[0];
+            })
+            .attr('cy', function(d) {
+              return path.centroid(d)[1];
+            })
+            .attr('r', function(d) {
+              if (d.properties.subcategory == 'resource') {
+                return 7;
+              } else {
+                return 0;
+              }
+            })
+            .style('fill', '#77B7B4')
+            .style('opacity', 1);
+
+          svgAmerica.selectAll('.county-grid-centroid')
+            .data(json.features)
+            .enter()
+            .append('circle')
+            .attr('class', 'county-grid-centroid')
+            .attr('cx', function(d) {
+              return path.centroid(d)[0];
+            })
+            .attr('cy', function(d) {
+              return path.centroid(d)[1];
+            })
+            .attr('r', function(d) {
+              if (d.properties.subcategory == 'america') {
+                return 7;
+              } else {
+                return 0;
+              }
+            })
+            // .style('fill', '#5B6988')
+            .style('fill', '#999AC7') // adjusted to not look too dark relative to the other colors
+            .style('opacity', 1);
+
+          svgAbroad.selectAll('.county-grid-centroid')
+            .data(json.features)
+            .enter()
+            .append('circle')
+            .attr('class', 'county-grid-centroid')
+            .attr('cx', function(d) {
+              return path.centroid(d)[0];
+            })
+            .attr('cy', function(d) {
+              return path.centroid(d)[1];
+            })
+            .attr('r', function(d) {
+              if (d.properties.subcategory == 'abroad') {
+                return 7;
+              } else {
+                return 0;
+              }
+            })
+            // .style('fill', '#5B6988')
+            .style('fill', '#999AC7') // adjusted to not look too dark relative to the other colors
+            .style('opacity', 1);
+
+          svgConcept.selectAll('.county-grid-centroid')
+            .data(json.features)
+            .enter()
+            .append('circle')
+            .attr('class', 'county-grid-centroid')
+            .attr('cx', function(d) {
+              return path.centroid(d)[0];
+            })
+            .attr('cy', function(d) {
+              return path.centroid(d)[1];
+            })
+            .attr('r', function(d) {
+              if (d.properties.subcategory == 'idea') {
+                return 7;
+              } else {
+                return 0;
+              }
+            })
+            .style('fill', '#BC80A5')
+            .style('opacity', 1);
+
+          svgObject.selectAll('.county-grid-centroid')
+            .data(json.features)
+            .enter()
+            .append('circle')
+            .attr('class', 'county-grid-centroid')
+            .attr('cx', function(d) {
+              return path.centroid(d)[0];
+            })
+            .attr('cy', function(d) {
+              return path.centroid(d)[1];
+            })
+            .attr('r', function(d) {
+              if (d.properties.subcategory == 'object') {
+                return 7;
+              } else {
+                return 0;
+              }
+            })
+            .style('fill', '#BC80A5')
+            .style('opacity', 1);
+
+          svgUnknown.selectAll('.county-grid-centroid')
+            .data(json.features)
+            .enter()
+            .append('circle')
+            .attr('class', 'county-grid-centroid')
+            .attr('cx', function(d) {
+              return path.centroid(d)[0];
+            })
+            .attr('cy', function(d) {
+              return path.centroid(d)[1];
+            })
+            .attr('r', function(d) {
+              if (d.properties.subcategory == 'uncertain') {
+                return 7;
+              } else {
+                return 0;
+              }
+            })
+            .style('fill', '#B2AEA9')
+            .style('opacity', 1);
+
+        }); // close JSON function
+
+      }); // close CSV function
+
+    </script>
+
+  </body>
+</html>

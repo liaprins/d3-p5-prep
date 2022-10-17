@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Name frequency | County etymologies | CCG</title>
+
+    <!-- D3 v6 -->
+    <script type="text/javascript" src="https://d3js.org/d3.v6.min.js"></script>
+
+    <!-- CSS *********************************************************************** -->
+    <style>
+    body {
+      font-family: 'Work Sans';
+    }
+    .name-bars {
+      fill: red;
+      margin: 5px;
+    }
+    </style>
+  </head>
+  <body>
+    <!-- HTML ********************************************************************** -->
+
+    <div id="name-frequency-vis"></div>
+
+    <!-- JAVASCRIPT **************************************************************** -->
+    <script type="text/javascript">
+
+    // load in the data
+    d3.csv("../data_county-etymologies.csv")
+      .then(function(data) {
+
+      // Step 1, counties: isolate names of counties into their own set
+      var countyNames = [];
+      for (var i = 0; i < data.length; i++) {
+        countyNames[i] = data[i].county;
+      }
+      countyNames.sort(function(a, b) { return d3.ascending(a, b) });
+
+      // Step 2, counties: throw out any repeated names, so each county name is only listed once (will be used to access d3.group's map, below)
+      var uniqueCountyNames = [];
+      uniqueCountyNames = countyNames.filter((d, i, array)=>{
+        return countyNames.indexOf(d) === i;
+      });
+
+      // Step 3, counties: group the CSV rows together by unique name
+      var countiesByName = d3.group(data.sort(function(a, b) { return d3.ascending(a.county, b.county) }), d => d.county);
+      var countiesByNameZh = d3.hierarchy(countiesByName);
+
+      // Step 4, counties: use list of uniqueCountyNames to access map keys per row to get length of each group
+      var countyNameCounts = [];
+      for (var i = 0; i < uniqueCountyNames.length; i++) { // loop through all unique county names
+        countyNameCounts[i] = {
+          name: uniqueCountyNames[i],
+          amount: countiesByName.get(uniqueCountyNames[i]).length
+        } // close object
+
+        // etymology loop, part 1
+        // Step 1, etys: isolate names of etymologies into their own set
+        countyNameCounts[i].etyinfo = {};
+        countyNameCounts[i].etyinfo.allEtys = [];
+        for (var j = 0; j < countiesByName.get(uniqueCountyNames[i]).length; j++) { // loop through each unique name's counties
+          countyNameCounts[i].etyinfo.allEtys[j] = countiesByNameZh.children[i].children[j].data.etymology; // store list of all etymologies for this unique county name
+        } // j
+
+        countyNameCounts[i].etyinfo.allEtys.sort(function(a, b) { return d3.ascending(a, b) });
+
+      } // i
+
+      // etymology loop, part 2
+      for (var k = 0; k < uniqueCountyNames.length; k++) {
+
+        // Step 2, etys: throw out any repeated etymologies, so each county name is only listed once (will be used to access d3.group's map, below)
+        countyNameCounts[k].etyinfo.uniqueEtyList = {};
+        countyNameCounts[k].etyinfo.uniqueEtyList = countyNameCounts[k].etyinfo.allEtys.filter((d, i, array)=>{
+          return countyNameCounts[k].etyinfo.allEtys.indexOf(d) === i;
+        });
+
+        // Step 3, etys: group the CSV rows together by unique name + unique etymology
+        var countiesByEty = d3.group(data.sort(function(a, b) { return d3.ascending(a.etymology, b.etymology) }), d => d.county, d => d.etymology);
+        var countiesByEtyZh = d3.hierarchy(countiesByEty);
+
+        // Step 4, etys: use list of unique etymologies (countyNameCounts[k].uniqueEtys) to access map keys to get length of each same-etymology group
+        countyNameCounts[k].etyinfo.eachEtyInfo = [];
+        for (var l = 0; l < countyNameCounts[k].etyinfo.uniqueEtyList.length; l++) { // loop through list of unique etymologies per county
+
+          // console.log(countiesByEty.get(uniqueCountyNames[k]).get(countyNameCounts[k].etyinfo.uniqueEtyList[l]).length);
+
+          countyNameCounts[k].etyinfo.eachEtyInfo[l] = {
+            etyname: countyNameCounts[k].etyinfo.uniqueEtyList[l],
+            etyamount: countiesByEty.get(uniqueCountyNames[k]).get(countyNameCounts[k].etyinfo.uniqueEtyList[l]).length,
+            rows: countiesByEty.get(uniqueCountyNames[k]).get(countyNameCounts[k].etyinfo.uniqueEtyList[l]).sort(function(a, b) { return d3.ascending(a.state, b.state) })
+          } // close object
+        } // l
+
+        // countyNameCounts[k].etyinfo = [];
+
+        // Step 5, etys: sort by most common etys within a county name
+        countyNameCounts[k].etyinfo.eachEtyInfo.sort(function(a, b) { return d3.descending(a.etyamount, b.etyamount) });
+
+      } // k
+
+      // Step 5, counties: sort by most counties with same name
+      countyNameCounts.sort(function(a, b) { return d3.descending(a.amount, b.amount) });
+
+      // countyNameCounts.filter(function(d){ return d.amount >= 10 });
+
+
+
+      console.log('data');
+      console.log(data);
+
+      console.log('countyNames');
+      console.log(countyNames);
+
+      console.log('uniqueCountyNames');
+      console.log(uniqueCountyNames);
+
+      console.log('countiesByName');
+      console.log(countiesByName);
+
+      console.log('countiesByNameZh');
+      console.log(countiesByNameZh);
+
+      console.log('countyNameCounts');
+      console.log(countyNameCounts.filter(function(d){ return d.amount >= 10 }));
+
+      console.log('countiesByEty');
+      console.log(countiesByEty);
+
+      console.log('countiesByEtyZh');
+      console.log(countiesByEtyZh);
+
+
+      var w = 1000;
+      var h = 25000;
+
+      var freqSvg = d3.select('#name-frequency-vis')
+        .append('svg')
+          .attr('width', w)
+          .attr('height', h);
+
+      // groups for bars + labels
+      var countyHeader = freqSvg.selectAll('.unique-county-name')
+        .data(countyNameCounts.filter(function(d){ return d.amount >= 10 }))
+        .enter()
+        .append('g')
+          .attr('class', 'unique-county-name')
+          .attr('transform', function(d, i) {
+            return 'translate(50, ' + ((i * 40) + 50) + ')';
+          });
+
+      // bars
+      countyHeader.append('rect')
+        .attr('class', 'name-bars')
+        .attr('width', function(d) {
+          return d.amount * 20;
+        })
+        .attr('height', 10)
+        .attr('x', 200)
+        .attr('y', 0);
+
+      // labels
+      countyHeader.append('text')
+          .text(function(d) {
+            return d.name + ": " + d.amount;
+          })
+          .attr('class', 'unique-county-name-label')
+          .attr('x', 0)
+          .attr('y', 10);
+
+      /*
+      var countyHeader = freqSvg.selectAll('.unique-county-name')
+        .data(countyNameCounts.filter(function(d){ return d.amount >= 10 }))
+        .enter()
+        .append('rect')
+          .attr('class', 'unique-county-name')
+          .attr('width', function(d) {
+            return d.amount * 20;
+          })
+          .attr('height', 10)
+          .attr('x', 50)
+          .attr('y', function(d, i) {
+            return i * 15;
+          });
+          */
+      /*
+      var countyChunk = countyHeader.selectAll('.unique-county-ety')
+        .data(function(d) {
+          return d.etyinfo.eachEtyInfo;
+        })
+        .enter()
+        .append('div')
+        .attr('class', '.unique-county-ety')
+        .html(function(d) {
+          return d.etyname;
+        })
+        .attr('width', function(d) {
+          d.amount * 20;
+        });
+        */
+
+    }); // close CSV function
+
+    </script>
+
+  </body>
+</html>
