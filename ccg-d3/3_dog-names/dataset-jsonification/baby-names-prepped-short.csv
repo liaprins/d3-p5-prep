@@ -1,0 +1,3190 @@
+name,gender,species,year,county,count
+AADEN,M,human,2008,Bronx,11
+AADEN,M,human,2008,Kings,10
+AADEN,M,human,2009,Bronx,18
+AAHIL,M,human,2014,Kings,10
+AALIYAH,F,human,2007,Bronx,28
+AALIYAH,F,human,2007,Kings,33
+AALIYAH,F,human,2007,New York,11
+AALIYAH,F,human,2007,Queens,15
+AALIYAH,F,human,2008,Bronx,27
+AALIYAH,F,human,2008,Kings,35
+AALIYAH,F,human,2008,New York,11
+AALIYAH,F,human,2008,Queens,17
+AALIYAH,F,human,2009,Bronx,41
+AALIYAH,F,human,2009,Kings,42
+AALIYAH,F,human,2009,New York,17
+AALIYAH,F,human,2009,Queens,34
+AALIYAH,F,human,2010,Bronx,38
+AALIYAH,F,human,2010,Kings,46
+AALIYAH,F,human,2010,New York,11
+AALIYAH,F,human,2010,Queens,21
+AALIYAH,F,human,2010,Richmond,12
+AALIYAH,F,human,2011,Bronx,51
+AALIYAH,F,human,2011,Kings,43
+AALIYAH,F,human,2011,New York,12
+AALIYAH,F,human,2011,Queens,36
+AALIYAH,F,human,2012,Bronx,32
+AALIYAH,F,human,2012,Kings,48
+AALIYAH,F,human,2012,New York,15
+AALIYAH,F,human,2012,Queens,38
+AALIYAH,F,human,2013,Bronx,36
+AALIYAH,F,human,2013,Kings,50
+AALIYAH,F,human,2013,New York,14
+AALIYAH,F,human,2013,Queens,44
+AALIYAH,F,human,2014,Bronx,44
+AALIYAH,F,human,2014,Kings,47
+AALIYAH,F,human,2014,New York,19
+AALIYAH,F,human,2014,Queens,27
+AALIYAH,F,human,2015,Bronx,33
+AALIYAH,F,human,2015,Kings,42
+AALIYAH,F,human,2015,New York,18
+AALIYAH,F,human,2015,Queens,26
+AARAV,M,human,2014,Queens,6
+AARIZ,M,human,2014,Queens,5
+AARON,M,human,2007,Bronx,70
+AARON,M,human,2007,Kings,91
+AARON,M,human,2007,New York,52
+AARON,M,human,2007,Queens,83
+AARON,M,human,2008,Bronx,57
+AARON,M,human,2008,Kings,80
+AARON,M,human,2008,New York,41
+AARON,M,human,2008,Queens,84
+AARON,M,human,2008,Richmond,12
+AARON,M,human,2009,Bronx,52
+AARON,M,human,2009,Kings,108
+AARON,M,human,2009,New York,46
+AARON,M,human,2009,Queens,70
+AARON,M,human,2009,Richmond,11
+AARON,M,human,2010,Bronx,56
+AARON,M,human,2010,Kings,104
+AARON,M,human,2010,New York,48
+AARON,M,human,2010,Queens,78
+AARON,M,human,2011,Bronx,56
+AARON,M,human,2011,Kings,99
+AARON,M,human,2011,New York,46
+AARON,M,human,2011,Queens,77
+AARON,M,human,2012,Bronx,63
+AARON,M,human,2012,Kings,115
+AARON,M,human,2012,New York,58
+AARON,M,human,2012,Queens,95
+AARON,M,human,2012,Richmond,12
+AARON,M,human,2013,Bronx,49
+AARON,M,human,2013,Kings,99
+AARON,M,human,2013,New York,38
+AARON,M,human,2013,Queens,106
+AARON,M,human,2013,Richmond,11
+AARON,M,human,2014,Bronx,67
+AARON,M,human,2014,Kings,109
+AARON,M,human,2014,New York,38
+AARON,M,human,2014,Queens,90
+AARON,M,human,2014,Richmond,9
+AARON,M,human,2015,Bronx,80
+AARON,M,human,2015,Kings,90
+AARON,M,human,2015,New York,29
+AARON,M,human,2015,Queens,93
+AARON,M,human,2015,Richmond,13
+AARYA,F,human,2014,Queens,7
+AAYAN,M,human,2009,Queens,12
+AAYAN,M,human,2012,Queens,10
+AAYAN,M,human,2014,Queens,7
+ABBA,M,human,2014,Kings,6
+ABBY,F,human,2012,Kings,10
+ABBY,F,human,2013,Kings,14
+ABBY,F,human,2014,Kings,18
+ABBY,F,human,2014,New York,6
+ABBY,F,human,2014,Queens,11
+ABBY,F,human,2015,Kings,16
+ABBY,F,human,2015,Queens,11
+ABDIEL,M,human,2011,Bronx,10
+ABDOUL,M,human,2014,Bronx,6
+ABDOULAYE,M,human,2011,Bronx,10
+ABDOULAYE,M,human,2013,Bronx,12
+ABDOULAYE,M,human,2014,Bronx,9
+ABDUL,M,human,2008,Bronx,13
+ABDUL,M,human,2009,Kings,13
+ABDUL,M,human,2011,Kings,12
+ABDUL,M,human,2014,Bronx,5
+ABDUL,M,human,2014,Kings,8
+ABDUL,M,human,2014,Queens,7
+ABDULLAH,M,human,2007,Kings,11
+ABDULLAH,M,human,2007,Queens,15
+ABDULLAH,M,human,2008,Kings,11
+ABDULLAH,M,human,2009,Kings,13
+ABDULLAH,M,human,2009,Queens,10
+ABDULLAH,M,human,2010,Kings,10
+ABDULLAH,M,human,2011,Kings,22
+ABDULLAH,M,human,2011,Queens,10
+ABDULLAH,M,human,2012,Kings,18
+ABDULLAH,M,human,2013,Kings,15
+ABDULLAH,M,human,2013,Queens,12
+ABDULLAH,M,human,2014,Bronx,8
+ABDULLAH,M,human,2014,Kings,10
+ABDULLAH,M,human,2014,Queens,17
+ABDULLAH,M,human,2015,Bronx,13
+ABDULLAH,M,human,2015,Kings,11
+ABDULLAH,M,human,2015,Queens,13
+ABDULRAHMAN,M,human,2014,Kings,5
+ABE,M,human,2014,Kings,8
+ABEL,M,human,2012,Bronx,11
+ABEL,M,human,2013,Bronx,15
+ABEL,M,human,2013,Queens,10
+ABEL,M,human,2014,Bronx,6
+ABEL,M,human,2014,Kings,5
+ABEL,M,human,2014,New York,5
+ABEL,M,human,2014,Queens,5
+ABEL,M,human,2015,Kings,16
+ABIGAIL,F,human,2007,Bronx,42
+ABIGAIL,F,human,2007,Kings,81
+ABIGAIL,F,human,2007,New York,46
+ABIGAIL,F,human,2007,Queens,64
+ABIGAIL,F,human,2007,Richmond,15
+ABIGAIL,F,human,2008,Bronx,35
+ABIGAIL,F,human,2008,Kings,82
+ABIGAIL,F,human,2008,New York,34
+ABIGAIL,F,human,2008,Queens,68
+ABIGAIL,F,human,2008,Richmond,14
+ABIGAIL,F,human,2009,Bronx,38
+ABIGAIL,F,human,2009,Kings,72
+ABIGAIL,F,human,2009,New York,56
+ABIGAIL,F,human,2009,Queens,85
+ABIGAIL,F,human,2009,Richmond,15
+ABIGAIL,F,human,2010,Bronx,38
+ABIGAIL,F,human,2010,Kings,79
+ABIGAIL,F,human,2010,New York,48
+ABIGAIL,F,human,2010,Queens,100
+ABIGAIL,F,human,2010,Richmond,12
+ABIGAIL,F,human,2011,Bronx,46
+ABIGAIL,F,human,2011,Kings,74
+ABIGAIL,F,human,2011,New York,52
+ABIGAIL,F,human,2011,Queens,85
+ABIGAIL,F,human,2011,Richmond,13
+ABIGAIL,F,human,2012,Bronx,48
+ABIGAIL,F,human,2012,Kings,91
+ABIGAIL,F,human,2012,New York,47
+ABIGAIL,F,human,2012,Queens,93
+ABIGAIL,F,human,2012,Richmond,15
+ABIGAIL,F,human,2013,Bronx,48
+ABIGAIL,F,human,2013,Kings,78
+ABIGAIL,F,human,2013,New York,41
+ABIGAIL,F,human,2013,Queens,90
+ABIGAIL,F,human,2013,Richmond,17
+ABIGAIL,F,human,2014,Bronx,50
+ABIGAIL,F,human,2014,Kings,68
+ABIGAIL,F,human,2014,New York,62
+ABIGAIL,F,human,2014,Queens,97
+ABIGAIL,F,human,2014,Richmond,17
+ABIGAIL,F,human,2015,Bronx,55
+ABIGAIL,F,human,2015,Kings,94
+ABIGAIL,F,human,2015,New York,38
+ABIGAIL,F,human,2015,Queens,110
+ABIGAIL,F,human,2015,Richmond,18
+ABOUBACAR,M,human,2014,Bronx,8
+ABRAHAM,M,human,2007,Bronx,16
+ABRAHAM,M,human,2007,Kings,101
+ABRAHAM,M,human,2007,New York,13
+ABRAHAM,M,human,2008,Kings,119
+ABRAHAM,M,human,2008,Queens,23
+ABRAHAM,M,human,2009,Kings,100
+ABRAHAM,M,human,2009,Queens,20
+ABRAHAM,M,human,2010,Bronx,14
+ABRAHAM,M,human,2010,Kings,131
+ABRAHAM,M,human,2010,New York,10
+ABRAHAM,M,human,2010,Queens,19
+ABRAHAM,M,human,2011,Kings,157
+ABRAHAM,M,human,2011,New York,10
+ABRAHAM,M,human,2011,Queens,20
+ABRAHAM,M,human,2012,Bronx,13
+ABRAHAM,M,human,2012,Kings,122
+ABRAHAM,M,human,2012,New York,10
+ABRAHAM,M,human,2012,Queens,11
+ABRAHAM,M,human,2013,Bronx,10
+ABRAHAM,M,human,2013,Kings,135
+ABRAHAM,M,human,2013,New York,10
+ABRAHAM,M,human,2013,Queens,15
+ABRAHAM,M,human,2014,Bronx,11
+ABRAHAM,M,human,2014,Kings,156
+ABRAHAM,M,human,2014,New York,11
+ABRAHAM,M,human,2014,Queens,24
+ABRAHAM,M,human,2014,Richmond,5
+ABRAHAM,M,human,2015,Bronx,19
+ABRAHAM,M,human,2015,Kings,130
+ABRAHAM,M,human,2015,Queens,21
+ABRIELLE,F,human,2014,Bronx,5
+ACHILLES,M,human,2014,New York,5
+ADA,F,human,2008,Queens,11
+ADA,F,human,2010,Kings,12
+ADA,F,human,2011,Kings,15
+ADA,F,human,2012,Kings,11
+ADA,F,human,2013,Kings,13
+ADA,F,human,2014,Kings,10
+ADA,F,human,2014,Queens,7
+ADA,F,human,2015,Kings,15
+ADALYNN,F,human,2014,Bronx,6
+ADAM,M,human,2007,Bronx,24
+ADAM,M,human,2007,Kings,64
+ADAM,M,human,2007,New York,24
+ADAM,M,human,2007,Queens,79
+ADAM,M,human,2007,Richmond,22
+ADAM,M,human,2008,Bronx,27
+ADAM,M,human,2008,Kings,73
+ADAM,M,human,2008,New York,22
+ADAM,M,human,2008,Queens,70
+ADAM,M,human,2008,Richmond,16
+ADAM,M,human,2009,Bronx,30
+ADAM,M,human,2009,Kings,55
+ADAM,M,human,2009,New York,38
+ADAM,M,human,2009,Queens,62
+ADAM,M,human,2009,Richmond,11
+ADAM,M,human,2010,Bronx,20
+ADAM,M,human,2010,Kings,81
+ADAM,M,human,2010,New York,37
+ADAM,M,human,2010,Queens,63
+ADAM,M,human,2010,Richmond,13
+ADAM,M,human,2011,Bronx,26
+ADAM,M,human,2011,Kings,72
+ADAM,M,human,2011,New York,40
+ADAM,M,human,2011,Queens,81
+ADAM,M,human,2011,Richmond,14
+ADAM,M,human,2012,Bronx,23
+ADAM,M,human,2012,Kings,86
+ADAM,M,human,2012,New York,41
+ADAM,M,human,2012,Queens,77
+ADAM,M,human,2012,Richmond,23
+ADAM,M,human,2013,Bronx,25
+ADAM,M,human,2013,Kings,78
+ADAM,M,human,2013,New York,25
+ADAM,M,human,2013,Queens,107
+ADAM,M,human,2013,Richmond,19
+ADAM,M,human,2014,Bronx,37
+ADAM,M,human,2014,Kings,110
+ADAM,M,human,2014,New York,33
+ADAM,M,human,2014,Queens,96
+ADAM,M,human,2014,Richmond,22
+ADAM,M,human,2015,Bronx,38
+ADAM,M,human,2015,Kings,85
+ADAM,M,human,2015,New York,32
+ADAM,M,human,2015,Queens,97
+ADAM,M,human,2015,Richmond,21
+ADAN,M,human,2014,Bronx,5
+ADAN,M,human,2014,Queens,6
+ADDISON,F,human,2008,New York,14
+ADDISON,F,human,2009,New York,11
+ADDISON,F,human,2010,New York,12
+ADDISON,F,human,2011,Kings,15
+ADDISON,F,human,2011,New York,10
+ADDISON,F,human,2012,Bronx,10
+ADDISON,F,human,2012,New York,13
+ADDISON,F,human,2013,Kings,13
+ADDISON,F,human,2013,New York,14
+ADDISON,F,human,2014,Kings,8
+ADDISON,F,human,2014,New York,10
+ADDISON,F,human,2014,Queens,9
+ADDISON,F,human,2014,Richmond,10
+ADDISON,F,human,2015,Kings,14
+ADELAIDE,F,human,2012,New York,16
+ADELAIDE,F,human,2014,Kings,7
+ADELAIDE,F,human,2014,New York,9
+ADELE,F,human,2011,Kings,15
+ADELE,F,human,2012,Kings,17
+ADELE,F,human,2013,Kings,15
+ADELE,F,human,2014,Bronx,5
+ADELE,F,human,2014,Kings,12
+ADELE,F,human,2014,New York,11
+ADELE,F,human,2014,Queens,8
+ADELE,F,human,2015,Kings,16
+ADELINA,F,human,2014,Kings,5
+ADELINE,F,human,2014,Kings,9
+ADELINE,F,human,2014,New York,5
+ADELINE,F,human,2015,Kings,11
+ADELYN,F,human,2014,Bronx,6
+ADEN,M,human,2007,Kings,10
+ADEN,M,human,2008,New York,13
+ADEN,M,human,2009,Kings,18
+ADEN,M,human,2009,Queens,11
+ADEN,M,human,2010,Kings,12
+ADEN,M,human,2011,Kings,19
+ADEN,M,human,2011,New York,11
+ADEN,M,human,2011,Queens,10
+ADEN,M,human,2012,Kings,10
+ADEN,M,human,2012,Queens,12
+ADEN,M,human,2013,Kings,14
+ADEN,M,human,2013,Queens,18
+ADEN,M,human,2014,Bronx,8
+ADEN,M,human,2014,Kings,14
+ADEN,M,human,2014,New York,5
+ADEN,M,human,2014,Queens,10
+ADEN,M,human,2015,Bronx,12
+ADEN,M,human,2015,Kings,12
+ADEN,M,human,2015,Queens,14
+ADHAM,M,human,2014,Kings,5
+ADIEL,M,human,2014,Queens,5
+ADINA,F,human,2007,Kings,11
+ADINA,F,human,2008,Kings,12
+ADINA,F,human,2009,Kings,18
+ADINA,F,human,2010,Kings,10
+ADINA,F,human,2011,Kings,13
+ADINA,F,human,2011,Queens,10
+ADINA,F,human,2012,Kings,13
+ADINA,F,human,2012,Queens,12
+ADINA,F,human,2013,Kings,13
+ADINA,F,human,2014,Kings,16
+ADINA,F,human,2014,Queens,6
+ADINA,F,human,2015,Kings,14
+ADITYA,M,human,2010,Queens,10
+ADONIS,M,human,2007,Bronx,12
+ADONIS,M,human,2008,Kings,12
+ADONIS,M,human,2009,Bronx,20
+ADONIS,M,human,2010,Bronx,10
+ADONIS,M,human,2010,Kings,13
+ADONIS,M,human,2011,Bronx,11
+ADONIS,M,human,2011,Kings,12
+ADONIS,M,human,2012,Kings,13
+ADONIS,M,human,2014,Bronx,13
+ADONIS,M,human,2014,Kings,10
+ADONIS,M,human,2014,Queens,9
+ADONIS,M,human,2015,Bronx,12
+ADRIAN,M,human,2007,Bronx,54
+ADRIAN,M,human,2007,Kings,46
+ADRIAN,M,human,2007,New York,35
+ADRIAN,M,human,2007,Queens,64
+ADRIAN,M,human,2008,Bronx,52
+ADRIAN,M,human,2008,Kings,56
+ADRIAN,M,human,2008,New York,42
+ADRIAN,M,human,2008,Queens,75
+ADRIAN,M,human,2008,Richmond,10
+ADRIAN,M,human,2009,Bronx,52
+ADRIAN,M,human,2009,Kings,49
+ADRIAN,M,human,2009,New York,31
+ADRIAN,M,human,2009,Queens,81
+ADRIAN,M,human,2010,Bronx,62
+ADRIAN,M,human,2010,Kings,60
+ADRIAN,M,human,2010,New York,29
+ADRIAN,M,human,2010,Queens,76
+ADRIAN,M,human,2010,Richmond,14
+ADRIAN,M,human,2011,Bronx,73
+ADRIAN,M,human,2011,Kings,56
+ADRIAN,M,human,2011,New York,37
+ADRIAN,M,human,2011,Queens,68
+ADRIAN,M,human,2012,Bronx,78
+ADRIAN,M,human,2012,Kings,62
+ADRIAN,M,human,2012,New York,25
+ADRIAN,M,human,2012,Queens,77
+ADRIAN,M,human,2013,Bronx,59
+ADRIAN,M,human,2013,Kings,58
+ADRIAN,M,human,2013,New York,24
+ADRIAN,M,human,2013,Queens,65
+ADRIAN,M,human,2013,Richmond,11
+ADRIAN,M,human,2014,Bronx,68
+ADRIAN,M,human,2014,Kings,59
+ADRIAN,M,human,2014,New York,25
+ADRIAN,M,human,2014,Queens,61
+ADRIAN,M,human,2014,Richmond,12
+ADRIAN,M,human,2015,Bronx,63
+ADRIAN,M,human,2015,Kings,70
+ADRIAN,M,human,2015,New York,25
+ADRIAN,M,human,2015,Queens,70
+ADRIANA,F,human,2007,Bronx,24
+ADRIANA,F,human,2007,Kings,20
+ADRIANA,F,human,2007,New York,13
+ADRIANA,F,human,2007,Queens,22
+ADRIANA,F,human,2008,Bronx,25
+ADRIANA,F,human,2008,Kings,28
+ADRIANA,F,human,2008,Queens,26
+ADRIANA,F,human,2008,Richmond,11
+ADRIANA,F,human,2009,Bronx,21
+ADRIANA,F,human,2009,Kings,20
+ADRIANA,F,human,2009,New York,18
+ADRIANA,F,human,2009,Queens,34
+ADRIANA,F,human,2009,Richmond,12
+ADRIANA,F,human,2010,Bronx,23
+ADRIANA,F,human,2010,Kings,24
+ADRIANA,F,human,2010,Queens,24
+ADRIANA,F,human,2011,Bronx,17
+ADRIANA,F,human,2011,Kings,29
+ADRIANA,F,human,2011,New York,12
+ADRIANA,F,human,2011,Queens,36
+ADRIANA,F,human,2011,Richmond,16
+ADRIANA,F,human,2012,Bronx,22
+ADRIANA,F,human,2012,Kings,30
+ADRIANA,F,human,2012,New York,15
+ADRIANA,F,human,2012,Queens,35
+ADRIANA,F,human,2012,Richmond,13
+ADRIANA,F,human,2013,Bronx,12
+ADRIANA,F,human,2013,Kings,18
+ADRIANA,F,human,2013,Queens,29
+ADRIANA,F,human,2014,Bronx,16
+ADRIANA,F,human,2014,Kings,17
+ADRIANA,F,human,2014,New York,11
+ADRIANA,F,human,2014,Queens,19
+ADRIANA,F,human,2014,Richmond,8
+ADRIANA,F,human,2015,Bronx,16
+ADRIANA,F,human,2015,Kings,27
+ADRIANA,F,human,2015,New York,10
+ADRIANA,F,human,2015,Queens,28
+ADRIANA,F,human,2015,Richmond,12
+ADRIANNA,F,human,2007,Bronx,13
+ADRIANNA,F,human,2007,Kings,12
+ADRIANNA,F,human,2007,Queens,17
+ADRIANNA,F,human,2008,Kings,19
+ADRIANNA,F,human,2008,Richmond,10
+ADRIANNA,F,human,2009,Bronx,15
+ADRIANNA,F,human,2009,Kings,13
+ADRIANNA,F,human,2009,Queens,15
+ADRIANNA,F,human,2010,Bronx,10
+ADRIANNA,F,human,2010,Kings,15
+ADRIANNA,F,human,2010,New York,12
+ADRIANNA,F,human,2010,Queens,17
+ADRIANNA,F,human,2010,Richmond,13
+ADRIANNA,F,human,2011,Bronx,13
+ADRIANNA,F,human,2011,Kings,15
+ADRIANNA,F,human,2011,Queens,14
+ADRIANNA,F,human,2011,Richmond,13
+ADRIANNA,F,human,2012,Bronx,12
+ADRIANNA,F,human,2012,Kings,17
+ADRIANNA,F,human,2012,Queens,13
+ADRIANNA,F,human,2013,Bronx,12
+ADRIANNA,F,human,2013,Kings,13
+ADRIANNA,F,human,2013,Queens,10
+ADRIANNA,F,human,2014,Bronx,13
+ADRIANNA,F,human,2014,Kings,11
+ADRIANNA,F,human,2014,Queens,15
+ADRIANNA,F,human,2015,Queens,13
+ADRIEL,M,human,2008,Bronx,13
+ADRIEL,M,human,2010,Bronx,11
+ADRIEL,M,human,2011,Bronx,13
+ADRIEL,M,human,2011,Kings,15
+ADRIEL,M,human,2012,Bronx,14
+ADRIEL,M,human,2013,Bronx,10
+ADRIEL,M,human,2014,Bronx,14
+ADRIEL,M,human,2014,New York,8
+ADRIEL,M,human,2014,Queens,9
+ADRIEL,M,human,2015,Bronx,23
+ADRIEN,M,human,2014,Bronx,7
+ADYAN,M,human,2013,Queens,10
+ADYAN,M,human,2014,Kings,6
+ADYAN,M,human,2014,Queens,10
+AGNES,F,human,2014,Kings,5
+AGNES,F,human,2014,New York,5
+AHARON,M,human,2009,Kings,16
+AHARON,M,human,2010,Kings,12
+AHARON,M,human,2011,Kings,13
+AHARON,M,human,2013,Kings,12
+AHARON,M,human,2014,Kings,20
+AHARON,M,human,2015,Kings,15
+AHMAD,M,human,2008,Kings,11
+AHMAD,M,human,2009,Kings,12
+AHMAD,M,human,2012,Kings,12
+AHMAD,M,human,2012,Queens,10
+AHMAD,M,human,2013,Kings,10
+AHMAD,M,human,2014,Bronx,8
+AHMAD,M,human,2014,Kings,8
+AHMAD,M,human,2015,Kings,15
+AHMED,M,human,2007,Kings,10
+AHMED,M,human,2007,Queens,12
+AHMED,M,human,2008,Bronx,11
+AHMED,M,human,2008,Kings,20
+AHMED,M,human,2008,Queens,10
+AHMED,M,human,2009,Kings,19
+AHMED,M,human,2009,Queens,12
+AHMED,M,human,2010,Kings,23
+AHMED,M,human,2010,Queens,12
+AHMED,M,human,2011,Kings,26
+AHMED,M,human,2011,Queens,19
+AHMED,M,human,2012,Kings,30
+AHMED,M,human,2012,Queens,13
+AHMED,M,human,2013,Kings,23
+AHMED,M,human,2013,Queens,22
+AHMED,M,human,2014,Bronx,9
+AHMED,M,human,2014,Kings,20
+AHMED,M,human,2014,New York,7
+AHMED,M,human,2014,Queens,15
+AHMED,M,human,2015,Bronx,15
+AHMED,M,human,2015,Kings,22
+AHMED,M,human,2015,Queens,13
+AHNAF,M,human,2014,Queens,7
+AHRON,M,human,2011,Kings,14
+AHRON,M,human,2012,Kings,10
+AHRON,M,human,2015,Kings,10
+AHUVA,F,human,2008,Kings,12
+AHUVA,F,human,2009,Kings,10
+AHUVA,F,human,2010,Kings,18
+AHUVA,F,human,2010,Queens,10
+AHUVA,F,human,2013,Kings,12
+AHUVA,F,human,2013,Queens,10
+AHUVA,F,human,2014,Kings,17
+AHUVA,F,human,2014,Queens,5
+AICHA,F,human,2011,Bronx,12
+AICHA,F,human,2014,Bronx,14
+AICHA,F,human,2014,Kings,5
+AIDA,F,human,2014,Kings,5
+AIDAN,M,human,2007,Bronx,25
+AIDAN,M,human,2007,Kings,52
+AIDAN,M,human,2007,New York,52
+AIDAN,M,human,2007,Queens,47
+AIDAN,M,human,2007,Richmond,11
+AIDAN,M,human,2008,Bronx,36
+AIDAN,M,human,2008,Kings,48
+AIDAN,M,human,2008,New York,33
+AIDAN,M,human,2008,Queens,62
+AIDAN,M,human,2008,Richmond,23
+AIDAN,M,human,2009,Bronx,32
+AIDAN,M,human,2009,Kings,41
+AIDAN,M,human,2009,New York,46
+AIDAN,M,human,2009,Queens,52
+AIDAN,M,human,2009,Richmond,17
+AIDAN,M,human,2010,Bronx,24
+AIDAN,M,human,2010,Kings,39
+AIDAN,M,human,2010,New York,18
+AIDAN,M,human,2010,Queens,56
+AIDAN,M,human,2011,Bronx,23
+AIDAN,M,human,2011,Kings,41
+AIDAN,M,human,2011,New York,27
+AIDAN,M,human,2011,Queens,50
+AIDAN,M,human,2012,Kings,28
+AIDAN,M,human,2012,New York,21
+AIDAN,M,human,2012,Queens,42
+AIDAN,M,human,2013,Bronx,23
+AIDAN,M,human,2013,Kings,23
+AIDAN,M,human,2013,New York,18
+AIDAN,M,human,2013,Queens,46
+AIDAN,M,human,2013,Richmond,10
+AIDAN,M,human,2014,Bronx,10
+AIDAN,M,human,2014,Kings,26
+AIDAN,M,human,2014,New York,13
+AIDAN,M,human,2014,Queens,29
+AIDAN,M,human,2015,Kings,19
+AIDAN,M,human,2015,New York,12
+AIDAN,M,human,2015,Queens,31
+AIDEL,F,human,2014,Kings,6
+AIDEN,M,human,2007,Bronx,46
+AIDEN,M,human,2007,Kings,52
+AIDEN,M,human,2007,New York,40
+AIDEN,M,human,2007,Queens,49
+AIDEN,M,human,2007,Richmond,18
+AIDEN,M,human,2008,Bronx,74
+AIDEN,M,human,2008,Kings,84
+AIDEN,M,human,2008,New York,59
+AIDEN,M,human,2008,Queens,78
+AIDEN,M,human,2008,Richmond,14
+AIDEN,M,human,2009,Bronx,89
+AIDEN,M,human,2009,Kings,96
+AIDEN,M,human,2009,New York,43
+AIDEN,M,human,2009,Queens,107
+AIDEN,M,human,2009,Richmond,24
+AIDEN,M,human,2010,Bronx,116
+AIDEN,M,human,2010,Kings,128
+AIDEN,M,human,2010,New York,67
+AIDEN,M,human,2010,Queens,136
+AIDEN,M,human,2010,Richmond,18
+AIDEN,M,human,2011,Bronx,113
+AIDEN,M,human,2011,Kings,177
+AIDEN,M,human,2011,New York,71
+AIDEN,M,human,2011,Queens,172
+AIDEN,M,human,2011,Richmond,30
+AIDEN,M,human,2012,Bronx,123
+AIDEN,M,human,2012,Kings,187
+AIDEN,M,human,2012,New York,62
+AIDEN,M,human,2012,Queens,171
+AIDEN,M,human,2012,Richmond,35
+AIDEN,M,human,2013,Bronx,106
+AIDEN,M,human,2013,Kings,182
+AIDEN,M,human,2013,New York,53
+AIDEN,M,human,2013,Queens,144
+AIDEN,M,human,2013,Richmond,19
+AIDEN,M,human,2014,Bronx,110
+AIDEN,M,human,2014,Kings,161
+AIDEN,M,human,2014,New York,53
+AIDEN,M,human,2014,Queens,161
+AIDEN,M,human,2014,Richmond,28
+AIDEN,M,human,2015,Bronx,111
+AIDEN,M,human,2015,Kings,169
+AIDEN,M,human,2015,New York,49
+AIDEN,M,human,2015,Queens,171
+AIDEN,M,human,2015,Richmond,22
+AILEEN,F,human,2010,Kings,10
+AILEEN,F,human,2010,Queens,11
+AILEEN,F,human,2011,Queens,11
+AILEEN,F,human,2012,Bronx,10
+AILEEN,F,human,2014,Bronx,5
+AILEEN,F,human,2014,Queens,11
+AILEEN,F,human,2015,Queens,10
+AIMEE,F,human,2015,Kings,10
+AISHA,F,human,2007,Queens,12
+AISHA,F,human,2008,Kings,12
+AISHA,F,human,2008,Queens,11
+AISHA,F,human,2009,Queens,12
+AISHA,F,human,2010,Bronx,23
+AISHA,F,human,2010,Queens,10
+AISHA,F,human,2011,Bronx,13
+AISHA,F,human,2011,Kings,13
+AISHA,F,human,2011,Queens,13
+AISHA,F,human,2012,Bronx,23
+AISHA,F,human,2012,Queens,11
+AISHA,F,human,2013,Bronx,13
+AISHA,F,human,2013,Kings,11
+AISHA,F,human,2013,Queens,19
+AISHA,F,human,2014,Bronx,17
+AISHA,F,human,2014,Kings,13
+AISHA,F,human,2014,Queens,13
+AISHA,F,human,2015,Bronx,28
+AISHA,F,human,2015,Kings,29
+AISHA,F,human,2015,Queens,12
+AISSATOU,F,human,2008,Bronx,11
+AISSATOU,F,human,2014,Bronx,7
+AIZA,F,human,2014,Kings,10
+AIZA,F,human,2014,Queens,6
+AJANI,M,human,2009,Kings,11
+AKIVA,M,human,2008,Kings,11
+AKIVA,M,human,2009,Kings,10
+AKIVA,M,human,2010,Queens,14
+AKIVA,M,human,2012,Kings,11
+AKIVA,M,human,2013,Kings,17
+AKIVA,M,human,2013,Queens,10
+AKIVA,M,human,2014,Kings,10
+AKIVA,M,human,2014,Queens,8
+ALAIA,F,human,2015,Bronx,39
+ALAIA,F,human,2015,Queens,17
+ALAINA,F,human,2014,Bronx,7
+ALAINA,F,human,2014,Kings,7
+ALAN,M,human,2007,Kings,45
+ALAN,M,human,2007,New York,13
+ALAN,M,human,2007,Queens,35
+ALAN,M,human,2008,Bronx,14
+ALAN,M,human,2008,Kings,48
+ALAN,M,human,2008,New York,14
+ALAN,M,human,2008,Queens,27
+ALAN,M,human,2009,Bronx,13
+ALAN,M,human,2009,Kings,35
+ALAN,M,human,2009,New York,12
+ALAN,M,human,2009,Queens,36
+ALAN,M,human,2010,Bronx,24
+ALAN,M,human,2010,Kings,42
+ALAN,M,human,2010,Queens,22
+ALAN,M,human,2011,Bronx,15
+ALAN,M,human,2011,Kings,43
+ALAN,M,human,2011,New York,13
+ALAN,M,human,2011,Queens,25
+ALAN,M,human,2012,Bronx,15
+ALAN,M,human,2012,Kings,45
+ALAN,M,human,2012,Queens,30
+ALAN,M,human,2013,Bronx,22
+ALAN,M,human,2013,Kings,42
+ALAN,M,human,2013,Queens,39
+ALAN,M,human,2014,Bronx,22
+ALAN,M,human,2014,Kings,28
+ALAN,M,human,2014,New York,15
+ALAN,M,human,2014,Queens,31
+ALAN,M,human,2014,Richmond,8
+ALAN,M,human,2015,Bronx,21
+ALAN,M,human,2015,Kings,43
+ALAN,M,human,2015,New York,12
+ALAN,M,human,2015,Queens,41
+ALANA,F,human,2007,Bronx,19
+ALANA,F,human,2007,Kings,17
+ALANA,F,human,2007,New York,17
+ALANA,F,human,2007,Queens,19
+ALANA,F,human,2008,Bronx,12
+ALANA,F,human,2008,Kings,17
+ALANA,F,human,2008,New York,10
+ALANA,F,human,2008,Queens,11
+ALANA,F,human,2009,Bronx,11
+ALANA,F,human,2009,Kings,16
+ALANA,F,human,2009,Queens,12
+ALANA,F,human,2010,Bronx,15
+ALANA,F,human,2010,Kings,15
+ALANA,F,human,2010,Queens,17
+ALANA,F,human,2011,Kings,11
+ALANA,F,human,2011,Queens,17
+ALANA,F,human,2012,Bronx,13
+ALANA,F,human,2012,Kings,14
+ALANA,F,human,2012,New York,11
+ALANA,F,human,2012,Queens,17
+ALANA,F,human,2013,Bronx,10
+ALANA,F,human,2013,Queens,15
+ALANA,F,human,2014,Bronx,15
+ALANA,F,human,2014,New York,7
+ALANA,F,human,2014,Queens,19
+ALANA,F,human,2015,Bronx,11
+ALANA,F,human,2015,Kings,13
+ALANA,F,human,2015,Queens,11
+ALANI,F,human,2012,Kings,11
+ALANI,F,human,2014,Bronx,5
+ALANI,F,human,2014,Kings,5
+ALANI,F,human,2015,Kings,11
+ALANIS,F,human,2014,Bronx,12
+ALANIS,F,human,2014,Queens,8
+ALANNA,F,human,2014,Bronx,6
+ALAYNA,F,human,2014,Kings,5
+ALAYSIA,F,human,2014,Bronx,5
+ALBERT,M,human,2007,Kings,19
+ALBERT,M,human,2007,New York,12
+ALBERT,M,human,2007,Queens,13
+ALBERT,M,human,2008,Bronx,17
+ALBERT,M,human,2008,Kings,29
+ALBERT,M,human,2008,Queens,12
+ALBERT,M,human,2009,Kings,19
+ALBERT,M,human,2009,New York,14
+ALBERT,M,human,2010,Bronx,18
+ALBERT,M,human,2010,Kings,21
+ALBERT,M,human,2010,Queens,11
+ALBERT,M,human,2011,Kings,14
+ALBERT,M,human,2012,Kings,29
+ALBERT,M,human,2012,New York,11
+ALBERT,M,human,2012,Queens,12
+ALBERT,M,human,2013,Bronx,11
+ALBERT,M,human,2013,Kings,16
+ALBERT,M,human,2013,New York,10
+ALBERT,M,human,2013,Queens,14
+ALBERT,M,human,2014,Bronx,8
+ALBERT,M,human,2014,Kings,23
+ALBERT,M,human,2014,New York,6
+ALBERT,M,human,2014,Queens,11
+ALBERT,M,human,2015,Kings,21
+ALBERT,M,human,2015,Queens,12
+ALBERTO,M,human,2007,Bronx,14
+ALBERTO,M,human,2014,Bronx,5
+ALBERTO,M,human,2014,Kings,5
+ALBERTO,M,human,2014,Queens,5
+ALDEN,M,human,2014,Kings,5
+ALEAH,F,human,2014,Bronx,5
+ALEAH,F,human,2014,Queens,5
+ALEC,M,human,2011,Kings,10
+ALEC,M,human,2013,Kings,10
+ALEC,M,human,2014,Kings,5
+ALEC,M,human,2014,New York,6
+ALEENA,F,human,2009,Queens,10
+ALEENA,F,human,2013,Kings,13
+ALEENA,F,human,2013,Queens,14
+ALEENA,F,human,2014,Bronx,7
+ALEENA,F,human,2014,Kings,10
+ALEENA,F,human,2014,Queens,10
+ALEENA,F,human,2015,Bronx,10
+ALEENA,F,human,2015,Queens,11
+ALEJANDRA,F,human,2008,Queens,14
+ALEJANDRA,F,human,2010,Bronx,10
+ALEJANDRA,F,human,2014,Kings,7
+ALEJANDRA,F,human,2014,Queens,5
+ALEJANDRO,M,human,2007,Bronx,17
+ALEJANDRO,M,human,2007,Kings,13
+ALEJANDRO,M,human,2007,New York,13
+ALEJANDRO,M,human,2007,Queens,32
+ALEJANDRO,M,human,2008,Bronx,21
+ALEJANDRO,M,human,2008,Kings,23
+ALEJANDRO,M,human,2008,New York,14
+ALEJANDRO,M,human,2008,Queens,36
+ALEJANDRO,M,human,2009,Bronx,24
+ALEJANDRO,M,human,2009,Kings,11
+ALEJANDRO,M,human,2009,New York,11
+ALEJANDRO,M,human,2009,Queens,29
+ALEJANDRO,M,human,2010,Bronx,28
+ALEJANDRO,M,human,2010,Kings,17
+ALEJANDRO,M,human,2010,New York,14
+ALEJANDRO,M,human,2010,Queens,30
+ALEJANDRO,M,human,2011,Bronx,19
+ALEJANDRO,M,human,2011,Kings,20
+ALEJANDRO,M,human,2011,Queens,24
+ALEJANDRO,M,human,2012,Bronx,22
+ALEJANDRO,M,human,2012,Kings,14
+ALEJANDRO,M,human,2012,New York,14
+ALEJANDRO,M,human,2012,Queens,20
+ALEJANDRO,M,human,2013,Bronx,21
+ALEJANDRO,M,human,2013,Kings,12
+ALEJANDRO,M,human,2013,Queens,25
+ALEJANDRO,M,human,2014,Bronx,18
+ALEJANDRO,M,human,2014,Kings,12
+ALEJANDRO,M,human,2014,New York,9
+ALEJANDRO,M,human,2014,Queens,20
+ALEJANDRO,M,human,2015,Bronx,12
+ALEJANDRO,M,human,2015,Kings,20
+ALEJANDRO,M,human,2015,Queens,14
+ALESSANDRA,F,human,2007,Queens,13
+ALESSANDRA,F,human,2008,New York,10
+ALESSANDRA,F,human,2010,New York,13
+ALESSANDRA,F,human,2011,Kings,12
+ALESSANDRA,F,human,2012,Queens,14
+ALESSANDRA,F,human,2014,Kings,8
+ALESSANDRA,F,human,2014,New York,10
+ALESSANDRA,F,human,2015,Queens,12
+ALESSANDRO,M,human,2008,New York,13
+ALESSIA,F,human,2014,Queens,6
+ALESSIA,F,human,2014,Richmond,5
+ALEX,M,human,2007,Bronx,35
+ALEX,M,human,2007,Kings,46
+ALEX,M,human,2007,New York,33
+ALEX,M,human,2007,Queens,79
+ALEX,M,human,2008,Bronx,32
+ALEX,M,human,2008,Kings,44
+ALEX,M,human,2008,New York,30
+ALEX,M,human,2008,Queens,58
+ALEX,M,human,2008,Richmond,10
+ALEX,M,human,2009,Bronx,39
+ALEX,M,human,2009,Kings,68
+ALEX,M,human,2009,New York,28
+ALEX,M,human,2009,Queens,77
+ALEX,M,human,2010,Bronx,39
+ALEX,M,human,2010,Kings,52
+ALEX,M,human,2010,New York,22
+ALEX,M,human,2010,Queens,63
+ALEX,M,human,2011,Bronx,27
+ALEX,M,human,2011,Kings,49
+ALEX,M,human,2011,New York,22
+ALEX,M,human,2011,Queens,61
+ALEX,M,human,2012,Bronx,22
+ALEX,M,human,2012,Kings,42
+ALEX,M,human,2012,New York,19
+ALEX,M,human,2012,Queens,53
+ALEX,M,human,2013,Bronx,17
+ALEX,M,human,2013,Kings,44
+ALEX,M,human,2013,New York,28
+ALEX,M,human,2013,Queens,51
+ALEX,M,human,2014,Bronx,25
+ALEX,M,human,2014,Kings,49
+ALEX,M,human,2014,New York,16
+ALEX,M,human,2014,Queens,54
+ALEX,M,human,2015,Bronx,13
+ALEX,M,human,2015,Kings,41
+ALEX,M,human,2015,New York,13
+ALEX,M,human,2015,Queens,51
+ALEXA,F,human,2007,Bronx,32
+ALEXA,F,human,2007,Kings,27
+ALEXA,F,human,2007,New York,32
+ALEXA,F,human,2007,Queens,38
+ALEXA,F,human,2007,Richmond,16
+ALEXA,F,human,2008,Bronx,20
+ALEXA,F,human,2008,Kings,29
+ALEXA,F,human,2008,New York,36
+ALEXA,F,human,2008,Queens,30
+ALEXA,F,human,2008,Richmond,11
+ALEXA,F,human,2009,Bronx,29
+ALEXA,F,human,2009,Kings,24
+ALEXA,F,human,2009,New York,26
+ALEXA,F,human,2009,Queens,34
+ALEXA,F,human,2009,Richmond,18
+ALEXA,F,human,2010,Bronx,25
+ALEXA,F,human,2010,Kings,30
+ALEXA,F,human,2010,New York,21
+ALEXA,F,human,2010,Queens,32
+ALEXA,F,human,2010,Richmond,16
+ALEXA,F,human,2011,Bronx,26
+ALEXA,F,human,2011,Kings,29
+ALEXA,F,human,2011,New York,31
+ALEXA,F,human,2011,Queens,26
+ALEXA,F,human,2011,Richmond,11
+ALEXA,F,human,2012,Bronx,22
+ALEXA,F,human,2012,Kings,31
+ALEXA,F,human,2012,New York,28
+ALEXA,F,human,2012,Queens,39
+ALEXA,F,human,2012,Richmond,11
+ALEXA,F,human,2013,Bronx,20
+ALEXA,F,human,2013,Kings,26
+ALEXA,F,human,2013,New York,25
+ALEXA,F,human,2013,Queens,30
+ALEXA,F,human,2013,Richmond,16
+ALEXA,F,human,2014,Bronx,20
+ALEXA,F,human,2014,Kings,27
+ALEXA,F,human,2014,New York,20
+ALEXA,F,human,2014,Queens,32
+ALEXA,F,human,2014,Richmond,12
+ALEXA,F,human,2015,Bronx,38
+ALEXA,F,human,2015,Kings,30
+ALEXA,F,human,2015,New York,24
+ALEXA,F,human,2015,Queens,51
+ALEXA,F,human,2015,Richmond,12
+ALEXANDER,M,human,2007,Bronx,70
+ALEXANDER,M,human,2007,Kings,102
+ALEXANDER,M,human,2007,New York,133
+ALEXANDER,M,human,2007,Queens,112
+ALEXANDER,M,human,2007,Richmond,20
+ALEXANDER,M,human,2008,Bronx,79
+ALEXANDER,M,human,2008,Kings,130
+ALEXANDER,M,human,2008,New York,147
+ALEXANDER,M,human,2008,Queens,142
+ALEXANDER,M,human,2008,Richmond,28
+ALEXANDER,M,human,2009,Bronx,97
+ALEXANDER,M,human,2009,Kings,140
+ALEXANDER,M,human,2009,New York,123
+ALEXANDER,M,human,2009,Queens,154
+ALEXANDER,M,human,2009,Richmond,23
+ALEXANDER,M,human,2010,Bronx,96
+ALEXANDER,M,human,2010,Kings,126
+ALEXANDER,M,human,2010,New York,127
+ALEXANDER,M,human,2010,Queens,143
+ALEXANDER,M,human,2010,Richmond,29
+ALEXANDER,M,human,2011,Bronx,83
+ALEXANDER,M,human,2011,Kings,121
+ALEXANDER,M,human,2011,New York,120
+ALEXANDER,M,human,2011,Queens,140
+ALEXANDER,M,human,2011,Richmond,23
+ALEXANDER,M,human,2012,Bronx,80
+ALEXANDER,M,human,2012,Kings,138
+ALEXANDER,M,human,2012,New York,145
+ALEXANDER,M,human,2012,Queens,135
+ALEXANDER,M,human,2012,Richmond,16
+ALEXANDER,M,human,2013,Bronx,79
+ALEXANDER,M,human,2013,Kings,126
+ALEXANDER,M,human,2013,New York,123
+ALEXANDER,M,human,2013,Queens,151
+ALEXANDER,M,human,2013,Richmond,29
+ALEXANDER,M,human,2014,Bronx,91
+ALEXANDER,M,human,2014,Kings,133
+ALEXANDER,M,human,2014,New York,117
+ALEXANDER,M,human,2014,Queens,149
+ALEXANDER,M,human,2014,Richmond,27
+ALEXANDER,M,human,2015,Bronx,69
+ALEXANDER,M,human,2015,Kings,162
+ALEXANDER,M,human,2015,New York,77
+ALEXANDER,M,human,2015,Queens,136
+ALEXANDER,M,human,2015,Richmond,22
+ALEXANDRA,F,human,2007,Bronx,26
+ALEXANDRA,F,human,2007,Kings,51
+ALEXANDRA,F,human,2007,New York,64
+ALEXANDRA,F,human,2007,Queens,49
+ALEXANDRA,F,human,2007,Richmond,20
+ALEXANDRA,F,human,2008,Bronx,27
+ALEXANDRA,F,human,2008,Kings,40
+ALEXANDRA,F,human,2008,New York,40
+ALEXANDRA,F,human,2008,Queens,37
+ALEXANDRA,F,human,2008,Richmond,10
+ALEXANDRA,F,human,2009,Bronx,15
+ALEXANDRA,F,human,2009,Kings,41
+ALEXANDRA,F,human,2009,New York,55
+ALEXANDRA,F,human,2009,Queens,50
+ALEXANDRA,F,human,2009,Richmond,17
+ALEXANDRA,F,human,2010,Bronx,10
+ALEXANDRA,F,human,2010,Kings,39
+ALEXANDRA,F,human,2010,New York,46
+ALEXANDRA,F,human,2010,Queens,32
+ALEXANDRA,F,human,2010,Richmond,10
+ALEXANDRA,F,human,2011,Bronx,20
+ALEXANDRA,F,human,2011,Kings,38
+ALEXANDRA,F,human,2011,New York,48
+ALEXANDRA,F,human,2011,Queens,45
+ALEXANDRA,F,human,2011,Richmond,15
+ALEXANDRA,F,human,2012,Kings,45
+ALEXANDRA,F,human,2012,New York,56
+ALEXANDRA,F,human,2012,Queens,37
+ALEXANDRA,F,human,2012,Richmond,16
+ALEXANDRA,F,human,2013,Bronx,14
+ALEXANDRA,F,human,2013,Kings,27
+ALEXANDRA,F,human,2013,New York,51
+ALEXANDRA,F,human,2013,Queens,43
+ALEXANDRA,F,human,2014,Bronx,17
+ALEXANDRA,F,human,2014,Kings,24
+ALEXANDRA,F,human,2014,New York,37
+ALEXANDRA,F,human,2014,Queens,32
+ALEXANDRA,F,human,2014,Richmond,10
+ALEXANDRA,F,human,2015,Bronx,12
+ALEXANDRA,F,human,2015,Kings,40
+ALEXANDRA,F,human,2015,New York,26
+ALEXANDRA,F,human,2015,Queens,32
+ALEXANDRA,F,human,2015,Richmond,17
+ALEXANDRIA,F,human,2010,Kings,12
+ALEXANDRIA,F,human,2014,Queens,8
+ALEXANDRIA,F,human,2015,Kings,11
+ALEXIA,F,human,2008,Kings,10
+ALEXIA,F,human,2010,Queens,10
+ALEXIA,F,human,2012,Kings,13
+ALEXIA,F,human,2013,Kings,13
+ALEXIA,F,human,2013,Queens,14
+ALEXIA,F,human,2014,Bronx,6
+ALEXIA,F,human,2014,Queens,12
+ALEXIS,F,human,2007,Bronx,15
+ALEXIS,F,human,2007,Kings,32
+ALEXIS,F,human,2007,New York,18
+ALEXIS,F,human,2007,Queens,20
+ALEXIS,F,human,2007,Richmond,10
+ALEXIS,F,human,2008,Bronx,22
+ALEXIS,F,human,2008,Kings,27
+ALEXIS,F,human,2008,New York,23
+ALEXIS,F,human,2008,Queens,14
+ALEXIS,F,human,2009,Bronx,16
+ALEXIS,F,human,2009,Kings,25
+ALEXIS,F,human,2009,New York,18
+ALEXIS,F,human,2009,Queens,14
+ALEXIS,F,human,2010,Bronx,20
+ALEXIS,F,human,2010,Kings,24
+ALEXIS,F,human,2010,New York,17
+ALEXIS,F,human,2010,Queens,21
+ALEXIS,F,human,2010,Richmond,10
+ALEXIS,F,human,2011,Kings,12
+ALEXIS,F,human,2011,New York,14
+ALEXIS,F,human,2011,Queens,10
+ALEXIS,F,human,2011,Richmond,11
+ALEXIS,F,human,2012,Kings,15
+ALEXIS,F,human,2012,New York,19
+ALEXIS,F,human,2013,Kings,13
+ALEXIS,F,human,2013,New York,11
+ALEXIS,F,human,2013,Queens,18
+ALEXIS,F,human,2014,Bronx,12
+ALEXIS,F,human,2014,Kings,15
+ALEXIS,F,human,2014,New York,6
+ALEXIS,F,human,2014,Queens,12
+ALEXIS,F,human,2014,Richmond,8
+ALEXIS,F,human,2015,Kings,12
+ALEXIS,F,human,2015,Queens,17
+ALEXIS,M,human,2007,Bronx,19
+ALEXIS,M,human,2007,Kings,25
+ALEXIS,M,human,2007,New York,12
+ALEXIS,M,human,2007,Queens,27
+ALEXIS,M,human,2008,Bronx,15
+ALEXIS,M,human,2008,Kings,25
+ALEXIS,M,human,2008,New York,11
+ALEXIS,M,human,2008,Queens,28
+ALEXIS,M,human,2009,Bronx,19
+ALEXIS,M,human,2009,Kings,19
+ALEXIS,M,human,2009,Queens,18
+ALEXIS,M,human,2010,Bronx,16
+ALEXIS,M,human,2010,Kings,17
+ALEXIS,M,human,2010,Queens,16
+ALEXIS,M,human,2011,Bronx,14
+ALEXIS,M,human,2011,Kings,14
+ALEXIS,M,human,2011,Queens,20
+ALEXIS,M,human,2012,Bronx,11
+ALEXIS,M,human,2012,Kings,16
+ALEXIS,M,human,2012,New York,10
+ALEXIS,M,human,2012,Queens,16
+ALEXIS,M,human,2013,Bronx,18
+ALEXIS,M,human,2013,Kings,12
+ALEXIS,M,human,2013,Queens,13
+ALEXIS,M,human,2014,Bronx,11
+ALEXIS,M,human,2014,Kings,9
+ALEXIS,M,human,2014,Queens,16
+ALEXIS,M,human,2015,Bronx,13
+ALEXIS,M,human,2015,Kings,14
+ALEXIS,M,human,2015,Queens,11
+ALFRED,M,human,2007,Kings,10
+ALFRED,M,human,2007,Queens,10
+ALFRED,M,human,2014,Kings,17
+ALFRED,M,human,2014,New York,5
+ALFRED,M,human,2014,Queens,6
+ALI,M,human,2007,Kings,20
+ALI,M,human,2007,Queens,18
+ALI,M,human,2008,Kings,24
+ALI,M,human,2008,Queens,19
+ALI,M,human,2009,Bronx,16
+ALI,M,human,2009,Kings,31
+ALI,M,human,2009,Queens,16
+ALI,M,human,2010,Bronx,15
+ALI,M,human,2010,Kings,19
+ALI,M,human,2010,New York,11
+ALI,M,human,2010,Queens,17
+ALI,M,human,2011,Bronx,12
+ALI,M,human,2011,Kings,26
+ALI,M,human,2011,Queens,16
+ALI,M,human,2012,Bronx,13
+ALI,M,human,2012,Kings,33
+ALI,M,human,2012,Queens,14
+ALI,M,human,2013,Kings,25
+ALI,M,human,2013,Queens,19
+ALI,M,human,2014,Bronx,12
+ALI,M,human,2014,Kings,40
+ALI,M,human,2014,New York,6
+ALI,M,human,2014,Queens,16
+ALI,M,human,2014,Richmond,5
+ALI,M,human,2015,Bronx,11
+ALI,M,human,2015,Kings,28
+ALI,M,human,2015,Queens,18
+ALIA,F,human,2014,Kings,8
+ALIA,F,human,2015,Queens,10
+ALICE,F,human,2007,Kings,24
+ALICE,F,human,2007,New York,14
+ALICE,F,human,2007,Queens,17
+ALICE,F,human,2008,Kings,28
+ALICE,F,human,2008,New York,21
+ALICE,F,human,2008,Queens,15
+ALICE,F,human,2009,Kings,31
+ALICE,F,human,2009,New York,16
+ALICE,F,human,2009,Queens,12
+ALICE,F,human,2010,Kings,32
+ALICE,F,human,2010,New York,25
+ALICE,F,human,2010,Queens,17
+ALICE,F,human,2011,Kings,48
+ALICE,F,human,2011,New York,18
+ALICE,F,human,2011,Queens,17
+ALICE,F,human,2012,Kings,46
+ALICE,F,human,2012,New York,33
+ALICE,F,human,2012,Queens,19
+ALICE,F,human,2013,Kings,46
+ALICE,F,human,2013,New York,19
+ALICE,F,human,2013,Queens,33
+ALICE,F,human,2014,Bronx,12
+ALICE,F,human,2014,Kings,36
+ALICE,F,human,2014,New York,26
+ALICE,F,human,2014,Queens,19
+ALICE,F,human,2015,Kings,45
+ALICE,F,human,2015,New York,21
+ALICE,F,human,2015,Queens,40
+ALICIA,F,human,2007,Bronx,14
+ALICIA,F,human,2007,Kings,13
+ALICIA,F,human,2007,Queens,17
+ALICIA,F,human,2008,Bronx,20
+ALICIA,F,human,2008,Kings,24
+ALICIA,F,human,2008,Queens,18
+ALICIA,F,human,2009,Kings,16
+ALICIA,F,human,2009,Queens,11
+ALICIA,F,human,2010,Bronx,15
+ALICIA,F,human,2010,Kings,16
+ALICIA,F,human,2010,New York,11
+ALICIA,F,human,2010,Queens,29
+ALICIA,F,human,2011,Bronx,17
+ALICIA,F,human,2011,Kings,16
+ALICIA,F,human,2012,Bronx,10
+ALICIA,F,human,2012,Kings,11
+ALICIA,F,human,2012,Queens,14
+ALICIA,F,human,2013,Queens,15
+ALICIA,F,human,2014,Kings,15
+ALICIA,F,human,2014,Queens,15
+ALINA,F,human,2007,Bronx,14
+ALINA,F,human,2007,Kings,13
+ALINA,F,human,2007,New York,12
+ALINA,F,human,2007,Queens,24
+ALINA,F,human,2008,Kings,19
+ALINA,F,human,2008,Queens,20
+ALINA,F,human,2009,Kings,28
+ALINA,F,human,2009,Queens,15
+ALINA,F,human,2010,Kings,13
+ALINA,F,human,2010,New York,12
+ALINA,F,human,2010,Queens,17
+ALINA,F,human,2011,Kings,14
+ALINA,F,human,2011,Queens,20
+ALINA,F,human,2012,Kings,28
+ALINA,F,human,2012,Queens,24
+ALINA,F,human,2013,Bronx,12
+ALINA,F,human,2013,Kings,22
+ALINA,F,human,2013,Queens,24
+ALINA,F,human,2014,Bronx,15
+ALINA,F,human,2014,Kings,36
+ALINA,F,human,2014,New York,11
+ALINA,F,human,2014,Queens,28
+ALINA,F,human,2015,Bronx,20
+ALINA,F,human,2015,Kings,26
+ALINA,F,human,2015,Queens,25
+ALISA,F,human,2008,Kings,12
+ALISA,F,human,2010,Kings,11
+ALISA,F,human,2013,Kings,12
+ALISA,F,human,2014,Kings,9
+ALISA,F,human,2014,New York,5
+ALISA,F,human,2014,Queens,9
+ALISHA,F,human,2007,Queens,12
+ALISHA,F,human,2008,Queens,14
+ALISHA,F,human,2010,Kings,10
+ALISHA,F,human,2010,Queens,11
+ALISHA,F,human,2011,Kings,10
+ALISHA,F,human,2014,Bronx,7
+ALISHA,F,human,2014,Kings,10
+ALISHA,F,human,2014,Queens,8
+ALISON,F,human,2007,Kings,13
+ALISON,F,human,2007,Queens,11
+ALISON,F,human,2008,Bronx,13
+ALISON,F,human,2008,Queens,17
+ALISON,F,human,2009,Bronx,11
+ALISON,F,human,2009,Kings,13
+ALISON,F,human,2009,Queens,25
+ALISON,F,human,2010,Bronx,10
+ALISON,F,human,2010,Kings,11
+ALISON,F,human,2010,Queens,19
+ALISON,F,human,2011,Bronx,13
+ALISON,F,human,2011,Kings,10
+ALISON,F,human,2011,Queens,14
+ALISON,F,human,2012,Bronx,10
+ALISON,F,human,2012,Kings,11
+ALISON,F,human,2012,Queens,18
+ALISON,F,human,2014,Bronx,6
+ALISON,F,human,2014,Kings,18
+ALISON,F,human,2014,Queens,10
+ALISON,F,human,2015,Queens,10
+ALISSA,F,human,2014,Queens,5
+ALISSON,F,human,2010,Queens,11
+ALISSON,F,human,2014,Queens,5
+ALIYAH,F,human,2007,Kings,15
+ALIYAH,F,human,2007,Queens,14
+ALIYAH,F,human,2008,Bronx,14
+ALIYAH,F,human,2008,Kings,11
+ALIYAH,F,human,2008,Queens,13
+ALIYAH,F,human,2009,Bronx,18
+ALIYAH,F,human,2009,Kings,15
+ALIYAH,F,human,2009,Queens,10
+ALIYAH,F,human,2010,Bronx,18
+ALIYAH,F,human,2010,Kings,20
+ALIYAH,F,human,2010,Queens,19
+ALIYAH,F,human,2011,Bronx,17
+ALIYAH,F,human,2011,Kings,17
+ALIYAH,F,human,2011,Queens,18
+ALIYAH,F,human,2012,Bronx,13
+ALIYAH,F,human,2012,Kings,18
+ALIYAH,F,human,2013,Bronx,13
+ALIYAH,F,human,2013,Kings,12
+ALIYAH,F,human,2013,Queens,11
+ALIYAH,F,human,2014,Bronx,12
+ALIYAH,F,human,2014,Kings,21
+ALIYAH,F,human,2014,New York,7
+ALIYAH,F,human,2014,Queens,18
+ALIYAH,F,human,2015,Bronx,18
+ALIYAH,F,human,2015,Queens,15
+ALIZA,F,human,2007,Kings,19
+ALIZA,F,human,2010,Kings,13
+ALIZA,F,human,2010,Queens,13
+ALIZA,F,human,2011,Kings,15
+ALIZA,F,human,2011,Queens,13
+ALIZA,F,human,2012,Kings,14
+ALIZA,F,human,2012,Queens,12
+ALIZA,F,human,2013,Kings,11
+ALIZA,F,human,2013,Queens,11
+ALIZA,F,human,2014,Kings,8
+ALIZA,F,human,2014,Queens,11
+ALIZA,F,human,2015,Kings,12
+ALIZA,F,human,2015,Queens,13
+ALLAN,M,human,2007,Kings,11
+ALLAN,M,human,2011,Kings,10
+ALLAN,M,human,2013,Kings,10
+ALLAN,M,human,2014,Bronx,7
+ALLAN,M,human,2014,Kings,5
+ALLAN,M,human,2014,Queens,8
+ALLEGRA,F,human,2014,New York,5
+ALLEN,M,human,2007,Bronx,11
+ALLEN,M,human,2007,Kings,22
+ALLEN,M,human,2008,Bronx,14
+ALLEN,M,human,2008,New York,13
+ALLEN,M,human,2008,Queens,18
+ALLEN,M,human,2009,Bronx,10
+ALLEN,M,human,2009,Kings,11
+ALLEN,M,human,2009,Queens,16
+ALLEN,M,human,2010,Bronx,16
+ALLEN,M,human,2010,Kings,11
+ALLEN,M,human,2010,Queens,13
+ALLEN,M,human,2011,Bronx,11
+ALLEN,M,human,2011,Kings,11
+ALLEN,M,human,2011,New York,10
+ALLEN,M,human,2011,Queens,15
+ALLEN,M,human,2012,Bronx,13
+ALLEN,M,human,2012,Kings,30
+ALLEN,M,human,2012,Queens,13
+ALLEN,M,human,2013,Kings,13
+ALLEN,M,human,2013,Queens,17
+ALLEN,M,human,2014,Bronx,5
+ALLEN,M,human,2014,Kings,21
+ALLEN,M,human,2014,New York,6
+ALLEN,M,human,2014,Queens,11
+ALLEN,M,human,2015,Bronx,12
+ALLEN,M,human,2015,Kings,18
+ALLEN,M,human,2015,Queens,10
+ALLISON,F,human,2007,Bronx,19
+ALLISON,F,human,2007,Kings,27
+ALLISON,F,human,2007,New York,14
+ALLISON,F,human,2007,Queens,33
+ALLISON,F,human,2008,Bronx,26
+ALLISON,F,human,2008,Kings,33
+ALLISON,F,human,2008,Queens,33
+ALLISON,F,human,2009,Bronx,20
+ALLISON,F,human,2009,Kings,38
+ALLISON,F,human,2009,New York,19
+ALLISON,F,human,2009,Queens,52
+ALLISON,F,human,2009,Richmond,10
+ALLISON,F,human,2010,Bronx,25
+ALLISON,F,human,2010,Kings,42
+ALLISON,F,human,2010,New York,25
+ALLISON,F,human,2010,Queens,49
+ALLISON,F,human,2011,Bronx,32
+ALLISON,F,human,2011,Kings,25
+ALLISON,F,human,2011,New York,25
+ALLISON,F,human,2011,Queens,45
+ALLISON,F,human,2012,Bronx,22
+ALLISON,F,human,2012,Kings,30
+ALLISON,F,human,2012,New York,10
+ALLISON,F,human,2012,Queens,52
+ALLISON,F,human,2013,Bronx,29
+ALLISON,F,human,2013,Kings,25
+ALLISON,F,human,2013,New York,16
+ALLISON,F,human,2013,Queens,52
+ALLISON,F,human,2014,Bronx,33
+ALLISON,F,human,2014,Kings,39
+ALLISON,F,human,2014,New York,12
+ALLISON,F,human,2014,Queens,52
+ALLISON,F,human,2015,Bronx,22
+ALLISON,F,human,2015,Kings,37
+ALLISON,F,human,2015,New York,12
+ALLISON,F,human,2015,Queens,46
+ALLISSON,F,human,2008,Bronx,11
+ALLISSON,F,human,2009,Queens,11
+ALLY,F,human,2014,Queens,5
+ALLYSON,F,human,2008,Queens,13
+ALLYSON,F,human,2014,Bronx,7
+ALLYSON,F,human,2014,New York,6
+ALLYSON,F,human,2014,Queens,6
+ALMA,F,human,2013,Kings,10
+ALMA,F,human,2014,Bronx,8
+ALMA,F,human,2014,Kings,7
+ALMA,F,human,2014,New York,6
+ALMA,F,human,2014,Queens,8
+ALMA,F,human,2015,Kings,11
+ALONDRA,F,human,2014,Queens,5
+ALPHA,M,human,2007,Bronx,10
+ALPHA,M,human,2014,Bronx,7
+ALPHA,M,human,2014,Kings,5
+ALSTON,M,human,2012,Kings,10
+ALSTON,M,human,2014,Kings,7
+ALTER,M,human,2012,Kings,10
+ALTER,M,human,2014,Kings,9
+ALVIN,M,human,2007,Kings,26
+ALVIN,M,human,2007,Queens,17
+ALVIN,M,human,2008,Kings,29
+ALVIN,M,human,2008,Queens,22
+ALVIN,M,human,2009,Kings,19
+ALVIN,M,human,2009,Queens,12
+ALVIN,M,human,2010,Kings,11
+ALVIN,M,human,2010,Queens,14
+ALVIN,M,human,2011,Bronx,11
+ALVIN,M,human,2011,Kings,24
+ALVIN,M,human,2011,Queens,20
+ALVIN,M,human,2012,Kings,28
+ALVIN,M,human,2012,Queens,19
+ALVIN,M,human,2013,Kings,21
+ALVIN,M,human,2013,Queens,17
+ALVIN,M,human,2014,Kings,17
+ALVIN,M,human,2014,New York,8
+ALVIN,M,human,2014,Queens,17
+ALVIN,M,human,2015,Bronx,12
+ALVIN,M,human,2015,Kings,17
+ALVIN,M,human,2015,Queens,15
+ALYSON,F,human,2014,Kings,5
+ALYSSA,F,human,2007,Bronx,71
+ALYSSA,F,human,2007,Kings,55
+ALYSSA,F,human,2007,New York,16
+ALYSSA,F,human,2007,Queens,70
+ALYSSA,F,human,2007,Richmond,15
+ALYSSA,F,human,2008,Bronx,48
+ALYSSA,F,human,2008,Kings,76
+ALYSSA,F,human,2008,New York,20
+ALYSSA,F,human,2008,Queens,67
+ALYSSA,F,human,2008,Richmond,17
+ALYSSA,F,human,2009,Bronx,39
+ALYSSA,F,human,2009,Kings,63
+ALYSSA,F,human,2009,New York,12
+ALYSSA,F,human,2009,Queens,61
+ALYSSA,F,human,2009,Richmond,25
+ALYSSA,F,human,2010,Bronx,43
+ALYSSA,F,human,2010,Kings,43
+ALYSSA,F,human,2010,New York,16
+ALYSSA,F,human,2010,Queens,61
+ALYSSA,F,human,2010,Richmond,19
+ALYSSA,F,human,2011,Bronx,26
+ALYSSA,F,human,2011,Kings,56
+ALYSSA,F,human,2011,New York,14
+ALYSSA,F,human,2011,Queens,53
+ALYSSA,F,human,2011,Richmond,17
+ALYSSA,F,human,2012,Bronx,21
+ALYSSA,F,human,2012,Kings,38
+ALYSSA,F,human,2012,Queens,33
+ALYSSA,F,human,2012,Richmond,11
+ALYSSA,F,human,2013,Bronx,21
+ALYSSA,F,human,2013,Kings,35
+ALYSSA,F,human,2013,Queens,51
+ALYSSA,F,human,2014,Bronx,14
+ALYSSA,F,human,2014,Kings,41
+ALYSSA,F,human,2014,New York,13
+ALYSSA,F,human,2014,Queens,37
+ALYSSA,F,human,2014,Richmond,8
+ALYSSA,F,human,2015,Bronx,19
+ALYSSA,F,human,2015,Kings,38
+ALYSSA,F,human,2015,Queens,26
+AMADOU,M,human,2011,Bronx,10
+AMADOU,M,human,2012,Bronx,11
+AMADOU,M,human,2013,Bronx,10
+AMADOU,M,human,2014,Bronx,9
+AMADOU,M,human,2015,Bronx,11
+AMALIA,F,human,2009,New York,11
+AMALIA,F,human,2014,Bronx,6
+AMALIA,F,human,2014,Kings,7
+AMALIA,F,human,2014,New York,6
+AMALIA,F,human,2014,Queens,5
+AMALIA,F,human,2015,Kings,14
+AMANDA,F,human,2007,Bronx,31
+AMANDA,F,human,2007,Kings,49
+AMANDA,F,human,2007,New York,25
+AMANDA,F,human,2007,Queens,34
+AMANDA,F,human,2008,Bronx,29
+AMANDA,F,human,2008,Kings,27
+AMANDA,F,human,2008,New York,26
+AMANDA,F,human,2008,Queens,32
+AMANDA,F,human,2008,Richmond,14
+AMANDA,F,human,2009,Bronx,18
+AMANDA,F,human,2009,Kings,25
+AMANDA,F,human,2009,New York,15
+AMANDA,F,human,2009,Queens,38
+AMANDA,F,human,2010,Bronx,16
+AMANDA,F,human,2010,Kings,27
+AMANDA,F,human,2010,New York,15
+AMANDA,F,human,2010,Queens,23
+AMANDA,F,human,2011,Bronx,23
+AMANDA,F,human,2011,Kings,23
+AMANDA,F,human,2011,New York,19
+AMANDA,F,human,2011,Queens,16
+AMANDA,F,human,2012,Bronx,11
+AMANDA,F,human,2012,Kings,23
+AMANDA,F,human,2012,New York,21
+AMANDA,F,human,2012,Queens,29
+AMANDA,F,human,2013,Bronx,14
+AMANDA,F,human,2013,Kings,17
+AMANDA,F,human,2013,New York,10
+AMANDA,F,human,2013,Queens,18
+AMANDA,F,human,2014,Bronx,13
+AMANDA,F,human,2014,Kings,19
+AMANDA,F,human,2014,New York,6
+AMANDA,F,human,2014,Queens,14
+AMANDA,F,human,2014,Richmond,5
+AMANDA,F,human,2015,Bronx,17
+AMANDA,F,human,2015,Kings,15
+AMANDA,F,human,2015,Queens,16
+AMANI,F,human,2008,Kings,11
+AMANI,F,human,2009,Bronx,12
+AMANI,F,human,2009,Kings,12
+AMANI,F,human,2009,Queens,10
+AMARA,F,human,2014,Kings,12
+AMARE,M,human,2014,Kings,6
+AMARI,M,human,2007,Kings,19
+AMARI,M,human,2008,Bronx,16
+AMARI,M,human,2008,Kings,19
+AMARI,M,human,2008,Queens,11
+AMARI,M,human,2009,Bronx,12
+AMARI,M,human,2009,Kings,32
+AMARI,M,human,2010,Bronx,11
+AMARI,M,human,2010,Kings,38
+AMARI,M,human,2011,Kings,38
+AMARI,M,human,2011,Queens,14
+AMARI,M,human,2012,Kings,15
+AMARI,M,human,2012,Queens,16
+AMARI,M,human,2013,Bronx,11
+AMARI,M,human,2013,Kings,21
+AMARI,M,human,2014,Bronx,7
+AMARI,M,human,2014,Kings,17
+AMARI,M,human,2014,Queens,11
+AMARI,M,human,2015,Bronx,17
+AMARI,M,human,2015,Kings,25
+AMARI,M,human,2015,Queens,11
+AMARIS,F,human,2014,Queens,5
+AMAYA,F,human,2007,Bronx,19
+AMAYA,F,human,2007,Kings,27
+AMAYA,F,human,2007,New York,11
+AMAYA,F,human,2007,Queens,14
+AMAYA,F,human,2008,Bronx,22
+AMAYA,F,human,2008,Kings,14
+AMAYA,F,human,2008,New York,12
+AMAYA,F,human,2009,Bronx,18
+AMAYA,F,human,2009,Kings,25
+AMAYA,F,human,2009,Queens,15
+AMAYA,F,human,2010,Bronx,19
+AMAYA,F,human,2010,Kings,17
+AMAYA,F,human,2010,Queens,13
+AMAYA,F,human,2011,Bronx,19
+AMAYA,F,human,2011,Kings,22
+AMAYA,F,human,2011,New York,16
+AMAYA,F,human,2011,Queens,21
+AMAYA,F,human,2012,Bronx,20
+AMAYA,F,human,2012,Kings,26
+AMAYA,F,human,2012,New York,17
+AMAYA,F,human,2012,Queens,20
+AMAYA,F,human,2013,Bronx,17
+AMAYA,F,human,2013,Kings,22
+AMAYA,F,human,2014,Bronx,16
+AMAYA,F,human,2014,Kings,28
+AMAYA,F,human,2014,New York,9
+AMAYA,F,human,2014,Queens,16
+AMAYA,F,human,2015,Bronx,27
+AMAYA,F,human,2015,Kings,14
+AMAYA,F,human,2015,Queens,16
+AMAYAH,F,human,2014,Kings,6
+AMBER,F,human,2007,Bronx,18
+AMBER,F,human,2007,Kings,18
+AMBER,F,human,2007,Queens,17
+AMBER,F,human,2008,Bronx,27
+AMBER,F,human,2008,Kings,17
+AMBER,F,human,2008,Queens,19
+AMBER,F,human,2009,Bronx,16
+AMBER,F,human,2009,Kings,27
+AMBER,F,human,2009,Queens,18
+AMBER,F,human,2010,Bronx,21
+AMBER,F,human,2010,Kings,18
+AMBER,F,human,2010,Queens,16
+AMBER,F,human,2011,Bronx,20
+AMBER,F,human,2011,Kings,23
+AMBER,F,human,2011,Queens,17
+AMBER,F,human,2012,Kings,17
+AMBER,F,human,2012,Queens,18
+AMBER,F,human,2013,Bronx,15
+AMBER,F,human,2013,Kings,19
+AMBER,F,human,2013,New York,14
+AMBER,F,human,2013,Queens,22
+AMBER,F,human,2014,Bronx,13
+AMBER,F,human,2014,Kings,17
+AMBER,F,human,2014,New York,5
+AMBER,F,human,2014,Queens,14
+AMBER,F,human,2015,Bronx,18
+AMBER,F,human,2015,Kings,15
+AMBER,F,human,2015,Queens,18
+AMEER,M,human,2014,Kings,7
+AMEERA,F,human,2014,Kings,6
+AMEERA,F,human,2014,Queens,5
+AMEERAH,F,human,2014,Kings,5
+AMELIA,F,human,2007,Bronx,11
+AMELIA,F,human,2007,Kings,25
+AMELIA,F,human,2007,New York,25
+AMELIA,F,human,2007,Queens,34
+AMELIA,F,human,2008,Bronx,12
+AMELIA,F,human,2008,Kings,41
+AMELIA,F,human,2008,New York,19
+AMELIA,F,human,2008,Queens,27
+AMELIA,F,human,2008,Richmond,10
+AMELIA,F,human,2009,Bronx,23
+AMELIA,F,human,2009,Kings,36
+AMELIA,F,human,2009,New York,24
+AMELIA,F,human,2009,Queens,36
+AMELIA,F,human,2010,Bronx,21
+AMELIA,F,human,2010,Kings,28
+AMELIA,F,human,2010,New York,30
+AMELIA,F,human,2010,Queens,35
+AMELIA,F,human,2011,Bronx,17
+AMELIA,F,human,2011,Kings,36
+AMELIA,F,human,2011,New York,38
+AMELIA,F,human,2011,Queens,42
+AMELIA,F,human,2012,Bronx,18
+AMELIA,F,human,2012,Kings,49
+AMELIA,F,human,2012,New York,38
+AMELIA,F,human,2012,Queens,46
+AMELIA,F,human,2013,Bronx,13
+AMELIA,F,human,2013,Kings,48
+AMELIA,F,human,2013,New York,26
+AMELIA,F,human,2013,Queens,42
+AMELIA,F,human,2013,Richmond,13
+AMELIA,F,human,2014,Bronx,34
+AMELIA,F,human,2014,Kings,49
+AMELIA,F,human,2014,New York,33
+AMELIA,F,human,2014,Queens,51
+AMELIA,F,human,2014,Richmond,10
+AMELIA,F,human,2015,Bronx,30
+AMELIA,F,human,2015,Kings,69
+AMELIA,F,human,2015,New York,32
+AMELIA,F,human,2015,Queens,80
+AMELIA,F,human,2015,Richmond,20
+AMELIE,F,human,2012,Kings,13
+AMELIE,F,human,2014,New York,10
+AMELIE,F,human,2014,Queens,8
+AMIA,F,human,2014,Kings,8
+AMIA,F,human,2014,Queens,5
+AMIA,F,human,2015,Kings,10
+AMINA,F,human,2007,Kings,11
+AMINA,F,human,2008,Kings,18
+AMINA,F,human,2009,Kings,12
+AMINA,F,human,2010,Kings,12
+AMINA,F,human,2010,Queens,13
+AMINA,F,human,2011,Kings,17
+AMINA,F,human,2012,Kings,19
+AMINA,F,human,2012,Queens,18
+AMINA,F,human,2013,Bronx,12
+AMINA,F,human,2013,Kings,17
+AMINA,F,human,2013,Queens,13
+AMINA,F,human,2014,Bronx,12
+AMINA,F,human,2014,Kings,30
+AMINA,F,human,2014,New York,10
+AMINA,F,human,2014,Queens,14
+AMINA,F,human,2014,Richmond,7
+AMINA,F,human,2015,Bronx,14
+AMINA,F,human,2015,Kings,39
+AMINA,F,human,2015,Queens,15
+AMINAH,F,human,2014,Kings,5
+AMINATA,F,human,2007,Bronx,15
+AMINATA,F,human,2008,Bronx,14
+AMINATA,F,human,2009,Bronx,14
+AMINATA,F,human,2010,Bronx,19
+AMINATA,F,human,2011,Bronx,17
+AMINATA,F,human,2012,Bronx,12
+AMINATA,F,human,2013,Bronx,17
+AMINATA,F,human,2014,Bronx,19
+AMINATA,F,human,2014,New York,5
+AMINATA,F,human,2015,Bronx,19
+AMIR,M,human,2007,Bronx,17
+AMIR,M,human,2007,Kings,35
+AMIR,M,human,2007,Queens,17
+AMIR,M,human,2008,Bronx,28
+AMIR,M,human,2008,Kings,48
+AMIR,M,human,2008,New York,13
+AMIR,M,human,2008,Queens,19
+AMIR,M,human,2009,Bronx,23
+AMIR,M,human,2009,Kings,50
+AMIR,M,human,2009,Queens,24
+AMIR,M,human,2010,Bronx,22
+AMIR,M,human,2010,Kings,46
+AMIR,M,human,2010,New York,14
+AMIR,M,human,2010,Queens,19
+AMIR,M,human,2011,Bronx,35
+AMIR,M,human,2011,Kings,53
+AMIR,M,human,2011,New York,18
+AMIR,M,human,2011,Queens,24
+AMIR,M,human,2012,Bronx,31
+AMIR,M,human,2012,Kings,48
+AMIR,M,human,2012,Queens,23
+AMIR,M,human,2013,Bronx,34
+AMIR,M,human,2013,Kings,78
+AMIR,M,human,2013,Queens,28
+AMIR,M,human,2014,Bronx,44
+AMIR,M,human,2014,Kings,63
+AMIR,M,human,2014,New York,12
+AMIR,M,human,2014,Queens,31
+AMIR,M,human,2015,Bronx,30
+AMIR,M,human,2015,Kings,70
+AMIR,M,human,2015,New York,16
+AMIR,M,human,2015,Queens,39
+AMIRA,F,human,2007,Kings,10
+AMIRA,F,human,2008,Kings,16
+AMIRA,F,human,2009,Kings,15
+AMIRA,F,human,2009,Queens,12
+AMIRA,F,human,2010,Kings,19
+AMIRA,F,human,2010,Queens,13
+AMIRA,F,human,2011,Kings,10
+AMIRA,F,human,2012,Kings,15
+AMIRA,F,human,2013,Kings,21
+AMIRA,F,human,2014,Bronx,7
+AMIRA,F,human,2014,Kings,23
+AMIRA,F,human,2014,Queens,12
+AMIRA,F,human,2015,Bronx,11
+AMIRA,F,human,2015,Kings,26
+AMIRA,F,human,2015,Queens,18
+AMIRAH,F,human,2010,Kings,10
+AMIRAH,F,human,2011,Kings,12
+AMIRAH,F,human,2012,Kings,19
+AMIRAH,F,human,2014,Bronx,7
+AMIRAH,F,human,2014,Kings,8
+AMIRAH,F,human,2015,Kings,14
+AMIRJON,M,human,2014,Kings,5
+AMIYA,F,human,2011,Kings,10
+AMIYA,F,human,2014,Bronx,6
+AMIYA,F,human,2014,Queens,6
+AMIYAH,F,human,2008,Kings,13
+AMIYAH,F,human,2009,Kings,14
+AMIYAH,F,human,2010,Kings,17
+AMIYAH,F,human,2011,Kings,14
+AMIYAH,F,human,2012,Kings,10
+AMIYAH,F,human,2013,Kings,12
+AMIYAH,F,human,2014,Bronx,6
+AMIYAH,F,human,2014,Kings,8
+AMIYAH,F,human,2014,Queens,5
+AMIYAH,F,human,2015,Kings,17
+AMIYAH,F,human,2015,Queens,10
+AMROM,M,human,2009,Kings,16
+AMROM,M,human,2011,Kings,13
+AMROM,M,human,2014,Kings,6
+AMY,F,human,2007,Bronx,20
+AMY,F,human,2007,Kings,29
+AMY,F,human,2007,New York,16
+AMY,F,human,2007,Queens,52
+AMY,F,human,2008,Bronx,27
+AMY,F,human,2008,Kings,36
+AMY,F,human,2008,New York,12
+AMY,F,human,2008,Queens,45
+AMY,F,human,2009,Bronx,20
+AMY,F,human,2009,Kings,35
+AMY,F,human,2009,New York,21
+AMY,F,human,2009,Queens,43
+AMY,F,human,2010,Bronx,25
+AMY,F,human,2010,Kings,37
+AMY,F,human,2010,New York,18
+AMY,F,human,2010,Queens,33
+AMY,F,human,2011,Bronx,36
+AMY,F,human,2011,Kings,26
+AMY,F,human,2011,New York,23
+AMY,F,human,2011,Queens,44
+AMY,F,human,2012,Bronx,20
+AMY,F,human,2012,Kings,31
+AMY,F,human,2012,New York,11
+AMY,F,human,2012,Queens,39
+AMY,F,human,2013,Bronx,32
+AMY,F,human,2013,Kings,29
+AMY,F,human,2013,New York,11
+AMY,F,human,2013,Queens,45
+AMY,F,human,2014,Bronx,28
+AMY,F,human,2014,Kings,27
+AMY,F,human,2014,New York,17
+AMY,F,human,2014,Queens,40
+AMY,F,human,2015,Bronx,18
+AMY,F,human,2015,Kings,33
+AMY,F,human,2015,New York,14
+AMY,F,human,2015,Queens,35
+AMYA,F,human,2008,Bronx,10
+ANA,F,human,2007,Bronx,13
+ANA,F,human,2007,Kings,19
+ANA,F,human,2007,Queens,16
+ANA,F,human,2008,Bronx,15
+ANA,F,human,2008,New York,11
+ANA,F,human,2008,Queens,11
+ANA,F,human,2009,Kings,14
+ANA,F,human,2009,New York,13
+ANA,F,human,2009,Queens,19
+ANA,F,human,2010,Bronx,14
+ANA,F,human,2010,Queens,13
+ANA,F,human,2011,Queens,13
+ANA,F,human,2012,Bronx,16
+ANA,F,human,2013,Bronx,10
+ANA,F,human,2013,Queens,14
+ANA,F,human,2014,Bronx,13
+ANA,F,human,2014,Kings,10
+ANA,F,human,2014,New York,8
+ANA,F,human,2014,Queens,8
+ANA,F,human,2015,Bronx,12
+ANA,F,human,2015,Kings,11
+ANA,F,human,2015,Queens,23
+ANABEL,F,human,2014,Kings,5
+ANABELLA,F,human,2014,Bronx,6
+ANABELLE,F,human,2013,Kings,10
+ANABELLE,F,human,2014,Queens,7
+ANABIA,F,human,2014,Queens,5
+ANAIS,F,human,2013,Kings,10
+ANAIS,F,human,2014,Kings,5
+ANAIS,F,human,2014,New York,5
+ANALIA,F,human,2009,Bronx,13
+ANALIA,F,human,2009,Kings,16
+ANALIA,F,human,2009,Queens,11
+ANAS,M,human,2014,Kings,5
+ANAS,M,human,2014,Queens,9
+ANASTASIA,F,human,2007,Kings,26
+ANASTASIA,F,human,2007,New York,11
+ANASTASIA,F,human,2008,Kings,14
+ANASTASIA,F,human,2008,Queens,14
+ANASTASIA,F,human,2009,Kings,18
+ANASTASIA,F,human,2009,Queens,14
+ANASTASIA,F,human,2010,Kings,19
+ANASTASIA,F,human,2010,Queens,10
+ANASTASIA,F,human,2011,Kings,14
+ANASTASIA,F,human,2012,Kings,14
+ANASTASIA,F,human,2013,Kings,19
+ANASTASIA,F,human,2013,New York,11
+ANASTASIA,F,human,2013,Queens,11
+ANASTASIA,F,human,2014,Bronx,7
+ANASTASIA,F,human,2014,Kings,12
+ANASTASIA,F,human,2014,Queens,8
+ANASTASIA,F,human,2015,Kings,14
+ANASTASIA,F,human,2015,Queens,15
+ANAYA,F,human,2007,Bronx,12
+ANAYA,F,human,2007,Kings,17
+ANAYA,F,human,2008,Bronx,21
+ANAYA,F,human,2008,Queens,10
+ANAYA,F,human,2009,Bronx,10
+ANAYA,F,human,2009,Kings,23
+ANAYA,F,human,2010,Queens,11
+ANAYA,F,human,2011,Kings,15
+ANAYA,F,human,2013,Kings,17
+ANAYA,F,human,2013,Queens,12
+ANAYA,F,human,2014,Bronx,12
+ANAYA,F,human,2014,Kings,14
+ANAYA,F,human,2014,New York,5
+ANAYA,F,human,2014,Queens,22
+ANAYA,F,human,2015,Kings,25
+ANAYA,F,human,2015,Queens,24
+ANAYAH,F,human,2014,Bronx,6
+ANAYAH,F,human,2014,Kings,6
+ANAYAH,F,human,2014,Queens,6
+ANDERSON,M,human,2007,Kings,10
+ANDERSON,M,human,2007,Queens,12
+ANDERSON,M,human,2008,Bronx,10
+ANDERSON,M,human,2008,Queens,14
+ANDERSON,M,human,2009,Bronx,10
+ANDERSON,M,human,2009,Kings,13
+ANDERSON,M,human,2009,Queens,13
+ANDERSON,M,human,2010,Queens,17
+ANDERSON,M,human,2011,Kings,15
+ANDERSON,M,human,2011,Queens,20
+ANDERSON,M,human,2012,Kings,12
+ANDERSON,M,human,2012,New York,10
+ANDERSON,M,human,2012,Queens,23
+ANDERSON,M,human,2013,Bronx,14
+ANDERSON,M,human,2013,Queens,17
+ANDERSON,M,human,2014,Kings,9
+ANDERSON,M,human,2014,New York,6
+ANDERSON,M,human,2014,Queens,16
+ANDERSON,M,human,2015,Kings,12
+ANDERSON,M,human,2015,New York,10
+ANDERSON,M,human,2015,Queens,12
+ANDRE,M,human,2007,Bronx,12
+ANDRE,M,human,2007,Kings,17
+ANDRE,M,human,2007,New York,11
+ANDRE,M,human,2007,Queens,23
+ANDRE,M,human,2008,Bronx,10
+ANDRE,M,human,2008,Kings,15
+ANDRE,M,human,2008,Queens,13
+ANDRE,M,human,2009,Bronx,10
+ANDRE,M,human,2009,Kings,16
+ANDRE,M,human,2009,Queens,12
+ANDRE,M,human,2010,Bronx,11
+ANDRE,M,human,2010,Kings,21
+ANDRE,M,human,2011,Bronx,16
+ANDRE,M,human,2011,Kings,11
+ANDRE,M,human,2012,Bronx,14
+ANDRE,M,human,2012,Kings,16
+ANDRE,M,human,2013,Bronx,12
+ANDRE,M,human,2013,Queens,10
+ANDRE,M,human,2014,Bronx,6
+ANDRE,M,human,2014,Kings,8
+ANDRE,M,human,2014,New York,7
+ANDRE,M,human,2015,Queens,10
+ANDREA,F,human,2007,Bronx,18
+ANDREA,F,human,2007,Kings,23
+ANDREA,F,human,2007,New York,12
+ANDREA,F,human,2007,Queens,35
+ANDREA,F,human,2008,Bronx,17
+ANDREA,F,human,2008,Kings,19
+ANDREA,F,human,2008,New York,13
+ANDREA,F,human,2008,Queens,35
+ANDREA,F,human,2009,Bronx,19
+ANDREA,F,human,2009,Kings,20
+ANDREA,F,human,2009,Queens,41
+ANDREA,F,human,2010,Bronx,14
+ANDREA,F,human,2010,Kings,27
+ANDREA,F,human,2010,Queens,30
+ANDREA,F,human,2011,Bronx,14
+ANDREA,F,human,2011,Kings,24
+ANDREA,F,human,2011,Queens,23
+ANDREA,F,human,2012,Kings,21
+ANDREA,F,human,2012,Queens,18
+ANDREA,F,human,2013,Bronx,11
+ANDREA,F,human,2013,Kings,14
+ANDREA,F,human,2013,Queens,27
+ANDREA,F,human,2014,Bronx,12
+ANDREA,F,human,2014,Kings,14
+ANDREA,F,human,2014,New York,8
+ANDREA,F,human,2014,Queens,19
+ANDREA,F,human,2014,Richmond,7
+ANDREA,F,human,2015,Bronx,17
+ANDREA,F,human,2015,Kings,16
+ANDREA,F,human,2015,Queens,24
+ANDREAS,M,human,2014,Queens,7
+ANDRES,M,human,2007,Kings,16
+ANDRES,M,human,2007,Queens,16
+ANDRES,M,human,2008,Bronx,13
+ANDRES,M,human,2008,Kings,13
+ANDRES,M,human,2008,Queens,15
+ANDRES,M,human,2009,Bronx,12
+ANDRES,M,human,2009,Kings,13
+ANDRES,M,human,2009,New York,11
+ANDRES,M,human,2009,Queens,17
+ANDRES,M,human,2010,Queens,18
+ANDRES,M,human,2011,Bronx,11
+ANDRES,M,human,2011,Queens,23
+ANDRES,M,human,2012,Kings,10
+ANDRES,M,human,2012,Queens,12
+ANDRES,M,human,2013,Queens,13
+ANDRES,M,human,2014,Bronx,7
+ANDRES,M,human,2014,Kings,6
+ANDRES,M,human,2014,Queens,13
+ANDRES,M,human,2015,Queens,17
+ANDREW,M,human,2007,Bronx,46
+ANDREW,M,human,2007,Kings,93
+ANDREW,M,human,2007,New York,71
+ANDREW,M,human,2007,Queens,116
+ANDREW,M,human,2007,Richmond,18
+ANDREW,M,human,2008,Bronx,51
+ANDREW,M,human,2008,Kings,89
+ANDREW,M,human,2008,New York,67
+ANDREW,M,human,2008,Queens,97
+ANDREW,M,human,2008,Richmond,35
+ANDREW,M,human,2009,Bronx,49
+ANDREW,M,human,2009,Kings,90
+ANDREW,M,human,2009,New York,58
+ANDREW,M,human,2009,Queens,95
+ANDREW,M,human,2009,Richmond,31
+ANDREW,M,human,2010,Bronx,37
+ANDREW,M,human,2010,Kings,70
+ANDREW,M,human,2010,New York,68
+ANDREW,M,human,2010,Queens,107
+ANDREW,M,human,2010,Richmond,25
+ANDREW,M,human,2011,Bronx,44
+ANDREW,M,human,2011,Kings,119
+ANDREW,M,human,2011,New York,69
+ANDREW,M,human,2011,Queens,98
+ANDREW,M,human,2011,Richmond,34
+ANDREW,M,human,2012,Bronx,54
+ANDREW,M,human,2012,Kings,85
+ANDREW,M,human,2012,New York,62
+ANDREW,M,human,2012,Queens,105
+ANDREW,M,human,2012,Richmond,21
+ANDREW,M,human,2013,Bronx,31
+ANDREW,M,human,2013,Kings,75
+ANDREW,M,human,2013,New York,38
+ANDREW,M,human,2013,Queens,78
+ANDREW,M,human,2013,Richmond,24
+ANDREW,M,human,2014,Bronx,34
+ANDREW,M,human,2014,Kings,85
+ANDREW,M,human,2014,New York,47
+ANDREW,M,human,2014,Queens,74
+ANDREW,M,human,2014,Richmond,16
+ANDREW,M,human,2015,Bronx,34
+ANDREW,M,human,2015,Kings,84
+ANDREW,M,human,2015,New York,40
+ANDREW,M,human,2015,Queens,77
+ANDREW,M,human,2015,Richmond,23
+ANDY,M,human,2007,Bronx,15
+ANDY,M,human,2007,Kings,56
+ANDY,M,human,2007,New York,18
+ANDY,M,human,2007,Queens,48
+ANDY,M,human,2008,Bronx,17
+ANDY,M,human,2008,Kings,52
+ANDY,M,human,2008,New York,11
+ANDY,M,human,2008,Queens,45
+ANDY,M,human,2009,Bronx,21
+ANDY,M,human,2009,Kings,42
+ANDY,M,human,2009,New York,18
+ANDY,M,human,2009,Queens,39
+ANDY,M,human,2010,Bronx,14
+ANDY,M,human,2010,Kings,38
+ANDY,M,human,2010,New York,13
+ANDY,M,human,2010,Queens,53
+ANDY,M,human,2011,Bronx,12
+ANDY,M,human,2011,Kings,32
+ANDY,M,human,2011,New York,10
+ANDY,M,human,2011,Queens,30
+ANDY,M,human,2012,Bronx,23
+ANDY,M,human,2012,Kings,45
+ANDY,M,human,2012,New York,16
+ANDY,M,human,2012,Queens,29
+ANDY,M,human,2013,Kings,27
+ANDY,M,human,2013,Queens,28
+ANDY,M,human,2014,Bronx,12
+ANDY,M,human,2014,Kings,34
+ANDY,M,human,2014,Queens,28
+ANDY,M,human,2015,Bronx,14
+ANDY,M,human,2015,Kings,28
+ANDY,M,human,2015,Queens,24
+ANGEL,F,human,2007,Kings,15
+ANGEL,F,human,2007,Queens,14
+ANGEL,F,human,2008,Kings,22
+ANGEL,F,human,2008,Queens,16
+ANGEL,F,human,2009,Kings,17
+ANGEL,F,human,2010,Kings,14
+ANGEL,F,human,2011,Kings,17
+ANGEL,F,human,2011,Queens,12
+ANGEL,F,human,2012,Kings,14
+ANGEL,F,human,2013,Kings,18
+ANGEL,F,human,2014,Bronx,10
+ANGEL,F,human,2014,Kings,10
+ANGEL,F,human,2014,Queens,7
+ANGEL,F,human,2015,Queens,10
+ANGEL,M,human,2007,Bronx,128
+ANGEL,M,human,2007,Kings,83
+ANGEL,M,human,2007,New York,54
+ANGEL,M,human,2007,Queens,62
+ANGEL,M,human,2007,Richmond,12
+ANGEL,M,human,2008,Bronx,116
+ANGEL,M,human,2008,Kings,82
+ANGEL,M,human,2008,New York,52
+ANGEL,M,human,2008,Queens,68
+ANGEL,M,human,2008,Richmond,15
+ANGEL,M,human,2009,Bronx,108
+ANGEL,M,human,2009,Kings,86
+ANGEL,M,human,2009,New York,39
+ANGEL,M,human,2009,Queens,75
+ANGEL,M,human,2009,Richmond,10
+ANGEL,M,human,2010,Bronx,98
+ANGEL,M,human,2010,Kings,80
+ANGEL,M,human,2010,New York,51
+ANGEL,M,human,2010,Queens,79
+ANGEL,M,human,2011,Bronx,114
+ANGEL,M,human,2011,Kings,64
+ANGEL,M,human,2011,New York,35
+ANGEL,M,human,2011,Queens,54
+ANGEL,M,human,2011,Richmond,10
+ANGEL,M,human,2012,Bronx,84
+ANGEL,M,human,2012,Kings,55
+ANGEL,M,human,2012,New York,33
+ANGEL,M,human,2012,Queens,71
+ANGEL,M,human,2012,Richmond,10
+ANGEL,M,human,2013,Bronx,84
+ANGEL,M,human,2013,Kings,54
+ANGEL,M,human,2013,New York,24
+ANGEL,M,human,2013,Queens,57
+ANGEL,M,human,2013,Richmond,10
+ANGEL,M,human,2014,Bronx,76
+ANGEL,M,human,2014,Kings,47
+ANGEL,M,human,2014,New York,32
+ANGEL,M,human,2014,Queens,54
+ANGEL,M,human,2015,Bronx,90
+ANGEL,M,human,2015,Kings,45
+ANGEL,M,human,2015,New York,24
+ANGEL,M,human,2015,Queens,48
+ANGEL,M,human,2015,Richmond,12
+ANGELA,F,human,2007,Bronx,15
+ANGELA,F,human,2007,Kings,45
+ANGELA,F,human,2007,New York,17
+ANGELA,F,human,2007,Queens,33
+ANGELA,F,human,2008,Bronx,16
+ANGELA,F,human,2008,Kings,25
+ANGELA,F,human,2008,New York,13
+ANGELA,F,human,2008,Queens,38
+ANGELA,F,human,2009,Kings,27
+ANGELA,F,human,2009,Queens,22
+ANGELA,F,human,2010,Bronx,11
+ANGELA,F,human,2010,Kings,27
+ANGELA,F,human,2010,Queens,24
+ANGELA,F,human,2011,Kings,25
+ANGELA,F,human,2011,New York,10
+ANGELA,F,human,2011,Queens,33
+ANGELA,F,human,2012,Bronx,10
+ANGELA,F,human,2012,Kings,25
+ANGELA,F,human,2012,Queens,35
+ANGELA,F,human,2013,Kings,40
+ANGELA,F,human,2013,Queens,25
+ANGELA,F,human,2014,Bronx,5
+ANGELA,F,human,2014,Kings,38
+ANGELA,F,human,2014,New York,12
+ANGELA,F,human,2014,Queens,44
+ANGELA,F,human,2014,Richmond,5
+ANGELA,F,human,2015,Bronx,10
+ANGELA,F,human,2015,Kings,31
+ANGELA,F,human,2015,Queens,36
+ANGELICA,F,human,2007,Bronx,10
+ANGELICA,F,human,2007,Kings,23
+ANGELICA,F,human,2007,Queens,19
+ANGELICA,F,human,2008,Kings,12
+ANGELICA,F,human,2008,Queens,20
+ANGELICA,F,human,2009,Kings,13
+ANGELICA,F,human,2009,Queens,17
+ANGELICA,F,human,2010,Bronx,11
+ANGELICA,F,human,2010,Kings,12
+ANGELICA,F,human,2010,Queens,12
+ANGELICA,F,human,2011,Bronx,17
+ANGELICA,F,human,2011,Kings,15
+ANGELICA,F,human,2011,Queens,19
+ANGELICA,F,human,2013,Kings,12
+ANGELICA,F,human,2014,Bronx,19
+ANGELICA,F,human,2014,Kings,11
+ANGELICA,F,human,2014,Queens,17
+ANGELICA,F,human,2015,Kings,14
+ANGELICA,F,human,2015,Queens,11
+ANGELINA,F,human,2007,Bronx,46
+ANGELINA,F,human,2007,Kings,71
+ANGELINA,F,human,2007,New York,26
+ANGELINA,F,human,2007,Queens,77
+ANGELINA,F,human,2007,Richmond,27
+ANGELINA,F,human,2008,Bronx,51
+ANGELINA,F,human,2008,Kings,57
+ANGELINA,F,human,2008,New York,25
+ANGELINA,F,human,2008,Queens,72
+ANGELINA,F,human,2008,Richmond,24
+ANGELINA,F,human,2009,Bronx,43
+ANGELINA,F,human,2009,Kings,48
+ANGELINA,F,human,2009,New York,23
+ANGELINA,F,human,2009,Queens,68
+ANGELINA,F,human,2009,Richmond,22
+ANGELINA,F,human,2010,Bronx,30
+ANGELINA,F,human,2010,Kings,54
+ANGELINA,F,human,2010,New York,18
+ANGELINA,F,human,2010,Queens,82
+ANGELINA,F,human,2010,Richmond,17
+ANGELINA,F,human,2011,Bronx,33
+ANGELINA,F,human,2011,Kings,41
+ANGELINA,F,human,2011,New York,18
+ANGELINA,F,human,2011,Queens,52
+ANGELINA,F,human,2011,Richmond,22
+ANGELINA,F,human,2012,Bronx,29
+ANGELINA,F,human,2012,Kings,45
+ANGELINA,F,human,2012,New York,10
+ANGELINA,F,human,2012,Queens,51
+ANGELINA,F,human,2012,Richmond,11
+ANGELINA,F,human,2013,Bronx,21
+ANGELINA,F,human,2013,Kings,39
+ANGELINA,F,human,2013,Queens,55
+ANGELINA,F,human,2014,Bronx,14
+ANGELINA,F,human,2014,Kings,53
+ANGELINA,F,human,2014,New York,15
+ANGELINA,F,human,2014,Queens,37
+ANGELINA,F,human,2014,Richmond,10
+ANGELINA,F,human,2015,Bronx,10
+ANGELINA,F,human,2015,Kings,39
+ANGELINA,F,human,2015,New York,10
+ANGELINA,F,human,2015,Queens,35
+ANGELINE,F,human,2014,Bronx,7
+ANGELINE,F,human,2014,Kings,5
+ANGELIQUE,F,human,2007,Kings,10
+ANGELIQUE,F,human,2008,Kings,10
+ANGELIQUE,F,human,2011,Bronx,13
+ANGELIQUE,F,human,2011,Queens,13
+ANGELIQUE,F,human,2012,Bronx,10
+ANGELIQUE,F,human,2012,Queens,11
+ANGELIQUE,F,human,2014,Bronx,10
+ANGELIQUE,F,human,2014,Kings,5
+ANGELIQUE,F,human,2014,New York,6
+ANGELO,M,human,2007,Bronx,10
+ANGELO,M,human,2007,Kings,11
+ANGELO,M,human,2007,Queens,16
+ANGELO,M,human,2008,Kings,12
+ANGELO,M,human,2008,Queens,18
+ANGELO,M,human,2009,Queens,16
+ANGELO,M,human,2010,Kings,11
+ANGELO,M,human,2010,Queens,14
+ANGELO,M,human,2011,Bronx,12
+ANGELO,M,human,2011,Kings,12
+ANGELO,M,human,2011,Queens,14
+ANGELO,M,human,2012,Bronx,10
+ANGELO,M,human,2012,Kings,10
+ANGELO,M,human,2012,Queens,14
+ANGELO,M,human,2013,Queens,18
+ANGELO,M,human,2013,Richmond,10
+ANGELO,M,human,2014,Kings,13
+ANGELO,M,human,2014,Queens,10
+ANGELO,M,human,2015,Kings,11
+ANGELO,M,human,2015,Queens,14
+ANGELO,M,human,2015,Richmond,10
+ANGIE,F,human,2007,Kings,14
+ANGIE,F,human,2007,Queens,15
+ANGIE,F,human,2008,Kings,11
+ANGIE,F,human,2008,Queens,14
+ANGIE,F,human,2009,Kings,21
+ANGIE,F,human,2009,Queens,19
+ANGIE,F,human,2010,Kings,23
+ANGIE,F,human,2010,Queens,14
+ANGIE,F,human,2011,Queens,14
+ANGIE,F,human,2012,Kings,11
+ANGIE,F,human,2012,Queens,11
+ANGIE,F,human,2013,Queens,15
+ANGIE,F,human,2014,Bronx,5
+ANGIE,F,human,2014,Kings,8
+ANGIE,F,human,2014,Queens,14
+ANGUS,M,human,2012,Kings,12
+ANIKA,F,human,2008,Queens,11
+ANIKA,F,human,2014,New York,5
+ANIKA,F,human,2015,Kings,11
+ANISA,F,human,2008,Queens,14
+ANISA,F,human,2013,Kings,13
+ANISA,F,human,2014,Kings,12
+ANISA,F,human,2015,Kings,13
+ANISJON,M,human,2014,Kings,5
+ANITA,F,human,2007,Kings,11
+ANIYA,F,human,2007,Bronx,14
+ANIYA,F,human,2007,Kings,15
+ANIYA,F,human,2008,Bronx,15
+ANIYA,F,human,2008,Kings,13
+ANIYA,F,human,2009,Bronx,10
+ANIYA,F,human,2009,Kings,15
+ANIYA,F,human,2010,Kings,12
+ANIYA,F,human,2011,Kings,10
+ANIYA,F,human,2014,Kings,9
+ANIYA,F,human,2014,Queens,5
+ANIYAH,F,human,2007,Bronx,18
+ANIYAH,F,human,2007,Kings,18
+ANIYAH,F,human,2007,New York,10
+ANIYAH,F,human,2008,Bronx,18
+ANIYAH,F,human,2008,Kings,25
+ANIYAH,F,human,2008,Queens,13
+ANIYAH,F,human,2009,Bronx,15
+ANIYAH,F,human,2009,Kings,17
+ANIYAH,F,human,2009,Queens,13
+ANIYAH,F,human,2010,Bronx,16
+ANIYAH,F,human,2010,Kings,27
+ANIYAH,F,human,2010,Queens,13
+ANIYAH,F,human,2011,Bronx,10
+ANIYAH,F,human,2011,Kings,27
+ANIYAH,F,human,2012,Bronx,13
+ANIYAH,F,human,2012,Kings,26
+ANIYAH,F,human,2013,Bronx,13
+ANIYAH,F,human,2013,Kings,13
+ANIYAH,F,human,2014,Bronx,11
+ANIYAH,F,human,2014,Kings,10
+ANJALI,F,human,2008,Queens,10
+ANJALI,F,human,2009,Queens,11
+ANJALI,F,human,2010,Queens,10
+ANJALI,F,human,2014,Queens,5
+ANNA,F,human,2007,Kings,54
+ANNA,F,human,2007,New York,53
+ANNA,F,human,2007,Queens,30
+ANNA,F,human,2007,Richmond,12
+ANNA,F,human,2008,Kings,38
+ANNA,F,human,2008,New York,51
+ANNA,F,human,2008,Queens,36
+ANNA,F,human,2008,Richmond,13
+ANNA,F,human,2009,Kings,61
+ANNA,F,human,2009,New York,44
+ANNA,F,human,2009,Queens,36
+ANNA,F,human,2010,Bronx,14
+ANNA,F,human,2010,Kings,58
+ANNA,F,human,2010,New York,49
+ANNA,F,human,2010,Queens,29
+ANNA,F,human,2011,Kings,52
+ANNA,F,human,2011,New York,34
+ANNA,F,human,2011,Queens,26
+ANNA,F,human,2012,Kings,48
+ANNA,F,human,2012,New York,39
+ANNA,F,human,2012,Queens,37
+ANNA,F,human,2013,Kings,53
+ANNA,F,human,2013,New York,33
+ANNA,F,human,2013,Queens,41
+ANNA,F,human,2014,Bronx,8
+ANNA,F,human,2014,Kings,53
+ANNA,F,human,2014,New York,34
+ANNA,F,human,2014,Queens,35
+ANNA,F,human,2014,Richmond,8
+ANNA,F,human,2015,Bronx,12
+ANNA,F,human,2015,Kings,54
+ANNA,F,human,2015,New York,22
+ANNA,F,human,2015,Queens,40
+ANNABEL,F,human,2007,New York,11
+ANNABEL,F,human,2008,New York,10
+ANNABEL,F,human,2010,New York,12
+ANNABEL,F,human,2012,New York,11
+ANNABEL,F,human,2014,Kings,6
+ANNABEL,F,human,2014,New York,8
+ANNABEL,F,human,2014,Queens,5
+ANNABELLA,F,human,2014,Bronx,6
+ANNABELLA,F,human,2014,Kings,7
+ANNABELLA,F,human,2014,New York,6
+ANNABELLA,F,human,2014,Queens,7
+ANNABELLE,F,human,2007,Kings,10
+ANNABELLE,F,human,2007,New York,17
+ANNABELLE,F,human,2008,New York,13
+ANNABELLE,F,human,2009,New York,10
+ANNABELLE,F,human,2010,New York,17
+ANNABELLE,F,human,2010,Queens,10
+ANNABELLE,F,human,2011,Kings,12
+ANNABELLE,F,human,2011,New York,18
+ANNABELLE,F,human,2011,Queens,14
+ANNABELLE,F,human,2012,Kings,13
+ANNABELLE,F,human,2012,New York,12
+ANNABELLE,F,human,2013,Kings,13
+ANNABELLE,F,human,2013,New York,17
+ANNABELLE,F,human,2013,Queens,17
+ANNABELLE,F,human,2014,Bronx,6
+ANNABELLE,F,human,2014,Kings,18
+ANNABELLE,F,human,2014,New York,19
+ANNABELLE,F,human,2014,Queens,18
+ANNABELLE,F,human,2015,Kings,16
+ANNABELLE,F,human,2015,New York,17
+ANNABELLE,F,human,2015,Queens,13
+ANNALISE,F,human,2014,Bronx,6
+ANNALISE,F,human,2014,New York,5
+ANNE,F,human,2013,Kings,10
+ANNE,F,human,2014,Kings,10
+ANNE,F,human,2014,New York,6
+ANNE,F,human,2014,Queens,9
+ANNIE,F,human,2007,Kings,14
+ANNIE,F,human,2007,Queens,12
+ANNIE,F,human,2008,Kings,13
+ANNIE,F,human,2008,New York,11
+ANNIE,F,human,2008,Queens,13
+ANNIE,F,human,2010,Kings,15
+ANNIE,F,human,2010,Queens,13
+ANNIE,F,human,2011,Queens,12
+ANNIE,F,human,2012,Kings,18
+ANNIE,F,human,2014,Kings,16
+ANNIE,F,human,2014,New York,7
+ANNIE,F,human,2014,Queens,15
+ANNIE,F,human,2015,Kings,19
+ANNIE,F,human,2015,Queens,10
+ANNIKA,F,human,2014,New York,5
+ANSON,M,human,2008,Kings,16
+ANSON,M,human,2008,Queens,12
+ANSON,M,human,2009,Kings,12
+ANSON,M,human,2009,Queens,10
+ANSON,M,human,2010,Queens,10
+ANSON,M,human,2011,Kings,11
+ANSON,M,human,2011,Queens,10
+ANSON,M,human,2012,Kings,14
+ANSON,M,human,2013,Kings,16
+ANSON,M,human,2014,Kings,18
+ANSON,M,human,2015,Kings,19
+ANTHONY,M,human,2007,Bronx,141
+ANTHONY,M,human,2007,Kings,161
+ANTHONY,M,human,2007,New York,67
+ANTHONY,M,human,2007,Queens,170
+ANTHONY,M,human,2007,Richmond,77
+ANTHONY,M,human,2008,Bronx,128
+ANTHONY,M,human,2008,Kings,174
+ANTHONY,M,human,2008,New York,53
+ANTHONY,M,human,2008,Queens,165
+ANTHONY,M,human,2008,Richmond,72
+ANTHONY,M,human,2009,Bronx,103
+ANTHONY,M,human,2009,Kings,153
+ANTHONY,M,human,2009,New York,45
+ANTHONY,M,human,2009,Queens,152
+ANTHONY,M,human,2009,Richmond,62
+ANTHONY,M,human,2010,Bronx,100
+ANTHONY,M,human,2010,Kings,141
+ANTHONY,M,human,2010,New York,50
+ANTHONY,M,human,2010,Queens,173
+ANTHONY,M,human,2010,Richmond,79
+ANTHONY,M,human,2011,Bronx,73
+ANTHONY,M,human,2011,Kings,144
+ANTHONY,M,human,2011,New York,39
+ANTHONY,M,human,2011,Queens,137
+ANTHONY,M,human,2011,Richmond,73
+ANTHONY,M,human,2012,Bronx,84
+ANTHONY,M,human,2012,Kings,124
+ANTHONY,M,human,2012,New York,34
+ANTHONY,M,human,2012,Queens,122
+ANTHONY,M,human,2012,Richmond,50
+ANTHONY,M,human,2013,Bronx,72
+ANTHONY,M,human,2013,Kings,122
+ANTHONY,M,human,2013,New York,33
+ANTHONY,M,human,2013,Queens,120
+ANTHONY,M,human,2013,Richmond,52
+ANTHONY,M,human,2014,Bronx,43
+ANTHONY,M,human,2014,Kings,83
+ANTHONY,M,human,2014,New York,43
+ANTHONY,M,human,2014,Queens,109
+ANTHONY,M,human,2014,Richmond,47
+ANTHONY,M,human,2015,Bronx,60
+ANTHONY,M,human,2015,Kings,100
+ANTHONY,M,human,2015,New York,24
+ANTHONY,M,human,2015,Queens,86
+ANTHONY,M,human,2015,Richmond,48
+ANTON,M,human,2014,Kings,5
+ANTON,M,human,2014,Queens,8
+ANTONELLA,F,human,2014,Queens,8
+ANTONELLA,F,human,2015,Queens,14
+ANTONIA,F,human,2014,Queens,6
+ANTONIA,F,human,2014,Richmond,5
+ANTONIO,M,human,2007,Bronx,15
+ANTONIO,M,human,2007,Kings,24
+ANTONIO,M,human,2007,Queens,24
+ANTONIO,M,human,2007,Richmond,11
+ANTONIO,M,human,2008,Bronx,18
+ANTONIO,M,human,2008,Kings,33
+ANTONIO,M,human,2008,New York,13
+ANTONIO,M,human,2008,Queens,21
+ANTONIO,M,human,2008,Richmond,10
+ANTONIO,M,human,2009,Bronx,18
+ANTONIO,M,human,2009,Kings,31
+ANTONIO,M,human,2009,Queens,16
+ANTONIO,M,human,2009,Richmond,10
+ANTONIO,M,human,2010,Bronx,23
+ANTONIO,M,human,2010,Kings,25
+ANTONIO,M,human,2010,New York,12
+ANTONIO,M,human,2010,Queens,24
+ANTONIO,M,human,2010,Richmond,11
+ANTONIO,M,human,2011,Bronx,13
+ANTONIO,M,human,2011,Kings,27
+ANTONIO,M,human,2011,New York,12
+ANTONIO,M,human,2011,Queens,19
+ANTONIO,M,human,2012,Bronx,13
+ANTONIO,M,human,2012,Kings,24
+ANTONIO,M,human,2012,Queens,14
+ANTONIO,M,human,2013,Bronx,13
+ANTONIO,M,human,2013,Kings,16
+ANTONIO,M,human,2013,New York,15
+ANTONIO,M,human,2013,Queens,17
+ANTONIO,M,human,2013,Richmond,12
+ANTONIO,M,human,2014,Bronx,11
+ANTONIO,M,human,2014,Kings,19
+ANTONIO,M,human,2014,New York,9
+ANTONIO,M,human,2014,Queens,14
+ANTONIO,M,human,2014,Richmond,12
+ANTONIO,M,human,2015,Kings,33
+ANTONIO,M,human,2015,Queens,15
+ANTONIO,M,human,2015,Richmond,12
+ANTONY,M,human,2009,Queens,10
+ANTONY,M,human,2014,Queens,6
+ANYA,F,human,2008,New York,10
+ANYA,F,human,2009,Kings,10
+ANYA,F,human,2009,New York,12
+ANYA,F,human,2012,New York,12
+ANYA,F,human,2013,New York,10
+ANYA,F,human,2014,Kings,6
+ANYA,F,human,2014,New York,10
+APRIL,F,human,2012,Kings,11
+APRIL,F,human,2014,Kings,9
+APRIL,F,human,2014,Queens,7
+APRIL,F,human,2015,Kings,10
+APRIL,F,human,2015,Queens,12
+ARABELLA,F,human,2014,Bronx,6
+ARABELLA,F,human,2014,New York,8
+ARABELLA,F,human,2014,Queens,6
+ARABELLA,F,human,2015,Queens,10
+ARCHER,M,human,2014,Kings,5
+ARCHER,M,human,2014,New York,5
+ARDEN,F,human,2014,Queens,5
+ARELY,F,human,2014,Queens,5
+ARES,M,human,2014,Queens,5
+ARHAM,M,human,2014,Queens,10
+ARI,M,human,2007,Kings,12
+ARI,M,human,2007,New York,15
+ARI,M,human,2008,Kings,14
+ARI,M,human,2008,New York,10
+ARI,M,human,2009,Kings,17
+ARI,M,human,2009,New York,15
+ARI,M,human,2010,Kings,19
+ARI,M,human,2010,New York,12
+ARI,M,human,2011,Kings,10
+ARI,M,human,2011,New York,14
+ARI,M,human,2012,Kings,17
+ARI,M,human,2012,New York,17
+ARI,M,human,2012,Queens,10
+ARI,M,human,2013,Kings,12
+ARI,M,human,2013,New York,16
+ARI,M,human,2014,Kings,22
+ARI,M,human,2014,New York,14
+ARI,M,human,2014,Queens,6
+ARI,M,human,2015,Kings,26
+ARI,M,human,2015,New York,13
+ARI,M,human,2015,Queens,13
+ARIA,F,human,2010,New York,10
+ARIA,F,human,2011,Kings,16
+ARIA,F,human,2012,Kings,20
+ARIA,F,human,2012,New York,13
+ARIA,F,human,2012,Queens,17
+ARIA,F,human,2013,Bronx,15
+ARIA,F,human,2013,Kings,27
+ARIA,F,human,2013,New York,17
+ARIA,F,human,2013,Queens,24
+ARIA,F,human,2013,Richmond,10
+ARIA,F,human,2014,Bronx,9
+ARIA,F,human,2014,Kings,32
+ARIA,F,human,2014,New York,27
+ARIA,F,human,2014,Queens,33
+ARIA,F,human,2014,Richmond,11
+ARIA,F,human,2015,Bronx,17
+ARIA,F,human,2015,Kings,32
+ARIA,F,human,2015,New York,22
+ARIA,F,human,2015,Queens,41
+ARIA,F,human,2015,Richmond,10
+ARIAH,F,human,2015,Kings,12
+ARIAN,M,human,2014,Bronx,6
+ARIANA,F,human,2007,Bronx,34
+ARIANA,F,human,2007,Kings,34
+ARIANA,F,human,2007,New York,24
+ARIANA,F,human,2007,Queens,49
+ARIANA,F,human,2008,Bronx,33
+ARIANA,F,human,2008,Kings,30
+ARIANA,F,human,2008,New York,14
+ARIANA,F,human,2008,Queens,47
+ARIANA,F,human,2008,Richmond,10
+ARIANA,F,human,2009,Bronx,24
+ARIANA,F,human,2009,Kings,39
+ARIANA,F,human,2009,New York,17
+ARIANA,F,human,2009,Queens,52
+ARIANA,F,human,2009,Richmond,18
+ARIANA,F,human,2010,Bronx,29
+ARIANA,F,human,2010,Kings,39
+ARIANA,F,human,2010,New York,15
+ARIANA,F,human,2010,Queens,40
+ARIANA,F,human,2011,Bronx,28
+ARIANA,F,human,2011,Kings,23
+ARIANA,F,human,2011,New York,16
+ARIANA,F,human,2011,Queens,40
+ARIANA,F,human,2011,Richmond,15
+ARIANA,F,human,2012,Bronx,22
+ARIANA,F,human,2012,Kings,43
+ARIANA,F,human,2012,New York,21
+ARIANA,F,human,2012,Queens,37
+ARIANA,F,human,2013,Bronx,32
+ARIANA,F,human,2013,Kings,46
+ARIANA,F,human,2013,New York,21
+ARIANA,F,human,2013,Queens,49
+ARIANA,F,human,2014,Bronx,38
+ARIANA,F,human,2014,Kings,53
+ARIANA,F,human,2014,New York,21
+ARIANA,F,human,2014,Queens,62
+ARIANA,F,human,2014,Richmond,18
+ARIANA,F,human,2015,Bronx,42
+ARIANA,F,human,2015,Kings,43
+ARIANA,F,human,2015,New York,17
+ARIANA,F,human,2015,Queens,67
+ARIANA,F,human,2015,Richmond,10
+ARIANE,F,human,2014,Queens,5
+ARIANNA,F,human,2007,Bronx,35
+ARIANNA,F,human,2007,Kings,56
+ARIANNA,F,human,2007,New York,20
+ARIANNA,F,human,2007,Queens,50
+ARIANNA,F,human,2007,Richmond,12
+ARIANNA,F,human,2008,Bronx,40
+ARIANNA,F,human,2008,Kings,47
+ARIANNA,F,human,2008,New York,21
+ARIANNA,F,human,2008,Queens,46
+ARIANNA,F,human,2009,Bronx,42
+ARIANNA,F,human,2009,Kings,60
+ARIANNA,F,human,2009,New York,16
+ARIANNA,F,human,2009,Queens,58
+ARIANNA,F,human,2009,Richmond,20
+ARIANNA,F,human,2010,Bronx,45
+ARIANNA,F,human,2010,Kings,57
+ARIANNA,F,human,2010,New York,24
+ARIANNA,F,human,2010,Queens,63
+ARIANNA,F,human,2010,Richmond,11
+ARIANNA,F,human,2011,Bronx,36
+ARIANNA,F,human,2011,Kings,46
+ARIANNA,F,human,2011,New York,17
+ARIANNA,F,human,2011,Queens,60
+ARIANNA,F,human,2011,Richmond,12
+ARIANNA,F,human,2012,Bronx,37
+ARIANNA,F,human,2012,Kings,38
+ARIANNA,F,human,2012,New York,20
+ARIANNA,F,human,2012,Queens,54
+ARIANNA,F,human,2012,Richmond,14
+ARIANNA,F,human,2013,Bronx,44
+ARIANNA,F,human,2013,Kings,44
+ARIANNA,F,human,2013,New York,19
+ARIANNA,F,human,2013,Queens,61
+ARIANNA,F,human,2013,Richmond,11
+ARIANNA,F,human,2014,Bronx,33
+ARIANNA,F,human,2014,Kings,44
+ARIANNA,F,human,2014,New York,22
+ARIANNA,F,human,2014,Queens,47
+ARIANNA,F,human,2014,Richmond,16
+ARIANNA,F,human,2015,Bronx,31
+ARIANNA,F,human,2015,Kings,41
+ARIANNA,F,human,2015,New York,11
+ARIANNA,F,human,2015,Queens,61
+ARIANNA,F,human,2015,Richmond,14
+ARIEL,F,human,2007,Kings,26
+ARIEL,F,human,2008,Kings,19
+ARIEL,F,human,2008,Queens,16
+ARIEL,F,human,2009,Kings,27
+ARIEL,F,human,2009,New York,13
+ARIEL,F,human,2009,Queens,18
+ARIEL,F,human,2010,Bronx,10
+ARIEL,F,human,2010,Kings,16
+ARIEL,F,human,2010,Queens,18
+ARIEL,F,human,2011,Bronx,12
+ARIEL,F,human,2011,Kings,27
+ARIEL,F,human,2011,Queens,21
+ARIEL,F,human,2012,Bronx,12
+ARIEL,F,human,2012,Kings,33
+ARIEL,F,human,2012,Queens,15
+ARIEL,F,human,2013,Bronx,17
+ARIEL,F,human,2013,Kings,35
+ARIEL,F,human,2013,Queens,25
+ARIEL,F,human,2014,Bronx,13
+ARIEL,F,human,2014,Kings,40
+ARIEL,F,human,2014,New York,8
+ARIEL,F,human,2014,Queens,23
+ARIEL,F,human,2014,Richmond,7
+ARIEL,F,human,2015,Bronx,16
+ARIEL,F,human,2015,Kings,20
+ARIEL,F,human,2015,Queens,25
+ARIEL,M,human,2007,Bronx,11
+ARIEL,M,human,2007,Kings,12
+ARIEL,M,human,2007,Queens,16
+ARIEL,M,human,2008,Bronx,19
+ARIEL,M,human,2008,Kings,17
+ARIEL,M,human,2008,New York,11
+ARIEL,M,human,2008,Queens,19
+ARIEL,M,human,2009,Bronx,10
+ARIEL,M,human,2009,Kings,24
+ARIEL,M,human,2009,New York,11
+ARIEL,M,human,2009,Queens,25
+ARIEL,M,human,2010,Bronx,12
+ARIEL,M,human,2010,Kings,16
+ARIEL,M,human,2010,New York,10
+ARIEL,M,human,2010,Queens,18
+ARIEL,M,human,2011,Bronx,10
+ARIEL,M,human,2011,Kings,20
+ARIEL,M,human,2011,New York,10
+ARIEL,M,human,2011,Queens,13
+ARIEL,M,human,2012,Kings,11
+ARIEL,M,human,2012,Queens,14
+ARIEL,M,human,2013,Queens,19
+ARIEL,M,human,2014,Bronx,9
+ARIEL,M,human,2014,Kings,15
+ARIEL,M,human,2014,New York,7
+ARIEL,M,human,2014,Queens,11
+ARIEL,M,human,2015,Bronx,10
+ARIEL,M,human,2015,New York,11
+ARIEL,M,human,2015,Queens,15
+ARIELA,F,human,2009,Kings,13
+ARIELLA,F,human,2007,Queens,13
+ARIELLA,F,human,2008,Kings,11
+ARIELLA,F,human,2008,Queens,16
+ARIELLA,F,human,2009,Kings,18
+ARIELLA,F,human,2010,Kings,13
+ARIELLA,F,human,2010,Queens,21
+ARIELLA,F,human,2011,Kings,21
+ARIELLA,F,human,2011,Queens,14
+ARIELLA,F,human,2012,Kings,22
+ARIELLA,F,human,2012,Queens,21
+ARIELLA,F,human,2013,Kings,19
+ARIELLA,F,human,2013,Queens,20
+ARIELLA,F,human,2014,Bronx,8
+ARIELLA,F,human,2014,Kings,20
+ARIELLA,F,human,2014,New York,5
+ARIELLA,F,human,2014,Queens,22
+ARIELLA,F,human,2015,Kings,19
+ARIELLA,F,human,2015,Queens,23
+ARIELLE,F,human,2007,New York,10
+ARIELLE,F,human,2008,Kings,14
+ARIELLE,F,human,2008,New York,11
+ARIELLE,F,human,2008,Queens,11
+ARIELLE,F,human,2009,Kings,13
+ARIELLE,F,human,2009,New York,10
+ARIELLE,F,human,2010,Kings,17
+ARIELLE,F,human,2010,New York,12
+ARIELLE,F,human,2011,Kings,12
+ARIELLE,F,human,2011,Queens,16
+ARIELLE,F,human,2012,Kings,19
+ARIELLE,F,human,2012,Queens,13
+ARIELLE,F,human,2013,Kings,19
+ARIELLE,F,human,2013,Queens,14
+ARIELLE,F,human,2014,Bronx,9
+ARIELLE,F,human,2014,Kings,14
+ARIELLE,F,human,2014,New York,10
+ARIELLE,F,human,2014,Queens,11
+ARIELLE,F,human,2015,Kings,14
+ARIELLE,F,human,2015,New York,10
+ARIELLE,F,human,2015,Queens,13
+ARISHA,F,human,2014,Queens,6
+ARJUN,M,human,2011,New York,13
+ARJUN,M,human,2014,New York,9
+ARJUN,M,human,2014,Queens,7
+ARLO,M,human,2014,Kings,16
+ARMAAN,M,human,2014,Queens,6
+ARMANDO,M,human,2014,Queens,5
+ARMANI,M,human,2009,Kings,11
+ARMANI,M,human,2010,Kings,10
+ARMANI,M,human,2011,Bronx,12
+ARMANI,M,human,2011,Kings,10
+ARMANI,M,human,2012,Bronx,11
+ARMANI,M,human,2013,Bronx,10
+ARMANI,M,human,2013,Kings,12
+ARMANI,M,human,2014,Bronx,5
+ARMANI,M,human,2014,Kings,6
+ARMANI,M,human,2014,Queens,6
+ARON,M,human,2007,Kings,42
+ARON,M,human,2007,Queens,13
+ARON,M,human,2008,Kings,53
+ARON,M,human,2009,Kings,53
+ARON,M,human,2010,Kings,51
+ARON,M,human,2011,Kings,60
+ARON,M,human,2012,Kings,63
+ARON,M,human,2013,Kings,63
+ARON,M,human,2014,Kings,53
+ARON,M,human,2014,Queens,5
+ARON,M,human,2015,Kings,62
+ARTHUR,M,human,2008,New York,13
+ARTHUR,M,human,2009,New York,13
+ARTHUR,M,human,2011,Kings,22
+ARTHUR,M,human,2011,New York,12
+ARTHUR,M,human,2012,Kings,13
+ARTHUR,M,human,2012,Queens,13
+ARTHUR,M,human,2013,Kings,22
+ARTHUR,M,human,2013,New York,12
+ARTHUR,M,human,2014,Kings,13
+ARTHUR,M,human,2014,New York,12
+ARTHUR,M,human,2014,Queens,9
+ARTHUR,M,human,2015,Kings,19
+ARTHUR,M,human,2015,New York,13
+ARTHUR,M,human,2015,Queens,10
+ARVIN,M,human,2014,Kings,6
+ARVIN,M,human,2014,Queens,6
+ARYA,F,human,2013,Kings,11
+ARYA,F,human,2013,Queens,12
+ARYA,F,human,2014,Bronx,9
+ARYA,F,human,2014,Kings,10
+ARYA,F,human,2014,New York,14
+ARYA,F,human,2014,Queens,24
+ARYA,F,human,2015,Kings,15
+ARYA,F,human,2015,Queens,24
+ARYAN,M,human,2007,Queens,18
+ARYAN,M,human,2008,Queens,14
+ARYAN,M,human,2009,Queens,10
+ARYAN,M,human,2011,Queens,13
+ARYAN,M,human,2012,Queens,13
+ARYAN,M,human,2013,Queens,21
+ARYAN,M,human,2014,Queens,20
+ARYAN,M,human,2015,Queens,10
+ARYANA,F,human,2014,Queens,5
+ARYANNA,F,human,2008,Queens,11
+ARYANNA,F,human,2014,Queens,5
+ARYE,M,human,2013,Kings,10
+ARYEH,M,human,2007,Kings,11
+ARYEH,M,human,2008,Kings,14
+ARYEH,M,human,2009,Kings,22
+ARYEH,M,human,2010,Kings,11
+ARYEH,M,human,2011,Kings,18
+ARYEH,M,human,2012,Kings,20
+ARYEH,M,human,2013,Kings,23
+ARYEH,M,human,2014,Kings,18
+ARYEH,M,human,2015,Kings,24
+ASA,M,human,2014,Kings,7
+ASADBEK,M,human,2014,Kings,5
+ASHANTI,F,human,2008,Kings,10
+ASHER,M,human,2007,Kings,22
+ASHER,M,human,2008,Kings,25
+ASHER,M,human,2008,New York,16
+ASHER,M,human,2009,Kings,27
+ASHER,M,human,2009,New York,20
+ASHER,M,human,2010,Kings,23
+ASHER,M,human,2010,New York,22
+ASHER,M,human,2011,Kings,29
+ASHER,M,human,2011,New York,18
+ASHER,M,human,2011,Queens,18
+ASHER,M,human,2012,Kings,31
+ASHER,M,human,2012,New York,27
+ASHER,M,human,2012,Queens,10
+ASHER,M,human,2013,Kings,23
+ASHER,M,human,2013,New York,25
+ASHER,M,human,2013,Queens,13
+ASHER,M,human,2014,Bronx,6
+ASHER,M,human,2014,Kings,43
+ASHER,M,human,2014,New York,29
+ASHER,M,human,2014,Queens,19
+ASHER,M,human,2015,Kings,56
+ASHER,M,human,2015,New York,16
+ASHER,M,human,2015,Queens,31
+ASHLEE,F,human,2007,Queens,11
+ASHLEE,F,human,2008,Kings,11
+ASHLEY,F,human,2007,Bronx,94
+ASHLEY,F,human,2007,Kings,107
+ASHLEY,F,human,2007,New York,44
+ASHLEY,F,human,2007,Queens,179
+ASHLEY,F,human,2007,Richmond,22
+ASHLEY,F,human,2008,Bronx,84
+ASHLEY,F,human,2008,Kings,95
+ASHLEY,F,human,2008,New York,47
+ASHLEY,F,human,2008,Queens,122
+ASHLEY,F,human,2008,Richmond,16
+ASHLEY,F,human,2009,Bronx,76
+ASHLEY,F,human,2009,Kings,97
+ASHLEY,F,human,2009,New York,38
+ASHLEY,F,human,2009,Queens,120
+ASHLEY,F,human,2009,Richmond,20
+ASHLEY,F,human,2010,Bronx,57
+ASHLEY,F,human,2010,Kings,75
+ASHLEY,F,human,2010,New York,33
+ASHLEY,F,human,2010,Queens,101
+ASHLEY,F,human,2010,Richmond,13
+ASHLEY,F,human,2011,Bronx,59
+ASHLEY,F,human,2011,Kings,75
+ASHLEY,F,human,2011,New York,29
+ASHLEY,F,human,2011,Queens,108
+ASHLEY,F,human,2011,Richmond,13
+ASHLEY,F,human,2012,Bronx,52
+ASHLEY,F,human,2012,Kings,64
+ASHLEY,F,human,2012,New York,30
+ASHLEY,F,human,2012,Queens,75
+ASHLEY,F,human,2012,Richmond,14
+ASHLEY,F,human,2013,Bronx,42
+ASHLEY,F,human,2013,Kings,67
+ASHLEY,F,human,2013,New York,22
+ASHLEY,F,human,2013,Queens,65
+ASHLEY,F,human,2014,Bronx,49
+ASHLEY,F,human,2014,Kings,52
+ASHLEY,F,human,2014,New York,14
+ASHLEY,F,human,2014,Queens,77
+ASHLEY,F,human,2014,Richmond,8
+ASHLEY,F,human,2015,Bronx,37
+ASHLEY,F,human,2015,Kings,45
+ASHLEY,F,human,2015,New York,21
+ASHLEY,F,human,2015,Queens,71
+ASHTON,M,human,2007,Queens,15
+ASHTON,M,human,2008,Queens,21
+ASHTON,M,human,2009,Queens,15
+ASHTON,M,human,2010,Queens,14
+ASHTON,M,human,2011,Bronx,12
+ASHTON,M,human,2011,Kings,15
+ASHTON,M,human,2011,Queens,18
+ASHTON,M,human,2012,Kings,15
+ASHTON,M,human,2012,Queens,11
+ASHTON,M,human,2013,Bronx,10
+ASHTON,M,human,2013,Kings,11
+ASHTON,M,human,2013,Queens,19
+ASHTON,M,human,2014,Bronx,12
+ASHTON,M,human,2014,Kings,11
+ASHTON,M,human,2014,New York,16
+ASHTON,M,human,2014,Queens,19
+ASHTON,M,human,2015,Bronx,18
+ASHTON,M,human,2015,Queens,15
+ASTRID,F,human,2014,New York,5
+ASTRID,F,human,2014,Queens,5
+ATARA,F,human,2014,Kings,7
+ATARA,F,human,2014,Queens,5
+ATHENA,F,human,2008,Kings,16
+ATHENA,F,human,2009,Queens,14
+ATHENA,F,human,2010,Kings,12
+ATHENA,F,human,2011,Kings,11
+ATHENA,F,human,2011,Queens,10
+ATHENA,F,human,2012,Kings,13
+ATHENA,F,human,2012,Queens,12
+ATHENA,F,human,2013,Kings,13
+ATHENA,F,human,2013,Queens,14
+ATHENA,F,human,2014,Bronx,17
+ATHENA,F,human,2014,Kings,13
+ATHENA,F,human,2014,New York,9
+ATHENA,F,human,2014,Queens,9
+ATHENA,F,human,2015,Bronx,13
+ATHENA,F,human,2015,Kings,21
+ATHENA,F,human,2015,Queens,15
+ATTICUS,M,human,2014,New York,7
+AUBREE,F,human,2014,Bronx,17
+AUBREE,F,human,2014,Kings,9
+AUBREE,F,human,2014,Queens,5
+AUBREE,F,human,2015,Bronx,12
+AUBREY,F,human,2010,New York,13
+AUBREY,F,human,2011,Bronx,18
+AUBREY,F,human,2011,Kings,12
+AUBREY,F,human,2011,New York,10
+AUBREY,F,human,2011,Queens,14
+AUBREY,F,human,2012,Bronx,15
+AUBREY,F,human,2012,Kings,16
+AUBREY,F,human,2012,New York,13
+AUBREY,F,human,2012,Queens,18
+AUBREY,F,human,2013,Bronx,22
+AUBREY,F,human,2013,Kings,16
+AUBREY,F,human,2013,New York,13
+AUBREY,F,human,2013,Queens,14
+AUBREY,F,human,2014,Bronx,27
+AUBREY,F,human,2014,Kings,19
+AUBREY,F,human,2014,New York,10
+AUBREY,F,human,2014,Queens,26
+AUBREY,F,human,2015,Bronx,19
+AUBREY,F,human,2015,Kings,31
+AUBREY,F,human,2015,New York,13
+AUBREY,F,human,2015,Queens,19
+AUDREY,F,human,2007,Kings,16
+AUDREY,F,human,2007,New York,22
+AUDREY,F,human,2007,Queens,25
+AUDREY,F,human,2008,Kings,21
+AUDREY,F,human,2008,New York,19
+AUDREY,F,human,2008,Queens,17
+AUDREY,F,human,2009,Kings,18
+AUDREY,F,human,2009,New York,27
+AUDREY,F,human,2010,Bronx,10
+AUDREY,F,human,2010,Kings,16
+AUDREY,F,human,2010,New York,25
+AUDREY,F,human,2010,Queens,18
+AUDREY,F,human,2011,Kings,12
+AUDREY,F,human,2011,New York,18
+AUDREY,F,human,2011,Queens,15
+AUDREY,F,human,2012,Kings,20
+AUDREY,F,human,2012,New York,27
+AUDREY,F,human,2012,Queens,22
+AUDREY,F,human,2013,Bronx,10
+AUDREY,F,human,2013,Kings,29
+AUDREY,F,human,2013,New York,21
+AUDREY,F,human,2013,Queens,25
+AUDREY,F,human,2014,Bronx,6
+AUDREY,F,human,2014,Kings,28
+AUDREY,F,human,2014,New York,24
+AUDREY,F,human,2014,Queens,20
+AUDREY,F,human,2015,Kings,24
+AUDREY,F,human,2015,New York,20
+AUDREY,F,human,2015,Queens,20
+AUGUST,F,human,2014,Kings,5
+AUGUST,M,human,2007,Kings,10
+AUGUST,M,human,2008,Kings,10
+AUGUST,M,human,2009,Kings,12
+AUGUST,M,human,2009,New York,14
+AUGUST,M,human,2010,Kings,18
+AUGUST,M,human,2011,Kings,10
+AUGUST,M,human,2012,Kings,20
+AUGUST,M,human,2012,New York,12
+AUGUST,M,human,2013,Kings,20
+AUGUST,M,human,2013,New York,11
+AUGUST,M,human,2014,Kings,22
+AUGUST,M,human,2014,New York,8
+AUGUST,M,human,2014,Queens,6
+AUGUST,M,human,2015,Kings,25
+AUGUST,M,human,2015,Queens,10
+AUGUSTUS,M,human,2014,Kings,5
+AURORA,F,human,2010,Queens,10
+AURORA,F,human,2012,Queens,11
+AURORA,F,human,2013,Kings,11
+AURORA,F,human,2014,Bronx,7
+AURORA,F,human,2014,Kings,10
+AURORA,F,human,2014,New York,7
+AURORA,F,human,2014,Queens,9
+AURORA,F,human,2015,Bronx,11
+AURORA,F,human,2015,Kings,15
+AURORA,F,human,2015,New York,10
+AURORA,F,human,2015,Queens,15
+AUSTIN,M,human,2007,Bronx,11
+AUSTIN,M,human,2007,Kings,15
+AUSTIN,M,human,2007,New York,15
+AUSTIN,M,human,2007,Queens,16
+AUSTIN,M,human,2008,Bronx,11
+AUSTIN,M,human,2008,Kings,17
+AUSTIN,M,human,2008,New York,12
+AUSTIN,M,human,2008,Queens,24
+AUSTIN,M,human,2009,Kings,32
+AUSTIN,M,human,2009,New York,18
+AUSTIN,M,human,2009,Queens,28
+AUSTIN,M,human,2010,Kings,28
+AUSTIN,M,human,2010,Queens,22
+AUSTIN,M,human,2011,Bronx,10
+AUSTIN,M,human,2011,Kings,40
+AUSTIN,M,human,2011,New York,24
+AUSTIN,M,human,2011,Queens,40
+AUSTIN,M,human,2012,Bronx,11
+AUSTIN,M,human,2012,Kings,47
+AUSTIN,M,human,2012,New York,24
+AUSTIN,M,human,2012,Queens,37
+AUSTIN,M,human,2013,Bronx,16
+AUSTIN,M,human,2013,Kings,54
+AUSTIN,M,human,2013,New York,22
+AUSTIN,M,human,2013,Queens,49
+AUSTIN,M,human,2014,Bronx,21
+AUSTIN,M,human,2014,Kings,54
+AUSTIN,M,human,2014,New York,25
+AUSTIN,M,human,2014,Queens,59
+AUSTIN,M,human,2014,Richmond,5
+AUSTIN,M,human,2015,Bronx,25
+AUSTIN,M,human,2015,Kings,43
+AUSTIN,M,human,2015,New York,19
+AUSTIN,M,human,2015,Queens,46
+AUTUMN,F,human,2008,Kings,12
+AUTUMN,F,human,2009,Bronx,11
+AUTUMN,F,human,2009,Kings,12
+AUTUMN,F,human,2010,Kings,11
+AUTUMN,F,human,2011,Bronx,10
+AUTUMN,F,human,2011,Kings,15
+AUTUMN,F,human,2011,Queens,10
+AUTUMN,F,human,2012,Bronx,10
+AUTUMN,F,human,2012,Kings,15
+AUTUMN,F,human,2012,Queens,10
+AUTUMN,F,human,2013,Kings,16
+AUTUMN,F,human,2013,Queens,13
+AUTUMN,F,human,2014,Bronx,15
+AUTUMN,F,human,2014,Kings,20
+AUTUMN,F,human,2014,New York,12
+AUTUMN,F,human,2014,Queens,16
+AUTUMN,F,human,2015,Bronx,12
+AUTUMN,F,human,2015,Kings,25
+AUTUMN,F,human,2015,Queens,11
+AVA,F,human,2007,Bronx,21
+AVA,F,human,2007,Kings,66
+AVA,F,human,2007,New York,83
+AVA,F,human,2007,Queens,70
+AVA,F,human,2007,Richmond,45
+AVA,F,human,2008,Bronx,30
+AVA,F,human,2008,Kings,71
+AVA,F,human,2008,New York,61
+AVA,F,human,2008,Queens,65
+AVA,F,human,2008,Richmond,41
+AVA,F,human,2009,Bronx,27
+AVA,F,human,2009,Kings,61
+AVA,F,human,2009,New York,55
+AVA,F,human,2009,Queens,65
+AVA,F,human,2009,Richmond,37
+AVA,F,human,2010,Bronx,36
+AVA,F,human,2010,Kings,76
+AVA,F,human,2010,New York,70
+AVA,F,human,2010,Queens,58
+AVA,F,human,2010,Richmond,40
+AVA,F,human,2011,Bronx,23
+AVA,F,human,2011,Kings,76
+AVA,F,human,2011,New York,69
+AVA,F,human,2011,Queens,71
+AVA,F,human,2011,Richmond,43
+AVA,F,human,2012,Bronx,38
+AVA,F,human,2012,Kings,81
+AVA,F,human,2012,New York,77
+AVA,F,human,2012,Queens,68
+AVA,F,human,2012,Richmond,51
+AVA,F,human,2013,Bronx,39
+AVA,F,human,2013,Kings,83
+AVA,F,human,2013,New York,72
+AVA,F,human,2013,Queens,88
+AVA,F,human,2013,Richmond,47
+AVA,F,human,2014,Bronx,49
+AVA,F,human,2014,Kings,95
+AVA,F,human,2014,New York,60
+AVA,F,human,2014,Queens,90
+AVA,F,human,2014,Richmond,38
+AVA,F,human,2015,Bronx,46
+AVA,F,human,2015,Kings,94
+AVA,F,human,2015,New York,50
+AVA,F,human,2015,Queens,92
+AVA,F,human,2015,Richmond,45
+AVERY,F,human,2007,New York,19
+AVERY,F,human,2008,New York,28
+AVERY,F,human,2009,New York,22
+AVERY,F,human,2009,Queens,10
+AVERY,F,human,2010,Kings,14
+AVERY,F,human,2010,New York,40
+AVERY,F,human,2010,Queens,17
+AVERY,F,human,2011,Kings,15
+AVERY,F,human,2011,New York,33
+AVERY,F,human,2011,Queens,10
+AVERY,F,human,2012,Kings,17
+AVERY,F,human,2012,New York,46
+AVERY,F,human,2012,Queens,25
+AVERY,F,human,2013,Bronx,11
+AVERY,F,human,2013,Kings,24
+AVERY,F,human,2013,New York,30
+AVERY,F,human,2013,Queens,27
+AVERY,F,human,2014,Bronx,21
+AVERY,F,human,2014,Kings,39
+AVERY,F,human,2014,New York,35
+AVERY,F,human,2014,Queens,21
+AVERY,F,human,2014,Richmond,13
+AVERY,F,human,2015,Bronx,20
+AVERY,F,human,2015,Kings,27
+AVERY,F,human,2015,New York,42
+AVERY,F,human,2015,Queens,32
+AVERY,F,human,2015,Richmond,13
+AVERY,M,human,2007,Kings,12
+AVERY,M,human,2008,New York,14
+AVERY,M,human,2008,Queens,11
+AVERY,M,human,2010,Bronx,16
+AVERY,M,human,2010,New York,11
+AVERY,M,human,2011,Kings,16
+AVERY,M,human,2011,Queens,10
+AVERY,M,human,2012,Bronx,10
+AVERY,M,human,2012,Kings,12
+AVERY,M,human,2012,Queens,16
+AVERY,M,human,2013,Bronx,13
+AVERY,M,human,2013,Kings,17
+AVERY,M,human,2013,New York,11
+AVERY,M,human,2013,Queens,12
+AVERY,M,human,2014,Bronx,18
+AVERY,M,human,2014,Kings,20
+AVERY,M,human,2014,New York,12
+AVERY,M,human,2014,Queens,12
+AVERY,M,human,2015,Bronx,15
+AVERY,M,human,2015,Kings,14
+AVERY,M,human,2015,Queens,14
+AVI,M,human,2011,Kings,10
+AVI,M,human,2014,Kings,7
+AVI,M,human,2015,Kings,10
+AVIGAIL,F,human,2014,Kings,7
+AVIGAIL,F,human,2014,Queens,6
+AVIGAIL,F,human,2015,Queens,11
+AVITAL,F,human,2008,Queens,12
+AVITAL,F,human,2014,Queens,6
+AVIVA,F,human,2014,Kings,7
+AVIVA,F,human,2014,New York,7
+AVIVA,F,human,2014,Queens,5
+AVIVA,F,human,2015,Queens,10
+AVNEET,F,human,2014,Queens,6
+AVRAHAM,M,human,2007,Kings,23
+AVRAHAM,M,human,2007,Queens,12
+AVRAHAM,M,human,2008,Kings,24
+AVRAHAM,M,human,2009,Kings,26
+AVRAHAM,M,human,2009,Queens,14
+AVRAHAM,M,human,2010,Kings,41
+AVRAHAM,M,human,2011,Kings,27
+AVRAHAM,M,human,2011,Queens,11
+AVRAHAM,M,human,2012,Kings,39
+AVRAHAM,M,human,2012,Queens,13
+AVRAHAM,M,human,2013,Kings,42
+AVRAHAM,M,human,2013,Queens,12
+AVRAHAM,M,human,2014,Kings,43
+AVRAHAM,M,human,2014,Queens,10
+AVRAHAM,M,human,2015,Kings,40
+AVROHOM,M,human,2007,Kings,14
+AVROHOM,M,human,2008,Kings,24
+AVROHOM,M,human,2009,Kings,22
+AVROHOM,M,human,2010,Kings,27
+AVROHOM,M,human,2011,Kings,20
+AVROHOM,M,human,2012,Kings,25
+AVROHOM,M,human,2013,Kings,21
+AVROHOM,M,human,2014,Kings,21
+AVROHOM,M,human,2015,Kings,24
+AVRUM,M,human,2010,Kings,13
+AVRUM,M,human,2011,Kings,10
+AVRUM,M,human,2012,Kings,16
+AVRUM,M,human,2013,Kings,16
+AVRUM,M,human,2014,Kings,11
+AWA,F,human,2014,Bronx,5
+AXEL,M,human,2008,Kings,11
+AXEL,M,human,2008,Queens,11
+AXEL,M,human,2009,Bronx,13
+AXEL,M,human,2009,Queens,14
+AXEL,M,human,2010,Kings,10
+AXEL,M,human,2010,Queens,11
+AXEL,M,human,2011,Bronx,18
+AXEL,M,human,2011,Kings,15
+AXEL,M,human,2011,New York,13
+AXEL,M,human,2011,Queens,30
+AXEL,M,human,2012,Bronx,10
+AXEL,M,human,2012,Kings,22
+AXEL,M,human,2012,Queens,22
+AXEL,M,human,2013,Bronx,15
+AXEL,M,human,2013,Kings,16
+AXEL,M,human,2013,New York,11
+AXEL,M,human,2013,Queens,24
+AXEL,M,human,2014,Bronx,18
+AXEL,M,human,2014,Kings,19
+AXEL,M,human,2014,New York,10
+AXEL,M,human,2014,Queens,16
+AXEL,M,human,2015,Bronx,16
+AXEL,M,human,2015,Kings,17
+AXEL,M,human,2015,Queens,21
+AYA,F,human,2014,Kings,12
+AYA,F,human,2014,Queens,5
+AYAAN,M,human,2008,Queens,10
+AYAAN,M,human,2009,Kings,10
+AYAAN,M,human,2009,Queens,12
+AYAAN,M,human,2010,Queens,10
+AYAAN,M,human,2011,Kings,12
+AYAAN,M,human,2011,Queens,13
+AYAAN,M,human,2012,Kings,12
+AYAAN,M,human,2012,Queens,23
+AYAAN,M,human,2013,Kings,13
+AYAAN,M,human,2013,Queens,22
+AYAAN,M,human,2014,Kings,14
+AYAAN,M,human,2014,Queens,31
+AYAAN,M,human,2015,Queens,21
+AYALA,F,human,2014,Kings,6
+AYAN,M,human,2010,Kings,10
+AYAN,M,human,2013,Queens,16
+AYAN,M,human,2014,Kings,8
+AYAN,M,human,2014,Queens,6
+AYANA,F,human,2014,Bronx,6
+AYANA,F,human,2014,Queens,8
+AYANNA,F,human,2008,Kings,11
+AYANNA,F,human,2014,Kings,6
+AYAT,F,human,2014,Queens,6
+AYDEN,M,human,2007,Bronx,18
+AYDEN,M,human,2007,Kings,25
+AYDEN,M,human,2007,New York,10
+AYDEN,M,human,2007,Queens,15
+AYDEN,M,human,2008,Bronx,29
+AYDEN,M,human,2008,Kings,31
+AYDEN,M,human,2008,New York,12
+AYDEN,M,human,2008,Queens,22
+AYDEN,M,human,2009,Bronx,19
+AYDEN,M,human,2009,Kings,32
+AYDEN,M,human,2009,New York,16
+AYDEN,M,human,2009,Queens,24
+AYDEN,M,human,2010,Bronx,50
+AYDEN,M,human,2010,Kings,36
+AYDEN,M,human,2010,New York,19
+AYDEN,M,human,2010,Queens,27
+AYDEN,M,human,2011,Bronx,64
+AYDEN,M,human,2011,Kings,69
+AYDEN,M,human,2011,New York,26
+AYDEN,M,human,2011,Queens,61
+AYDEN,M,human,2011,Richmond,10
+AYDEN,M,human,2012,Bronx,45
+AYDEN,M,human,2012,Kings,66
+AYDEN,M,human,2012,New York,18
+AYDEN,M,human,2012,Queens,47
+AYDEN,M,human,2013,Bronx,45
+AYDEN,M,human,2013,Kings,40
+AYDEN,M,human,2013,New York,19
+AYDEN,M,human,2013,Queens,41
+AYDEN,M,human,2014,Bronx,58
+AYDEN,M,human,2014,Kings,56
+AYDEN,M,human,2014,New York,13
+AYDEN,M,human,2014,Queens,45
+AYDEN,M,human,2014,Richmond,6
+AYDEN,M,human,2015,Bronx,41
+AYDEN,M,human,2015,Kings,55
+AYDEN,M,human,2015,New York,21
+AYDEN,M,human,2015,Queens,43
+AYDIN,M,human,2012,Queens,16
+AYDIN,M,human,2014,Bronx,6
+AYDIN,M,human,2015,Queens,10
+AYESHA,F,human,2014,Kings,13
+AYESHA,F,human,2014,Queens,15
+AYESHA,F,human,2015,Kings,10
+AYESHA,F,human,2015,Queens,10
+AYLA,F,human,2014,Kings,9
+AYLA,F,human,2014,New York,10
+AYLA,F,human,2015,Kings,16
+AYLEEN,F,human,2014,Queens,5
+AYLIN,F,human,2013,Kings,10
+AYLIN,F,human,2014,Bronx,14
+AYLIN,F,human,2014,Kings,15
+AYLIN,F,human,2014,Queens,15
+AYLIN,F,human,2015,Queens,17
+AZAAN,M,human,2014,Kings,6
+AZAAN,M,human,2014,Queens,5
+AZALEA,F,human,2014,Bronx,5
+AZARIAH,M,human,2014,Kings,5
+AZIM,M,human,2014,Kings,6
+AZIMJON,M,human,2014,Kings,5
+AZIZA,F,human,2014,Kings,10

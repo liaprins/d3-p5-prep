@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>natural-log-line-chart | dog-age | CCG</title>
+	<!-- Copied from this bl.ock, then updated for D3 v6: https://bl.ocks.org/mbostock/7621155 -->
+
+    <!-- CHOOSE WHICH D3 LIBRARY FILE TO POINT TO BELOW vvv -->
+    <!-- p5 -->
+    <!-- <script type="text/javascript" src="../../../d3-library/p5.min.js"></script> -->
+    <!-- D3 v6 via D3 website -->
+    <!-- <script type="text/javascript" src="https://d3js.org/d3.v6.min.js"></script> -->
+    <!-- v6(.7) via downloaded file -->
+    <script type="text/javascript" src="../../../d3-library/d3.js"></script>
+    <!-- v4(.5) via downloaded file -->
+    <!-- <script type="text/javascript" src="../../../d3-book-master/d3.js"></script> -->
+
+<!-- CSS *********************************************************************** -->
+    <style>
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.axis--x text {
+  font: 10px sans-serif;
+}
+
+.axis--y text {
+  font: oblique 15px Georgia, serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+    </style>
+  </head>
+  <body>
+<!-- HTML ********************************************************************** -->
+
+<!-- ADD id OF <div> BELOW vvv TO BE THIS VIS'S SHORTNAME -->
+<!-- <div id="natural-log-line-chart"></div> -->
+
+
+
+
+
+
+<!-- JAVASCRIPT **************************************************************** -->
+    <script type="text/javascript">
+
+var superscript = "⁰¹²³⁴⁵⁶⁷⁸⁹",
+    formatPower = function(d) { return (d + "").split("").map(function(c) { return superscript[c]; }).join(""); };
+
+var margin = {top: 40.5, right: 40.5, bottom: 50.5, left: 60.5},
+    width = 500 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+// var x = d3.scale.linear()
+var x = d3.scaleLinear()
+    // .domain([0, 100])
+	.domain([0, 100])
+    .range([0, width]);
+
+// var y = d3.scale.log()
+var y = d3.scaleLog()
+    .base(Math.E)
+    // .domain([Math.exp(0), Math.exp(9)])
+	.domain([Math.exp(0), Math.exp(10)])
+    .range([height, 0]);
+
+// var xAxis = d3.svg.axis()
+var xAxis = d3.axisBottom()
+    .scale(x);
+    // .orient("bottom");
+
+// var yAxis = d3.svg.axis()
+var yAxis = d3.axisLeft()
+    .scale(y)
+    // .orient("left")
+    .tickFormat(function(d) { return "e" + formatPower(Math.round(Math.log(d))); });
+
+// var line = d3.svg.line()
+var line = d3.line()
+    .x(function(d) { return x(d[0]); })
+    .y(function(d) { return y(d[1]); });
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+svg.append("g")
+    .attr("class", "axis axis--y")
+    // .attr("transform", "translate(-10,0)")
+	.attr("transform", "translate(-0,0)")
+    .call(yAxis);
+
+svg.append("g")
+    .attr("class", "axis axis--x")
+    // .attr("transform", "translate(0," + (height + 10) + ")")
+	.attr("transform", "translate(0," + (height + 0) + ")")
+    .call(xAxis);
+
+svg.append("path")
+    // .datum(d3.range(100).map(function(x) { return [x, x * x + x + 1]; }))
+	.datum(d3.range(100).map(function(x) { return [x, (16 * (x * x + x)) + 1]; }))
+    .attr("class", "line")
+    .attr("d", line);
+
+    </script>
+
+  </body>
+</html>
