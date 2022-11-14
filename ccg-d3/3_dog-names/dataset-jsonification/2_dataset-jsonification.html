@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>dataset-jsonification | dog-names | CCG</title>
+
+    <!-- CHOOSE WHICH D3 LIBRARY FILE TO POINT TO BELOW vvv -->
+    <!-- p5 -->
+    <!-- <script type="text/javascript" src="../../../d3-library/p5.min.js"></script> -->
+    <!-- D3 v6 via D3 website -->
+    <script type="text/javascript" src="https://d3js.org/d3.v6.min.js"></script>
+    <!-- v6(.7) via downloaded file -->
+    <!-- <script type="text/javascript" src="../../../d3-library/d3.js"></script> -->
+    <!-- v4(.5) via downloaded file -->
+    <!-- <script type="text/javascript" src="../../../d3-book-master/d3.js"></script> -->
+
+    <!-- CSS *********************************************************************** -->
+    <style>
+      body {
+        font-family: 'Work Sans';
+      }
+      </style>
+    </head>
+    <body>
+      <!-- HTML ********************************************************************** -->
+  
+      <div id="name-frequency-vis"></div>
+  
+      <!-- JAVASCRIPT **************************************************************** -->
+      <script type="text/javascript">
+  
+      // load in the data
+      d3.csv("dog-names-prepped_A-F.csv")
+        .then(function(data) {
+  
+        // Step 1, names: isolate each distinct dog name into its own set
+        var namesList = [];
+        for (var i = 0; i < data.length; i++) {
+          namesList[i] = data[i].name;
+        }
+        namesList.sort(function(a, b) { return d3.ascending(a, b) });
+  
+        // Step 2, names: throw out any repeated names, so each dog name is only listed once (will be used to access d3.group's map, below)
+        var uniqueNamesList = [];
+        uniqueNamesList = namesList.filter((d, i, array)=>{
+          return namesList.indexOf(d) === i;
+        });
+  
+        // Step 3, names: group the CSV rows together by unique name
+        var rowsByName = d3.group(data.sort(function(a, b) { return d3.ascending(a.name, b.name) }), d => d.name);
+        var rowsByNameZh = d3.hierarchy(rowsByName);
+  
+        // Step 4, names: use list of uniqueNamesList to access map keys per row to get length of each group
+        var nameCounts = [];
+        for (var i = 0; i < uniqueNamesList.length; i++) { // loop through all unique county names
+          nameCounts[i] = {
+            name: uniqueNamesList[i],
+            amount: rowsByName.get(uniqueNamesList[i]).length
+          } // close object
+  
+          // gender loop, part 1
+          // Step 1, dog gender: isolate genders into their own sets
+          nameCounts[i].genderinfo = {};
+          nameCounts[i].genderinfo.allGenders = [];
+          for (var j = 0; j < rowsByName.get(uniqueNamesList[i]).length; j++) { // loop through each unique name's genders
+            nameCounts[i].genderinfo.allGenders[j] = rowsByNameZh.children[i].children[j].data.gender; // store list of all genders for this unique dog name
+          } // j
+  
+          // nameCounts[i].genderinfo.allGenders.sort(function(a, b) { return d3.ascending(a, b) });
+  
+        } // i
+  
+        // gender loop, part 2
+        for (var k = 0; k < uniqueNamesList.length; k++) {
+  
+          // Step 2, gender: throw out any repeated genders, so each dog name is only listed once (will be used to access d3.group's map, below)
+          nameCounts[k].genderinfo.uniqueGenderList = {};
+          nameCounts[k].genderinfo.uniqueGenderList = nameCounts[k].genderinfo.allGenders.filter((d, i, array)=>{
+            return nameCounts[k].genderinfo.allGenders.indexOf(d) === i;
+          });
+  
+          // Step 3, gender: group the CSV rows together by unique name + unique gender
+          var namesByGender = d3.group(data.sort(function(a, b) { return d3.ascending(a.gender, b.gender) }), d => d.name, d => d.gender);
+          var namesByGenderZh = d3.hierarchy(namesByGender);
+  
+          // Step 4, gender: use list of unique genders (nameCounts[k].uniqueEtys) to access map keys to get length of each same-gender group
+          nameCounts[k].genderinfo.eachGenderInfo = [];
+          for (var l = 0; l < nameCounts[k].genderinfo.uniqueGenderList.length; l++) { // loop through list of unique genders per name
+    
+            nameCounts[k].genderinfo.eachGenderInfo[l] = {
+              genderlabel: nameCounts[k].genderinfo.uniqueGenderList[l],
+              genderamount: namesByGender.get(uniqueNamesList[k]).get(nameCounts[k].genderinfo.uniqueGenderList[l]).length,
+              rows: namesByGender.get(uniqueNamesList[k]).get(nameCounts[k].genderinfo.uniqueGenderList[l])
+            } // close object
+          } // l
+  
+        } // k
+  
+        // Step 5, names: sort by most common name
+        nameCounts.sort(function(a, b) { return d3.descending(a.amount, b.amount) });  
+
+  
+        console.log('data');
+        console.log(data);
+  
+        console.log('namesList');
+        console.log(namesList);
+  
+        console.log('uniqueNamesList');
+        console.log(uniqueNamesList);
+  
+        console.log('rowsByName');
+        console.log(rowsByName);
+  
+        console.log('rowsByNameZh');
+        console.log(rowsByNameZh);
+  
+        console.log('nameCounts');
+        console.log(nameCounts);
+  
+        console.log('namesByGender');
+        console.log(namesByGender);
+  
+        console.log('namesByGenderZh');
+        console.log(namesByGenderZh);
+  
+  
+        var w = 1000;
+        var h = 25000;
+  
+        var freqSvg = d3.select('#name-frequency-vis');
+  
+        var nameHeader = freqSvg.selectAll('ul')
+          // .data(nameCounts.filter(function(d){ return d.amount >= 10 }))
+          .data(nameCounts)
+          .enter()
+          .append('ul')
+          .html(function(d) {
+            return '<h3>' + d.name + ": " + d.amount + '</h3>';
+            ;
+          })
+            .attr('x', 50)
+            .attr('y', function(d, i) {
+              return (i * 25) + 50;
+            });
+  
+        nameHeader.selectAll('li')
+          .data(function(d) {
+            return d.genderinfo.eachGenderInfo;
+          })
+          .enter()
+          .append('li')
+          .html(function(d) {
+            return d.genderlabel + ': ' + d.genderamount + ' dogs 🐕';
+          });
+  
+      }); // close CSV function
+  
+      </script>
+  
+    </body>
+  </html>
+  
