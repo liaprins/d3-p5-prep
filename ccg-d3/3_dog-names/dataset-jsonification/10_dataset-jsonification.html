@@ -34,7 +34,7 @@
         .then(function(json) {
 
           for (i = 0; i < json.features.length; i++) {
-            console.log('There are ' + (parseFloat(json.features[i].info.dogfemalecount) + parseFloat(json.features[i].info.dogmalecount)) + ' dogs named ' + json.features[i].name + '.');
+            console.log('The 🐶 : 🧒 ratio for the name ' + json.features[i].name  + ' is ' + (parseFloat(json.features[i].info.doghumanratio)));
           }
   
       }); // close JSON function

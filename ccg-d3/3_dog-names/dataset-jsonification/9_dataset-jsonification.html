@@ -49,6 +49,11 @@
         // Step 3, names: group the CSV rows together by unique name
         var rowsByName = d3.group(data.sort(function(a, b) { return d3.ascending(a.name, b.name) }), d => d.name);
         var rowsByNameZh = d3.hierarchy(rowsByName);
+
+        console.log('rowsByName');
+        console.log(rowsByName);
+        console.log('rowsByNameZh');
+        console.log(rowsByNameZh);
   
         // Step 4, names: use list of uniqueNamesList to access map keys per row to get length of each group
         var nameCounts = [];
@@ -104,16 +109,52 @@
           .enter()
           .append('span')
           .html(function(d) {
+            var dogfemalecount = d.dogfemalecount;
+            var dogmalecount = d.dogmalecount;
+            var humanfemalecount = d.humanfemalecount;
+            var humanmalecount = d.humanmalecount;
+            var femalecount = (dogfemalecount + humanfemalecount);
+            var malecount = (dogmalecount + humanmalecount);
+            var dogcount = (dogfemalecount + dogmalecount);
+            var humancount = (humanfemalecount + humanmalecount);
+            var dogfemalepopulation = 25537;
+            var dogmalepopulation = 30788;
+            var humanfemalepopulation = 236078;
+            var humanmalepopulation = 319854;
+            var dogpopulation = (dogfemalepopulation + dogmalepopulation);
+            var humanpopulation = (humanfemalepopulation + humanmalepopulation);
+            var femalepopulation = (dogfemalepopulation + humanfemalepopulation);
+            var malepopulation = (dogmalepopulation + humanmalepopulation);
+            var occurrencerate = 100000;
+            var dogoccurrencerate = (dogpopulation / occurrencerate);
+            var dogoccurrence = (dogcount / dogoccurrencerate);
+            var humanoccurrencerate = (humanpopulation / occurrencerate);
+            var humanoccurrence = (humancount / humanoccurrencerate);
+            var doghumanratio = (dogoccurrence / humanoccurrence);
+            var humandogratio = (humanoccurrence / dogoccurrence);
+            var femaleoccurrencerate = (femalepopulation / occurrencerate);
+            var femaleoccurrence = (femalecount / femaleoccurrencerate);
+            var maleoccurrencerate = (malepopulation / occurrencerate);
+            var maleoccurrence = (malecount / maleoccurrencerate);
+            var femalemaleratio = (femaleoccurrence / maleoccurrence);
+            var malefemaleratio = (maleoccurrence / femaleoccurrence);
+
             return '<p>{ "name"&#58; "' + d.name + 
               '", </br> "info": {' + 
-              ' </br> "femalecount": "' + (d.dogfemalecount + d.humanfemalecount) + 
-              '", </br> "malecount": "' + (d.dogmalecount + d.humanmalecount) + 
-              '", </br> "dogcount": "' + (d.dogfemalecount + d.dogmalecount) + 
-              '", </br> "humancount": "' + (d.humanfemalecount + d.humanmalecount) + 
-              '", </br> "dogfemalecount": "' + d.dogfemalecount + 
-              '", </br> "dogmalecount": "' + d.dogmalecount + 
-              '", </br> "humanfemalecount": "' + d.humanfemalecount + 
-              '", </br> "humanmalecount": "' + d.humanmalecount + 
+              ' </br> "dogfemalecount": "' + dogfemalecount + 
+              '", </br> "dogmalecount": "' + dogmalecount + 
+              '", </br> "humanfemalecount": "' + humanfemalecount + 
+              '", </br> "humanmalecount": "' + humanmalecount + 
+              '", </br> "femalecount": "' + femalecount + 
+              '", </br> "malecount": "' + malecount + 
+              '", </br> "dogcount": "' + dogcount + 
+              '", </br> "humancount": "' + humancount + 
+              '", </br> "dogoccurrence": "' + dogoccurrence + 
+              '", </br> "humanoccurrence": "' + humanoccurrence + 
+              '", </br> "doghumanratio": "' + doghumanratio + 
+              '", </br> "humandogratio": "' + humandogratio + 
+              '", </br> "femalemaleratio": "' + femalemaleratio + 
+              '", </br> "malefemaleratio": "' + malefemaleratio + 
               '"} }, </p>'
           })
             .attr('x', 50)

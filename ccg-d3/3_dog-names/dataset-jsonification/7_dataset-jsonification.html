@@ -101,8 +101,8 @@
                 // console.log(rowsByNameZh.children[m].children[n].data.name + ' (M): ' + nameTallyMale);
               } // if
             } // n
-            console.log(rowsByNameZh.children[m].data[0] + ' (F): ' + nameTallyFemale);
-            console.log(rowsByNameZh.children[m].data[0] + ' (M): ' + nameTallyMale);
+            // console.log(rowsByNameZh.children[m].data[0] + ' (F): ' + nameTallyFemale);
+            // console.log(rowsByNameZh.children[m].data[0] + ' (M): ' + nameTallyMale);
             nameCounts[m].genderinfo.female =  nameTallyFemale;
             nameCounts[m].genderinfo.male =  nameTallyMale;
           } // m          
@@ -157,9 +157,7 @@
           .enter()
           .append('span')
           .html(function(d) {
-            if (d.genderinfo.female !== 0) {
               return '<p>' + d.name + ', F, ' + d.genderinfo.female + ', </p><p>' + d.name + ', M, ' + d.genderinfo.male + ', </p>';
-            }
           })
             .attr('x', 50)
             .attr('y', function(d, i) {
