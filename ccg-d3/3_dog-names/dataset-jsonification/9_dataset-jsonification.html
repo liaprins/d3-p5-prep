@@ -60,10 +60,10 @@
         for (var i = 0; i < uniqueNamesList.length; i++) { // loop through all unique county names
           nameCounts[i] = {
             name: uniqueNamesList[i],
-            dogfemalecount: parseFloat(rowsByNameZh.children[i].children[0].data.count),
-            dogmalecount: parseFloat(rowsByNameZh.children[i].children[2].data.count),
-            humanfemalecount: parseFloat(rowsByNameZh.children[i].children[1].data.count),
-            humanmalecount: parseFloat(rowsByNameZh.children[i].children[3].data.count)
+            dogFemaleCount: parseFloat(rowsByNameZh.children[i].children[0].data.count),
+            dogMaleCount: parseFloat(rowsByNameZh.children[i].children[2].data.count),
+            humanFemaleCount: parseFloat(rowsByNameZh.children[i].children[1].data.count),
+            humanMaleCount: parseFloat(rowsByNameZh.children[i].children[3].data.count)
           } // close object
   
           // species loop, part 1
@@ -109,52 +109,90 @@
           .enter()
           .append('span')
           .html(function(d) {
-            var dogfemalecount = d.dogfemalecount;
-            var dogmalecount = d.dogmalecount;
-            var humanfemalecount = d.humanfemalecount;
-            var humanmalecount = d.humanmalecount;
-            var femalecount = (dogfemalecount + humanfemalecount);
-            var malecount = (dogmalecount + humanmalecount);
-            var dogcount = (dogfemalecount + dogmalecount);
-            var humancount = (humanfemalecount + humanmalecount);
-            var dogfemalepopulation = 25537;
-            var dogmalepopulation = 30788;
-            var humanfemalepopulation = 236078;
-            var humanmalepopulation = 319854;
-            var dogpopulation = (dogfemalepopulation + dogmalepopulation);
-            var humanpopulation = (humanfemalepopulation + humanmalepopulation);
-            var femalepopulation = (dogfemalepopulation + humanfemalepopulation);
-            var malepopulation = (dogmalepopulation + humanmalepopulation);
-            var occurrencerate = 100000;
-            var dogoccurrencerate = (dogpopulation / occurrencerate);
-            var dogoccurrence = (dogcount / dogoccurrencerate);
-            var humanoccurrencerate = (humanpopulation / occurrencerate);
-            var humanoccurrence = (humancount / humanoccurrencerate);
-            var doghumanratio = (dogoccurrence / humanoccurrence);
-            var humandogratio = (humanoccurrence / dogoccurrence);
-            var femaleoccurrencerate = (femalepopulation / occurrencerate);
-            var femaleoccurrence = (femalecount / femaleoccurrencerate);
-            var maleoccurrencerate = (malepopulation / occurrencerate);
-            var maleoccurrence = (malecount / maleoccurrencerate);
-            var femalemaleratio = (femaleoccurrence / maleoccurrence);
-            var malefemaleratio = (maleoccurrence / femaleoccurrence);
+            var dogFemaleCount = d.dogFemaleCount;
+            var dogMaleCount = d.dogMaleCount;
+            var humanFemaleCount = d.humanFemaleCount;
+            var humanMaleCount = d.humanMaleCount;
+            var femaleCount = (dogFemaleCount + humanFemaleCount);
+            var maleCount = (dogMaleCount + humanMaleCount);
+            var dogCount = (dogFemaleCount + dogMaleCount);
+            var humanCount = (humanFemaleCount + humanMaleCount);
+            var dogFemalePopulation = 25537;
+            var dogMalePopulation = 30788;
+            var humanFemalePopulation = 236078;
+            var humanMalePopulation = 319854;
+            var dogPopulation = (dogFemalePopulation + dogMalePopulation);
+            var humanPopulation = (humanFemalePopulation + humanMalePopulation);
+            var femalePopulation = (dogFemalePopulation + humanFemalePopulation);
+            var malePopulation = (dogMalePopulation + humanMalePopulation);
+            var occurrenceRate = 100000;
+            var dogOccurrenceRate = (dogPopulation / occurrenceRate);
+            var dogOccurrence = (dogCount / dogOccurrenceRate);
+            var humanOccurrenceRate = (humanPopulation / occurrenceRate);
+            var humanOccurrence = (humanCount / humanOccurrenceRate);
+            var dogHumanRatio = (dogOccurrence / humanOccurrence);
+            var humanDogRatio = (humanOccurrence / dogOccurrence);
+            var dogHumanRatioPer100;
+            var humanDogRatioPer100;
+            if (humanOccurrence == 0) {
+              dogHumanRatioPer100 = 100;
+              humanDogRatioPer100 = 0;
+            } else if (dogOccurrence == 0) {
+              dogHumanRatioPer100 = 0;
+              humanDogRatioPer100 = 100;
+            } else if (dogOccurrence > humanOccurrence) {
+              humanDogRatioPer100 = (100 / (dogHumanRatio + 1));
+              dogHumanRatioPer100 = (humanDogRatioPer100 * dogHumanRatio);
+            } else {
+              dogHumanRatioPer100 = (100 / (humanDogRatio + 1));
+              humanDogRatioPer100 = (dogHumanRatioPer100 * humanDogRatio);
+            }
+            var speciesRatioSimple = d3.format(".0f")(dogHumanRatioPer100) + " : " + d3.format(".0f")(humanDogRatioPer100); // round to whole numbers and put in xx : xx format
+            var femaleOccurrenceRate = (femalePopulation / occurrenceRate);
+            var femaleOccurrence = (femaleCount / femaleOccurrenceRate);
+            var maleOccurrenceRate = (malePopulation / occurrenceRate);
+            var maleOccurrence = (maleCount / maleOccurrenceRate);
+            var femaleMaleRatio = (femaleOccurrence / maleOccurrence);
+            var maleFemaleRatio = (maleOccurrence / femaleOccurrence);
+            var femaleMaleRatioPer100;
+            var maleFemaleRatioPer100;
+            if (maleOccurrence == 0) {
+              femaleMaleRatioPer100 = 100;
+              maleFemaleRatioPer100 = 0;
+            } else if (femaleOccurrence == 0) {
+              femaleMaleRatioPer100 = 0;
+              maleFemaleRatioPer100 = 100;
+            } else if (femaleOccurrence > maleOccurrence) {
+              maleFemaleRatioPer100 = (100 / (femaleMaleRatio + 1));
+              femaleMaleRatioPer100 = (maleFemaleRatioPer100 * femaleMaleRatio);
+            } else {
+              femaleMaleRatioPer100 = (100 / (maleFemaleRatio + 1));
+              maleFemaleRatioPer100 = (femaleMaleRatioPer100 * maleFemaleRatio);
+            }
+            var genderRatioSimple = d3.format(".0f")(femaleMaleRatioPer100) + " : " + d3.format(".0f")(maleFemaleRatioPer100); // round to whole numbers and put in xx : xx format
 
             return '<p>{ "name"&#58; "' + d.name + 
               '", </br> "info": {' + 
-              ' </br> "dogfemalecount": "' + dogfemalecount + 
-              '", </br> "dogmalecount": "' + dogmalecount + 
-              '", </br> "humanfemalecount": "' + humanfemalecount + 
-              '", </br> "humanmalecount": "' + humanmalecount + 
-              '", </br> "femalecount": "' + femalecount + 
-              '", </br> "malecount": "' + malecount + 
-              '", </br> "dogcount": "' + dogcount + 
-              '", </br> "humancount": "' + humancount + 
-              '", </br> "dogoccurrence": "' + dogoccurrence + 
-              '", </br> "humanoccurrence": "' + humanoccurrence + 
-              '", </br> "doghumanratio": "' + doghumanratio + 
-              '", </br> "humandogratio": "' + humandogratio + 
-              '", </br> "femalemaleratio": "' + femalemaleratio + 
-              '", </br> "malefemaleratio": "' + malefemaleratio + 
+              ' </br> "dogFemaleCount": "' + dogFemaleCount + 
+              '", </br> "dogMaleCount": "' + dogMaleCount + 
+              '", </br> "humanFemaleCount": "' + humanFemaleCount + 
+              '", </br> "humanMaleCount": "' + humanMaleCount + 
+              '", </br> "femaleCount": "' + femaleCount + 
+              '", </br> "maleCount": "' + maleCount + 
+              '", </br> "dogCount": "' + dogCount + 
+              '", </br> "humanCount": "' + humanCount + 
+              '", </br> "dogOccurrence": "' + dogOccurrence + 
+              '", </br> "humanOccurrence": "' + humanOccurrence + 
+              '", </br> "dogHumanRatio": "' + dogHumanRatio + 
+              '", </br> "humanDogRatio": "' + humanDogRatio + 
+              '", </br> "dogHumanRatioPer100": "' + dogHumanRatioPer100 + 
+              '", </br> "humanDogRatioPer100": "' + humanDogRatioPer100 + 
+              '", </br> "speciesRatioSimple": "' + speciesRatioSimple + 
+              '", </br> "femaleMaleRatio": "' + femaleMaleRatio + 
+              '", </br> "maleFemaleRatio": "' + maleFemaleRatio + 
+              '", </br> "femaleMaleRatioPer100": "' + femaleMaleRatioPer100 + 
+              '", </br> "maleFemaleRatioPer100": "' + maleFemaleRatioPer100 + 
+              '", </br> "genderRatioSimple": "' + genderRatioSimple + 
               '"} }, </p>'
           })
             .attr('x', 50)
@@ -168,17 +206,3 @@
   
     </body>
   </html>
-
-  <!-- .html(function(d) {
-    return '<p>name: ' + d.name + 
-      ', </br> info: {' + 
-      ' </br> femalecount: ' + (d.dogfemalecount + d.humanfemalecount) + 
-      ', </br> malecount: ' + (d.dogmalecount + d.humanmalecount) + 
-      ', </br> dogcount: ' + (d.dogfemalecount + d.dogmalecount) + 
-      ', </br> humancount: ' + (d.humanfemalecount + d.humanmalecount) + 
-      ', </br> dogfemalecount: ' + d.dogfemalecount + 
-      ', </br> dogmalecount: ' + d.dogmalecount + 
-      ', </br> humanfemalecount: ' + d.humanfemalecount + 
-      ', </br> humanmalecount: ' + d.humanmalecount + 
-      '}, </p>';
-  }) -->
