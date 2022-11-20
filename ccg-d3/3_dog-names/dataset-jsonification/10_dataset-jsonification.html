@@ -30,11 +30,11 @@
       <script type="text/javascript">
   
       // load in the data
-      d3.json('names.json')
+      d3.json('../names.json')
         .then(function(json) {
 
-          for (i = 0; i < json.features.length; i++) {
-            console.log('The 🐶 : 🧒 ratio for the name ' + json.features[i].name  + ' is ' + (parseFloat(json.features[i].info.doghumanratio)));
+          for (i = 0; i < json.distinctNames.length; i++) {
+            console.log('The 🐶 : 🧒 ratio for the name ' + json.distinctNames[i].name  + ' is ' + (json.distinctNames[i].info.speciesRatioSimple));
           }
   
       }); // close JSON function
