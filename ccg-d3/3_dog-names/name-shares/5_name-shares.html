@@ -46,6 +46,8 @@
     <body>
       <!-- HTML ********************************************************************** -->
   
+      <input type="text" id="userInput" class="form-control" placeholder="Search Name">
+
       <div id="sort-alphabetical-name">
         <p>
           🔤 Sort by name alphabetically
@@ -76,54 +78,32 @@
         </p>
       </div>
       
-      <div id="name-shares-vis">
-        <div id="deletable-container"></div>
-      </div>
+      <div id="name-shares-vis"></div>
   
       <!-- JAVASCRIPT **************************************************************** -->
       <script type="text/javascript">
   
       // load in the data
       d3.json('../names.json')
-        .then(function(json) {
-
-          // var sortAlphabeticalName = json;
-          var sortAlphabeticalName = json.distinctNames.slice().sort((a, b) => d3.ascending(a.name, b.name));
-          
-          var sortOccurrenceDog = json.distinctNames.slice().sort((a, b) => d3.descending(parseFloat(a.info.dogOccurrence), parseFloat(b.info.dogOccurrence)));
-          
-          var sortOccurrenceHuman = json.distinctNames.slice().sort((a, b) => d3.descending(parseFloat(a.info.humanOccurrence), parseFloat(b.info.humanOccurrence)));
-          
-          var sortDogHumanRatio = json.distinctNames.slice().sort((a, b) => d3.descending(parseFloat(a.info.dogHumanRatioPer100), parseFloat(b.info.dogHumanRatioPer100)) || d3.descending(parseFloat(a.info.dogOccurrence), parseFloat(b.info.dogOccurrence)) || d3.ascending(parseFloat(a.info.humanOccurrence), parseFloat(b.info.humanOccurrence)));
-          
-          var sortHumanDogRatio = json.distinctNames.slice().sort((a, b) => d3.descending(parseFloat(a.info.humanDogRatioPer100), parseFloat(b.info.humanDogRatioPer100)) || d3.descending(parseFloat(a.info.humanOccurrence), parseFloat(b.info.humanOccurrence)) || d3.ascending(parseFloat(a.info.dogOccurrence), parseFloat(b.info.dogOccurrence)));
-          
-          var sortedDataSource;
-          sortedDataSource = sortAlphabeticalName;
-          
+        .then(function(json) {          
 
           var w = 2000;
           var h = 172000;
 
-          function sort() {
-
-          d3.select('#deletable-container').remove();
-
           var nameSharesSvg = d3.select('#name-shares-vis')
-            .append('div')
-              .attr('id', 'deletable-container')
             .append('svg')
               .attr('width', w)
               .attr('height', h);
 
           // groups for bars + labels
           var nameHeader = nameSharesSvg.selectAll('.distinct-name')
-            // .data(json.distinctNames)
-            // .data(sortAlphabeticalName)
-            .data(sortedDataSource)
+            .data(json.distinctNames)
             .enter()
             .append('g')
               .attr('class', 'distinct-name')
+              .attr('id', function(d) {
+                return d.name;
+              })
               .attr('transform', function(d, i) {
                 return 'translate(50, ' + ((i * 50) + 50) + ')';
               });
@@ -135,7 +115,7 @@
               return d.info.dogOccurrence;
             })
             .attr('height', 10)
-            .attr('x', 250)
+            .attr('x', 170)
             .attr('y', 0)
             .attr('fill', '#FD7F6F');
 
@@ -146,55 +126,101 @@
               return d.info.humanOccurrence;
             })
             .attr('height', 10)
-            .attr('x', 250)
+            .attr('x', 170)
             .attr('y', 12)
             .attr('fill', '#56C6E2');
 
           // labels
           nameHeader.append('text')
               .text(function(d) {
-                return d.name + " 🐶 " + d.info.dogCount + " // 🧒 " + d.info.humanCount;
+                return d.name;
               })
               .attr('class', 'distinct-name-label')
               .attr('x', 0)
               .attr('y', 18);
 
-            } // close sort function
-            
-            sort();
+          // sort
+          var selectedSortMethod;
 
-          // SORT (TESTING!)
           d3.select('#sort-alphabetical-name')
             .on('click', function() {
-              sortedDataSource = sortAlphabeticalName;
-              sort();
+              selectedSortMethod = this.getAttribute('id');
+              sortBars(selectedSortMethod);
             }); // close .on
 
           d3.select('#sort-occurrence-dog')
             .on('click', function() {
-              sortedDataSource = sortOccurrenceDog;
-              sort();
+              selectedSortMethod = this.getAttribute('id');
+              sortBars(selectedSortMethod);
             }); // close .on
             
           d3.select('#sort-occurrence-human')
             .on('click', function() {
-              sortedDataSource = sortOccurrenceHuman;
-              sort();
+              selectedSortMethod = this.getAttribute('id');
+              sortBars(selectedSortMethod);
             }); // close .on
 
           d3.select('#sort-dog-human-ratio')
             .on('click', function() {
-              sortedDataSource = sortDogHumanRatio;
-              sort();
+              selectedSortMethod = this.getAttribute('id');
+              sortBars(selectedSortMethod);
             }); // close .on
 
           d3.select('#sort-human-dog-ratio')
             .on('click', function() {
-              sortedDataSource = sortHumanDogRatio;
-              sort();
+              selectedSortMethod = this.getAttribute('id');
+              sortBars(selectedSortMethod);
             }); // close .on
 
-          console.log(sortedDataSource);
+          // var sortBars = function() {
+          var sortBars = function(selectedSortMethod) {
+            nameHeader.sort(function(a, b) {
+              console.log('selectedSortMethod ' + selectedSortMethod);
+              if (selectedSortMethod == 'sort-occurrence-dog') {
+                return d3.descending(parseFloat(a.info.dogOccurrence), parseFloat(b.info.dogOccurrence));
+              } else if (selectedSortMethod == 'sort-occurrence-human') {
+                return d3.descending(parseFloat(a.info.humanOccurrence), parseFloat(b.info.humanOccurrence));
+              } else if (selectedSortMethod == 'sort-dog-human-ratio') {
+                return d3.descending(parseFloat(a.info.dogHumanRatioPer100), parseFloat(b.info.dogHumanRatioPer100)) || d3.descending(parseFloat(a.info.dogOccurrence), parseFloat(b.info.dogOccurrence)) || d3.ascending(parseFloat(a.info.humanOccurrence), parseFloat(b.info.humanOccurrence));
+              } else if (selectedSortMethod == 'sort-human-dog-ratio') {
+                return d3.descending(parseFloat(a.info.humanDogRatioPer100), parseFloat(b.info.humanDogRatioPer100)) || d3.descending(parseFloat(a.info.humanOccurrence), parseFloat(b.info.humanOccurrence)) || d3.ascending(parseFloat(a.info.dogOccurrence), parseFloat(b.info.dogOccurrence));
+              }
+            })
+            // .transition()
+            //  .delay(function(d, i) {
+            //    return i * 0.5;
+            //  })
+            //  .duration(1000)
+            .attr('transform', function(d, i) {
+              return 'translate(50, ' + ((i * 50) + 50) + ')';
+            });
+          } // close sortBars
+
+
+
+
+          // search
+
+            d3.select("#userInput").on("keyup", search);
+            function search(value, d) {
+              var input = this.value.toUpperCase(); 
+
+              nameSharesSvg.selectAll('.search-result')
+                .classed('search-result', false);
+                
+              nameSharesSvg.selectAll('#search-result-indicator').remove();
+
+              nameSharesSvg.selectAll('#' + input)
+                .classed('search-result', true)
+                .append('text')
+                  .text('🤠')
+                  .attr('id', 'search-result-indicator')
+                  .attr('x', -30)
+                  .attr('y', 17);
+            };
+
+
+
       
         }); // close JSON function
   
