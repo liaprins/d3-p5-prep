@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en" style="overflow-x: hidden !important;">
+  <head>
+    <meta charset="utf-8" />
+    <!-- Work Sans via Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+  
+      
+<!-- ⬇︎⬇︎⬇︎⬇︎⬇︎ D3/P5 LIBRARY * D3/P5 LIBRARY * D3/P5 LIBRARY * D3/P5 LIBRARY * D3/P5 LIBRARY * D3/P5 LIBRARY * D3/P5 LIBRARY -->
+    
+    <!-- CHOOSE WHICH D3 LIBRARY FILE TO POINT TO BELOW vvv -->
+    <!-- p5 -->
+    <!-- <script type="text/javascript" src="../../../d3-library/p5.min.js"></script> -->
+    <!-- D3 v6 via D3 website -->
+    <script type="text/javascript" src="https://d3js.org/d3.v6.min.js"></script>
+    <!-- v6(.7) via downloaded file -->
+    <!-- <script type="text/javascript" src="../../../d3-library/d3.js"></script> -->
+    <!-- v4(.5) via downloaded file -->
+    <!-- <script type="text/javascript" src="../../../d3-book-master/d3.js"></script> -->
+
+<!-- ⬆︎⬆︎⬆︎⬆︎⬆︎ D3/P5 LIBRARY * D3/P5 LIBRARY * D3/P5 LIBRARY * D3/P5 LIBRARY * D3/P5 LIBRARY * D3/P5 LIBRARY * D3/P5 LIBRARY -->
+  
+
+    <title>
+      name-shares | dog-names | CCG
+    </title>
+        
+    <link rel="stylesheet" href="../../../assets/css/reset.css">
+    <link rel="stylesheet" href="../../../assets/css/globalnavfooter.css">
+    <link rel="stylesheet" href="../../../assets/css/somepages.css">
+    <link rel="stylesheet" href="../../../assets/css/text.css">
+    <link rel="stylesheet" href="../../../assets/css/menu-hamburger.css">
+    <link rel="stylesheet" href="../../../assets/css/mediaqueries.css">
+                
+    <style>
+
+
+/* ⬇︎⬇︎⬇︎⬇︎⬇︎ CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS */
+
+html {
+  scroll-behavior: smooth;
+}
+.name-shares-search-input,
+#sort-alphabetical-name,
+#sort-occurrence-dog,
+#sort-occurrence-human,
+#sort-dog-human-ratio,
+#sort-human-dog-ratio {
+  background-color: white;
+  color: black;
+  border: 2px black solid;
+  display: block;
+  margin: 15px 0px;
+  padding: 10px 25px;
+  cursor: pointer;
+}
+.name-shares-search-input {
+  display: block;
+  width: 100%;
+  cursor: auto;
+  font-size: 17px;
+  font-family: Work Sans;
+  padding: 15px 25px;
+}
+.outer,
+.inner {
+  height: 500px;
+  z-index: 10;
+}
+.outer {
+  width: 78.6vw;
+  margin: 2.048rem auto;
+  position: relative;
+  left: -14.286;
+  overflow: auto;
+  scroll-behavior: smooth;
+  background-color: #f5f5f5;
+}
+#name-shares-vis {
+  /* display: block;
+  height: 100%; */
+}
+.distinct-name-label {
+  text-anchor: middle;
+  letter-spacing: 0.07rem;
+}
+.name-bars-dog {
+  transform: scaleX(-1);
+}
+
+/* Mediaqueries */
+@media (min-width: 817px) {
+  .outer {
+    width: 85.714vw;
+    left: calc(50% - 42.857vw); /* 42.857vw = (50vw (to get to L edge of screen) - 7.143vw (2/28col)) */
+  }
+}
+@media (min-width: 1225px) {
+  .outer {
+    width: 1108.333px;
+    left: -233px;
+  }
+}
+
+/* ⬆︎⬆︎⬆︎⬆︎⬆︎ CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS */
+
+
+    </style>
+  </head>
+  <body>
+    <!-- Container to hold reading line -->
+    <div id="readingline"></div>  
+    <div id="everythingexceptnav">  
+      <!-- Inline definition script -->
+      <script src="../../../assets/js/definitions.js">
+      </script>
+      <!-- Lightbox and slideshow all in one script -->
+      <script src="../../../assets/js/lightboxslideshow.js">
+      </script>
+      <!-- Detects swipes by users with touchscreens for galleries -->
+      <script src="../../../assets/js/pure-swipe.js">
+      </script>
+      <!-- Opening <article> to make room for RR results that need to be wider than this width, to accommodate their all having margins on L + R -->
+      <article class="mockmain" id="pre-rr">    
+        <!-- I'm arranging the pieces of the intro part according to the V-mobile design; CSS can re-arrange them; this is according to responsive design principles -->
+        <div class="desktopcontent"></div>
+        <div id="postdesktopcontent">
+          <!-- Date of post -->
+          <p id="postdate" class="date m-textface bold postdatewidth">
+            21 Sep 1986
+          </p>
+          <!-- Postglasses icon + title of post -->
+          <a href="https://curiositycoloredglasses.com/" id="postlink">
+            <!-- Post glasses icon -->
+            <div class="postglassescontainer">
+              <div class="stem shortstem leftstem"></div><div style="background-image: url(../../../assets/images/-l-placeholder.jpg)" class="circle leftcircle"></div><div class="stem centerstem"></div><div style="background-image: url(../../../assets/images/-r-placeholder.jpg)" class="circle rightcircle"></div><div class="stem shortstem rightstem"></div>
+            </div>
+            <!-- Name of post -->
+            <h2 class="posttitle">
+              Am I a placeholder title?
+            </h2>
+          </a>
+          <!-- In-page table of contents for extra sections; only shown if 2+ extra sections (assuming Comments are always on; if not I should make sure to have two others) -->
+          <div class="toc s-display">
+            <a href="#process" id="process-link" class="toc-link">
+              Process
+            </a>
+            <a href="#glossary" id="glossary-link" class="toc-link">
+              Glossary
+            </a>
+            <a href="#notes" id="thankyou-link" class="toc-link">
+              Notes
+            </a>
+            <a href="#relatedposts" id="rr-link" class="toc-link">
+              Related Posts
+            </a>
+            <a href="#comments" id="comments-link" class="toc-link">
+              Comments
+            </a>
+          </div>
+          <!-- "Lia Prins" to show up as default author -->
+          <span id="writtenby" class="xs-textface bold">by</span><span class="writer s-display"><a href="https://liaprins.com" target="_blank" class="yellowhover">&nbspLia Prins</a>
+          </span>
+          <!-- Intro of post -->
+          <span id="postintro" class="l-textface">
+            Bear claw carrot cake marzipan jujubes chupa chups marzipan I love cake halvah&#58; candy canes tiramisu donut brownie danish. Jujubes fruitcake croissant donut candy cake pastry. Danish pastry sweet roll topping gingerbread candy fruitcake macaroon dessert. Jelly-o powder powder toffee danish chocolate. I love chupa chups marzipan I love brownie. Cake lemon drops danish marzipan halvah tiramisu.
+          </span>
+          <div id="posttagshare">
+            <!-- Tags of post -->
+            <span id="posttaggroup" class="s-textface">
+              <!-- Make them link to the tags page -->
+              <a href="https://curiositycoloredglasses.com/" id="posttag" class="xs-textface tag yellowhover">&nbsp&nbsp#tag1</a>
+              <a href="https://curiositycoloredglasses.com/" id="posttag" class="xs-textface tag yellowhover">&nbsp&nbsp#tag2</a>
+              <a href="https://curiositycoloredglasses.com/" id="posttag" class="xs-textface tag yellowhover">&nbsp&nbsp#tag3</a>
+              <a href="https://curiositycoloredglasses.com/" id="posttag" class="xs-textface tag yellowhover">&nbsp&nbsp#tag4</a>
+              <a href="https://curiositycoloredglasses.com/" id="posttag" class="xs-textface tag yellowhover">&nbsp&nbsp#tag5</a>
+            </span>
+            <!-- Sharing for this post -->
+            <span id="share">
+              <!-- TWITTER: From a tutorial website: onlinejournalismblog.com, but adding ability to dynamically include a visualized image. -->
+              <a href="https://twitter.com/iggldee" target="_blank" title="Share on Twitter">
+                <img src= "../../../assets/images/Twitter.svg" alt="Share on Twitter" class="socialicon shareicon yellowhover">
+              </a>
+              <!-- FACEBOOK: This method is from Facebook Developers, after modifications. It only works in conjunction with the script called separately and my registered CCG Facebook app ID (1816213758596939) -->
+              <span id="ogBtn" title="Share on Facebook">
+                <img src= "../../../assets/images/Facebook.svg" alt="Share on Facebook" class="socialicon shareicon yellowhover">
+              </span>
+              <!-- PINTEREST: From Pinterest widget builder (modified to get stored image-->                
+              <a data-pin-do="buttonBookmark" data-pin-custom="true" data-pin-save="false" href="https://www.pinterest.com/pin/create/button/" title="Share on Pinterest">
+                <img src="../../../assets/images/Pinterest.svg" alt="Save to Pinterest" class="socialicon shareicon yellowhover">
+              </a>
+            </span>
+          </div>    <!-- Closing id="posttagshare" -->
+          <!-- Body text area of post (after intro) -->
+          <div id="posttext" class="m-textface hyphenation">
+
+            Tart candy canes jelly-o donut danish cake. Lemon drops cake chocolate bar sugar plum marshmallow. Brownie I love pie I love I love oat cake. I love cupcake oat cake tootsie roll cheesecake candy canes sugar plum candy canes. Donut I love I love I love chocolate bar chocolate tart sugar plum chocolate bar. Shortbread carrot cake icing chocolate bar dessert carrot cake I love topping candy canes. Dragée sweet roll chupa chups caramels lemon drops I love chocolate bar gummies jelly-o. Wafer ice cream donut I love tart jelly-o tart chocolate cake shortbread. I love marzipan jelly apple pie brownie cheesecake shortbread croissant. Toffee apple pie cake cookie apple pie bear claw.
+      
+      
+<!-- ⬇︎⬇︎⬇︎⬇︎⬇︎ HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML -->
+        
+<input type="text" id="userInput" class="name-shares-search-input" placeholder="Search Name">
+
+<div id="sort-alphabetical-name">
+  <p>🔤 Sort by name alphabetically</p>
+</div>
+            
+<div id="sort-occurrence-dog">
+  <p>🐶 Sort by occurrence across dogs</p>
+</div>
+      
+<div id="sort-occurrence-human">
+  <p>🧒 Sort by occurrence across humans</p>
+</div>
+
+<div id="sort-dog-human-ratio">
+  <p>🐶 : 🧒 Sort by dog-to-human ratio</p>
+</div>
+      
+<div id="sort-human-dog-ratio">
+  <p>🧒 : 🐶 Sort by human-to-dog ratio</p>
+</div>
+            
+<div class="outer">
+  <div class="inner">
+    <div id="name-shares-vis"></div>
+  </div>
+</div>
+      
+<!-- ⬆︎⬆︎⬆︎⬆︎⬆︎ HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML -->  
+
+
+            Chocolate cake I love cheesecake icing. Brownie pastry soufflé candy soufflé jujubes. Gummies macaroon shortbread apple pie muffin I love jelly beans cake apple pie. Chupa chups jelly beans candy oat cake biscuit. Icing I love pastry chocolate bar tootsie roll lemon drops. Jelly apple pie I love marzipan halvah. Bonbon lemon drops I love topping sesame snaps oat cake I love. Sweet lemon drops lollipop chocolate cake shortbread wafer danish candy canes marzipan. Dragée lemon drops shortbread topping carrot cake I love chocolate cake pudding jujubes. Fruitcake marzipan cookie carrot cake lollipop marshmallow apple pie marshmallow cake.
+
+            <img src="../../../assets/images/home.svg" alt="" id="articleendglasses">
+          </div>
+          <!-- Separator line between main content and extra sections -->
+          <hr class="toprule" id="separatorline" />
+          <!-- Process -->
+          <section id="process">
+            <details class="postsectiondetails" open>
+              <summary class="sectionsummary postpagesectionsummary blackbg"><h3>Process</h3>
+                <a href="{{ site.baseurl }}{{ page.url }}" class="toparrowlink" title="Up to top">
+                  <img src= "../../../assets/images/top-white.svg" class="toparrow">
+                </a>
+              </summary>
+              <!-- PROCESS CONTENT TO GO HERE -->
+            </details>
+          </section>
+          <!-- Glossary -->
+          <section id="glossary">
+            <details class="postsectiondetails" open>
+              <summary class="sectionsummary postpagesectionsummary blackbg"><h3>Glossary</h3>
+                <a href="{{ site.baseurl }}{{ page.url }}" class="toparrowlink" title="Up to top">
+                  <img src= "../../../assets/images/top-white.svg" class="toparrow">
+                </a>
+              </summary>
+              <dl>
+              <!-- GLOSSARY CONTENT TO GO HERE -->
+              </dl>
+            </details>
+          </section>
+          <!-- Notes -->
+          <section id="notes">
+            <details class="postsectiondetails" open>
+              <summary class="sectionsummary postpagesectionsummary blackbg"><h3>Notes</h3>
+                <a href="{{ site.baseurl }}{{ page.url }}" class="toparrowlink" title="Up to top">
+                  <img src= "../../../assets/images/top-white.svg" class="toparrow">
+                </a>
+              </summary>
+            <!-- FOOTNOTES CONTENT TO GO HERE -->
+            </details>
+          </section>
+        </div>    <!-- Closing class="postdesktopcontent" -->
+      </article>
+  
+      <script type="text/javascript">
+
+
+// ⬇︎⬇︎⬇︎⬇︎⬇︎ JAVASCRIPT * JAVASCRIPT * JAVASCRIPT * JAVASCRIPT * JAVASCRIPT * JAVASCRIPT * JAVASCRIPT * JAVASCRIPT * JAVASCRIPT
+
+var windowW = window.innerWidth; // capture screen width to create "mediaqueries" within JS
+var w;
+
+if (windowW < 817) { // set var for width of vis, depending on screen width
+  w = (78.6 * windowW) / 100;
+} else if (windowW < 1225) {
+  w = (85.714 * windowW) / 100;
+} else {
+  var w = 1108;
+}
+
+var h = 172000;
+
+  
+// load in the data
+d3.json('../names.json')
+  .then(function(json) {          
+
+    var nameWidth = 80;
+    var vNameSpacing = 35;
+
+    var nameSharesSvg = d3.select('#name-shares-vis')
+      .append('svg')
+        .attr('width', w)
+        .attr('height', h);
+
+    // groups for bars + labels
+    var nameHeader = nameSharesSvg.selectAll('.distinct-name')
+      .data(json.distinctNames)
+      .enter()
+      .append('g')
+        .attr('class', 'distinct-name')
+        .attr('id', function(d) {
+          return d.name;
+        })
+        .attr('transform', function(d, i) {
+          return 'translate(0, ' + ((i * vNameSpacing) + vNameSpacing) + ')';
+        });
+
+    // bars for dogs (red)
+    nameHeader.append('rect')
+      .attr('class', 'name-bars-dog')
+      .attr('width', function(d) {
+        return (d.info.dogOccurrence * 0.27);
+      })
+      .attr('height', 10)
+      .attr('x', ((w / 2) - nameWidth) * -1)
+      .attr('y', 8)
+      .attr('fill', '#FD7F6F');
+
+    // bars for humans (blue)
+    nameHeader.append('rect')
+      .attr('class', 'name-bars-human')
+      .attr('width', function(d) {
+        return (d.info.humanOccurrence * 0.27);
+      })
+      .attr('height', 10)
+      .attr('x', (w / 2) + nameWidth)
+      .attr('y', 8)
+      .attr('fill', '#56C6E2');
+
+    // labels
+    nameHeader.append('text')
+        .text(function(d) {
+          return d.name;
+        })
+        .attr('class', 'distinct-name-label s-textface bold')
+        .attr('x', w / 2)
+        .attr('y', 18);
+
+    // sort
+    var selectedSortMethod;
+
+    d3.select('#sort-alphabetical-name')
+      .on('click', function() {
+        selectedSortMethod = this.getAttribute('id');
+        sortBars(selectedSortMethod);
+      }); // close .on
+
+    d3.select('#sort-occurrence-dog')
+      .on('click', function() {
+        selectedSortMethod = this.getAttribute('id');
+        sortBars(selectedSortMethod);
+      }); // close .on
+        
+    d3.select('#sort-occurrence-human')
+      .on('click', function() {
+        selectedSortMethod = this.getAttribute('id');
+        sortBars(selectedSortMethod);
+      }); // close .on
+
+    d3.select('#sort-dog-human-ratio')
+      .on('click', function() {
+        selectedSortMethod = this.getAttribute('id');
+        sortBars(selectedSortMethod);
+      }); // close .on
+
+    d3.select('#sort-human-dog-ratio')
+      .on('click', function() {
+        selectedSortMethod = this.getAttribute('id');
+        sortBars(selectedSortMethod);
+      }); // close .on
+
+    // var sortBars = function() {
+    var sortBars = function(selectedSortMethod) {
+      nameHeader.sort(function(a, b) {
+        console.log('selectedSortMethod ' + selectedSortMethod);
+        if (selectedSortMethod == 'sort-occurrence-dog') {
+          return d3.descending(parseFloat(a.info.dogOccurrence), parseFloat(b.info.dogOccurrence));
+        } else if (selectedSortMethod == 'sort-occurrence-human') {
+          return d3.descending(parseFloat(a.info.humanOccurrence), parseFloat(b.info.humanOccurrence));
+        } else if (selectedSortMethod == 'sort-dog-human-ratio') {
+          return d3.descending(parseFloat(a.info.dogHumanRatioPer100), parseFloat(b.info.dogHumanRatioPer100)) || d3.descending(parseFloat(a.info.dogOccurrence), parseFloat(b.info.dogOccurrence)) || d3.ascending(parseFloat(a.info.humanOccurrence), parseFloat(b.info.humanOccurrence));
+        } else if (selectedSortMethod == 'sort-human-dog-ratio') {
+          return d3.descending(parseFloat(a.info.humanDogRatioPer100), parseFloat(b.info.humanDogRatioPer100)) || d3.descending(parseFloat(a.info.humanOccurrence), parseFloat(b.info.humanOccurrence)) || d3.ascending(parseFloat(a.info.dogOccurrence), parseFloat(b.info.dogOccurrence));
+        }
+      })
+      .attr('transform', function(d, i) {
+        return 'translate(0, ' + ((i * vNameSpacing) + vNameSpacing) + ')';
+      });
+    } // close sortBars
+
+    // search
+    d3.select("#userInput").on("keyup", search);
+
+    function search() {
+      var input = this.value.toUpperCase(); 
+
+      nameSharesSvg.selectAll('.search-result')
+        .classed('search-result', false);
+      nameSharesSvg.selectAll('#search-result-indicator').remove();
+
+      var searchResult = nameSharesSvg.selectAll('#' + input)
+        .classed('search-result', true)
+        .append('text')
+          .text('🤠')
+          .attr('id', 'search-result-indicator')
+          .attr('x', -30)
+          .attr('y', 17);
+
+      var searchResult;
+      if (document.getElementById(input)) {
+        searchResult = document.getElementById(input);
+        searchResult.scrollIntoView();
+      }
+        
+    }; // close search fx
+  
+}); // close JSON function
+
+// ⬆︎⬆︎⬆︎⬆︎⬆︎ JAVASCRIPT * JAVASCRIPT * JAVASCRIPT * JAVASCRIPT * JAVASCRIPT * JAVASCRIPT * JAVASCRIPT * JAVASCRIPT * JAVASCRIPT
+
+      
+      </script>
+
+      <!-- Draws line at top of screen to show how far scrolled through main content -->
+      <script src="../../../assets/js/readingline.js">
+      </script>
+      <footer role="contentinfo">
+        <div id="footercontent">
+          <!-- Subscribe -->
+          <form action="//curiositycoloredglasses.us14.list-manage.com/subscribe/post?u=05f8f85154975a52907f2ce4d&amp;id=086ebe8644" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+            <span class="mc-field-group">
+              <input type="email" value="" name="EMAIL" class="boxinput s-textface" id="mce-EMAIL" placeholder="Email address">
+            </span>
+            <!-- Honeypot -->
+            <span style="position: absolute; left: -5000px;" aria-hidden="true">
+              <input type="text" name="b_05f8f85154975a52907f2ce4d_086ebe8644" tabindex="-1" value="">
+            </span>
+            <!-- "Subscribe" button -->
+            <input type="submit" value="Subscribe" name="subscribe" class="xs-display boxbutton subscribebutton" id="mc-embedded-subscribe">
+          </form>
+          <!-- Message to see example posts -->
+          <p class="xs-textface" id="subscribemessage">
+            Find out about new posts!
+            <a href="http://us14.campaign-archive2.com/home/?u=05f8f85154975a52907f2ce4d&id=086ebe8644" title="View previous campaigns" target="_blank">
+              See an example email first.
+            </a>
+          </p>
+          <!-- MailChimp scripts -->
+          <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'>
+          </script>
+          <script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';}(jQuery));var $mcj = jQuery.noConflict(true);
+          </script>
+          <!-- Follow -->
+          <span id="follow">
+            <!-- Link to my instagram page -->
+            <a href="https://www.instagram.com/curiositycoloredglasses/" title="Follow on Instagram" target="_blank">
+              <img src= "../../../assets/images/Instagram.svg" alt="Follow me on Instagram" id="instagramlogo" class="followicon socialicon">
+            </a>
+            <!-- Link to @iggledee twitter page -->
+            <a href="https://twitter.com/iggledee" title="Follow on Twitter" target="_blank">
+              <img src= "../../../assets/images/Twitter.svg" alt="Follow me on Twitter" class="followicon socialicon">
+            </a>
+            <!-- Link to my portfolio website -->
+            <a href="http://liaprins.com/" target="_blank" id="portfolio" class="m-textface bold">
+              liaprins.com
+            </a>
+          </span>
+        </div>
+      </footer>
+    </div> <!-- closing id="everythingexceptnav" which exists on every page except QQ, and is closed within Archive's own layout -->
+      <!-- Menu has to be called here, to account for a major Safari bug: Safari renders anything measured in rems at 1px, if it comes after a <details> tag... and my menu is within a <details> tag, so it was messing up everything with rems in Safari. Moving menu to the very bottom means there is nothing in the html after it, so it is fine. The menu is styled in css to position it absolutely at the top -->
+    <nav role="navigation">
+      <details id="navdetails" open>
+        <summary id="navsummary">
+        </summary>
+        <!-- Home glasses icon -->
+        <a href="https://curiositycoloredglasses.com//" title="Curiosity-Colored Glasses">
+          <img src="../../../assets/images/home.svg" alt="Curiosity-Colored Glasses" id="homeicon" class="yellowhover">
+        </a>
+        <!-- Loop through mainpages list according to order number assigned in each page's front matter -->
+        <ul id="navlist">
+          <a href="https://curiositycoloredglasses.com/hello" class="menuwordlink"><li id="menuword" class="navnothome m-display yellowhover"><span href="https://curiositycoloredglasses.com/hello">Hello</span></li></a>
+          <a href="https://curiositycoloredglasses.com/questionqueue" class="menuwordlink"><li id="menuword" class="navnothome m-display yellowhover"><span href="https://curiositycoloredglasses.com/questionqueue">Question Queue</span></li></a>
+          <a href="https://curiositycoloredglasses.com/library" class="menuwordlink"><li id="menuword" class="navnothome m-display yellowhover"><span href="https://curiositycoloredglasses.com/library">Library</span></li></a>
+          <a href="https://curiositycoloredglasses.com/archive" class="menuwordlink"><li id="menuword" class="navnothome m-display yellowhover"><span href="https://curiositycoloredglasses.com/archive">Archive</span></li></a>
+          <!-- Searchbar -->
+          <li id="navsearch" class="navnothome">
+            <div id="searchdecoy" title="Search" class="yellowhover" style="display: none;">
+              <img src="../../../assets/images/search.svg" alt="search" class="navsearchicon">
+            </div>
+            <form action="/search" method="get" id="navsearchform">
+              <input type="text" placeholder="search" name="query" id="navsearchinput" class="s-textface underlineinput">
+              <button type="submit" value="search" title="Search" id="navsearchbutton" class="searchbutton yellowhover">
+                <img src="../../../assets/images/search.svg" alt="search" class="navsearchicon">
+              </button>
+            </form>
+          </li>
+        </ul>
+      </details>
+    </nav>
+    <!-- Sitewide scripts -->
+    <script src="../../../assets/js/menu.js">
+    </script>
+    <script src="../../../assets/js/search.js">
+    </script>
+  </body>
+</html>
+  
+  
