@@ -92,6 +92,20 @@ html {
 .name-bars-dog {
   transform: scaleX(-1);
 }
+#dog-axis-label,
+#human-axis-label {
+  text-align: center;
+  display: inline-block !important;
+  width: 550px;
+}
+#chart-title {
+  padding-top: 30px;
+}
+.chart-intro-text {
+  margin-left: 50px !important;
+  margin-right: 50px !important;
+  display: block !important;
+}
 
 /* Mediaqueries */
 @media (min-width: 817px) {
@@ -134,21 +148,21 @@ html {
         <div id="postdesktopcontent">
           <!-- Date of post -->
           <p id="postdate" class="date m-textface bold postdatewidth">
-            21 Sep 1986
+            01 Dec 2022
           </p>
           <!-- Postglasses icon + title of post -->
           <a href="https://curiositycoloredglasses.com/" id="postlink">
             <!-- Post glasses icon -->
             <div class="postglassescontainer">
-              <div class="stem shortstem leftstem"></div><div style="background-image: url(../../../assets/images/-l-placeholder.jpg)" class="circle leftcircle"></div><div class="stem centerstem"></div><div style="background-image: url(../../../assets/images/-r-placeholder.jpg)" class="circle rightcircle"></div><div class="stem shortstem rightstem"></div>
+              <div class="stem shortstem leftstem"></div><div style="background-image: url(../../../assets/images/-l-placeholder-blank.jpg)" class="circle leftcircle"></div><div class="stem centerstem"></div><div style="background-image: url(../../../assets/images/-r-placeholder-blank.jpg)" class="circle rightcircle"></div><div class="stem shortstem rightstem"></div>
             </div>
             <!-- Name of post -->
             <h2 class="posttitle">
-              Am I a placeholder title?
+              How many dogs have my name? And how many humans have my dog's name?
             </h2>
           </a>
           <!-- In-page table of contents for extra sections; only shown if 2+ extra sections (assuming Comments are always on; if not I should make sure to have two others) -->
-          <div class="toc s-display">
+          <!-- <div class="toc s-display">
             <a href="#process" id="process-link" class="toc-link">
               Process
             </a>
@@ -164,23 +178,23 @@ html {
             <a href="#comments" id="comments-link" class="toc-link">
               Comments
             </a>
-          </div>
+          </div> -->
           <!-- "Lia Prins" to show up as default author -->
           <span id="writtenby" class="xs-textface bold">by</span><span class="writer s-display"><a href="https://liaprins.com" target="_blank" class="yellowhover">&nbspLia Prins</a>
           </span>
           <!-- Intro of post -->
           <span id="postintro" class="l-textface">
-            Bear claw carrot cake marzipan jujubes chupa chups marzipan I love cake halvah&#58; candy canes tiramisu donut brownie danish. Jujubes fruitcake croissant donut candy cake pastry. Danish pastry sweet roll topping gingerbread candy fruitcake macaroon dessert. Jelly-o powder powder toffee danish chocolate. I love chupa chups marzipan I love brownie. Cake lemon drops danish marzipan halvah tiramisu.
+            [Introductory text explaining the concept here. Text explaining the concept to go here. Introductory text explaining the concept here. Text explaining the concept to go here. Introductory text explaining the concept here. Text explaining the concept to go here.]
           </span>
           <div id="posttagshare">
             <!-- Tags of post -->
             <span id="posttaggroup" class="s-textface">
               <!-- Make them link to the tags page -->
-              <a href="https://curiositycoloredglasses.com/" id="posttag" class="xs-textface tag yellowhover">&nbsp&nbsp#tag1</a>
+              <!-- <a href="https://curiositycoloredglasses.com/" id="posttag" class="xs-textface tag yellowhover">&nbsp&nbsp#tag1</a>
               <a href="https://curiositycoloredglasses.com/" id="posttag" class="xs-textface tag yellowhover">&nbsp&nbsp#tag2</a>
               <a href="https://curiositycoloredglasses.com/" id="posttag" class="xs-textface tag yellowhover">&nbsp&nbsp#tag3</a>
               <a href="https://curiositycoloredglasses.com/" id="posttag" class="xs-textface tag yellowhover">&nbsp&nbsp#tag4</a>
-              <a href="https://curiositycoloredglasses.com/" id="posttag" class="xs-textface tag yellowhover">&nbsp&nbsp#tag5</a>
+              <a href="https://curiositycoloredglasses.com/" id="posttag" class="xs-textface tag yellowhover">&nbsp&nbsp#tag5</a> -->
             </span>
             <!-- Sharing for this post -->
             <span id="share">
@@ -201,7 +215,7 @@ html {
           <!-- Body text area of post (after intro) -->
           <div id="posttext" class="m-textface hyphenation">
 
-            Tart candy canes jelly-o donut danish cake. Lemon drops cake chocolate bar sugar plum marshmallow. Brownie I love pie I love I love oat cake. I love cupcake oat cake tootsie roll cheesecake candy canes sugar plum candy canes. Donut I love I love I love chocolate bar chocolate tart sugar plum chocolate bar. Shortbread carrot cake icing chocolate bar dessert carrot cake I love topping candy canes. Dragée sweet roll chupa chups caramels lemon drops I love chocolate bar gummies jelly-o. Wafer ice cream donut I love tart jelly-o tart chocolate cake shortbread. I love marzipan jelly apple pie brownie cheesecake shortbread croissant. Toffee apple pie cake cookie apple pie bear claw.
+            [A bit more explanatory text (coming soon!). A bit more explanatory text. A bit more explanatory text (coming soon!). A bit more explanatory text. A bit more explanatory text (coming soon!). A bit more explanatory text. A bit more explanatory text (coming soon!). A bit more explanatory text. A bit more explanatory text (coming soon!). A bit more explanatory text. ]
       
       
 <!-- ⬇︎⬇︎⬇︎⬇︎⬇︎ HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML -->
@@ -228,7 +242,20 @@ html {
   <p>🧒 : 🐶 Sort by human-to-dog ratio</p>
 </div>
             
-<div id="name-shares-axes"></div>
+<div id="name-shares-axes">
+  <h4 id="chart-title" class="chart-intro-text">
+    Name occurrence
+  </h4>
+  <p class="chart-intro-text">
+    Use the search bar above to find a name. Use the sorting buttons re-order the names. Hover on a name to see the rate of dogs and humans (per 100,000) with that name.
+  </p>
+  <p id="dog-axis-label">
+    Occurrence per 100,000 dogs
+  </p>
+  <p id="human-axis-label">
+    Occurrence per 100,000 humans
+  </p>
+</div>
 <div id="name-shares-outer" class="outer">
   <div class="inner">
     <div id="name-shares-vis"></div>
@@ -238,13 +265,12 @@ html {
 <!-- ⬆︎⬆︎⬆︎⬆︎⬆︎ HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML -->  
 
 
-            Chocolate cake I love cheesecake icing. Brownie pastry soufflé candy soufflé jujubes. Gummies macaroon shortbread apple pie muffin I love jelly beans cake apple pie. Chupa chups jelly beans candy oat cake biscuit. Icing I love pastry chocolate bar tootsie roll lemon drops. Jelly apple pie I love marzipan halvah. Bonbon lemon drops I love topping sesame snaps oat cake I love. Sweet lemon drops lollipop chocolate cake shortbread wafer danish candy canes marzipan. Dragée lemon drops shortbread topping carrot cake I love chocolate cake pudding jujubes. Fruitcake marzipan cookie carrot cake lollipop marshmallow apple pie marshmallow cake.
+            [Concluding text will go here (coming soon!). Concluding text will go here. Concluding text will go here (coming soon!). Concluding text will go here. Concluding text will go here (coming soon!). Concluding text will go here. Concluding text will go here (coming soon!). Concluding text will go here. Concluding text will go here (coming soon!). Concluding text will go here. Concluding text will go here (coming soon!). Concluding text will go here. Concluding text will go here (coming soon!). Concluding text will go here. Concluding text will go here (coming soon!). Concluding text will go here. ]
 
             <img src="../../../assets/images/home.svg" alt="" id="articleendglasses">
           </div>
-          <!-- Separator line between main content and extra sections -->
-          <hr class="toprule" id="separatorline" />
-          <!-- Process -->
+          <!-- <hr class="toprule" id="separatorline" />
+
           <section id="process">
             <details class="postsectiondetails" open>
               <summary class="sectionsummary postpagesectionsummary blackbg"><h3>Process</h3>
@@ -252,10 +278,9 @@ html {
                   <img src= "../../../assets/images/top-white.svg" class="toparrow">
                 </a>
               </summary>
-              <!-- PROCESS CONTENT TO GO HERE -->
             </details>
           </section>
-          <!-- Glossary -->
+
           <section id="glossary">
             <details class="postsectiondetails" open>
               <summary class="sectionsummary postpagesectionsummary blackbg"><h3>Glossary</h3>
@@ -264,11 +289,10 @@ html {
                 </a>
               </summary>
               <dl>
-              <!-- GLOSSARY CONTENT TO GO HERE -->
               </dl>
             </details>
           </section>
-          <!-- Notes -->
+
           <section id="notes">
             <details class="postsectiondetails" open>
               <summary class="sectionsummary postpagesectionsummary blackbg"><h3>Notes</h3>
@@ -276,9 +300,8 @@ html {
                   <img src= "../../../assets/images/top-white.svg" class="toparrow">
                 </a>
               </summary>
-            <!-- FOOTNOTES CONTENT TO GO HERE -->
             </details>
-          </section>
+          </section> -->
         </div>    <!-- Closing class="postdesktopcontent" -->
       </article>
   
