@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en" style="overflow-x: hidden !important;">
+  <head>
+    <meta charset="utf-8" />
+    <!-- Work Sans via Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+  
+      
+<!-- ⬇︎⬇︎⬇︎⬇︎⬇︎ D3/P5 LIBRARY * D3/P5 LIBRARY * D3/P5 LIBRARY * D3/P5 LIBRARY * D3/P5 LIBRARY * D3/P5 LIBRARY * D3/P5 LIBRARY -->
+    
+    <!-- CHOOSE WHICH D3 LIBRARY FILE TO POINT TO BELOW vvv -->
+    <!-- p5 -->
+    <!-- <script type="text/javascript" src="../../../d3-library/p5.min.js"></script> -->
+    <!-- D3 v6 via D3 website -->
+    <!-- <script type="text/javascript" src="https://d3js.org/d3.v6.min.js"></script> -->
+    <!-- v6(.7) via downloaded file (AIRPLANE VERSION OF THE ABOVE ^^^) -->
+    <script type="text/javascript" src="../../../d3-library/d3.js"></script>
+    <!-- v4(.5) via downloaded file -->
+    <!-- <script type="text/javascript" src="../../../d3-book-master/d3.js"></script> -->
+
+<!-- ⬆︎⬆︎⬆︎⬆︎⬆︎ D3/P5 LIBRARY * D3/P5 LIBRARY * D3/P5 LIBRARY * D3/P5 LIBRARY * D3/P5 LIBRARY * D3/P5 LIBRARY * D3/P5 LIBRARY -->
+  
+
+    <title>
+      name-shares | dog-names | CCG
+    </title>
+        
+    <link rel="stylesheet" href="../../../assets/css/reset.css">
+    <link rel="stylesheet" href="../../../assets/css/globalnavfooter.css">
+    <link rel="stylesheet" href="../../../assets/css/somepages.css">
+    <link rel="stylesheet" href="../../../assets/css/text.css">
+    <link rel="stylesheet" href="../../../assets/css/menu-hamburger.css">
+    <link rel="stylesheet" href="../../../assets/css/mediaqueries.css">
+                
+    <style>
+
+
+/* ⬇︎⬇︎⬇︎⬇︎⬇︎ CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS */
+
+html {
+  scroll-behavior: smooth;
+}
+.name-shares-search-input,
+#sort-alphabetical-name,
+#sort-occurrence-dog,
+#sort-occurrence-human,
+#sort-dog-human-ratio,
+#sort-human-dog-ratio {
+  background-color: white;
+  color: black;
+  border: 2px black solid;
+  display: block;
+  margin: 15px 0px;
+  padding: 10px 25px;
+  cursor: pointer;
+}
+.name-shares-search-input {
+  display: block;
+  width: 100%;
+  cursor: auto;
+  font-size: 17px;
+  font-family: Work Sans;
+  padding: 15px 25px;
+}
+.outer,
+.inner {
+  height: 500px;
+  z-index: 10;
+}
+#name-shares-axes {
+  margin: 2.048rem auto 0 auto;
+}
+#name-shares-axes,
+.outer {
+  width: 78.6vw;
+  position: relative;
+  left: -14.286;
+  /* background-color: #f5f5f5; */
+}
+.outer {
+  margin: 0 auto 2.048rem auto;
+  overflow: auto;
+  scroll-behavior: smooth;
+}
+.distinct-name-label {
+  text-anchor: middle;
+  letter-spacing: 0.07rem;
+  cursor: pointer;
+}
+.name-bars-dog {
+  transform: scaleX(-1);
+}
+#dog-axis-label,
+#human-axis-label {
+  text-align: center;
+  display: inline-block !important;
+  width: 550px;
+}
+#chart-title {
+  padding-top: 30px;
+}
+.chart-intro-text {
+  margin-left: 50px !important;
+  margin-right: 50px !important;
+  display: block !important;
+}
+
+/* Mediaqueries */
+@media (min-width: 817px) {
+  #name-shares-axes,
+  .outer {
+    width: 85.714vw;
+    left: calc(50% - 42.857vw); /* 42.857vw = (50vw (to get to L edge of screen) - 7.143vw (2/28col)) */
+  }
+}
+@media (min-width: 1225px) {
+  #name-shares-axes,
+  .outer {
+    width: 1108.333px;
+    left: -233px;
+  }
+}
+
+/* ⬆︎⬆︎⬆︎⬆︎⬆︎ CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS * CSS */
+
+
+    </style>
+  </head>
+  <body>
+    <!-- Container to hold reading line -->
+    <div id="readingline"></div>  
+    <div id="everythingexceptnav">  
+      <!-- Inline definition script -->
+      <!-- <script src="../../../assets/js/definitions.js">
+      </script> -->
+      <!-- Lightbox and slideshow all in one script -->
+      <script src="../../../assets/js/lightboxslideshow.js">
+      </script>
+      <!-- Detects swipes by users with touchscreens for galleries -->
+      <script src="../../../assets/js/pure-swipe.js">
+      </script>
+      <!-- Opening <article> to make room for RR results that need to be wider than this width, to accommodate their all having margins on L + R -->
+      <article class="mockmain" id="pre-rr">    
+        <!-- I'm arranging the pieces of the intro part according to the V-mobile design; CSS can re-arrange them; this is according to responsive design principles -->
+        <div class="desktopcontent"></div>
+        <div id="postdesktopcontent">
+          <!-- Date of post -->
+          <p id="postdate" class="date m-textface bold postdatewidth">
+            01 Dec 2022
+          </p>
+          <!-- Postglasses icon + title of post -->
+          <a href="https://curiositycoloredglasses.com/" id="postlink">
+            <!-- Post glasses icon -->
+            <div class="postglassescontainer">
+              <div class="stem shortstem leftstem"></div><div style="background-image: url(../../../assets/images/-l-placeholder.jpg)" class="circle leftcircle"></div><div class="stem centerstem"></div><div style="background-image: url(../../../assets/images/-r-placeholder.jpg)" class="circle rightcircle"></div><div class="stem shortstem rightstem"></div>
+            </div>
+            <!-- Name of post -->
+            <h2 class="posttitle">
+              How many dogs have my name? And how many humans have my dog's name?
+            </h2>
+          </a>
+          <!-- In-page table of contents for extra sections; only shown if 2+ extra sections (assuming Comments are always on; if not I should make sure to have two others) -->
+          <!-- <div class="toc s-display">
+            <a href="#process" id="process-link" class="toc-link">
+              Process
+            </a>
+            <a href="#glossary" id="glossary-link" class="toc-link">
+              Glossary
+            </a>
+            <a href="#notes" id="thankyou-link" class="toc-link">
+              Notes
+            </a>
+            <a href="#relatedposts" id="rr-link" class="toc-link">
+              Related Posts
+            </a>
+            <a href="#comments" id="comments-link" class="toc-link">
+              Comments
+            </a>
+          </div> -->
+          <!-- "Lia Prins" to show up as default author -->
+          <span id="writtenby" class="xs-textface bold">by</span><span class="writer s-display"><a href="https://liaprins.com" target="_blank" class="yellowhover">&nbspLia Prins</a>
+          </span>
+          <!-- Intro of post -->
+          <span id="postintro" class="l-textface">
+            [Introductory text explaining the concept here. Text explaining the concept to go here. Introductory text explaining the concept here. Text explaining the concept to go here. Introductory text explaining the concept here. Text explaining the concept to go here.]
+          </span>
+          <div id="posttagshare">
+            <!-- Tags of post -->
+            <span id="posttaggroup" class="s-textface">
+              <!-- Make them link to the tags page -->
+              <!-- <a href="https://curiositycoloredglasses.com/" id="posttag" class="xs-textface tag yellowhover">&nbsp&nbsp#tag1</a>
+              <a href="https://curiositycoloredglasses.com/" id="posttag" class="xs-textface tag yellowhover">&nbsp&nbsp#tag2</a>
+              <a href="https://curiositycoloredglasses.com/" id="posttag" class="xs-textface tag yellowhover">&nbsp&nbsp#tag3</a>
+              <a href="https://curiositycoloredglasses.com/" id="posttag" class="xs-textface tag yellowhover">&nbsp&nbsp#tag4</a>
+              <a href="https://curiositycoloredglasses.com/" id="posttag" class="xs-textface tag yellowhover">&nbsp&nbsp#tag5</a> -->
+            </span>
+            <!-- Sharing for this post -->
+            <span id="share">
+              <!-- TWITTER: From a tutorial website: onlinejournalismblog.com, but adding ability to dynamically include a visualized image. -->
+              <a href="https://twitter.com/iggldee" target="_blank" title="Share on Twitter">
+                <img src= "../../../assets/images/Twitter.svg" alt="Share on Twitter" class="socialicon shareicon yellowhover">
+              </a>
+              <!-- FACEBOOK: This method is from Facebook Developers, after modifications. It only works in conjunction with the script called separately and my registered CCG Facebook app ID (1816213758596939) -->
+              <span id="ogBtn" title="Share on Facebook">
+                <img src= "../../../assets/images/Facebook.svg" alt="Share on Facebook" class="socialicon shareicon yellowhover">
+              </span>
+              <!-- PINTEREST: From Pinterest widget builder (modified to get stored image-->                
+              <a data-pin-do="buttonBookmark" data-pin-custom="true" data-pin-save="false" href="https://www.pinterest.com/pin/create/button/" title="Share on Pinterest">
+                <img src="../../../assets/images/Pinterest.svg" alt="Save to Pinterest" class="socialicon shareicon yellowhover">
+              </a>
+            </span>
+          </div>    <!-- Closing id="posttagshare" -->
+          <!-- Body text area of post (after intro) -->
+          <div id="posttext" class="m-textface hyphenation">
+
+            [A bit more explanatory text (coming soon!). A bit more explanatory text. A bit more explanatory text (coming soon!). A bit more explanatory text. A bit more explanatory text (coming soon!). A bit more explanatory text. A bit more explanatory text (coming soon!). A bit more explanatory text. A bit more explanatory text (coming soon!). A bit more explanatory text. ]
+      
+      
+<!-- ⬇︎⬇︎⬇︎⬇︎⬇︎ HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML -->
+        
+<input type="text" id="userInput" class="name-shares-search-input" placeholder="Search Name">
+
+<!-- <div id="sort-alphabetical-name">
+  <p>🔤 Sort by name alphabetically</p>
+</div> -->
+            
+<div id="sort-occurrence-dog">
+  <p>🐶 Sort by occurrence across dogs</p>
+</div>
+      
+<div id="sort-occurrence-human">
+  <p>🧒 Sort by occurrence across humans</p>
+</div>
+
+<div id="sort-dog-human-ratio">
+  <p>🐶 : 🧒 Sort by dog-to-human ratio</p>
+</div>
+      
+<div id="sort-human-dog-ratio">
+  <p>🧒 : 🐶 Sort by human-to-dog ratio</p>
+</div>
+            
+<div id="name-shares-axes">
+  <h4 id="chart-title" class="chart-intro-text">
+    Name occurrence
+  </h4>
+  <p class="chart-intro-text">
+    Use the search bar above to find a name. Use the sorting buttons re-order the names. Hover on a name to see the rate of dogs and humans (per 100,000) with that name.
+  </p>
+  <p id="dog-axis-label">
+    Occurrence per 100,000 dogs
+  </p>
+  <p id="human-axis-label">
+    Occurrence per 100,000 humans
+  </p>
+</div>
+<div id="name-shares-outer" class="outer">
+  <div class="inner">
+    <div id="name-shares-vis"></div>
+  </div>
+</div>
+      
+<!-- ⬆︎⬆︎⬆︎⬆︎⬆︎ HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML -->  
+
+
+            [Concluding text will go here (coming soon!). Concluding text will go here. Concluding text will go here (coming soon!). Concluding text will go here. Concluding text will go here (coming soon!). Concluding text will go here. Concluding text will go here (coming soon!). Concluding text will go here. Concluding text will go here (coming soon!). Concluding text will go here. Concluding text will go here (coming soon!). Concluding text will go here. Concluding text will go here (coming soon!). Concluding text will go here. Concluding text will go here (coming soon!). Concluding text will go here. ]
+
+            <img src="../../../assets/images/home.svg" alt="" id="articleendglasses">
+          </div>
+          <!-- <hr class="toprule" id="separatorline" />
+
+          <section id="process">
+            <details class="postsectiondetails" open>
+              <summary class="sectionsummary postpagesectionsummary blackbg"><h3>Process</h3>
+                <a href="{{ site.baseurl }}{{ page.url }}" class="toparrowlink" title="Up to top">
+                  <img src= "../../../assets/images/top-white.svg" class="toparrow">
+                </a>
+              </summary>
+            </details>
+          </section>
+
+          <section id="glossary">
+            <details class="postsectiondetails" open>
+              <summary class="sectionsummary postpagesectionsummary blackbg"><h3>Glossary</h3>
+                <a href="{{ site.baseurl }}{{ page.url }}" class="toparrowlink" title="Up to top">
+                  <img src= "../../../assets/images/top-white.svg" class="toparrow">
+                </a>
+              </summary>
+              <dl>
+              </dl>
+            </details>
+          </section>
+
+          <section id="notes">
+            <details class="postsectiondetails" open>
+              <summary class="sectionsummary postpagesectionsummary blackbg"><h3>Notes</h3>
+                <a href="{{ site.baseurl }}{{ page.url }}" class="toparrowlink" title="Up to top">
+                  <img src= "../../../assets/images/top-white.svg" class="toparrow">
+                </a>
+              </summary>
+            </details>
+          </section> -->
+        </div>    <!-- Closing class="postdesktopcontent" -->
+      </article>
+  
+      <script type="text/javascript">
+
+
+// ⬇︎⬇︎⬇︎⬇︎⬇︎ JAVASCRIPT * JAVASCRIPT * JAVASCRIPT * JAVASCRIPT * JAVASCRIPT * JAVASCRIPT * JAVASCRIPT * JAVASCRIPT * JAVASCRIPT
+
+var windowW = window.innerWidth; // capture screen width to create "mediaqueries" within JS
+var w;
+
+if (windowW < 817) { // set var for width of vis, depending on screen width
+  w = (78.6 * windowW) / 100;
+} else if (windowW < 1225) {
+  w = (85.714 * windowW) / 100;
+} else {
+  var w = 1108;
+}
+
+var h = 172000;
+  
+// load in the data
+d3.json('../names.json')
+  .then(function(json) {
+
+  var nameWidth = 80;
+  var vNameSpacing = 35;
+    
+  // scales
+  var clampMin = 5;
+  var nameSharesScale = d3.scaleLinear()
+    .domain([0, 1582]) // manually adding occurrence of highest occurring dog name (Bella)
+    .range([0, (w / 2) - nameWidth - 50]); // WILL NEED TO ACCOUNT FOR MARGIN/PADDING WITHIN THE DV'S BOX (temporarily using "50px" in place of 2.048rem, since they are equivalent at widest screensize)
+
+  var nameSharesScaleBackwards = d3.scaleLinear() // this only to be used by dog axis (not even dog data, though!)
+    .domain([0, 1582]) // manually adding occurrence of highest occurring dog name (Bella)
+    .range([(w / 2) - nameWidth - 50, 0]); // WILL NEED TO ACCOUNT FOR MARGIN/PADDING WITHIN THE DV'S BOX (temporarily using "50px" in place of 2.048rem, since they are equivalent at widest screensize)
+
+  // axes
+  var humanAxis = d3.axisTop()
+    .scale(nameSharesScale)
+    .ticks(3)
+    .tickSizeOuter(0);
+
+  var dogAxis = d3.axisTop()
+    .scale(nameSharesScaleBackwards)
+    .ticks(3)
+    .tickSizeOuter(0);
+
+    var nameSharesSvg = d3.select('#name-shares-vis')
+      .append('svg')
+        .attr('width', w)
+        .attr('height', h);
+
+    // groups for bars + labels
+    var nameHeader = nameSharesSvg.selectAll('.distinct-name')
+      // .data(json.distinctNames)
+      .data(json.distinctNames.slice().sort((a, b) => d3.descending(parseFloat(a.info.dogOccurrence), parseFloat(b.info.dogOccurrence)))) // sort by dog : human ratio (see file #3 for more sort options for the dataset)
+      .enter()
+      .append('g')
+        .attr('class', 'distinct-name')
+        .attr('id', function(d) {
+          return d.name;
+        })
+        .attr('transform', function(d, i) {
+          return 'translate(0, ' + ((i * vNameSpacing) + vNameSpacing) + ')';
+        });
+        
+    nameHeader.append('rect')
+      .attr('class', 'selected-box')
+      .attr('width', w)
+      .attr('height', vNameSpacing - 1)
+      .attr('x', 0)
+      .attr('y', -5)
+      .attr('fill', '#f9f9f9')
+      .attr('opacity', 0)
+      .attr('cursor', 'pointer')
+      .on('mouseover', function () {
+        d3.select(this)
+          .attr('opacity', 1);
+      })
+      .on('mouseout', function () {
+        d3.select(this)
+          .attr('opacity', 0);
+      });
+
+    // bars for dogs (red)
+    nameHeader.append('rect')
+      .attr('class', 'name-bars-dog')
+      // .attr('width', function(d) {
+      //   return nameSharesScale(d.info.dogOccurrence);
+      // })
+      .attr('width', function(d) {
+        if (d.info.dogOccurrence == 0) {
+          return 0;
+        } else {
+          return nameSharesScale(d.info.dogOccurrence) + 1;
+        }
+      })
+      .attr('height', 10)
+      .attr('x', ((w / 2) - nameWidth) * -1)
+      .attr('y', 8)
+      .attr('fill', '#FD7F6F')
+      .style("pointer-events", "none");
+
+    // bars for humans (blue)
+    nameHeader.append('rect')
+      .attr('class', 'name-bars-human')
+      // .attr('width', function(d) {
+      //   return nameSharesScale(d.info.humanOccurrence);
+      // })
+      .attr('width', function(d) {
+        if (d.info.humanOccurrence == 0) {
+          return 0;
+        } else {
+          return nameSharesScale(d.info.humanOccurrence) + 1;
+        }
+      })
+      .attr('height', 10)
+      .attr('x', (w / 2) + nameWidth)
+      .attr('y', 8)
+      .attr('fill', '#56C6E2')
+      .style("pointer-events", "none");
+
+    // labels
+    nameHeader.append('text')
+        .text(function(d) {
+          return d.name;
+        })
+        .attr('class', 'distinct-name-label s-textface bold')
+        .attr('x', w / 2)
+        .attr('y', 18)
+        .style("pointer-events", "none")
+        .append('title')
+        .text(function(d) {
+          return '🐶 Occurrence per 100,000 dogs: ' + d3.format(".0f")(d.info.dogOccurrence) + '                   👶 Occurrence per 100,000 babies: ' + d3.format(".0f")(d.info.humanOccurrence);
+        })
+        // .attr('title', function(d) {
+        //   return '🐶 Occurrence per 100,000 dogs: ' + d3.format(".0f")(d.info.dogOccurrence) + ' // 👶 Occurrence per 100,000 babies: ' + d3.format(".0f")(d.info.humanOccurrence);
+        // });
+
+    // sort
+    var selectedSortMethod;
+
+    d3.select('#sort-alphabetical-name')
+      .on('click', function() {
+        selectedSortMethod = this.getAttribute('id');
+        sortBars(selectedSortMethod);
+      }); // close .on
+
+    d3.select('#sort-occurrence-dog')
+      .on('click', function() {
+        selectedSortMethod = this.getAttribute('id');
+        sortBars(selectedSortMethod);
+      }); // close .on
+        
+    d3.select('#sort-occurrence-human')
+      .on('click', function() {
+        selectedSortMethod = this.getAttribute('id');
+        sortBars(selectedSortMethod);
+      }); // close .on
+
+    d3.select('#sort-dog-human-ratio')
+      .on('click', function() {
+        selectedSortMethod = this.getAttribute('id');
+        sortBars(selectedSortMethod);
+      }); // close .on
+
+    d3.select('#sort-human-dog-ratio')
+      .on('click', function() {
+        selectedSortMethod = this.getAttribute('id');
+        sortBars(selectedSortMethod);
+      }); // close .on
+
+    var sortBars = function(selectedSortMethod) {
+      nameHeader.sort(function(a, b) {
+        if (selectedSortMethod == 'sort-occurrence-dog') {
+          return d3.descending(parseFloat(a.info.dogOccurrence), parseFloat(b.info.dogOccurrence));
+        } else if (selectedSortMethod == 'sort-occurrence-human') {
+          return d3.descending(parseFloat(a.info.humanOccurrence), parseFloat(b.info.humanOccurrence));
+        } else if (selectedSortMethod == 'sort-dog-human-ratio') {
+          return d3.descending(parseFloat(a.info.dogHumanRatioPer100), parseFloat(b.info.dogHumanRatioPer100)) || d3.descending(parseFloat(a.info.dogOccurrence), parseFloat(b.info.dogOccurrence)) || d3.ascending(parseFloat(a.info.humanOccurrence), parseFloat(b.info.humanOccurrence));
+        } else if (selectedSortMethod == 'sort-human-dog-ratio') {
+          return d3.descending(parseFloat(a.info.humanDogRatioPer100), parseFloat(b.info.humanDogRatioPer100)) || d3.descending(parseFloat(a.info.humanOccurrence), parseFloat(b.info.humanOccurrence)) || d3.ascending(parseFloat(a.info.dogOccurrence), parseFloat(b.info.dogOccurrence));
+        }
+      })
+      .attr('transform', function(d, i) {
+        return 'translate(0, ' + ((i * vNameSpacing) + vNameSpacing) + ')';
+      });
+    } // close sortBars
+
+    // search
+    d3.select("#userInput").on("keyup", search);
+
+    function search() {
+      var input = this.value.toUpperCase(); 
+      
+      nameSharesSvg.selectAll('.search-result')
+        .classed('search-result', false);
+      nameSharesSvg.selectAll('#search-result-indicator').remove();
+
+      var searchResult = nameSharesSvg.selectAll('#' + input)
+        .classed('search-result', true);
+
+      // searchResult.select('.selected-box')
+      //   .attr('opacity', 1);
+
+      var searchResult;
+      if (document.getElementById(input)) {
+        searchResult = document.getElementById(input);
+        nameSharesSvg.selectAll('#' + input)
+          .classed('search-result', true)
+          .select('.selected-box')
+          .attr('opacity', 1);
+        searchResult.scrollIntoView();
+      }
+        
+    }; // close search fx
+
+    // call axes
+    var nameSharesAxes = d3.select('#name-shares-axes')
+      .append('svg')
+      .attr('id', 'name-shares-axes-svg-container')
+      .attr('width', w)
+      .attr('height', 35);
+
+    nameSharesAxes.append("g")
+      .call(humanAxis)
+      .attr("class", "axis")
+      .attr("id", "human-axis")
+      .attr('transform', 'translate(' + ((w / 2) + nameWidth) + ', 30)');
+    
+    nameSharesAxes.append("g")
+      .call(dogAxis)
+      .attr("class", "axis")
+      .attr("id", "dog-axis")
+      .attr('transform', 'translate(50, 30)'); // "50" is for margin, will need to be replaced / variablized
+  
+}); // close JSON function
+
+// ⬆︎⬆︎⬆︎⬆︎⬆︎ JAVASCRIPT * JAVASCRIPT * JAVASCRIPT * JAVASCRIPT * JAVASCRIPT * JAVASCRIPT * JAVASCRIPT * JAVASCRIPT * JAVASCRIPT
+
+      
+      </script>
+
+      <!-- Draws line at top of screen to show how far scrolled through main content -->
+      <script src="../../../assets/js/readingline.js">
+      </script>
+      <footer role="contentinfo">
+        <div id="footercontent">
+          <!-- Subscribe -->
+          <form action="//curiositycoloredglasses.us14.list-manage.com/subscribe/post?u=05f8f85154975a52907f2ce4d&amp;id=086ebe8644" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+            <span class="mc-field-group">
+              <input type="email" value="" name="EMAIL" class="boxinput s-textface" id="mce-EMAIL" placeholder="Email address">
+            </span>
+            <!-- Honeypot -->
+            <span style="position: absolute; left: -5000px;" aria-hidden="true">
+              <input type="text" name="b_05f8f85154975a52907f2ce4d_086ebe8644" tabindex="-1" value="">
+            </span>
+            <!-- "Subscribe" button -->
+            <input type="submit" value="Subscribe" name="subscribe" class="xs-display boxbutton subscribebutton" id="mc-embedded-subscribe">
+          </form>
+          <!-- Message to see example posts -->
+          <p class="xs-textface" id="subscribemessage">
+            Find out about new posts!
+            <a href="http://us14.campaign-archive2.com/home/?u=05f8f85154975a52907f2ce4d&id=086ebe8644" title="View previous campaigns" target="_blank">
+              See an example email first.
+            </a>
+          </p>
+          <!-- COMMENTING OUT WHILE ON AIRPLANE -->
+          <!-- MailChimp scripts -->
+          <!-- <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'>
+          </script> -->
+          <!-- COMMENTING OUT WHILE ON AIRPLANE -->
+          <!-- <script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';}(jQuery));var $mcj = jQuery.noConflict(true); -->
+          <!-- </script> -->
+          <!-- Follow -->
+          <span id="follow">
+            <!-- Link to my instagram page -->
+            <a href="https://www.instagram.com/curiositycoloredglasses/" title="Follow on Instagram" target="_blank">
+              <img src= "../../../assets/images/Instagram.svg" alt="Follow me on Instagram" id="instagramlogo" class="followicon socialicon">
+            </a>
+            <!-- Link to @iggledee twitter page -->
+            <a href="https://twitter.com/iggledee" title="Follow on Twitter" target="_blank">
+              <img src= "../../../assets/images/Twitter.svg" alt="Follow me on Twitter" class="followicon socialicon">
+            </a>
+            <!-- Link to my portfolio website -->
+            <a href="http://liaprins.com/" target="_blank" id="portfolio" class="m-textface bold">
+              liaprins.com
+            </a>
+          </span>
+        </div>
+      </footer>
+    </div> <!-- closing id="everythingexceptnav" which exists on every page except QQ, and is closed within Archive's own layout -->
+      <!-- Menu has to be called here, to account for a major Safari bug: Safari renders anything measured in rems at 1px, if it comes after a <details> tag... and my menu is within a <details> tag, so it was messing up everything with rems in Safari. Moving menu to the very bottom means there is nothing in the html after it, so it is fine. The menu is styled in css to position it absolutely at the top -->
+    <nav role="navigation">
+      <details id="navdetails" open>
+        <summary id="navsummary">
+        </summary>
+        <!-- Home glasses icon -->
+        <a href="https://curiositycoloredglasses.com//" title="Curiosity-Colored Glasses">
+          <img src="../../../assets/images/home.svg" alt="Curiosity-Colored Glasses" id="homeicon" class="yellowhover">
+        </a>
+        <!-- Loop through mainpages list according to order number assigned in each page's front matter -->
+        <ul id="navlist">
+          <a href="https://curiositycoloredglasses.com/hello" class="menuwordlink"><li id="menuword" class="navnothome m-display yellowhover"><span href="https://curiositycoloredglasses.com/hello">Hello</span></li></a>
+          <a href="https://curiositycoloredglasses.com/questionqueue" class="menuwordlink"><li id="menuword" class="navnothome m-display yellowhover"><span href="https://curiositycoloredglasses.com/questionqueue">Question Queue</span></li></a>
+          <a href="https://curiositycoloredglasses.com/library" class="menuwordlink"><li id="menuword" class="navnothome m-display yellowhover"><span href="https://curiositycoloredglasses.com/library">Library</span></li></a>
+          <a href="https://curiositycoloredglasses.com/archive" class="menuwordlink"><li id="menuword" class="navnothome m-display yellowhover"><span href="https://curiositycoloredglasses.com/archive">Archive</span></li></a>
+          <!-- Searchbar -->
+          <li id="navsearch" class="navnothome">
+            <div id="searchdecoy" title="Search" class="yellowhover" style="display: none;">
+              <img src="../../../assets/images/search.svg" alt="search" class="navsearchicon">
+            </div>
+            <form action="/search" method="get" id="navsearchform">
+              <input type="text" placeholder="search" name="query" id="navsearchinput" class="s-textface underlineinput">
+              <button type="submit" value="search" title="Search" id="navsearchbutton" class="searchbutton yellowhover">
+                <img src="../../../assets/images/search.svg" alt="search" class="navsearchicon">
+              </button>
+            </form>
+          </li>
+        </ul>
+      </details>
+    </nav>
+    <!-- Sitewide scripts -->
+    <script src="../../../assets/js/menu.js">
+    </script>
+    <script src="../../../assets/js/search.js">
+    </script>
+  </body>
+</html>
+  
+  
