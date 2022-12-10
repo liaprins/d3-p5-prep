@@ -69,9 +69,17 @@
   stroke-width: 1;
 }
 #nameshares-vis {
+  margin-bottom: 2rem;
+}
+/* #nameshares-vis { */
+#nameshares-vis > .inner {
   height: 500px; /* SHOULD BE MEDIAQUERIFIED ONCE I DECIDE FINAL DIMENSIONS FOR ALL DEVICES */
-  overflow: auto;
+  /* overflow: auto; */
+  overflow: scroll;
   scroll-behavior: smooth; /* even though also called on html element (within globalnavfooter.css), it's not working on search results unless called here */
+}
+#nameshares-vis > .inner {
+  overflow: scroll;
 }
 #nameshares-vis .tick-line {
   stroke: #d9d9d9;
@@ -99,22 +107,45 @@
   text-anchor: middle;
   letter-spacing: 0.07rem;
 }
-#nameshares-sort-search > .sort-option,
-#nameshares-sort-search > .search-field {
-  background-color: white;
-  color: black;
-  border: 2px black solid;
-  display: block;
-  margin: 15px 0px;
-  padding: 10px 25px;
-  cursor: pointer;
+
+/* Sidebar */
+#nameshares-sort-search {
+  position: relative;
+  left: 0px;
+  display: inline-block;
+  vertical-align: top;
 }
-#nameshares-sort-search > .search-field {
-  width: 100%;
-  cursor: auto;
-  font-size: 17px;
-  font-family: Work Sans;
-  padding: 15px 25px;
+#nameshares-sort-label,
+#nameshares-sort-dropdown {
+  width: 78.5vw;
+  font-family: 'Work Sans';
+}
+#nameshares-sort-label {
+  margin-bottom: 0;
+}
+#nameshares-sort-dropdown {
+  padding: 0.25rem 0.2rem;
+  margin-bottom: 1rem;
+  border-style: solid;
+  border-radius: 0;
+  border-width: 0.1rem;
+  border-color: #000000;
+}
+#user-input {
+  width: calc(78.5vw - 2rem);
+  padding-bottom: 0.25rem;    /* :) Finessed the space between input word and underline bar to match space between input and bottom of field for subscribe + comment name fields */
+  padding-left: 0;
+  position: relative;
+  top: -0.2rem;
+  border-bottom-width: 0.1rem;
+}
+#nameshares-search-button {
+  height: 1.476rem;
+  padding: 0.316rem;
+}
+#nameshares-caption {
+  margin-bottom: 1.024rem;
+  top: 6.5rem;
 }
 
 /* Mediaqueries */
@@ -127,6 +158,13 @@
   #nameshares-fixed > .axis-label {
     width: calc(42.86vw - 3.35rem); /* half w (the vis' width) minus [half nameWidth + countWidth4Digits + countOffset] */
   }
+  #nameshares-sort-label,
+  #nameshares-sort-dropdown {
+    width: 642px;
+  }
+  #user-input {
+    width: calc(640px - 1.9rem);
+  }
 }
 @media (min-width: 1225px) {
   #nameshares-vis,
@@ -136,6 +174,30 @@
   }
   #nameshares-fixed > .axis-label {
     width: calc(554px - 3.35rem); /* half w (the vis' width) minus [half nameWidth + countWidth4Digits + countOffset] */
+  }
+  #nameshares-sort-search {
+    position: absolute;
+    left: -233px;
+    /* width: 175px; */
+  }
+  #nameshares-sort-label,
+  #nameshares-sort-dropdown {
+    width: 175px;
+  }
+  #nameshares-sort-label {
+    margin: 0 0 0.25rem 0 !important;
+    display: block !important;
+  }
+  #user-input {
+    width: calc(175px - 1.15rem);
+  }
+  #nameshares-search-button {
+    position: relative;
+    left: -0.28rem;
+  }
+  #nameshares-caption {
+    position: absolute;
+    left: -58px;
   }
 }
 
@@ -242,10 +304,10 @@
     Name occurrence
   </h4>
   <p id="dog-axis-label" class="axis-label s-textface bold">
-    Occurrence per 100,000 dogs
+    Count per 100,000 dogs
   </p>
   <p id="human-axis-label" class="axis-label s-textface bold">
-    Occurrence per 100,000 humans
+    Count per 100,000 humans
   </p>
 </div>
 
@@ -254,27 +316,51 @@
   <div class="inner"></div>
 </div>
 
-<!-- Sort + search... TO GO INTO A FIGCAPTION -->
+<!-- Sort + search -->
+<!-- <div id="nameshares-sidebar"> -->
 <div id="nameshares-sort-search">
-  <div id="sort-occurrence-dog" class="sort-option">
-    <p>🐶 Sort by occurrence across dogs</p>
-  </div>     
-  <div id="sort-occurrence-human" class="sort-option">
-    <p>🧒 Sort by occurrence across humans</p>
+  <!-- Sort -->
+  <div id="nameshares-sort">
+    <label for="nameshares-sort" id="nameshares-sort-label" class="s-textface">
+      Sort by:
+    </label>
+    <select name="sort" id="nameshares-sort-dropdown" class="xs-textface">
+      <option value="dogoccurrence" id="sort-occurrence-dog" class="sort-option xs-textface">
+        Count, dogs
+      </option>
+      <option value="humanoccurrence" id="sort-occurrence-human" class="sort-option xs-textface">
+        Count, humans
+      </option>
+      <option value="doghumanratio" id="sort-dog-human-ratio" class="sort-option xs-textface">
+        Dog : human ratio
+      </option>
+      <option value="humandogratio" id="sort-human-dog-ratio" class="sort-option xs-textface">
+        Human : dog ratio
+      </option>
+    </select>
   </div>
-  <div id="sort-dog-human-ratio" class="sort-option">
-    <p>🐶 : 🧒 Sort by dog-to-human ratio</p>
-  </div>   
-  <div id="sort-human-dog-ratio" class="sort-option">
-    <p>🧒 : 🐶 Sort by human-to-dog ratio</p>
-  </div>
-  <input type="text" id="user-input" class="search-field" placeholder="Search Name">
+
+  <!-- Search -->
+  <!-- <div id="nameshares-search-container"> -->
+  <!-- <form action="" method="get" id=""> -->
+    <input type="text" placeholder="search names" name="query" id="user-input" class="xs-textface underlineinput">
+    <button type="submit" value="search" title="Search" id="nameshares-search-button" class="searchbutton yellowhover">
+      <img src="../../../assets/images/search.svg" alt="search" class="navsearchicon">
+    </button>
+  <!-- </form> -->
+  <!-- </div> -->
+  <span> <!-- MUST BE WRAPPED IN A <span>, OTHERWISE IT IS A DIRECT CHILD OF <div>, AND lightboxsideshow.js CALLS THE LIGHTBOX CAPTIONS THROUGH div>figcaption (ANY <figcaption> THAT IS A DIRECT CHILD OF A <div>, SO IF THIS CAPTION IS ALSO A DIRECT CHILD OF A <div> IT MAJORLY MESSES UP THINGS FOR LIGHTBOX CAPTIONS) -->
+    <figcaption id="nameshares-caption" class="xs-textface">
+      <hr class="toprule">
+      Change the sort-order of the rows in this chart or search for a specific name.
+    </figcaption>
+  </span>
 </div>
       
 <!-- ⬆︎⬆︎⬆︎⬆︎⬆︎ HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML * HTML -->  
 
 
-            [Concluding text will go here (coming soon!). Concluding text will go here. Concluding text will go here (coming soon!). Concluding text will go here. Concluding text will go here (coming soon!). Concluding text will go here. Concluding text will go here (coming soon!). Concluding text will go here. Concluding text will go here (coming soon!). Concluding text will go here. Concluding text will go here (coming soon!). Concluding text will go here. Concluding text will go here (coming soon!). Concluding text will go here. Concluding text will go here (coming soon!). Concluding text will go here. ]
+            [Concluding text will go here (coming soon!). Concluding text will go here. Concluding text will go here (coming soon!). Concluding text will go here. Concluding text will go here (coming soon!). Concluding text will go here. Concluding text will go here (coming soon!). Concluding text will go here. Concluding text will go here (coming soon!). Concluding text will go here. Concluding text will go here (coming soon!). Concluding text will go here. Concluding text will go here (coming soon!). Concluding text will go here. Concluding text will go here (coming soon!). Concluding text will go here.]
 
             <img src="../../../assets/images/home.svg" alt="" id="articleendglasses">
           </div>
@@ -357,7 +443,7 @@ d3.json('../names.json')
   var nameOffset = remConverter(7);
   var barWeight = remConverter(7);
   var barY = (vNameSpacing / 2) - (barWeight / 2);
-  var vAxesOffset = remConverter(14);
+  var vAxesOffset = remConverter(15);
  
   // scales
   var scale = d3.scaleLinear()
@@ -444,7 +530,7 @@ d3.json('../names.json')
 
   // groups for bars + labels + selected state's rects and text
   var nameGroup = namesharesSvg.selectAll('#nameshares-vis .name-group')
-    .data(json.distinctNames.slice().sort((a, b) => d3.descending(parseFloat(a.info.dogOccurrence), parseFloat(b.info.dogOccurrence)))) // sort by dog : human ratio (see file #3 for more sort options for the dataset, or for default (alphabetical), use `.data(json.distinctNames)`)
+    .data(json.distinctNames.slice().sort((a, b) => (d3.descending(parseFloat(a.info.dogOccurrence), parseFloat(b.info.dogOccurrence)) || d3.ascending(parseFloat(a.info.humanOccurrence), parseFloat(b.info.humanOccurrence))))) // sort by dog occurrence, secondary-sort by reverse human occurrence (see file #3 for more sort options for the dataset, or for default (alphabetical), use `.data(json.distinctNames)`)
     .enter()
     .append('g')
       .attr('id', function(d) {
@@ -562,18 +648,21 @@ d3.json('../names.json')
   d3.selectAll('.sort-option')
     .on('click', function() {
       sortNames(this.getAttribute('id'));
+      var namesharesInner = document.querySelector('#nameshares-vis .inner');
+      console.log(namesharesInner.scrollTop);
+      namesharesInner.scrollTo(0,0);
     });      
     
   var sortNames = function(sortMethod) {
     nameGroup.sort(function(a, b) {
       if (sortMethod == 'sort-occurrence-human') {
-        return d3.descending(parseFloat(a.info.humanOccurrence), parseFloat(b.info.humanOccurrence));
+        return d3.descending(parseFloat(a.info.humanOccurrence), parseFloat(b.info.humanOccurrence)) || d3.ascending(parseFloat(a.info.dogOccurrence), parseFloat(b.info.dogOccurrence));
       } else if (sortMethod == 'sort-dog-human-ratio') {
         return d3.descending(parseFloat(a.info.dogHumanRatioPer100), parseFloat(b.info.dogHumanRatioPer100)) || d3.descending(parseFloat(a.info.dogOccurrence), parseFloat(b.info.dogOccurrence)) || d3.ascending(parseFloat(a.info.humanOccurrence), parseFloat(b.info.humanOccurrence));
       } else if (sortMethod == 'sort-human-dog-ratio') {
         return d3.descending(parseFloat(a.info.humanDogRatioPer100), parseFloat(b.info.humanDogRatioPer100)) || d3.descending(parseFloat(a.info.humanOccurrence), parseFloat(b.info.humanOccurrence)) || d3.ascending(parseFloat(a.info.dogOccurrence), parseFloat(b.info.dogOccurrence));
-      } else {
-        return d3.descending(parseFloat(a.info.dogOccurrence), parseFloat(b.info.dogOccurrence));
+      } else { // sort-occurrence-dog
+        return d3.descending(parseFloat(a.info.dogOccurrence), parseFloat(b.info.dogOccurrence)) || d3.ascending(parseFloat(a.info.humanOccurrence), parseFloat(b.info.humanOccurrence));
       } 
     })
     .attr('transform', function(d, i) {
