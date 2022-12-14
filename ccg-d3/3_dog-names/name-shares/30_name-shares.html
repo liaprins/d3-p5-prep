@@ -71,7 +71,6 @@
 #nameshares-vis {
   margin-bottom: 2rem;
 }
-/* #nameshares-vis { */
 #nameshares-vis > .inner {
   height: 500px; /* SHOULD BE MEDIAQUERIFIED ONCE I DECIDE FINAL DIMENSIONS FOR ALL DEVICES */
   /* overflow: auto; */
@@ -107,6 +106,23 @@
   text-anchor: middle;
   letter-spacing: 0.07rem;
 }
+/* #nameshares-sort-search > .sort-option,
+#nameshares-sort-search > .search-field {
+  background-color: white;
+  color: black;
+  border: 2px black solid;
+  display: block;
+  margin: 15px 0px;
+  padding: 10px 25px;
+  cursor: pointer;
+}
+#nameshares-sort-search > .search-field {
+  width: 100%;
+  cursor: auto;
+  font-size: 17px;
+  font-family: Work Sans;
+  padding: 15px 25px;
+} */
 
 /* Sidebar */
 #nameshares-sort-search {
@@ -115,21 +131,16 @@
   display: inline-block;
   vertical-align: top;
 }
-#nameshares-sort-label,
-#nameshares-sort-dropdown {
-  width: 78.5vw;
-  font-family: 'Work Sans';
+#nameshares-sortdetails {
+  display: block;
+  margin-bottom: 0.5rem !important;
+  cursor: pointer;
 }
-#nameshares-sort-label {
-  margin-bottom: 0;
-}
-#nameshares-sort-dropdown {
-  padding: 0.25rem 0.2rem;
-  margin-bottom: 1rem;
-  border-style: solid;
-  border-radius: 0;
-  border-width: 0.1rem;
-  border-color: #000000;
+/* #nameshares-sortsummary {
+  cursor: pointer;    
+} */
+#nameshares-sortsummary::-webkit-details-marker {    /* Setting up the custom icons instead of default toggles */
+  display: none;    
 }
 #user-input {
   width: calc(78.5vw - 2rem);
@@ -137,15 +148,22 @@
   padding-left: 0;
   position: relative;
   top: -0.2rem;
-  border-bottom-width: 0.1rem;
+  /* border-bottom-width: 0.1rem; */
 }
 #nameshares-search-button {
   height: 1.476rem;
   padding: 0.316rem;
 }
+.nameshares-namenotfound {
+  visibility: hidden;
+  width: 78.5vw;
+}
+.visible {
+  visibility: visible;
+}
 #nameshares-caption {
   margin-bottom: 1.024rem;
-  top: 6.5rem;
+  top: 12rem;
 }
 
 /* Mediaqueries */
@@ -158,12 +176,11 @@
   #nameshares-fixed > .axis-label {
     width: calc(42.86vw - 3.35rem); /* half w (the vis' width) minus [half nameWidth + countWidth4Digits + countOffset] */
   }
-  #nameshares-sort-label,
-  #nameshares-sort-dropdown {
-    width: 642px;
-  }
   #user-input {
     width: calc(640px - 1.9rem);
+  }
+  #nameshares-namenotfound {
+    width: 642px;
   }
 }
 @media (min-width: 1225px) {
@@ -180,13 +197,15 @@
     left: -233px;
     /* width: 175px; */
   }
-  #nameshares-sort-label,
-  #nameshares-sort-dropdown {
-    width: 175px;
-  }
   #nameshares-sort-label {
     margin: 0 0 0.25rem 0 !important;
     display: block !important;
+  }
+  #nameshares-sortdetails {
+    /* display: block;
+    margin-bottom: 0.5rem !important;
+    cursor: pointer; */
+    width: 175px;
   }
   #user-input {
     width: calc(175px - 1.15rem);
@@ -194,6 +213,9 @@
   #nameshares-search-button {
     position: relative;
     left: -0.28rem;
+  }
+  #nameshares-namenotfound {
+    width: 175px;
   }
   #nameshares-caption {
     position: absolute;
@@ -304,10 +326,10 @@
     Name occurrence
   </h4>
   <p id="dog-axis-label" class="axis-label s-textface bold">
-    Count per 100,000 dogs
+    Occurrence per 100,000 dogs
   </p>
   <p id="human-axis-label" class="axis-label s-textface bold">
-    Count per 100,000 humans
+    Occurrence per 100,000 humans
   </p>
 </div>
 
@@ -317,41 +339,39 @@
 </div>
 
 <!-- Sort + search -->
+<!-- <div id="nameshares-sidebar"> -->
 <div id="nameshares-sort-search">
   <!-- Sort -->
-  <div id="nameshares-sort">
-    <label for="nameshares-sort" id="nameshares-sort-label" class="s-textface">
-      Sort by:
-    </label>
-    <select name="sort" id="nameshares-sort-dropdown" class="xs-textface">
-      <option value="dogoccurrence" id="sort-occurrence-dog" class="sort-option xs-textface">
-        Count, dogs
-      </option>
-      <option value="humanoccurrence" id="sort-occurrence-human" class="sort-option xs-textface">
-        Count, humans
-      </option>
-      <option value="doghumanratio" id="sort-dog-human-ratio" class="sort-option xs-textface">
-        Dog : human ratio
-      </option>
-      <option value="humandogratio" id="sort-human-dog-ratio" class="sort-option xs-textface">
-        Human : dog ratio
-      </option>
-    </select>
-  </div>
-
+  <p id="nameshares-sort-label" class="s-textface">Sort names by:</p>
+  <details id="nameshares-sortdetails">
+    <summary id="nameshares-sortsummary">
+      Count, dogs!
+    </summary>
+      <div id="sort-occurrence-dog" class="sort-option s-textface">
+        <p>Count, dogs</p>
+      </div>     
+      <div id="sort-occurrence-human" class="sort-option s-textface">
+        <p>Count, humans</p>
+      </div>
+      <div id="sort-dog-human-ratio" class="sort-option s-textface">
+        <p>Dog : human ratio</p>
+      </div>   
+      <div id="sort-human-dog-ratio" class="sort-option s-textface">
+        <p>Human : dog ratio</p>
+      </div>
+  </details>
   <!-- Search -->
-  <!-- <div id="nameshares-search-container"> -->
-  <!-- <form action="" method="get" id=""> -->
-    <input type="text" placeholder="search names" name="query" id="user-input" class="xs-textface underlineinput">
+    <input type="text" placeholder="search names" name="query" id="user-input" class="nameshares-search-field s-textface underlineinput">
     <button type="submit" value="search" title="Search" id="nameshares-search-button" class="searchbutton yellowhover">
       <img src="../../../assets/images/search.svg" alt="search" class="navsearchicon">
     </button>
-  <!-- </form> -->
-  <!-- </div> -->
+    <div id="nameshares-namenotfound" class="nameshares-namenotfound">
+      Name not found
+    </div>
   <span> <!-- MUST BE WRAPPED IN A <span>, OTHERWISE IT IS A DIRECT CHILD OF <div>, AND lightboxsideshow.js CALLS THE LIGHTBOX CAPTIONS THROUGH div>figcaption (ANY <figcaption> THAT IS A DIRECT CHILD OF A <div>, SO IF THIS CAPTION IS ALSO A DIRECT CHILD OF A <div> IT MAJORLY MESSES UP THINGS FOR LIGHTBOX CAPTIONS) -->
     <figcaption id="nameshares-caption" class="xs-textface">
       <hr class="toprule">
-      Change the sort-order of the rows in this chart or search for a specific name.
+      [Insert caption here. Insert caption here. Insert caption here. Insert caption here. Insert caption here. Insert caption here. Insert caption here. Insert caption here.]
     </figcaption>
   </span>
 </div>
@@ -669,13 +689,25 @@ d3.json('../names.json')
     });
   } // close sortNames
 
+  //  // clear "Name not found" message
+  //  d3.select("#nameshares-sort-search #user-input")
+  //   .on("keyup", function() {
+  //     var searchBox = document.querySelector('.nameshares-search-field'); 
+  //     var input = searchBox.value.toUpperCase();
+  //     if (document.getElementById(input)) {
+  //       d3.select('#nameshares-namenotfound')
+  //       .classed('visible', false);
+  //     }
+  //   });
+
   // search
   function searchNames() {
     namesharesSvg.selectAll('#nameshares-vis .selected-box')
       .attr('opacity', 0);
     namesharesSvg.selectAll('#nameshares-vis .count')
       .attr('opacity', 0);
-    var input = this.value.toUpperCase(); 
+    var searchBox = document.querySelector('.nameshares-search-field'); 
+    var input = searchBox.value.toUpperCase();
     if (document.getElementById(input)) {
       namesharesSvg.selectAll('#' + input)
         .select('#nameshares-vis .selected-box')
@@ -684,11 +716,24 @@ d3.json('../names.json')
         .attr('opacity', 1);
       var searchResult = document.getElementById(input);
       searchResult.scrollIntoView();
+    } else {
+      d3.select('#nameshares-namenotfound')
+        .classed('visible', true);
     } // close if 
   }; // close searchNames
 
+  // call search function when hit enter key
   d3.select("#nameshares-sort-search #user-input")
-    .on("keyup", searchNames);
+    .on("keyup", function(e) {
+      e.preventDefault();
+      if (e.keyCode == 13) {
+        searchNames();
+      }
+    });
+  
+  // call search function when click search button
+  d3.select("#nameshares-search-button")
+    .on("click", searchNames);
 
   // call axes
   var namesharesAxes = d3.select('#nameshares-fixed')

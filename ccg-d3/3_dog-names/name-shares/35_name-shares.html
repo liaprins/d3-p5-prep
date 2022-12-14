@@ -71,15 +71,14 @@
 #nameshares-vis {
   margin-bottom: 2rem;
 }
-/* #nameshares-vis { */
 #nameshares-vis > .inner {
   height: 500px; /* SHOULD BE MEDIAQUERIFIED ONCE I DECIDE FINAL DIMENSIONS FOR ALL DEVICES */
   /* overflow: auto; */
   overflow: scroll;
   scroll-behavior: smooth; /* even though also called on html element (within globalnavfooter.css), it's not working on search results unless called here */
 }
-#nameshares-vis > .inner {
-  overflow: scroll;
+#nameshares-vis {
+  height: 500px;
 }
 #nameshares-vis .tick-line {
   stroke: #d9d9d9;
@@ -93,7 +92,8 @@
 #nameshares-vis .count,
 #nameshares-vis .bars-dog,
 #nameshares-vis .bars-human,
-.name-label {
+#nameshares-vis .name-label,
+#nameshares-vis .gradient {
   pointer-events: none;
 }
 #nameshares-vis .bars-dog {
@@ -106,6 +106,12 @@
 #nameshares-vis .name-label {
   text-anchor: middle;
   letter-spacing: 0.07rem;
+}
+#nameshares-vis .gradient {
+  height: 50px;
+  background-image: linear-gradient(rgba(255,255,255,0), rgba(255,255,255,1));
+  position: relative;
+  top: -50px;
 }
 
 /* Sidebar */
@@ -124,6 +130,11 @@
   margin-bottom: 0;
 }
 #nameshares-sort-dropdown {
+  appearance: none;
+  background-image: url(../../../assets/images/down-arrowhead.svg);
+  background-repeat: no-repeat;
+  background-size: 0.6rem;
+  background-position: calc(78.5vw - 1rem), 0; /* 1rem = width of arrow (0.6rem) + [2 x padding inside dropdown, see next line (2 x 0.2rem)]  */
   padding: 0.25rem 0.2rem;
   margin-bottom: 1rem;
   border-style: solid;
@@ -142,6 +153,14 @@
 #nameshares-search-button {
   height: 1.476rem;
   padding: 0.316rem;
+}
+.nameshares-namenotfound {
+  visibility: hidden;
+  width: 78.5vw;
+  margin-top: -0.2rem;
+}
+.visible {
+  visibility: visible;
 }
 #nameshares-caption {
   margin-bottom: 1.024rem;
@@ -162,8 +181,14 @@
   #nameshares-sort-dropdown {
     width: 642px;
   }
+  #nameshares-sort-dropdown {
+    background-position: calc(642px - 1rem), 0; /* 1rem = width of arrow (0.6rem) + [2 x padding inside dropdown, see next line (2 x 0.2rem)]  */
+  }
   #user-input {
     width: calc(640px - 1.9rem);
+  }
+  #nameshares-namenotfound {
+    width: 642px;
   }
 }
 @media (min-width: 1225px) {
@@ -184,6 +209,9 @@
   #nameshares-sort-dropdown {
     width: 175px;
   }
+  #nameshares-sort-dropdown {
+    background-position: calc(175px - 1rem), 0; /* 1rem = width of arrow (0.6rem) + [2 x padding inside dropdown, see next line (2 x 0.2rem)]  */
+  }
   #nameshares-sort-label {
     margin: 0 0 0.25rem 0 !important;
     display: block !important;
@@ -194,6 +222,9 @@
   #nameshares-search-button {
     position: relative;
     left: -0.28rem;
+  }
+  #nameshares-namenotfound {
+    width: 175px;
   }
   #nameshares-caption {
     position: absolute;
@@ -304,16 +335,17 @@
     Name occurrence
   </h4>
   <p id="dog-axis-label" class="axis-label s-textface bold">
-    Count per 100,000 dogs
+    Occurrence per 100,000 dogs
   </p>
   <p id="human-axis-label" class="axis-label s-textface bold">
-    Count per 100,000 humans
+    Occurrence per 100,000 humans
   </p>
 </div>
 
 <!-- Scrolling vis with bars, names -->
 <div id="nameshares-vis">
   <div class="inner"></div>
+  <div class="gradient"></div>
 </div>
 
 <!-- Sort + search -->
@@ -324,30 +356,29 @@
       Sort by:
     </label>
     <select name="sort" id="nameshares-sort-dropdown" class="xs-textface">
-      <option value="dogoccurrence" id="sort-occurrence-dog" class="sort-option xs-textface">
+      <option value="sort-occurrence-dog" id="sort-occurrence-dog" class="sort-option xs-textface">
         Count, dogs
       </option>
-      <option value="humanoccurrence" id="sort-occurrence-human" class="sort-option xs-textface">
+      <option value="sort-occurrence-human" id="sort-occurrence-human" class="sort-option xs-textface">
         Count, humans
       </option>
-      <option value="doghumanratio" id="sort-dog-human-ratio" class="sort-option xs-textface">
+      <option value="sort-dog-human-ratio" id="sort-dog-human-ratio" class="sort-option xs-textface">
         Dog : human ratio
       </option>
-      <option value="humandogratio" id="sort-human-dog-ratio" class="sort-option xs-textface">
+      <option value="sort-human-dog-ratio" id="sort-human-dog-ratio" class="sort-option xs-textface">
         Human : dog ratio
       </option>
     </select>
   </div>
 
   <!-- Search -->
-  <!-- <div id="nameshares-search-container"> -->
-  <!-- <form action="" method="get" id=""> -->
-    <input type="text" placeholder="search names" name="query" id="user-input" class="xs-textface underlineinput">
+    <input type="text" placeholder="search names" name="query" id="user-input" class="nameshares-search-field xs-textface underlineinput">
     <button type="submit" value="search" title="Search" id="nameshares-search-button" class="searchbutton yellowhover">
       <img src="../../../assets/images/search.svg" alt="search" class="navsearchicon">
     </button>
-  <!-- </form> -->
-  <!-- </div> -->
+    <div id="nameshares-namenotfound" class="nameshares-namenotfound xs-textface bold">
+      Name not found
+    </div>
   <span> <!-- MUST BE WRAPPED IN A <span>, OTHERWISE IT IS A DIRECT CHILD OF <div>, AND lightboxsideshow.js CALLS THE LIGHTBOX CAPTIONS THROUGH div>figcaption (ANY <figcaption> THAT IS A DIRECT CHILD OF A <div>, SO IF THIS CAPTION IS ALSO A DIRECT CHILD OF A <div> IT MAJORLY MESSES UP THINGS FOR LIGHTBOX CAPTIONS) -->
     <figcaption id="nameshares-caption" class="xs-textface">
       <hr class="toprule">
@@ -434,12 +465,15 @@ d3.json('../names.json')
   }
 
   // declare rem-dependent vars, to be converted via function where they're called
-  var vNameSpacing = remConverter(22);
+  // var vNameSpacing = remConverter(22);
+  var vNameSpacing = remConverter(17);
   var h = vNameSpacing * (json.distinctNames.length);
   var countWidth4Digits = remConverter(30);
   var countMargin = remConverter(7); // space between furthest-out count (for Bella), also other count-related spacing
-  var nameWidth = remConverter(55);
-  var nameOffset = remConverter(7);
+  // var nameWidth = remConverter(55);
+  var nameWidth = remConverter(45);
+  // var nameOffset = remConverter(7);
+  var nameOffset = remConverter(6.5);
   var barWeight = remConverter(7);
   var barY = (vNameSpacing / 2) - (barWeight / 2);
   var vAxesOffset = remConverter(15);
@@ -639,19 +673,11 @@ d3.json('../names.json')
     .text(function(d) {
       return d.name;
     })
-    .attr('class', 'name-label s-textface bold')
+    .attr('class', 'name-label xs-textface bold')
     .attr('x', w / 2)
     .attr('y', barY + nameOffset);
 
-  // sort
-  d3.selectAll('.sort-option')
-    .on('click', function() {
-      sortNames(this.getAttribute('id'));
-      var namesharesInner = document.querySelector('#nameshares-vis .inner');
-      console.log(namesharesInner.scrollTop);
-      namesharesInner.scrollTo(0,0);
-    });      
-    
+  // sort    
   var sortNames = function(sortMethod) {
     nameGroup.sort(function(a, b) {
       if (sortMethod == 'sort-occurrence-human') {
@@ -669,13 +695,49 @@ d3.json('../names.json')
     });
   } // close sortNames
 
+  var dropDown = document.getElementById("nameshares-sort-dropdown");
+  function getDropDownValue() {
+    var value = dropDown.value;
+    sortNames(value);
+    var namesharesInner = document.querySelector('#nameshares-vis .inner');
+    namesharesInner.scrollTo(0,0);
+  }
+  dropDown.onchange = getDropDownValue;
+  getDropDownValue();
+
+   // clear "Name not found" message
+   var searchBox = document.querySelector('.nameshares-search-field');
+   searchBox.addEventListener('change', clearSearchError);
+
+  function clearSearchError() {
+    d3.select('#nameshares-namenotfound')
+      .classed('visible', false);
+  }
+
+   searchBox.onchange = clearSearchError;
+   clearSearchError();
+
+  //  d3.select("#nameshares-sort-search #user-input")
+  //   .on('keyup', console.log('TEST'));
+    // .on("keyup", function() {
+    //   console.log ('NAME FOUND!')
+    //   var searchBox = document.querySelector('.nameshares-search-field'); 
+    //   var input = searchBox.value.toUpperCase();
+    //   if (document.getElementById(input)) {
+    //     // console.log ('NAME FOUND!')
+    //     d3.select('#nameshares-namenotfound')
+    //     .classed('visible', false);
+    //   }
+    // });
+
   // search
   function searchNames() {
     namesharesSvg.selectAll('#nameshares-vis .selected-box')
       .attr('opacity', 0);
     namesharesSvg.selectAll('#nameshares-vis .count')
       .attr('opacity', 0);
-    var input = this.value.toUpperCase(); 
+    var searchBox = document.querySelector('.nameshares-search-field'); 
+    var input = searchBox.value.toUpperCase();
     if (document.getElementById(input)) {
       namesharesSvg.selectAll('#' + input)
         .select('#nameshares-vis .selected-box')
@@ -684,11 +746,24 @@ d3.json('../names.json')
         .attr('opacity', 1);
       var searchResult = document.getElementById(input);
       searchResult.scrollIntoView();
+    } else {
+      d3.select('#nameshares-namenotfound')
+        .classed('visible', true);
     } // close if 
   }; // close searchNames
 
+  // call search function when hit enter key
   d3.select("#nameshares-sort-search #user-input")
-    .on("keyup", searchNames);
+    .on("keyup", function(e) {
+      e.preventDefault();
+      if (e.keyCode == 13) {
+        searchNames();
+      }
+    });
+  
+  // call search function when click search button
+  d3.select("#nameshares-search-button")
+    .on("click", searchNames);
 
   // call axes
   var namesharesAxes = d3.select('#nameshares-fixed')
