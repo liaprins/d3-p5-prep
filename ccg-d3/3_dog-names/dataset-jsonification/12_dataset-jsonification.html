@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>dataset-jsonification | dog-names | CCG</title>
+
+    <!-- CHOOSE WHICH D3 LIBRARY FILE TO POINT TO BELOW vvv -->
+    <!-- p5 -->
+    <!-- <script type="text/javascript" src="../../../d3-library/p5.min.js"></script> -->
+    <!-- D3 v6 via D3 website -->
+    <script type="text/javascript" src="https://d3js.org/d3.v6.min.js"></script>
+    <!-- v6(.7) via downloaded file -->
+    <!-- <script type="text/javascript" src="../../../d3-library/d3.js"></script> -->
+    <!-- v4(.5) via downloaded file -->
+    <!-- <script type="text/javascript" src="../../../d3-book-master/d3.js"></script> -->
+
+    <!-- CSS *********************************************************************** -->
+    <style>
+      body {
+        font-family: 'Work Sans';
+      }
+      </style>
+    </head>
+    <body>
+      <!-- HTML ********************************************************************** -->
+  
+      <div id="nameLengths-jsonification"></div>
+  
+      <!-- JAVASCRIPT **************************************************************** -->
+      <script type="text/javascript">
+  
+      // load in the data
+      d3.json('../names2.json')
+        .then(function(json) {
+
+        // Step 1, name-lengths: isolate each name's name-length (char count) into its own set
+        var charCountsList = [];
+        for (i = 0; i < json.distinctNames.length; i++) {
+          charCountsList[i] = json.distinctNames[i].name.length;
+        }
+        charCountsList.sort(function(a, b) { return d3.ascending(a, b) });
+  
+        // Step 2, name-lengths: throw out any repeated name-lengths, so each name-length is only listed once (will be used to access d3.group's map, below)
+        var uniqueNameLengthsList = [];
+        uniqueNameLengthsList = charCountsList.filter((d, i, array)=>{
+          return charCountsList.indexOf(d) === i;
+        });
+  
+        // Step 3, name-lengths: group the CSV rows together by unique name
+        var rowsByNameLength = d3.group(json.distinctNames.sort(function(a, b) { return d3.ascending(a.name.length, b.name.length) }), d => d.name.length);
+        var rowsByNameLengthZh = d3.hierarchy(rowsByNameLength);
+  
+        // Step 4, name-lengths: use list of uniqueNameLengthsList to access map keys per row to get length of each group
+        var nameLengthCounts = [];
+        for (var m = 0; m < uniqueNameLengthsList.length; m++) { // loop through all unique name-lengths
+          
+          // A. set baseline (0) for vars that will hold accumulating counts as looped through
+          var dogFemaleCountTally = 0;
+          var dogMaleCountTally = 0;
+          var humanFemaleCountTally = 0;
+          var humanMaleCountTally = 0;
+          var femaleCountTally = 0;
+          var maleCountTally = 0;
+          var dogCountTally = 0;
+          var humanCountTally = 0;
+          var dogOccurrenceTally = 0;
+          var humanOccurrenceTally = 0;
+          var femaleOccurrenceTally = 0;
+          var maleOccurrenceTally = 0;
+          
+          for (var n = 0; n < rowsByNameLengthZh.children[m].children.length; n++) { // per unique name-length, loop through all its individual names
+            
+            // B. set var to gather counts at individual-name-level while looping through individual names
+            var dogFemaleCountPerName = parseFloat(rowsByNameLengthZh.children[m].children[n].data.info.dogFemaleCount);
+            var dogMaleCountPerName = parseFloat(rowsByNameLengthZh.children[m].children[n].data.info.dogMaleCount);
+            var humanFemaleCountPerName = parseFloat(rowsByNameLengthZh.children[m].children[n].data.info.humanFemaleCount);
+            var humanMaleCountPerName = parseFloat(rowsByNameLengthZh.children[m].children[n].data.info.humanMaleCount);
+            var femaleCountPerName = parseFloat(rowsByNameLengthZh.children[m].children[n].data.info.femaleCount);
+            var maleCountPerName = parseFloat(rowsByNameLengthZh.children[m].children[n].data.info.maleCount);
+            var dogCountPerName = parseFloat(rowsByNameLengthZh.children[m].children[n].data.info.dogCount);
+            var humanCountPerName = parseFloat(rowsByNameLengthZh.children[m].children[n].data.info.humanCount);
+            var dogOccurrencePerName = parseFloat(rowsByNameLengthZh.children[m].children[n].data.info.dogOccurrence);
+            var humanOccurrencePerName = parseFloat(rowsByNameLengthZh.children[m].children[n].data.info.humanOccurrence);
+            var femaleOccurrencePerName = parseFloat(rowsByNameLengthZh.children[m].children[n].data.info.femaleOccurrence);
+            var maleOccurrencePerName = parseFloat(rowsByNameLengthZh.children[m].children[n].data.info.maleOccurrence);
+            
+            // C. sum up counts provided by individual names, into sums per name-length
+            dogFemaleCountTally += dogFemaleCountPerName;
+            dogMaleCountTally += dogMaleCountPerName;
+            humanFemaleCountTally += humanFemaleCountPerName;
+            humanMaleCountTally += humanMaleCountPerName;
+            femaleCountTally += femaleCountPerName;
+            maleCountTally += maleCountPerName;
+            dogCountTally += dogCountPerName;
+            humanCountTally += humanCountPerName;
+            dogOccurrenceTally += dogOccurrencePerName;
+            humanOccurrenceTally += humanOccurrencePerName;
+            femaleOccurrenceTally += femaleOccurrencePerName;
+            maleOccurrenceTally += maleOccurrencePerName;
+          
+          } // n
+          nameLengthCounts[m] = {
+            nameLength: uniqueNameLengthsList[m],
+            amount: rowsByNameLength.get(uniqueNameLengthsList[m]).length,
+            lengthInfo: {}
+            // dogOccurrence_nameLengths: dogOccurrenceTally
+          } // close object
+          
+          // D. output sums per name-length into newly created nameLengthCounts dataset
+          nameLengthCounts[m].lengthInfo.dogFemaleCount_nameLengths = dogFemaleCountTally;
+          nameLengthCounts[m].lengthInfo.dogMaleCount_nameLengths = dogMaleCountTally;
+          nameLengthCounts[m].lengthInfo.humanFemaleCount_nameLengths = humanFemaleCountTally;
+          nameLengthCounts[m].lengthInfo.humanMaleCount_nameLengths = humanMaleCountTally;
+          nameLengthCounts[m].lengthInfo.femaleCount_nameLengths = femaleCountTally;
+          nameLengthCounts[m].lengthInfo.maleCount_nameLengths = maleCountTally;
+          nameLengthCounts[m].lengthInfo.dogCount_nameLengths = dogCountTally;
+          nameLengthCounts[m].lengthInfo.humanCount_nameLengths = humanCountTally;
+          nameLengthCounts[m].lengthInfo.dogOccurrence_nameLengths = dogOccurrenceTally;
+          nameLengthCounts[m].lengthInfo.humanOccurrence_nameLengths = humanOccurrenceTally;
+          nameLengthCounts[m].lengthInfo.femaleOccurrence_nameLengths = femaleOccurrenceTally;
+          nameLengthCounts[m].lengthInfo.maleOccurrence_nameLengths = maleOccurrenceTally;
+  
+        } // m
+  
+        console.log('json');
+        console.log(json);
+  
+        console.log('charCountsList');
+        console.log(charCountsList);
+  
+        console.log('uniqueNameLengthsList');
+        console.log(uniqueNameLengthsList);
+  
+        console.log('rowsByNameLength');
+        console.log(rowsByNameLength);
+  
+        console.log('rowsByNameLengthZh');
+        console.log(rowsByNameLengthZh);
+  
+        console.log('nameLengthCounts');
+        console.log(nameLengthCounts);
+  
+  
+        var w = 1000;
+        var h = 5000;
+  
+        var nameLengthsSvg = d3.select('#nameLengths-jsonification');
+
+        // loop through all names to output their dog and human counts in CSV format
+        var outputText = nameLengthsSvg.selectAll('span')
+          .data(nameLengthCounts)
+          .enter()
+          .append('span')
+          .html(function(d) {
+            var dogFemaleCount_nameLengths = d.lengthInfo.dogFemaleCount_nameLengths;
+            var dogMaleCount_nameLengths = d.lengthInfo.dogMaleCount_nameLengths;
+            var humanFemaleCount_nameLengths = d.lengthInfo.humanFemaleCount_nameLengths;
+            var humanMaleCount_nameLengths = d.lengthInfo.humanMaleCount_nameLengths;
+            var femaleCount_nameLengths = d.lengthInfo.femaleCount_nameLengths;
+            var maleCount_nameLengths = d.lengthInfo.maleCount_nameLengths;
+            var dogCount_nameLengths = d.lengthInfo.dogCount_nameLengths;
+            var humanCount_nameLengths = d.lengthInfo.humanCount_nameLengths;
+            var dogOccurrence_nameLengths = d.lengthInfo.dogOccurrence_nameLengths;
+            var humanOccurrence_nameLengths = d.lengthInfo.humanOccurrence_nameLengths;
+
+            var dogHumanRatio_nameLengths = (dogOccurrence_nameLengths / humanOccurrence_nameLengths);
+            var humanDogRatio_nameLengths = (humanOccurrence_nameLengths / dogOccurrence_nameLengths);
+            var dogHumanRatioPer100_nameLengths;
+            var humanDogRatioPer100_nameLengths;
+            if (humanOccurrence_nameLengths == 0) {
+              dogHumanRatioPer100_nameLengths = 100;
+              humanDogRatioPer100_nameLengths = 0;
+            } else if (dogOccurrence_nameLengths == 0) {
+              dogHumanRatioPer100_nameLengths = 0;
+              humanDogRatioPer100_nameLengths = 100;
+            } else if (dogOccurrence_nameLengths > humanOccurrence_nameLengths) {
+              humanDogRatioPer100_nameLengths = (100 / (dogHumanRatio_nameLengths + 1));
+              dogHumanRatioPer100_nameLengths = (humanDogRatioPer100_nameLengths * dogHumanRatio_nameLengths);
+            } else {
+              dogHumanRatioPer100_nameLengths = (100 / (humanDogRatio_nameLengths + 1));
+              humanDogRatioPer100_nameLengths = (dogHumanRatioPer100_nameLengths * humanDogRatio_nameLengths);
+            }
+            var speciesRatioSimple_nameLengths = d3.format(".0f")(dogHumanRatioPer100_nameLengths) + " : " + d3.format(".0f")(humanDogRatioPer100_nameLengths); // round to whole numbers and put in xx : xx format
+            var femaleOccurrence_nameLengths = d.lengthInfo.femaleOccurrence_nameLengths;
+            var maleOccurrence_nameLengths = d.lengthInfo.maleOccurrence_nameLengths;
+            var femaleMaleRatio_nameLengths = (femaleOccurrence_nameLengths / maleOccurrence_nameLengths);
+            var maleFemaleRatio_nameLengths = (maleOccurrence_nameLengths / femaleOccurrence_nameLengths);
+            var femaleMaleRatioPer100_nameLengths;
+            var maleFemaleRatioPer100_nameLengths;
+            if (maleOccurrence_nameLengths == 0) {
+              femaleMaleRatioPer100_nameLengths = 100;
+              maleFemaleRatioPer100_nameLengths = 0;
+            } else if (femaleOccurrence_nameLengths == 0) {
+              femaleMaleRatioPer100_nameLengths = 0;
+              maleFemaleRatioPer100_nameLengths = 100;
+            } else if (femaleOccurrence_nameLengths > maleOccurrence_nameLengths) {
+              maleFemaleRatioPer100_nameLengths = (100 / (femaleMaleRatio_nameLengths + 1));
+              femaleMaleRatioPer100_nameLengths = (maleFemaleRatioPer100_nameLengths * femaleMaleRatio_nameLengths);
+            } else {
+              femaleMaleRatioPer100_nameLengths = (100 / (maleFemaleRatio_nameLengths + 1));
+              maleFemaleRatioPer100_nameLengths = (femaleMaleRatioPer100_nameLengths * maleFemaleRatio_nameLengths);
+            }
+            var genderRatioSimple_nameLengths = d3.format(".0f")(femaleMaleRatioPer100_nameLengths) + " : " + d3.format(".0f")(maleFemaleRatioPer100_nameLengths); // round to whole numbers and put in xx : xx format
+
+            return '<p>{ "nameLength"&#58; "' + d.nameLength + 
+              '", </br> "lengthInfo": {' + 
+              ' </br> "dogFemaleCount": "' + dogFemaleCount_nameLengths + 
+              '", </br> "dogMaleCount": "' + dogMaleCount_nameLengths + 
+              '", </br> "humanFemaleCount": "' + humanFemaleCount_nameLengths + 
+              '", </br> "humanMaleCount": "' + humanMaleCount_nameLengths + 
+              '", </br> "femaleCount": "' + femaleCount_nameLengths + 
+              '", </br> "maleCount": "' + maleCount_nameLengths + 
+              '", </br> "dogCount": "' + dogCount_nameLengths + 
+              '", </br> "humanCount": "' + humanCount_nameLengths + 
+              '", </br> "dogOccurrence": "' + dogOccurrence_nameLengths + 
+              '", </br> "humanOccurrence": "' + humanOccurrence_nameLengths + 
+              '", </br> "dogHumanRatio": "' + dogHumanRatio_nameLengths + 
+              '", </br> "humanDogRatio": "' + humanDogRatio_nameLengths + 
+              '", </br> "dogHumanRatioPer100": "' + dogHumanRatioPer100_nameLengths + 
+              '", </br> "humanDogRatioPer100": "' + humanDogRatioPer100_nameLengths + 
+              '", </br> "speciesRatioSimple": "' + speciesRatioSimple_nameLengths + 
+              '", </br> "femaleMaleRatio": "' + femaleMaleRatio_nameLengths + 
+              '", </br> "maleFemaleRatio": "' + maleFemaleRatio_nameLengths + 
+              '", </br> "femaleMaleRatioPer100": "' + femaleMaleRatioPer100_nameLengths + 
+              '", </br> "maleFemaleRatioPer100": "' + maleFemaleRatioPer100_nameLengths + 
+              '", </br> "genderRatioSimple": "' + genderRatioSimple_nameLengths + 
+              '"} }, </p>'
+          })
+            .attr('x', 50)
+            .attr('y', function(d, i) {
+              return (i * 25) + 50;
+            });
+
+
+
+
+
+  
+      }); // close JSON function
+  
+      </script>
+  
+    </body>
+  </html>
+  
+  
