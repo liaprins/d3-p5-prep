@@ -262,7 +262,7 @@
             </div>
             <!-- Name of post -->
             <h2 class="posttitle">
-              How many dogs have my name? And how many humans have my dog's name?
+              What makes a dog name a dog name?
             </h2>
           </a>
           <!-- In-page table of contents for extra sections; only shown if 2+ extra sections (assuming Comments are always on; if not I should make sure to have two others) -->
@@ -327,7 +327,7 @@
 <!-- Top part above vis that doesn't scroll -->
 <div id="nameshares-fixed">
   <h4 class="vis-title">
-    Name occurrence
+    How many dogs have your name? And how many humans have your dog’s name?
   </h4>
   <p id="dog-axis-label" class="axis-label s-textface bold">
     Occurrence per 100,000 dogs
@@ -367,13 +367,13 @@
   </div>
 
   <!-- Search -->
-    <input type="text" placeholder="search names" name="query" id="nameshares-search-input" class="nameshares-search-field xs-textface underlineinput">
-    <button type="submit" value="search" title="Search" id="nameshares-search-button" class="searchbutton yellowhover">
-      <img src="../../../assets/images/search.svg" alt="search" class="navsearchicon">
-    </button>
-    <div id="nameshares-error" class="nameshares-error xs-textface bold">
-      Name not found
-    </div>
+  <input type="text" placeholder="search names" name="query" id="nameshares-search-input" class="nameshares-search-field xs-textface underlineinput">
+  <button type="submit" value="search" title="Search" id="nameshares-search-button" class="searchbutton yellowhover">
+    <img src="../../../assets/images/search.svg" alt="search" class="navsearchicon">
+  </button>
+  <div id="nameshares-error" class="nameshares-error xs-textface bold">
+    Name not found
+  </div>
   <span> <!-- MUST BE WRAPPED IN A <span>, OTHERWISE IT IS A DIRECT CHILD OF <div>, AND lightboxsideshow.js CALLS THE LIGHTBOX CAPTIONS THROUGH div>figcaption (ANY <figcaption> THAT IS A DIRECT CHILD OF A <div>, SO IF THIS CAPTION IS ALSO A DIRECT CHILD OF A <div> IT MAJORLY MESSES UP THINGS FOR LIGHTBOX CAPTIONS) -->
     <figcaption id="nameshares-caption" class="xs-textface">
       <hr class="toprule">
