@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>dataset-jsonification | dog-names | CCG</title>
+
+    <!-- CHOOSE WHICH D3 LIBRARY FILE TO POINT TO BELOW vvv -->
+    <!-- p5 -->
+    <!-- <script type="text/javascript" src="../../../d3-library/p5.min.js"></script> -->
+    <!-- D3 v6 via D3 website -->
+    <script type="text/javascript" src="https://d3js.org/d3.v6.min.js"></script>
+    <!-- v6(.7) via downloaded file -->
+    <!-- <script type="text/javascript" src="../../../d3-library/d3.js"></script> -->
+    <!-- v4(.5) via downloaded file -->
+    <!-- <script type="text/javascript" src="../../../d3-book-master/d3.js"></script> -->
+
+    <!-- CSS *********************************************************************** -->
+    <style>
+      body {
+        font-family: 'Work Sans';
+      }
+      </style>
+    </head>
+    <body>
+      <!-- HTML ********************************************************************** -->
+  
+      <p>LOOK IN CONSOLE FOR THIS ONE!</p>
+  
+      <!-- JAVASCRIPT **************************************************************** -->
+      <script type="text/javascript">
+  
+      // load in the data
+      d3.json('../first-letter/first-letter.json')
+        .then(function(json) {
+
+          for (i = 0; i < json.distinctFirstLetters.length; i++) {
+            console.log('The 🐶 : 🧒 ratio for the first-letter ' + json.distinctFirstLetters[i].nameLength  + ' is ' + (json.distinctFirstLetters[i].lengthInfo.speciesRatioSimple));
+          }
+  
+      }); // close JSON function
+  
+      </script>
+  
+    </body>
+  </html>
+  
+  
