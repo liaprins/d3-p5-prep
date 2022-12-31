@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>dataset-jsonification | dog-names | CCG</title>
+
+    <!-- CHOOSE WHICH D3 LIBRARY FILE TO POINT TO BELOW vvv -->
+    <!-- p5 -->
+    <!-- <script type="text/javascript" src="../../../d3-library/p5.min.js"></script> -->
+    <!-- D3 v6 via D3 website -->
+    <!-- <script type="text/javascript" src="https://d3js.org/d3.v6.min.js"></script> -->
+    <!-- v6(.7) via downloaded file -->
+    <script type="text/javascript" src="../../../d3-library/d3.js"></script>
+    <!-- v4(.5) via downloaded file -->
+    <!-- <script type="text/javascript" src="../../../d3-book-master/d3.js"></script> -->
+
+    <!-- CSS *********************************************************************** -->
+    <style>
+      body {
+        font-family: 'Work Sans';
+      }
+      </style>
+    </head>
+    <body>
+      <!-- HTML ********************************************************************** -->
+  
+      <div id="nameLengths-jsonification">
+        LOOK IN CONSOLE FOR THIS ONE!!! <br/>
+        If not all letters of the alphabet are showing in console, try hard-refreshing (Shift + Command + R)
+      </div>
+  
+      <!-- JAVASCRIPT **************************************************************** -->
+      <script type="text/javascript">
+  
+      // load in the data
+      d3.json('../names.json')
+        .then(function(json) {
+
+        // Step 1, name-lengths: isolate each name's name-length (char count) into its own set
+        var charCountsList = [];
+        var namesList = [];
+        var dogOccurrenceList = [];
+        var humanOccurrenceList = [];
+        var charCountsWithNames = [];
+        for (i = 0; i < json.distinctNames.length; i++) {
+          charCountsList[i] = json.distinctNames[i].name[0];
+          namesList[i] = json.distinctNames[i].name;
+          dogOccurrenceList[i] = json.distinctNames[i].info.dogOccurrence;
+          humanOccurrenceList[i] = json.distinctNames[i].info.humanOccurrence;
+          charCountsWithNames[i] = {
+            charCount: charCountsList[i],
+            name: namesList[i],
+            dogOccurrence: dogOccurrenceList[i],
+            humanOccurrence: humanOccurrenceList[i]
+          };
+        }
+        charCountsList.sort(function(a, b) { return d3.ascending(a, b) });
+        charCountsWithNames.sort(function(a, b) { return d3.ascending(a.charCount, b.charCount) });
+  
+        // Step 2, name-lengths: throw out any repeated name-lengths, so each name-length is only listed once 
+        var uniqueNameLengthsList = [];
+        uniqueNameLengthsList = charCountsList.filter((d, i, array)=>{
+          return charCountsList.indexOf(d) === i;
+        });
+
+        // collect names per name-length
+        var uniqueNameLengthsWithNames = [];
+        for (var j = 0; j < uniqueNameLengthsList.length; j++) {
+          uniqueNameLengthsWithNames[j] = {
+            numberOfNameLetters: uniqueNameLengthsList[j],
+            listOfNames: [],
+            listOfDogNames: [],
+            listOfHumanNames: [],
+          };
+          for (var k = 0; k < charCountsWithNames.length; k++) { // 13
+            if (uniqueNameLengthsList[j] == charCountsWithNames[k].charCount) {
+              for (var l = 0; l < charCountsWithNames.length; l++) { // 3437
+                if (charCountsWithNames[k].name == json.distinctNames[l].name) {
+                  uniqueNameLengthsWithNames[j].listOfNames[k] = {
+                    name: charCountsWithNames[k].name,
+                    dogOccurrenceForName: charCountsWithNames[k].dogOccurrence,
+                    humanOccurrenceForName: json.distinctNames[l].info.humanOccurrence
+                  }; // close object
+                } // close 1st inner if
+
+                if ((charCountsWithNames[k].name == json.distinctNames[l].name) && (uniqueNameLengthsWithNames[j].listOfNames[k].dogOccurrenceForName != 0)) {                  
+                  uniqueNameLengthsWithNames[j].listOfDogNames[k] = charCountsWithNames[k].name;
+                  console.log('dog names per first-letter: ' + uniqueNameLengthsWithNames[j].listOfDogNames[k][0]);  // outputs char count per dog name; use console's print-tally to discern number of dog names per name-length
+                } // close 2nd inner if
+
+              } // close l
+
+            } // close outer if
+
+          } // close k
+
+          for (var m = 0; m < charCountsWithNames.length; m++) { // 13
+            if (uniqueNameLengthsList[j] == charCountsWithNames[m].charCount) {
+              for (var l = 0; l < charCountsWithNames.length; l++) { // 3437
+                if (charCountsWithNames[m].name == json.distinctNames[l].name) {
+                  uniqueNameLengthsWithNames[j].listOfNames[m] = {
+                    name: charCountsWithNames[m].name,
+                    dogOccurrenceForName: charCountsWithNames[m].dogOccurrence,
+                    humanOccurrenceForName: json.distinctNames[l].info.humanOccurrence
+                  }; // close object
+                } // close 1st inner if
+
+                if ((charCountsWithNames[m].name == json.distinctNames[l].name) && (uniqueNameLengthsWithNames[j].listOfNames[m].humanOccurrenceForName != 0)) {
+                  uniqueNameLengthsWithNames[j].listOfHumanNames[m] = charCountsWithNames[m].name;
+                  console.log('human names per first-letter: ' + uniqueNameLengthsWithNames[j].listOfHumanNames[m][0]);  // outputs char count per dog name; use console's print-tally to discern number of dog names per name-length
+                } // close 2nd inner if
+
+              } // close l
+
+            } // close outer if
+
+          } // close m
+                    
+        } // close j
+        
+      }); // close JSON function
+  
+      </script>
+  
+    </body>
+  </html>
+  
+  

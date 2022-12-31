@@ -4,6 +4,8 @@
         
         { "nameLength": "1",
         "lengthInfo": {
+        "dogNameCount": "2",
+        "humanNameCount": "0",
         "dogFemaleCount": "4",
         "dogMaleCount": "11",
         "humanFemaleCount": "0",
@@ -27,6 +29,8 @@
 
         { "nameLength": "2",
         "lengthInfo": {
+        "dogNameCount": "26",
+        "humanNameCount": "1",
         "dogFemaleCount": "68",
         "dogMaleCount": "223",
         "humanFemaleCount": "0",
@@ -50,6 +54,8 @@
 
         { "nameLength": "3",
         "lengthInfo": {
+        "dogNameCount": "118",
+        "humanNameCount": "48",
         "dogFemaleCount": "1049",
         "dogMaleCount": "2563",
         "humanFemaleCount": "13306",
@@ -73,6 +79,8 @@
 
         { "nameLength": "4",
         "lengthInfo": {
+        "dogNameCount": "453",
+        "humanNameCount": "251",
         "dogFemaleCount": "7277",
         "dogMaleCount": "6589",
         "humanFemaleCount": "26143",
@@ -96,6 +104,8 @@
 
         { "nameLength": "5",
         "lengthInfo": {
+        "dogNameCount": "653",
+        "humanNameCount": "531",
         "dogFemaleCount": "8768",
         "dogMaleCount": "9884",
         "humanFemaleCount": "59808",
@@ -119,6 +129,8 @@
 
         { "nameLength": "6",
         "lengthInfo": {
+        "dogNameCount": "501",
+        "humanNameCount": "526",
         "dogFemaleCount": "4816",
         "dogMaleCount": "7169",
         "humanFemaleCount": "60575",
@@ -142,6 +154,8 @@
 
         { "nameLength": "7",
         "lengthInfo": {
+        "dogNameCount": "255",
+        "humanNameCount": "327",
         "dogFemaleCount": "1908",
         "dogMaleCount": "3092",
         "humanFemaleCount": "37800",
@@ -165,6 +179,8 @@
 
         { "nameLength": "8",
         "lengthInfo": {
+        "dogNameCount": "108",
+        "humanNameCount": "143",
         "dogFemaleCount": "1296",
         "dogMaleCount": "920",
         "humanFemaleCount": "24020",
@@ -188,6 +204,8 @@
 
         { "nameLength": "9",
         "lengthInfo": {
+        "dogNameCount": "44",
+        "humanNameCount": "53",
         "dogFemaleCount": "269",
         "dogMaleCount": "252",
         "humanFemaleCount": "13822",
@@ -211,6 +229,8 @@
 
         { "nameLength": "10",
         "lengthInfo": {
+        "dogNameCount": "9",
+        "humanNameCount": "10",
         "dogFemaleCount": "60",
         "dogMaleCount": "42",
         "humanFemaleCount": "599",
@@ -234,6 +254,8 @@
 
         { "nameLength": "11",
         "lengthInfo": {
+        "dogNameCount": "7",
+        "humanNameCount": "6",
         "dogFemaleCount": "14",
         "dogMaleCount": "44",
         "humanFemaleCount": "5",
@@ -257,6 +279,8 @@
 
         { "nameLength": "12",
         "lengthInfo": {
+        "dogNameCount": "1",
+        "humanNameCount": "1",
         "dogFemaleCount": "3",
         "dogMaleCount": "3",
         "humanFemaleCount": "0",
@@ -280,6 +304,8 @@
 
         { "nameLength": "17",
         "lengthInfo": {
+        "dogNameCount": "1",
+        "humanNameCount": "0",
         "dogFemaleCount": "5",
         "dogMaleCount": "0",
         "humanFemaleCount": "0",
