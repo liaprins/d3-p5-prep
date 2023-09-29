@@ -62,7 +62,8 @@
   font-family: Work Sans;
 }
 #namelengths-fixed .axis > path {
-  opacity: 0;
+  /* opacity: 0; */
+  opacity: 1;
 }
 #h-axes-bg-line {
   stroke: #000000;
@@ -276,7 +277,7 @@
 <!-- Top part above vis that doesn't scroll -->
 <div id="namelengths-fixed">
   <h4 class="vis-title">
-    How long are dog names compared to human names?
+    How long are dog names compared to human names?!
   </h4>
   <p id="dog-axis-label" class="axis-label s-textface bold">
     Occurrence per 100,000 dogs
@@ -421,13 +422,13 @@ d3.json('name-lengths.json')
     .scale(occurrenceScale)
     .ticks(3)
     .tickFormat(d3.format("~s"))
-    .tickSize(0)
+    // .tickSize(0)
     .tickSizeOuter(0);
   var dogAxis = d3.axisTop()
     .scale(occurrenceScaleBackwards)
     .ticks(3)
     .tickFormat(d3.format("~s"))
-    .tickSize(0)
+    // .tickSize(0)
     .tickSizeOuter(0);
 
   // parent svg container
@@ -743,12 +744,12 @@ d3.json('name-lengths.json')
           .attr('x2', countMargin + countWidth4Digits + nameScaleBackwards(200));
         d3.select('#namelengths-vis #tick-line-dog-2')
           .transition()
-          .attr('x1', countMargin + countWidth4Digits + nameScaleBackwards(400))
-          .attr('x2', countMargin + countWidth4Digits + nameScaleBackwards(400));
+          .attr('x1', countWidth4Digits + nameScaleBackwards(400))
+          .attr('x2', countWidth4Digits + nameScaleBackwards(400));
         d3.select('#namelengths-vis #tick-line-dog-3')
           .transition()
-          .attr('x1', countMargin + countWidth4Digits + nameScaleBackwards(600))
-          .attr('x2', countMargin + countWidth4Digits + nameScaleBackwards(600));
+          .attr('x1', countWidth4Digits + nameScaleBackwards(600))
+          .attr('x2', countWidth4Digits + nameScaleBackwards(600));
         d3.select('#namelengths-vis #tick-line-human-1')
           .transition()
           .attr('x1', (w / 2) + nameWidth + nameScale(200))
